@@ -111,11 +111,11 @@ select option{background:var(--s2);}
 
   <div class="sec">
     <div class="sl">商品追加（複数一括OK）</div>
-    <div class="uz" onclick="document.getElementById('bu').click()" ondragover="event.preventDefault()" ondrop="onDrop(event)">
-      <input type="file" id="bu" accept="image/*" multiple onchange="onUpload(event)" style="display:none;">
-      <div class="uz-ico">📦</div>
-      <div class="uz-txt">クリックまたはドラッグ＆ドロップ<br>複数選択可・PNG推奨</div>
-    </div>
+    <label for="bu" style="display:block;background:var(--s2);border:2px dashed rgba(255,110,180,.5);border-radius:9px;padding:14px;text-align:center;cursor:pointer;transition:all .2s;">
+      <div style="font-size:20px;margin-bottom:3px;opacity:.6">📦</div>
+      <div style="font-size:10px;color:var(--mu)">ここをクリックして画像を選択<br>複数選択可・PNG推奨</div>
+    </label>
+    <input type="file" id="bu" accept="image/*" multiple onchange="onUpload(event)" style="position:absolute;left:-9999px;">
     <div class="pl" id="pl"></div>
   </div>
 
