@@ -7,652 +7,643 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
-/* ── APP UI ── */
-:root{--bg:#08080f;--s1:#10101a;--s2:#18182a;--s3:#202030;--a1:#ff6eb4;--a2:#a855f7;--a3:#ffd93d;--tx:#f0f0fa;--mu:#6060a0;--bd:#1e1e38;}
+/* ===== APP UI ===== */
+:root{
+  --bg:#08080f;--s1:#10101a;--s2:#18182a;--s3:#202030;
+  --a1:#ff6eb4;--a2:#a855f7;--a3:#ffd93d;--a4:#4aefc0;
+  --tx:#f0f0fa;--mu:#6060a0;--bd:#1e1e38;
+}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;min-height:100vh;}
-.app{display:grid;grid-template-columns:380px 1fr;gap:0;min-height:100vh;}
-@media(max-width:900px){.app{grid-template-columns:1fr;}}
+body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;min-height:100vh;display:flex;}
 
-/* LEFT SIDEBAR */
-.sidebar{background:var(--s1);border-right:1px solid var(--bd);padding:20px;overflow-y:auto;height:100vh;position:sticky;top:0;}
-.logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;background:linear-gradient(130deg,#ff6eb4,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;}
-.tagline{font-size:11px;color:var(--mu);margin-bottom:20px;}
-.section{margin-bottom:18px;}
-.sec-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:10px;}
-.fg{margin-bottom:10px;}
-label{display:block;font-size:11px;font-weight:600;color:var(--mu);margin-bottom:4px;}
-input,textarea,select{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:7px;color:var(--tx);font-family:'Noto Sans JP',sans-serif;font-size:12px;padding:8px 10px;outline:none;transition:border-color .2s;}
-input:focus,textarea:focus,select:focus{border-color:var(--a1);}
+/* SIDEBAR */
+.sidebar{
+  width:360px;min-width:360px;background:var(--s1);border-right:1px solid var(--bd);
+  padding:18px;overflow-y:auto;height:100vh;position:sticky;top:0;
+}
+.logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
+  background:linear-gradient(130deg,#ff6eb4,#a855f7);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:2px;}
+.tagline{font-size:10px;color:var(--mu);margin-bottom:16px;}
+.sec{margin-bottom:16px;}
+.sl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.sl::after{content:'';flex:1;height:1px;background:var(--bd);}
+.fg{margin-bottom:8px;}
+label{display:block;font-size:10px;font-weight:600;color:var(--mu);margin-bottom:3px;}
+input,select{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:6px;color:var(--tx);font-family:'Noto Sans JP',sans-serif;font-size:12px;padding:7px 9px;outline:none;transition:border-color .2s;}
+input:focus,select:focus{border-color:var(--a1);}
 select option{background:var(--s2);}
-.chips{display:flex;flex-wrap:wrap;gap:5px;}
-.chip{background:var(--s2);border:1px solid var(--bd);border-radius:6px;color:var(--mu);font-size:10px;font-weight:500;padding:4px 8px;cursor:pointer;transition:all .15s;white-space:nowrap;user-select:none;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:4px;}
+.chip{background:var(--s2);border:1px solid var(--bd);border-radius:5px;color:var(--mu);font-size:10px;font-weight:500;padding:4px 8px;cursor:pointer;transition:all .15s;white-space:nowrap;user-select:none;}
 .chip:hover,.chip.on{background:rgba(255,110,180,.15);border-color:var(--a1);color:var(--a1);}
 
 /* Theme grid */
-.theme-row{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;}
-.tbtn{border-radius:8px;padding:7px 4px;cursor:pointer;text-align:center;font-size:8px;font-weight:700;border:2px solid transparent;transition:all .18s;line-height:1.3;}
-.tbtn.on{border-color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.3);}
+.tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;}
+.tbtn{border-radius:7px;padding:7px 3px;cursor:pointer;text-align:center;font-size:8px;font-weight:700;border:2px solid transparent;transition:all .18s;line-height:1.4;}
+.tbtn.on{border-color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.25);}
 
-/* Products */
-.prod-list{display:flex;flex-direction:column;gap:8px;max-height:320px;overflow-y:auto;padding-right:2px;}
+/* Upload zone */
+.upload-zone{
+  background:var(--s2);border:2px dashed rgba(255,110,180,.3);border-radius:10px;
+  padding:16px;text-align:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;
+}
+.upload-zone:hover{border-color:var(--a1);background:rgba(255,110,180,.05);}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.upload-icon{font-size:24px;margin-bottom:4px;opacity:.5;}
+.upload-txt{font-size:11px;color:var(--mu);line-height:1.5;}
+.upload-hint{font-size:9px;color:rgba(255,110,180,.6);margin-top:3px;}
+
+/* Product list */
+.prod-list{display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto;padding-right:2px;}
 .prod-list::-webkit-scrollbar{width:3px;}
 .prod-list::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px;}
-.pitem{background:var(--s2);border:1px solid var(--bd);border-radius:9px;padding:10px;}
-.pitem-top{display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;}
-.pimg{width:52px;height:52px;border-radius:7px;object-fit:contain;background:var(--s3);border:1px solid var(--bd);flex-shrink:0;}
-.pimg-ph{width:52px;height:52px;border-radius:7px;background:var(--s3);border:1.5px dashed var(--bd);display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;flex-shrink:0;position:relative;overflow:hidden;transition:border-color .2s;}
-.pimg-ph:hover{border-color:var(--a1);}
-.pimg-ph input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.pfields{flex:1;display:flex;flex-direction:column;gap:3px;}
-.pfields input{font-size:11px;padding:5px 7px;}
-.pdel{background:rgba(255,60,60,.12);border:1px solid rgba(255,60,60,.2);border-radius:5px;color:#ff5050;font-size:9px;padding:3px 6px;cursor:pointer;white-space:nowrap;transition:all .15s;flex-shrink:0;}
+.pitem{background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:8px;display:flex;gap:8px;align-items:center;}
+.pitem-img{width:44px;height:44px;border-radius:6px;object-fit:contain;background:var(--s3);border:1px solid var(--bd);flex-shrink:0;}
+.pitem-fields{flex:1;display:flex;flex-direction:column;gap:3px;}
+.pitem-fields input{font-size:10px;padding:4px 7px;}
+.pitem-size{display:flex;gap:3px;align-items:center;}
+.pitem-size input{width:52px;font-size:10px;padding:4px 6px;}
+.pitem-size span{font-size:9px;color:var(--mu);}
+.pdel{background:rgba(255,60,60,.1);border:none;border-radius:4px;color:#ff5050;font-size:11px;padding:4px 6px;cursor:pointer;transition:all .15s;flex-shrink:0;}
 .pdel:hover{background:rgba(255,60,60,.25);}
-.add-btn{width:100%;background:rgba(255,110,180,.07);border:1.5px dashed rgba(255,110,180,.25);border-radius:8px;color:var(--a1);font-size:11px;padding:9px;cursor:pointer;transition:all .2s;margin-top:6px;}
-.add-btn:hover{background:rgba(255,110,180,.14);}
-.gen-btn{width:100%;background:linear-gradient(130deg,#ff6eb4,#a855f7);border:none;border-radius:10px;color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;padding:13px;cursor:pointer;transition:opacity .2s,transform .1s;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;}
+
+/* Generate button */
+.gen-btn{
+  width:100%;background:linear-gradient(130deg,#ff6eb4,#a855f7);
+  border:none;border-radius:9px;color:#fff;font-family:'Syne',sans-serif;
+  font-size:14px;font-weight:700;padding:12px;cursor:pointer;
+  transition:opacity .2s,transform .1s;display:flex;align-items:center;justify-content:center;gap:8px;
+}
 .gen-btn:hover{opacity:.88;transform:translateY(-1px);}
 .gen-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
 .spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-/* RIGHT: Preview */
-.preview-area{padding:24px;overflow-y:auto;display:flex;flex-direction:column;align-items:center;gap:16px;}
-.preview-top{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
-.pbtn{background:var(--s2);border:1px solid var(--bd);border-radius:7px;color:var(--mu);font-size:11px;padding:8px 14px;cursor:pointer;transition:all .15s;}
-.pbtn:hover{border-color:var(--a1);color:var(--a1);}
-.pbtn.g{background:rgba(74,239,192,.1);border-color:rgba(74,239,192,.3);color:#4aefc0;}
-.empty-state{text-align:center;padding:80px 20px;color:var(--mu);}
-.empty-state .ico{font-size:52px;margin-bottom:16px;opacity:.25;}
-.empty-state p{font-size:13px;line-height:1.8;}
+/* PREVIEW AREA */
+.preview-area{
+  flex:1;padding:20px;overflow-y:auto;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  background:var(--bg);
+}
+.action-bar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.abtn{background:var(--s1);border:1px solid var(--bd);border-radius:7px;color:var(--mu);font-size:11px;padding:8px 14px;cursor:pointer;transition:all .15s;}
+.abtn:hover{border-color:var(--a1);color:var(--a1);}
+.abtn.g{background:rgba(74,239,192,.1);border-color:rgba(74,239,192,.3);color:var(--a4);}
+.empty{text-align:center;padding:80px 20px;color:var(--mu);}
+.empty .ico{font-size:52px;margin-bottom:16px;opacity:.2;}
+.empty p{font-size:13px;line-height:1.9;}
 
-/* ── BANNER STYLES ── */
-.banner-outer{position:relative;display:inline-block;}
+/* ===== BANNER THEMES ===== */
+.t-pink{--c1:#ff6eb4;--c2:#e879f9;--c3:#fce7f3;--c4:#fff0f7;--ct:#831843;--cs:#be185d;--cbrand:#ff6eb4;font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;}
+.t-yellow{--c1:#f59e0b;--c2:#ef4444;--c3:#fef3c7;--c4:#fffbeb;--ct:#78350f;--cs:#b45309;--cbrand:#f59e0b;font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;}
+.t-green{--c1:#16a34a;--c2:#0d9488;--c3:#dcfce7;--c4:#f0fdf4;--ct:#14532d;--cs:#166534;--cbrand:#16a34a;font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;}
+.t-purple{--c1:#9333ea;--c2:#ec4899;--c3:#f3e8ff;--c4:#faf5ff;--ct:#4c1d95;--cs:#7e22ce;--cbrand:#9333ea;font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;}
+.t-blue{--c1:#0284c7;--c2:#6366f1;--c3:#e0f2fe;--c4:#f0f9ff;--ct:#0c4a6e;--cs:#0369a1;--cbrand:#0284c7;font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;}
+.t-peach{--c1:#f97316;--c2:#ec4899;--c3:#ffedd5;--c4:#fff7ed;--ct:#7c2d12;--cs:#c2410c;--cbrand:#f97316;font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;}
+.t-choco{--c1:#92400e;--c2:#d97706;--c3:#f5ebe0;--c4:#fdf8f4;--ct:#3b1a08;--cs:#78350f;--cbrand:#92400e;font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;}
+.t-mint{--c1:#0d9488;--c2:#6366f1;--c3:#ccfbf1;--c4:#f0fdfa;--ct:#134e4a;--cs:#0f766e;--cbrand:#0d9488;font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;}
+.t-strawberry{--c1:#e11d48;--c2:#fb7185;--c3:#ffe4e6;--c4:#fff1f2;--ct:#881337;--cs:#be123c;--cbrand:#e11d48;font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;}
+.t-lavender{--c1:#7c3aed;--c2:#db2777;--c3:#ede9fe;--c4:#f5f3ff;--ct:#2e1065;--cs:#5b21b6;--cbrand:#7c3aed;font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;}
 
-/* Pink theme */
-.theme-pink{
-  --tc1:#ff6eb4;--tc2:#e879f9;--tc3:#fce7f3;--tc4:#fdf2f8;
-  --tbg:#fff0f7;--tcard:#ffffff;--ttitle:#be185d;--ttext:#831843;--tsub:#9d174d;
-  --tborder:#fce7f3;--tprice-bg:#ff6eb4;--tprice-text:#fff;
-  --tdeco1:#f9a8d4;--tdeco2:#fbbf24;
-  font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;
-}
-/* Yellow theme */
-.theme-yellow{
-  --tc1:#f59e0b;--tc2:#ef4444;--tc3:#fef3c7;--tc4:#fffbeb;
-  --tbg:#fffdf5;--tcard:#ffffff;--ttitle:#b45309;--ttext:#78350f;--tsub:#92400e;
-  --tborder:#fde68a;--tprice-bg:#f59e0b;--tprice-text:#fff;
-  --tdeco1:#fbbf24;--tdeco2:#f43f5e;
-  font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;
-}
-/* Green theme */
-.theme-green{
-  --tc1:#16a34a;--tc2:#0d9488;--tc3:#dcfce7;--tc4:#f0fdf4;
-  --tbg:#f5fff8;--tcard:#ffffff;--ttitle:#15803d;--ttext:#14532d;--tsub:#166534;
-  --tborder:#bbf7d0;--tprice-bg:#16a34a;--tprice-text:#fff;
-  --tdeco1:#86efac;--tdeco2:#34d399;
-  font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;
-}
-/* Purple theme */
-.theme-purple{
-  --tc1:#9333ea;--tc2:#ec4899;--tc3:#f3e8ff;--tc4:#faf5ff;
-  --tbg:#fdf8ff;--tcard:#ffffff;--ttitle:#7e22ce;--ttext:#4c1d95;--tsub:#5b21b6;
-  --tborder:#e9d5ff;--tprice-bg:#9333ea;--tprice-text:#fff;
-  --tdeco1:#c4b5fd;--tdeco2:#f0abfc;
-  font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;
-}
-/* Blue theme */
-.theme-blue{
-  --tc1:#0284c7;--tc2:#6366f1;--tc3:#e0f2fe;--tc4:#f0f9ff;
-  --tbg:#f5fbff;--tcard:#ffffff;--ttitle:#0369a1;--ttext:#0c4a6e;--tsub:#075985;
-  --tborder:#bae6fd;--tprice-bg:#0284c7;--tprice-text:#fff;
-  --tdeco1:#7dd3fc;--tdeco2:#a5b4fc;
-  font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;
-}
-/* Peach theme */
-.theme-peach{
-  --tc1:#f97316;--tc2:#ec4899;--tc3:#ffedd5;--tc4:#fff7ed;
-  --tbg:#fff9f5;--tcard:#ffffff;--ttitle:#c2410c;--ttext:#7c2d12;--tsub:#9a3412;
-  --tborder:#fed7aa;--tprice-bg:#f97316;--tprice-text:#fff;
-  --tdeco1:#fdba74;--tdeco2:#f9a8d4;
-  font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;
-}
-/* Choco theme */
-.theme-choco{
-  --tc1:#92400e;--tc2:#d97706;--tc3:#f5ebe0;--tc4:#fdf8f4;
-  --tbg:#fdf6ef;--tcard:#ffffff;--ttitle:#78350f;--ttext:#3b1a08;--tsub:#4b2510;
-  --tborder:#e7d5c8;--tprice-bg:#92400e;--tprice-text:#fff;
-  --tdeco1:#d6b896;--tdeco2:#fbbf24;
-  font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;
-}
-/* Mint theme */
-.theme-mint{
-  --tc1:#0d9488;--tc2:#6366f1;--tc3:#ccfbf1;--tc4:#f0fdfa;
-  --tbg:#f5fffd;--tcard:#ffffff;--ttitle:#0f766e;--ttext:#134e4a;--tsub:#115e59;
-  --tborder:#99f6e4;--tprice-bg:#0d9488;--tprice-text:#fff;
-  --tdeco1:#5eead4;--tdeco2:#818cf8;
-  font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;
-}
-
-.banner-wrap{
-  background:var(--tbg);
+/* ===== BANNER LAYOUT ===== */
+.banner{
+  background:var(--c4);
   position:relative;
   overflow:hidden;
-  box-shadow:0 20px 60px rgba(0,0,0,.2);
+  user-select:none;
 }
 
-/* Banner decorations */
-.banner-deco-top{
-  position:absolute;top:0;left:0;right:0;
-  height:12px;
-  background:repeating-linear-gradient(90deg,var(--tc1) 0,var(--tc1) 8px,var(--tc2) 8px,var(--tc2) 16px);
-  opacity:0.7;
-}
-.banner-deco-bottom{
-  position:absolute;bottom:0;left:0;right:0;
-  height:12px;
-  background:repeating-linear-gradient(90deg,var(--tc2) 0,var(--tc2) 8px,var(--tc1) 8px,var(--tc1) 16px);
-  opacity:0.7;
-}
-.banner-deco-left{
-  position:absolute;top:12px;left:0;bottom:12px;width:10px;
-  background:linear-gradient(180deg,var(--tc1),var(--tc2));opacity:0.5;
-}
-.banner-deco-right{
-  position:absolute;top:12px;right:0;bottom:12px;width:10px;
-  background:linear-gradient(180deg,var(--tc2),var(--tc1));opacity:0.5;
-}
-
-/* Dot pattern overlay */
-.banner-dots{
+/* Texture overlay */
+.banner-tex{
   position:absolute;inset:0;
-  background-image:radial-gradient(circle,var(--tdeco1) 1.5px,transparent 1.5px);
-  background-size:24px 24px;
-  opacity:0.18;
-  pointer-events:none;
+  background-image:
+    radial-gradient(circle at 20% 20%,var(--c1) 0,transparent 1px),
+    radial-gradient(circle at 80% 80%,var(--c2) 0,transparent 1px);
+  background-size:22px 22px,28px 28px;
+  opacity:.08;pointer-events:none;z-index:0;
 }
 
-/* Banner header */
-.banner-header{
-  position:relative;
+/* Wavy border top/bottom */
+.banner-wave-top,.banner-wave-bottom{
+  position:absolute;left:0;right:0;height:0;
+  pointer-events:none;z-index:1;
+}
+.banner-wave-top{top:0;}
+.banner-wave-bottom{bottom:0;}
+
+/* Side bars */
+.banner-sidebar-l,.banner-sidebar-r{
+  position:absolute;top:0;bottom:0;width:14px;z-index:1;
+}
+.banner-sidebar-l{left:0;background:repeating-linear-gradient(180deg,var(--c1) 0,var(--c1) 6px,var(--c2) 6px,var(--c2) 12px);opacity:.5;}
+.banner-sidebar-r{right:0;background:repeating-linear-gradient(180deg,var(--c2) 0,var(--c2) 6px,var(--c1) 6px,var(--c1) 12px);opacity:.5;}
+
+/* Title area */
+.banner-title-area{
+  position:relative;z-index:10;
   text-align:center;
-  padding:28px 24px 20px;
-  z-index:1;
+  padding:32px 30px 20px;
 }
-.banner-sub-badge{
+.banner-sub{
   display:inline-block;
-  background:var(--tc1);
-  color:#fff;
-  font-size:13px;
-  font-weight:700;
-  padding:5px 18px;
-  border-radius:999px;
+  background:var(--c1);color:#fff;
+  font-size:14px;font-weight:700;
+  padding:5px 20px;border-radius:999px;
   margin-bottom:12px;
-  letter-spacing:0.5px;
+  letter-spacing:.5px;
+  box-shadow:0 3px 10px rgba(0,0,0,.12);
 }
-.banner-title{
-  font-family:'Zen Maru Gothic','Noto Sans JP',sans-serif;
+.banner-main-title{
   font-weight:900;
-  line-height:1.15;
+  line-height:1.12;
   letter-spacing:-1px;
-  background:linear-gradient(135deg,var(--tc1),var(--tc2));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  filter:drop-shadow(0 2px 4px rgba(0,0,0,.08));
-}
-.banner-title-outline{
   position:relative;
+  display:inline-block;
 }
-.banner-title-outline::after{
-  content:attr(data-text);
-  position:absolute;
-  left:0;right:0;top:0;
-  background:none;
+/* Title with outline+gradient */
+.banner-main-title .title-text{
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  position:relative;z-index:1;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.1));
+}
+.banner-main-title .title-shadow{
+  position:absolute;top:3px;left:3px;right:0;
+  -webkit-text-stroke:6px rgba(255,255,255,.7);
   -webkit-text-fill-color:transparent;
-  -webkit-text-stroke:3px rgba(255,255,255,0.6);
-  z-index:-1;
+  z-index:0;
 }
 .banner-divider{
   display:flex;align-items:center;gap:10px;
-  margin:12px auto 0;width:80%;
+  margin:10px auto 0;width:70%;max-width:400px;
 }
-.banner-divider-line{height:2px;flex:1;background:linear-gradient(90deg,transparent,var(--tc1),transparent);}
-.banner-divider-icon{font-size:14px;color:var(--tc1);}
+.banner-divider-line{height:2px;flex:1;background:linear-gradient(90deg,transparent,var(--c1),transparent);}
+.banner-divider-dot{width:6px;height:6px;border-radius:50%;background:var(--c1);}
 
-/* Product grid */
-.banner-grid{
-  padding:0 18px 20px;
-  position:relative;z-index:1;
-}
-.banner-grid.cols-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-.banner-grid.cols-2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
-.banner-grid.cols-1{display:grid;grid-template-columns:1fr;gap:10px;}
-
-/* Product card */
-.pcard{
-  background:var(--tcard);
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:0 2px 12px rgba(0,0,0,.08),0 0 0 1.5px var(--tborder);
-  transition:transform .2s;
-  position:relative;
-}
-.pcard-img-wrap{
-  background:var(--tc4);
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
-  position:relative;
-}
-.pcard-img-wrap img{
-  width:100%;height:100%;
-  object-fit:contain;
-  padding:8px;
-}
-.pcard-img-placeholder{
-  width:100%;height:100%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:28px;opacity:0.4;
-}
-.pcard-body{
-  padding:10px 10px 12px;
-}
-.pcard-brand{
-  font-size:10px;font-weight:700;
-  color:var(--tc1);
-  margin-bottom:3px;
-  letter-spacing:0.3px;
-}
-.pcard-name{
-  font-size:11px;font-weight:700;
-  color:var(--ttext);
-  line-height:1.4;
-  margin-bottom:4px;
-}
-.pcard-desc{
-  font-size:10px;font-weight:400;
-  color:var(--tsub);
-  line-height:1.4;
-  margin-bottom:6px;
-}
-.pcard-price{
-  display:inline-block;
-  background:var(--tprice-bg);
-  color:var(--tprice-text);
-  font-size:11px;font-weight:700;
-  padding:3px 10px;
-  border-radius:999px;
-  letter-spacing:0.3px;
-}
-/* Corner ribbon */
-.pcard-ribbon{
-  position:absolute;top:8px;left:8px;
-  background:var(--tc2);
-  color:#fff;
-  font-size:9px;font-weight:700;
-  padding:2px 8px;
-  border-radius:999px;
-  letter-spacing:0.3px;
-  z-index:2;
+/* Products scatter area */
+.banner-scatter{
+  position:relative;z-index:5;
+  /* height set by JS */
 }
 
-/* Banner footer */
-.banner-footer{
-  text-align:center;
-  padding:12px 20px 24px;
-  position:relative;z-index:1;
-}
-.banner-footer-text{
-  font-size:11px;font-weight:500;
-  color:var(--tsub);
-  opacity:0.7;
-}
-.banner-hashtags{
-  display:flex;gap:6px;justify-content:center;flex-wrap:wrap;
-  margin-top:8px;
-}
-.banner-hashtag{
-  font-size:10px;font-weight:600;
-  color:var(--tc1);
-  opacity:0.8;
-}
-
-/* Floating deco */
-.fdeco{
+/* Each product item in scatter */
+.scatter-item{
   position:absolute;
-  pointer-events:none;
-  font-size:16px;
-  opacity:0.3;
-  z-index:0;
+  display:flex;flex-direction:column;align-items:center;
+  cursor:default;
+}
+.scatter-item img{
+  /* シャドウは filter:drop-shadow で透明部分を無視して自然な影 */
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.18)) drop-shadow(0 0 6px rgba(255,255,255,.4));
+  display:block;
+  max-width:100%;
+  height:auto;
+}
+/* ブランドバッジ */
+.brand-badge{
+  display:inline-block;
+  background:var(--c1);
+  color:#fff;
+  font-size:11px;font-weight:700;
+  padding:3px 12px;
+  border-radius:999px;
+  margin-top:6px;
+  white-space:nowrap;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+  letter-spacing:.3px;
+}
+.brand-badge.outline{
+  background:#fff;
+  color:var(--c1);
+  border:2px solid var(--c1);
+}
+/* 商品名テキスト */
+.product-name-text{
+  font-size:11px;font-weight:600;
+  color:var(--ct);
+  text-align:center;
+  margin-top:3px;
+  line-height:1.3;
+  max-width:120px;
+}
+.product-price-text{
+  font-size:10px;font-weight:700;
+  color:var(--cs);
+  margin-top:2px;
+}
+
+/* Footer */
+.banner-footer{
+  position:relative;z-index:5;
+  text-align:center;
+  padding:14px 20px 28px;
+}
+.banner-footer-line{
+  height:2px;
+  background:linear-gradient(90deg,transparent,var(--c1),var(--c2),var(--c1),transparent);
+  margin-bottom:10px;opacity:.4;
+}
+.banner-footer-txt{font-size:11px;color:var(--ct);opacity:.6;margin-bottom:6px;}
+.banner-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+.banner-tag{font-size:11px;font-weight:600;color:var(--c1);opacity:.7;}
+
+/* Floating decoration elements */
+.fdeco{
+  position:absolute;pointer-events:none;z-index:2;
+  font-style:normal;opacity:.25;
+  transition:none;
 }
 </style>
 </head>
 <body>
-<div class="app">
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <div class="logo">BannerAI</div>
-    <div class="tagline">LIPSレベルの商品まとめバナーを秒で作成</div>
 
-    <div class="section">
-      <div class="sec-label">バナー設定</div>
-      <div class="fg">
-        <label>タイトル *</label>
-        <input type="text" id="bannerTitle" placeholder="例：垢抜け眉毛メイクおすすめ10選" oninput="liveUpdate()">
-      </div>
-      <div class="fg">
-        <label>サブテキスト</label>
-        <input type="text" id="bannerSub" placeholder="例：ブルベ向け・プチプラ" oninput="liveUpdate()">
-      </div>
-      <div class="fg">
-        <label>サイズ</label>
-        <div class="chips" id="sc">
-          <div class="chip on" data-w="1080" data-h="1350">Instagram縦</div>
-          <div class="chip" data-w="1080" data-h="1080">正方形</div>
-          <div class="chip" data-w="1080" data-h="1920">ストーリー</div>
-          <div class="chip" data-w="1200" data-h="628">OGP横長</div>
-        </div>
-      </div>
-    </div>
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="logo">BannerAI</div>
+  <div class="tagline">LIPSレベルの商品まとめバナーを秒で作成</div>
 
-    <div class="section">
-      <div class="sec-label">テーマ</div>
-      <div class="theme-row" id="themeGrid">
-        <div class="tbtn on" data-t="pink" style="background:linear-gradient(135deg,#ffb7d5,#e879f9);color:#fff">ピンク<br><span style="font-size:7px;opacity:.8">フェミニン</span></div>
-        <div class="tbtn" data-t="yellow" style="background:linear-gradient(135deg,#fde68a,#fb923c);color:#78350f">イエロー<br><span style="font-size:7px;opacity:.8">ナチュラル</span></div>
-        <div class="tbtn" data-t="green" style="background:linear-gradient(135deg,#a7f3d0,#34d399);color:#064e3b">グリーン<br><span style="font-size:7px;opacity:.8">清楚</span></div>
-        <div class="tbtn" data-t="purple" style="background:linear-gradient(135deg,#c4b5fd,#8b5cf6);color:#fff">パープル<br><span style="font-size:7px;opacity:.8">上品</span></div>
-        <div class="tbtn" data-t="blue" style="background:linear-gradient(135deg,#bae6fd,#38bdf8);color:#0c4a6e">ブルー<br><span style="font-size:7px;opacity:.8">クール</span></div>
-        <div class="tbtn" data-t="peach" style="background:linear-gradient(135deg,#fed7aa,#fb923c);color:#7c2d12">ピーチ<br><span style="font-size:7px;opacity:.8">ポップ</span></div>
-        <div class="tbtn" data-t="choco" style="background:linear-gradient(135deg,#d6b896,#92400e);color:#fff">ショコラ<br><span style="font-size:7px;opacity:.8">高級感</span></div>
-        <div class="tbtn" data-t="mint" style="background:linear-gradient(135deg,#ccfbf1,#2dd4bf);color:#134e4a">ミント<br><span style="font-size:7px;opacity:.8">さわやか</span></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="sec-label">レイアウト</div>
-      <div class="chips" id="lc">
-        <div class="chip on" data-l="cols-3">3列</div>
-        <div class="chip" data-l="cols-2">2列</div>
-        <div class="chip" data-l="cols-1">1列</div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="sec-label">商品を追加（制限なし）</div>
-      <div class="prod-list" id="prodList"></div>
-      <button class="add-btn" onclick="addProd()">＋ 商品を追加する</button>
-    </div>
-
-    <div class="section">
-      <button class="gen-btn" id="genBtn" onclick="generate()">
-        <span id="bt">✦ AIでバナーを生成する</span>
-        <div class="spinner" id="sp"></div>
-      </button>
+  <!-- バナー設定 -->
+  <div class="sec">
+    <div class="sl">バナー設定</div>
+    <div class="fg"><label>メインタイトル *</label><input type="text" id="title" placeholder="例：垢抜け眉毛メイクおすすめ10選"></div>
+    <div class="fg"><label>サブテキスト（任意）</label><input type="text" id="sub" placeholder="例：ブルベ向け・プチプラ特集"></div>
+    <div class="fg"><label>フッターメッセージ（任意）</label><input type="text" id="footer" placeholder="例：※価格は掲載時点のものです"></div>
+    <div class="row2">
+      <div class="fg"><label>バナー幅 (px)</label><input type="number" id="bw" value="1080" min="400" max="2000" step="10"></div>
+      <div class="fg"><label>バナー高さ (px)</label><input type="number" id="bh" value="1350" min="400" max="3000" step="10"></div>
     </div>
   </div>
 
-  <!-- PREVIEW -->
-  <div class="preview-area" id="previewArea">
-    <div class="empty-state">
-      <div class="ico">🎨</div>
-      <p>左のフォームを入力して<br>「バナーを生成する」を押してください<br><br>商品画像・ブランド名・価格を入れるだけで<br>LIPSレベルのバナーが完成します</p>
+  <!-- テーマ -->
+  <div class="sec">
+    <div class="sl">テーマ</div>
+    <div class="tgrid" id="tgrid">
+      <div class="tbtn on" data-t="pink" style="background:linear-gradient(135deg,#ffb7d5,#e879f9);color:#fff">ピンク<br><span style="font-size:7px">フェミニン</span></div>
+      <div class="tbtn" data-t="yellow" style="background:linear-gradient(135deg,#fde68a,#fb923c);color:#78350f">イエロー<br><span style="font-size:7px">ナチュラル</span></div>
+      <div class="tbtn" data-t="green" style="background:linear-gradient(135deg,#a7f3d0,#34d399);color:#064e3b">グリーン<br><span style="font-size:7px">清楚</span></div>
+      <div class="tbtn" data-t="purple" style="background:linear-gradient(135deg,#c4b5fd,#8b5cf6);color:#fff">パープル<br><span style="font-size:7px">上品</span></div>
+      <div class="tbtn" data-t="blue" style="background:linear-gradient(135deg,#bae6fd,#38bdf8);color:#0c4a6e">ブルー<br><span style="font-size:7px">クール</span></div>
+      <div class="tbtn" data-t="peach" style="background:linear-gradient(135deg,#fed7aa,#fb923c);color:#7c2d12">ピーチ<br><span style="font-size:7px">ポップ</span></div>
+      <div class="tbtn" data-t="choco" style="background:linear-gradient(135deg,#d6b896,#92400e);color:#fff">ショコラ<br><span style="font-size:7px">高級感</span></div>
+      <div class="tbtn" data-t="mint" style="background:linear-gradient(135deg,#ccfbf1,#2dd4bf);color:#134e4a">ミント<br><span style="font-size:7px">さわやか</span></div>
+      <div class="tbtn" data-t="strawberry" style="background:linear-gradient(135deg,#fda4af,#e11d48);color:#fff">ストロベリー<br><span style="font-size:7px">情熱</span></div>
+      <div class="tbtn" data-t="lavender" style="background:linear-gradient(135deg,#ddd6fe,#7c3aed);color:#fff">ラベンダー<br><span style="font-size:7px">神秘的</span></div>
     </div>
+  </div>
+
+  <!-- レイアウト -->
+  <div class="sec">
+    <div class="sl">レイアウト</div>
+    <div class="chips" id="lchips">
+      <div class="chip on" data-l="scatter">無造作散らし</div>
+      <div class="chip" data-l="grid3">3列グリッド</div>
+      <div class="chip" data-l="grid2">2列グリッド</div>
+    </div>
+  </div>
+
+  <!-- ブランドバッジスタイル -->
+  <div class="sec">
+    <div class="sl">ブランドバッジスタイル</div>
+    <div class="chips" id="bchips">
+      <div class="chip on" data-b="filled">塗りつぶし</div>
+      <div class="chip" data-b="outline">アウトライン</div>
+      <div class="chip" data-b="none">なし</div>
+    </div>
+  </div>
+
+  <!-- 商品追加 -->
+  <div class="sec">
+    <div class="sl">商品を追加（一括OK）</div>
+    <div class="upload-zone">
+      <input type="file" id="bulkUpload" accept="image/*" multiple onchange="onBulkUpload(event)">
+      <div class="upload-icon">📦</div>
+      <div class="upload-txt">クリックまたはドラッグ＆ドロップ</div>
+      <div class="upload-hint">複数ファイルを一気に選択できます（PNG推奨）</div>
+    </div>
+    <div class="prod-list" id="prodList" style="margin-top:8px;"></div>
+  </div>
+
+  <!-- 生成 -->
+  <div class="sec">
+    <button class="gen-btn" id="genBtn" onclick="generate()">
+      <span id="bt">✦ バナーを生成する</span>
+      <div class="spinner" id="sp"></div>
+    </button>
+  </div>
+</div>
+
+<!-- PREVIEW -->
+<div class="preview-area" id="previewArea">
+  <div class="empty">
+    <div class="ico">🎨</div>
+    <p>商品画像をアップロードして<br>「バナーを生成する」を押してください<br><br>
+    <span style="font-size:11px;color:#4aefc0">💡 PNG（背景透過）画像を使うと<br>よりLIPSらしい仕上がりになります</span></p>
   </div>
 </div>
 
 <script>
 let products=[];
 let selTheme='pink';
-let selLayout='cols-3';
-let bw=1080,bh=1350;
+let selLayout='scatter';
+let selBadge='filled';
 let aiData=null;
-let liveTimer=null;
 
-// Init
-for(let i=0;i<3;i++)addProd();
-
-// Size chips
-document.querySelectorAll('#sc .chip').forEach(c=>c.addEventListener('click',()=>{
-  document.querySelectorAll('#sc .chip').forEach(x=>x.classList.remove('on'));
-  c.classList.add('on');bw=+c.dataset.w;bh=+c.dataset.h;
-}));
-
-// Layout chips
-document.querySelectorAll('#lc .chip').forEach(c=>c.addEventListener('click',()=>{
-  document.querySelectorAll('#lc .chip').forEach(x=>x.classList.remove('on'));
-  c.classList.add('on');selLayout=c.dataset.l;
-  if(document.getElementById('bannerEl'))updateBannerStyle();
-}));
-
-// Theme buttons
-document.querySelectorAll('.tbtn').forEach(b=>b.addEventListener('click',()=>{
-  document.querySelectorAll('.tbtn').forEach(x=>x.classList.remove('on'));
+// ── THEME ──
+document.querySelectorAll('#tgrid .tbtn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#tgrid .tbtn').forEach(x=>x.classList.remove('on'));
   b.classList.add('on');selTheme=b.dataset.t;
-  if(document.getElementById('bannerEl'))updateBannerStyle();
 }));
 
-function addProd(){
-  const id='p'+Date.now()+'_'+Math.random().toString(36).slice(2,6);
-  products.push({id,img:null,brand:'',name:'',price:'',desc:''});
-  renderProdList();
+// ── LAYOUT ──
+document.querySelectorAll('#lchips .chip').forEach(c=>c.addEventListener('click',()=>{
+  document.querySelectorAll('#lchips .chip').forEach(x=>x.classList.remove('on'));
+  c.classList.add('on');selLayout=c.dataset.l;
+}));
+
+// ── BADGE ──
+document.querySelectorAll('#bchips .chip').forEach(c=>c.addEventListener('click',()=>{
+  document.querySelectorAll('#bchips .chip').forEach(x=>x.classList.remove('on'));
+  c.classList.add('on');selBadge=c.dataset.b;
+}));
+
+// ── BULK UPLOAD ──
+function onBulkUpload(e){
+  const files=Array.from(e.target.files);
+  let loaded=0;
+  files.forEach(f=>{
+    const r=new FileReader();
+    r.onload=ev=>{
+      const id='p'+Date.now()+'_'+Math.random().toString(36).slice(2,6);
+      products.push({id,img:ev.target.result,brand:'',name:'',price:'',size:160});
+      loaded++;
+      if(loaded===files.length)renderProdList();
+    };
+    r.readAsDataURL(f);
+  });
+  e.target.value='';
 }
 
 function delProd(id){
   products=products.filter(p=>p.id!==id);
   renderProdList();
-  if(document.getElementById('bannerEl'))renderBannerProducts();
+}
+
+function upd(id,f,v){
+  const p=products.find(x=>x.id===id);
+  if(p)p[f]=(f==='size')?parseInt(v)||100:v;
 }
 
 function renderProdList(){
   const list=document.getElementById('prodList');
   list.innerHTML='';
-  products.forEach((p,i)=>{
+  if(!products.length){list.innerHTML='<div style="text-align:center;padding:12px;font-size:10px;color:var(--mu)">まだ商品がありません</div>';return;}
+  products.forEach(p=>{
     const div=document.createElement('div');
     div.className='pitem';
     div.innerHTML=`
-      <div class="pitem-top">
-        <div class="pimg-ph" id="ph_${p.id}">
-          ${p.img?`<img src="${p.img}" class="pimg" style="width:52px;height:52px;">`:`<span>📷</span>`}
-          <input type="file" accept="image/*" onchange="onProdImg(event,'${p.id}')">
+      <img src="${p.img}" class="pitem-img" alt="">
+      <div class="pitem-fields">
+        <input type="text" placeholder="ブランド名" value="${p.brand}" oninput="upd('${p.id}','brand',this.value)">
+        <input type="text" placeholder="商品名（任意）" value="${p.name}" oninput="upd('${p.id}','name',this.value)">
+        <div class="pitem-size">
+          <span>サイズ:</span>
+          <input type="number" value="${p.size}" min="60" max="400" step="10" oninput="upd('${p.id}','size',this.value)">
+          <span>px</span>
+          <input type="text" placeholder="価格" value="${p.price}" oninput="upd('${p.id}','price',this.value)" style="flex:1">
         </div>
-        <div class="pfields">
-          <input type="text" placeholder="ブランド名" value="${p.brand}" oninput="upd('${p.id}','brand',this.value)">
-          <input type="text" placeholder="商品名" value="${p.name}" oninput="upd('${p.id}','name',this.value)">
-          <input type="text" placeholder="価格（例：858円）" value="${p.price}" oninput="upd('${p.id}','price',this.value)">
-        </div>
-        <button class="pdel" onclick="delProd('${p.id}')">✕</button>
       </div>
-      <input type="text" placeholder="説明文（任意）" value="${p.desc}" oninput="upd('${p.id}','desc',this.value)" style="font-size:10px;margin-top:4px;">
+      <button class="pdel" onclick="delProd('${p.id}')">✕</button>
     `;
     list.appendChild(div);
   });
 }
 
-function upd(id,f,v){
-  const p=products.find(x=>x.id===id);
-  if(p){p[f]=v;if(document.getElementById('bannerEl'))scheduleLiveUpdate();}
-}
+renderProdList();
 
-function onProdImg(e,id){
-  const f=e.target.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=ev=>{
-    const p=products.find(x=>x.id===id);
-    if(p){p.img=ev.target.result;renderProdList();if(document.getElementById('bannerEl'))renderBannerProducts();}
-  };
-  r.readAsDataURL(f);
-}
-
-function scheduleLiveUpdate(){
-  clearTimeout(liveTimer);
-  liveTimer=setTimeout(()=>{if(document.getElementById('bannerEl'))renderBannerProducts();},300);
-}
-
-function liveUpdate(){
-  if(document.getElementById('bannerEl')){
-    scheduleLiveUpdate();
-    document.querySelector('.banner-title').textContent=document.getElementById('bannerTitle').value||'タイトル';
-    document.querySelector('.banner-title').setAttribute('data-text',document.getElementById('bannerTitle').value||'タイトル');
-    const subEl=document.querySelector('.banner-sub-badge');
-    if(subEl){const sv=document.getElementById('bannerSub').value;subEl.textContent=sv||'';subEl.style.display=sv?'inline-block':'none';}
-  }
-}
-
+// ── GENERATE ──
 async function generate(){
-  const title=document.getElementById('bannerTitle').value.trim();
+  const title=document.getElementById('title').value.trim();
   if(!title){alert('タイトルを入力してください');return;}
+  if(!products.length){alert('商品を追加してください');return;}
 
   const btn=document.getElementById('genBtn');
   btn.disabled=true;
   document.getElementById('bt').style.display='none';
   document.getElementById('sp').style.display='block';
 
-  // AIでキャッチコピー等を生成
-  const validProds=products.filter(p=>p.name||p.brand);
-  const prompt=`以下の商品まとめバナーのコンテンツを提案してください。
-
+  // AI でハッシュタグ・コピー生成
+  const prompt=`以下のバナーのハッシュタグとフッターを提案してください。
 タイトル: ${title}
-商品数: ${validProds.length}
 テーマ: ${selTheme}
-
 JSONのみ出力:
-{"tagline":"タイトルを補完するキャッチコピー15文字以内","footer":"フッターメッセージ20文字以内","hashtags":["#タグ1","#タグ2","#タグ3"]}`;
+{"hashtags":["#タグ1","#タグ2","#タグ3","#タグ4"],"footer":"フッター一言20文字以内"}`;
 
   try{
     const res=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
-    const data=await res.json();
-    if(!data.error){
-      const match=(data.text||'').match(/\{[\s\S]*\}/);
-      if(match)aiData=JSON.parse(match[0].replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g,''));
+    const d=await res.json();
+    if(!d.error){
+      const m=(d.text||'').match(/\{[\s\S]*\}/);
+      if(m)aiData=JSON.parse(m[0].replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g,''));
     }
-  }catch(e){console.warn('AI fallback',e);aiData=null;}
+  }catch(e){aiData=null;}
 
   renderBanner();
+
   btn.disabled=false;
   document.getElementById('bt').style.display='block';
   document.getElementById('sp').style.display='none';
 }
 
+// ── RENDER BANNER ──
 function renderBanner(){
-  const title=document.getElementById('bannerTitle').value.trim()||'タイトル';
-  const sub=document.getElementById('bannerSub').value.trim();
+  const title=document.getElementById('title').value.trim()||'タイトル';
+  const sub=document.getElementById('sub').value.trim();
+  const footerTxt=document.getElementById('footer').value.trim()||(aiData?.footer||'');
+  const bw=parseInt(document.getElementById('bw').value)||1080;
+  const bh=parseInt(document.getElementById('bh').value)||1350;
+
+  const titleFontSize=Math.round(bw*(title.length>14?0.065:title.length>10?0.075:0.088));
+  const subFontSize=Math.round(bw*0.025);
+
+  // スケール
   const area=document.getElementById('previewArea');
+  const maxW=Math.max(300,area.clientWidth-40);
+  const scale=Math.min(1,maxW/bw);
 
-  // スケール計算
-  const maxPreviewW=Math.min(window.innerWidth-420,700);
-  const scale=maxPreviewW/bw;
-  const dw=Math.round(bw*scale);
-  const dh=Math.round(bh*scale);
+  // タイトルエリア高さ概算
+  const titleAreaH=Math.round(bh*0.22);
+  // 商品エリア高さ
+  const scatterH=bh-titleAreaH-Math.round(bh*0.1);
 
-  const titleSize=Math.round(bw*(title.length>12?0.07:0.085));
-  const colsNum=selLayout==='cols-3'?3:selLayout==='cols-2'?2:1;
-  const imgH=Math.round(bw/colsNum*(selLayout==='cols-1'?0.4:0.65));
+  // 商品配置計算
+  const placements=calcPlacements(products,bw,scatterH,selLayout);
 
-  area.innerHTML=`
-    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:12px;">
-      <button class="pbtn g" onclick="saveJPG()">⬇ JPGで保存</button>
-      <button class="pbtn" onclick="generate()">🔄 AI再生成</button>
-    </div>
-    <div style="transform:scale(${scale.toFixed(3)});transform-origin:top center;display:inline-block;margin-bottom:${Math.round(dh*(scale-1))}px">
-      <div class="banner-wrap theme-${selTheme}" id="bannerEl" style="width:${bw}px;">
-        <div class="banner-deco-top"></div>
-        <div class="banner-deco-bottom"></div>
-        <div class="banner-deco-left"></div>
-        <div class="banner-deco-right"></div>
-        <div class="banner-dots"></div>
+  // Banner HTML
+  const decos=['✿','★','♡','✦','♪','◎','❋','✸','◇','❀'];
+  const decoHTML=Array.from({length:14},(_,i)=>{
+    const x=Math.random()*90+3;
+    const y=Math.random()*90+3;
+    const fs=Math.round(bw*(0.015+Math.random()*.015));
+    const rot=Math.random()*60-30;
+    return `<div class="fdeco" style="left:${x.toFixed(1)}%;top:${y.toFixed(1)}%;font-size:${fs}px;transform:rotate(${rot.toFixed(0)}deg)">${decos[i%decos.length]}</div>`;
+  }).join('');
 
-        <!-- Floating decos -->
-        <div class="fdeco" style="top:5%;left:4%">✿</div>
-        <div class="fdeco" style="top:3%;right:5%">★</div>
-        <div class="fdeco" style="top:8%;left:88%">♡</div>
-        <div class="fdeco" style="top:92%;left:3%">✦</div>
-        <div class="fdeco" style="top:94%;right:4%">✿</div>
-        <div class="fdeco" style="top:48%;left:2%">♪</div>
-        <div class="fdeco" style="top:55%;right:2%">◎</div>
+  const productsHTML=placements.map(({p,x,y,w,rot})=>{
+    const nameHTML=p.name?`<div class="product-name-text" style="font-size:${Math.round(w*0.12)}px;max-width:${w+20}px">${p.name}</div>`:'';
+    const priceHTML=p.price?`<div class="product-price-text" style="font-size:${Math.round(w*0.1)}px">${p.price}</div>`:'';
+    const badgeHTML=p.brand&&selBadge!=='none'
+      ?`<div class="brand-badge ${selBadge==='outline'?'outline':''}" style="font-size:${Math.round(w*0.11)}px;padding:${Math.round(w*0.03)}px ${Math.round(w*0.1)}px">${p.brand}</div>`
+      :'';
+    return `
+      <div class="scatter-item" style="left:${x}px;top:${y}px;transform:rotate(${rot}deg);width:${w}px;">
+        <img src="${p.img}" style="width:${w}px;height:auto;" alt="${p.name||p.brand||''}">
+        ${badgeHTML}
+        ${nameHTML}
+        ${priceHTML}
+      </div>`;
+  }).join('');
 
-        <div class="banner-header">
-          <div class="banner-sub-badge" style="${sub?'':'display:none'}">${sub}</div>
-          <div class="banner-title banner-title-outline" data-text="${title}" style="font-size:${titleSize}px">${title}</div>
-          <div class="banner-divider">
-            <div class="banner-divider-line"></div>
-            <div class="banner-divider-icon">✦</div>
-            <div class="banner-divider-line"></div>
-          </div>
+  const tagsHTML=(aiData?.hashtags||[]).map(t=>`<span class="banner-tag">${t}</span>`).join('');
+  const subHTML=sub?`<div class="banner-sub" style="font-size:${subFontSize}px">${sub}</div>`:'';
+
+  const bannerHTML=`
+    <div class="banner t-${selTheme}" id="bannerEl" style="width:${bw}px;min-height:${bh}px;">
+      <div class="banner-tex"></div>
+      <div class="banner-sidebar-l"></div>
+      <div class="banner-sidebar-r"></div>
+      ${decoHTML}
+
+      <div class="banner-title-area" style="padding:${Math.round(bh*.025)}px ${Math.round(bw*.06)}px ${Math.round(bh*.015)}px;">
+        ${subHTML}
+        <div class="banner-main-title" style="font-size:${titleFontSize}px;">
+          <div class="title-shadow">${title}</div>
+          <div class="title-text">${title}</div>
         </div>
-
-        <div class="banner-grid ${selLayout}" id="prodGrid"></div>
-
-        <div class="banner-footer">
-          <div class="banner-footer-text">${aiData?.footer||'※価格は掲載時点のものです'}</div>
-          <div class="banner-hashtags" id="hashtagsEl"></div>
+        <div class="banner-divider">
+          <div class="banner-divider-line"></div>
+          <div class="banner-divider-dot"></div>
+          <div class="banner-divider-line"></div>
         </div>
+      </div>
+
+      <div class="banner-scatter" style="height:${scatterH}px;position:relative;">
+        ${productsHTML}
+      </div>
+
+      <div class="banner-footer">
+        <div class="banner-footer-line"></div>
+        ${footerTxt?`<div class="banner-footer-txt" style="font-size:${Math.round(bw*.018)}px">${footerTxt}</div>`:''}
+        <div class="banner-tags">${tagsHTML}</div>
       </div>
     </div>
   `;
 
-  renderBannerProducts();
-  renderHashtags();
-  window._bannerEl=document.getElementById('bannerEl');
-  window._bannerScale=scale;
-}
-
-function renderBannerProducts(){
-  const grid=document.getElementById('prodGrid');
-  if(!grid)return;
-  const colsNum=selLayout==='cols-3'?3:selLayout==='cols-2'?2:1;
-  const imgH=Math.round(bw/colsNum*(selLayout==='cols-1'?0.35:selLayout==='cols-2'?0.7:0.75));
-  const validProds=products.filter(p=>p.name||p.brand||p.img);
-  if(validProds.length===0){grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:40px;color:#ccc;font-size:14px;">商品を追加してください</div>`;return;}
-  grid.innerHTML=validProds.map((p,i)=>`
-    <div class="pcard">
-      ${i<3?`<div class="pcard-ribbon">おすすめ</div>`:''}
-      <div class="pcard-img-wrap" style="height:${imgH}px">
-        ${p.img?`<img src="${p.img}" alt="${p.name}">`:`<div class="pcard-img-placeholder">📷</div>`}
-      </div>
-      <div class="pcard-body">
-        ${p.brand?`<div class="pcard-brand">${p.brand}</div>`:''}
-        ${p.name?`<div class="pcard-name">${p.name}</div>`:''}
-        ${p.desc?`<div class="pcard-desc">${p.desc}</div>`:''}
-        ${p.price?`<div class="pcard-price">${p.price}</div>`:''}
-      </div>
+  area.innerHTML=`
+    <div class="action-bar">
+      <button class="abtn g" onclick="saveJPG()">⬇ JPGで保存</button>
+      <button class="abtn" onclick="generate()">🔄 再生成</button>
     </div>
-  `).join('');
+    <div style="transform:scale(${scale.toFixed(3)});transform-origin:top center;display:inline-block;margin-bottom:${Math.round(bh*(scale-1))}px;">
+      ${bannerHTML}
+    </div>
+  `;
+  window._bw=bw;window._bh=bh;
 }
 
-function renderHashtags(){
-  const el=document.getElementById('hashtagsEl');
-  if(!el)return;
-  const tags=aiData?.hashtags||['#コスメ','#メイク','#プチプラ'];
-  el.innerHTML=tags.map(t=>`<span class="banner-hashtag">${t}</span>`).join('');
+// ── PLACEMENT CALC ──
+function calcPlacements(prods,bw,areaH,layout){
+  if(!prods.length)return[];
+
+  if(layout==='grid3'||layout==='grid2'){
+    const cols=layout==='grid3'?3:2;
+    const pad=Math.round(bw*.04);
+    const gap=Math.round(bw*.025);
+    const cardW=Math.floor((bw-pad*2-gap*(cols-1))/cols);
+    return prods.map((p,i)=>{
+      const col=i%cols;
+      const row=Math.floor(i/cols);
+      const imgW=p.size||cardW;
+      return{p,x:pad+col*(cardW+gap)+(cardW-imgW)/2,y:row*(areaH/Math.ceil(prods.length/cols)),w:imgW,rot:0};
+    });
+  }
+
+  // SCATTER layout
+  const placements=[];
+  const occupied=[];
+
+  // グリッドベースでランダム配置（重なりを最小化）
+  const cols=prods.length<=4?2:prods.length<=9?3:4;
+  const rows=Math.ceil(prods.length/cols);
+  const cellW=Math.round(bw/cols);
+  const cellH=Math.round(areaH/rows);
+
+  prods.forEach((p,i)=>{
+    const col=i%cols;
+    const row=Math.floor(i/cols);
+
+    const imgW=Math.min(p.size||160,cellW*.85);
+
+    // セル内でランダムオフセット
+    const jitterX=(Math.random()-.5)*cellW*.25;
+    const jitterY=(Math.random()-.5)*cellH*.2;
+
+    const x=col*cellW+(cellW-imgW)/2+jitterX;
+    const y=row*cellH+jitterY+cellH*.05;
+
+    // ランダムな微回転（-8〜+8度）
+    const rot=(Math.random()-.5)*16;
+
+    placements.push({p,x:Math.max(0,Math.min(bw-imgW,x)),y:Math.max(0,y),w:imgW,rot});
+  });
+
+  return placements;
 }
 
-function updateBannerStyle(){
-  const el=document.getElementById('bannerEl');
-  if(!el)return;
-  el.className=`banner-wrap theme-${selTheme}`;
-  const grid=document.getElementById('prodGrid');
-  if(grid){grid.className=`banner-grid ${selLayout}`;renderBannerProducts();}
-}
-
+// ── SAVE JPG ──
 async function saveJPG(){
-  const el=window._bannerEl;
+  const el=document.getElementById('bannerEl');
   if(!el){alert('まずバナーを生成してください');return;}
+
+  // 一時的にscaleをリセット
+  const wrap=el.parentElement;
+  const origTransform=wrap.style.transform;
+  const origMargin=wrap.style.marginBottom;
+  wrap.style.transform='scale(1)';
+  wrap.style.marginBottom='0';
+
   try{
+    const bw=window._bw||1080;
+    const bh=window._bh||1350;
     const canvas=await html2canvas(el,{
-      scale:2,useCORS:true,allowTaint:true,
+      scale:2,
+      useCORS:true,
+      allowTaint:true,
       backgroundColor:null,
-      width:bw,height:el.offsetHeight,
-      logging:false
+      width:bw,
+      windowWidth:bw,
+      logging:false,
+      onclone:(doc)=>{
+        // クローン内のtransformをリセット
+        const cloned=doc.getElementById('bannerEl');
+        if(cloned){cloned.style.transform='none';}
+      }
     });
     const a=document.createElement('a');
-    const title=document.getElementById('bannerTitle').value.trim()||'banner';
+    const title=document.getElementById('title').value.trim()||'banner';
     a.download=`banner_${title.slice(0,10)}_${Date.now()}.jpg`;
     a.href=canvas.toDataURL('image/jpeg',.95);
     a.click();
   }catch(e){
-    alert('保存に失敗しました。もう一度試してください。');
     console.error(e);
+    alert('保存に失敗しました: '+e.message);
+  }finally{
+    wrap.style.transform=origTransform;
+    wrap.style.marginBottom=origMargin;
   }
 }
 </script>
