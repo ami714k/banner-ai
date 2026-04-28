@@ -27,9 +27,9 @@ select option{background:var(--s2);}
 .tgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;}
 .tbtn{border-radius:6px;padding:6px 2px;cursor:pointer;text-align:center;font-size:8px;font-weight:700;border:2px solid transparent;transition:all .18s;line-height:1.3;}
 .tbtn.on{border-color:#fff;}
-.uz{background:var(--s2);border:2px dashed rgba(255,110,180,.3);border-radius:9px;padding:14px;text-align:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+.uz{background:var(--s2);border:2px dashed rgba(255,110,180,.3);border-radius:9px;padding:14px;text-align:center;cursor:pointer;transition:all .2s;position:relative;}
 .uz:hover{border-color:var(--a1);}
-.uz input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.uz input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;z-index:10;}
 .uz-ico{font-size:20px;margin-bottom:3px;opacity:.4;}
 .uz-txt{font-size:10px;color:var(--mu);}
 .pl{display:flex;flex-direction:column;gap:5px;max-height:240px;overflow-y:auto;margin-top:6px;}
@@ -111,8 +111,8 @@ select option{background:var(--s2);}
 
   <div class="sec">
     <div class="sl">商品追加（複数一括OK）</div>
-    <div class="uz">
-      <input type="file" id="bu" accept="image/*" multiple onchange="onUpload(event)">
+    <div class="uz" onclick="document.getElementById('bu').click()" ondragover="event.preventDefault()" ondrop="onDrop(event)">
+      <input type="file" id="bu" accept="image/*" multiple onchange="onUpload(event)" style="display:none;">
       <div class="uz-ico">📦</div>
       <div class="uz-txt">クリックまたはドラッグ＆ドロップ<br>複数選択可・PNG推奨</div>
     </div>
@@ -176,6 +176,26 @@ function onUpload(e){
     r.readAsDataURL(f);
   });
   e.target.value='';
+}
+
+function onDrop(e){
+  e.preventDefault();
+  const files = Array.from(e.dataTransfer.files).filter(f=>f.type.startsWith('image/'));
+  if(!files.length) return;
+  let n=0;
+  files.forEach(f=>{
+    const r=new FileReader();
+    r.onload=ev=>{
+      const img=new Image();
+      img.onload=()=>{
+        const id='p'+Date.now()+'_'+Math.random().toString(36).slice(2,5);
+        products.push({id,img:ev.target.result,w:img.naturalWidth,h:img.naturalHeight,brand:'',name:'',price:'',size:160});
+        n++;if(n===files.length)renderPL();
+      };
+      img.src=ev.target.result;
+    };
+    r.readAsDataURL(f);
+  });
 }
 
 function delP(id){products=products.filter(p=>p.id!==id);renderPL();}
