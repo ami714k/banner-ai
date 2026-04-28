@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BannerAI — バナージェネレーター</title>
+<title>BannerAI — プロ品質バナージェネレーター</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#07070e;--s1:#101018;--s2:#17171f;--s3:#1e1e28;--a1:#7c6aff;--a2:#ff6a8a;--a3:#4aefc0;--tx:#f0f0fa;--mu:#5858a0;--bd:#1a1a30;--r:16px;}
@@ -42,9 +42,12 @@ select option{background:var(--s2);}
 .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:6px;}
 .pbtn{background:var(--s3);border:1px solid var(--bd);border-radius:5px;padding:5px 3px;font-size:9px;color:var(--mu);cursor:pointer;text-align:center;transition:all .15s;}
 .pbtn:hover,.pbtn.on{background:rgba(124,106,255,.15);border-color:var(--a1);color:var(--a1);}
-.btn{width:100%;background:linear-gradient(130deg,var(--a1),var(--a2));border:none;border-radius:10px;color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;padding:13px;cursor:pointer;transition:opacity .2s,transform .12s;margin-top:4px;}
+.btn{width:100%;background:linear-gradient(130deg,var(--a1),var(--a2));border:none;border-radius:10px;color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;padding:13px;cursor:pointer;transition:opacity .2s,transform .12s;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;}
 .btn:hover{opacity:.88;transform:translateY(-1px);}
 .btn:active{transform:translateY(0);}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.spinner{width:15px;height:15px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none;}
+@keyframes spin{to{transform:rotate(360deg);}}
 .hint{background:rgba(124,106,255,.07);border:1px solid rgba(124,106,255,.15);border-radius:8px;padding:11px 13px;font-size:10px;color:var(--mu);line-height:1.8;margin-top:12px;}
 .hint strong{color:var(--a1);}
 .div{height:1px;background:var(--bd);margin:14px 0;}
@@ -81,10 +84,10 @@ footer{text-align:center;padding:36px 0 20px;color:var(--mu);font-size:9px;}
 </head>
 <body>
 <div class="wrap">
-  <header><div class="logo">BannerAI</div><div class="badge">PRO</div></header>
+  <header><div class="logo">BannerAI</div><div class="badge">AI Powered</div></header>
   <div class="hero">
     <h1>情報を入れるだけで<br><em>プロ品質のバナーが生まれる。</em></h1>
-    <p>配色・装飾・写真・文字を自動生成。JPG保存対応。APIキー不要で完全無料。</p>
+    <p>AIがキャッチコピー・配色・レイアウトを提案。写真アップロード・JPG保存対応。</p>
   </div>
   <div class="grid">
     <div class="panel">
@@ -118,29 +121,25 @@ footer{text-align:center;padding:36px 0 20px;color:var(--mu);font-size:9px;}
         <input type="text" id="product" placeholder="例：夏の新作コスメ、転職サービス">
       </div>
       <div class="fg">
-        <label>キャッチコピー（空欄で自動生成）</label>
-        <input type="text" id="catch" placeholder="例：あなたの毎日を、もっと輝かせよう。">
-      </div>
-      <div class="fg">
-        <label>サブテキスト</label>
-        <input type="text" id="sub" placeholder="例：期間限定キャンペーン実施中">
-      </div>
-      <div class="fg">
         <label>ターゲット層</label>
         <input type="text" id="target" placeholder="例：20〜30代女性">
       </div>
       <div class="fg">
+        <label>伝えたいこと・訴求ポイント</label>
+        <textarea id="msg" placeholder="例：期間限定セール、使いやすさが特徴"></textarea>
+      </div>
+      <div class="fg">
         <label>雰囲気・トーン</label>
         <select id="tone">
-          <option value="auto">おまかせ（自動判断）</option>
-          <option value="luxury">高級感・洗練</option>
-          <option value="pop">ポップ・かわいい</option>
-          <option value="cool">クール・スタイリッシュ</option>
-          <option value="natural">ナチュラル・やわらか</option>
-          <option value="bold">力強い・インパクト重視</option>
-          <option value="minimal">シンプル・ミニマル</option>
-          <option value="trust">信頼感・誠実</option>
-          <option value="feminine">エレガント・フェミニン</option>
+          <option value="">おまかせ（AIが判断）</option>
+          <option value="高級感・洗練">高級感・洗練</option>
+          <option value="ポップ・かわいい">ポップ・かわいい</option>
+          <option value="クール・スタイリッシュ">クール・スタイリッシュ</option>
+          <option value="ナチュラル・やわらか">ナチュラル・やわらか</option>
+          <option value="力強い・インパクト重視">力強い・インパクト重視</option>
+          <option value="シンプル・ミニマル">シンプル・ミニマル</option>
+          <option value="信頼感・誠実">信頼感・誠実</option>
+          <option value="エレガント・フェミニン">エレガント・フェミニン</option>
         </select>
       </div>
       <div class="fg">
@@ -160,39 +159,38 @@ footer{text-align:center;padding:36px 0 20px;color:var(--mu);font-size:9px;}
           <div class="pbtn" data-p="bottom">下部</div>
         </div>
       </div>
-      <button class="btn" onclick="gen()">✦ バナーを生成する</button>
+      <button class="btn" id="genBtn" onclick="gen()">
+        <span id="bt">✦ AIでバナーを生成する</span>
+        <div class="spinner" id="sp"></div>
+      </button>
       <div class="div"></div>
       <div class="hint"><strong>💡 ヒント</strong><br>コンセプトカードをクリックでデザイン切り替え。JPG保存でそのまま使えます。</div>
     </div>
     <div class="out">
       <div class="pbox">
         <div class="plabel">バナープレビュー</div>
-        <div class="pc" id="pa"><div class="empty"><div class="eico">🎨</div><p>左のフォームを入力して<br>「バナーを生成する」を押してください</p></div></div>
+        <div class="pc" id="pa"><div class="empty"><div class="eico">🎨</div><p>左のフォームを入力して<br>「AIでバナーを生成する」を押してください</p></div></div>
       </div>
       <div class="cbox">
-        <div class="plabel">デザインコンセプト案</div>
-        <div id="ca"><div class="empty" style="padding:16px"><p>生成すると3パターンのコンセプトが表示されます</p></div></div>
+        <div class="plabel">AIが考えたデザインコンセプト案</div>
+        <div id="ca"><div class="empty" style="padding:16px"><p>生成するとAIが考えた<br>3パターンのコンセプトが表示されます</p></div></div>
       </div>
     </div>
   </div>
-  <footer>BannerAI — South Agency AI Contest 2026</footer>
+  <footer>BannerAI — Powered by Gemini AI · South Agency AI Contest 2026</footer>
 </div>
 <script>
 let photo=null,ppos='left',concepts=[],si=0,bw=600,bh=600,bl='1080×1080（正方形）';
 
-// size chips
 document.querySelectorAll('#sc .chip').forEach(c=>c.addEventListener('click',()=>{
   document.querySelectorAll('#sc .chip').forEach(x=>x.classList.remove('on'));
   c.classList.add('on');bw=+c.dataset.w;bh=+c.dataset.h;bl=c.dataset.l;
 }));
-
-// photo pos
 document.querySelectorAll('.pbtn').forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll('.pbtn').forEach(x=>x.classList.remove('on'));
   b.classList.add('on');ppos=b.dataset.p;
   if(concepts.length)render(concepts[si]);
 }));
-
 function onPhoto(e){
   const f=e.target.files[0];if(!f)return;
   const r=new FileReader();
@@ -200,104 +198,64 @@ function onPhoto(e){
   r.readAsDataURL(f);
 }
 
-// ── TONE DATABASE ──
-const TD={
-  luxury:{
-    pals:[
-      {n:'ダークゴールド',bg:'#0c0800',bg2:'#1c1200',tx:'#f0dfa0',ac:'#c9a84c',sc:'rgba(240,223,160,.6)',pt:'geometric'},
-      {n:'ディープネイビー',bg:'#060c16',bg2:'#0c1826',tx:'#e0eaff',ac:'#8899cc',sc:'rgba(224,234,255,.6)',pt:'lines'},
-    ],
-    cats:['{p}の新しいスタンダード。','{p}、上質な選択。','本物を、あなたに。'],
-  },
-  pop:{
-    pals:[
-      {n:'ビビッドコーラル',bg:'#ff5555',bg2:'#ff8040',tx:'#fff',ac:'#ffd93d',sc:'rgba(255,255,255,.85)',pt:'dots'},
-      {n:'ポップミント',bg:'#00c090',bg2:'#00a0cc',tx:'#fff',ac:'#ff6bae',sc:'rgba(255,255,255,.85)',pt:'circles'},
-    ],
-    cats:['毎日が楽しくなる！{p}','わくわくが止まらない♪{p}','かわいい！{p}'],
-  },
-  cool:{
-    pals:[
-      {n:'サイバーブルー',bg:'#050815',bg2:'#090f25',tx:'#c8e0ff',ac:'#00ccff',sc:'rgba(200,224,255,.6)',pt:'grid'},
-      {n:'ミッドナイト',bg:'#07000f',bg2:'#100018',tx:'#ddd0ff',ac:'#aa55ff',sc:'rgba(221,208,255,.6)',pt:'diagonal'},
-    ],
-    cats:['{p}が、常識を変える。','次世代の{p}、ここに。','一歩先を行く{p}。'],
-  },
-  natural:{
-    pals:[
-      {n:'アースグリーン',bg:'#eef5ee',bg2:'#e2f0e2',tx:'#183018',ac:'#4caf50',sc:'rgba(24,48,24,.6)',pt:'organic'},
-      {n:'テラコッタ',bg:'#f8f0e0',bg2:'#f0e4cc',tx:'#3c2c18',ac:'#c87840',sc:'rgba(60,44,24,.6)',pt:'organic'},
-    ],
-    cats:['自然の力で、{p}。','{p}、大地からの贈り物。','やさしい{p}で笑顔に。'],
-  },
-  bold:{
-    pals:[
-      {n:'レッド×ブラック',bg:'#0c0000',bg2:'#180000',tx:'#fff',ac:'#ff1a1a',sc:'rgba(255,255,255,.75)',pt:'diagonal'},
-      {n:'イエロー×ブラック',bg:'#070700',bg2:'#121200',tx:'#fff',ac:'#ffd600',sc:'rgba(255,255,255,.75)',pt:'diagonal'},
-    ],
-    cats:['圧倒的な{p}。','{p}が、すべてを変える。','今すぐ手に入れろ。{p}。'],
-  },
-  minimal:{
-    pals:[
-      {n:'ホワイト×ブラック',bg:'#ffffff',bg2:'#f6f6f6',tx:'#111',ac:'#222',sc:'rgba(17,17,17,.5)',pt:'none'},
-      {n:'オフホワイト',bg:'#f4f2ef',bg2:'#eae6e0',tx:'#1a1a1a',ac:'#777',sc:'rgba(26,26,26,.45)',pt:'none'},
-    ],
-    cats:['{p}。それだけでいい。','シンプルに、{p}。','余計なものは、いらない。'],
-  },
-  trust:{
-    pals:[
-      {n:'ネイビー',bg:'#001230',bg2:'#002060',tx:'#fff',ac:'#4d9fff',sc:'rgba(255,255,255,.7)',pt:'lines'},
-      {n:'フォレスト',bg:'#08201a',bg2:'#122e24',tx:'#fff',ac:'#4ecb71',sc:'rgba(255,255,255,.7)',pt:'lines'},
-    ],
-    cats:['{p}で、安心を。','信頼の{p}。','実績が証明する、{p}の力。'],
-  },
-  feminine:{
-    pals:[
-      {n:'ローズゴールド',bg:'#fff0f4',bg2:'#ffe0ec',tx:'#48182e',ac:'#d46898',sc:'rgba(72,24,46,.6)',pt:'floral'},
-      {n:'ラベンダー',bg:'#f4f0ff',bg2:'#eae0ff',tx:'#2a0e5c',ac:'#9c5fd4',sc:'rgba(42,14,92,.6)',pt:'floral'},
-    ],
-    cats:['{p}で、もっと美しく。','あなたのための{p}。','上品さを、日常に。'],
-  },
-  auto:{
-    pals:[
-      {n:'モダンパープル',bg:'#08081e',bg2:'#0e0e2c',tx:'#fff',ac:'#7c6aff',sc:'rgba(255,255,255,.65)',pt:'geometric'},
-      {n:'ウォームアンバー',bg:'#100600',bg2:'#1c0e00',tx:'#fff8e8',ac:'#ff8c42',sc:'rgba(255,248,232,.65)',pt:'geometric'},
-      {n:'フレッシュブルー',bg:'#eef6ff',bg2:'#e0f0ff',tx:'#082840',ac:'#2196f3',sc:'rgba(8,40,64,.6)',pt:'lines'},
-    ],
-    cats:['{p}、新しい体験へ。','選ばれる理由がある。{p}。','{p}で、毎日が変わる。'],
-  },
-};
-
-function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
-
-function makeCatch(product,tone){
-  const c=document.getElementById('catch').value.trim();
-  if(c)return c;
-  const short=product.length>10?product.slice(0,10):product;
-  return pick(TD[tone]?.cats||TD.auto.cats).replace(/{p}/g,short);
-}
-
-function gen(){
+async function gen(){
   const uc=document.getElementById('useCase').value;
   const pr=document.getElementById('product').value.trim();
-  const sb=document.getElementById('sub').value.trim();
   const tg=document.getElementById('target').value.trim();
-  let tn=document.getElementById('tone').value;
+  const mg=document.getElementById('msg').value.trim();
+  const tn=document.getElementById('tone').value;
   if(!uc){alert('バナーの用途を選択してください');return;}
   if(!pr){alert('商品・サービス名を入力してください');return;}
   const chip=document.querySelector('#sc .chip.on');
   bw=+(chip?.dataset.w||600);bh=+(chip?.dataset.h||600);bl=chip?.dataset.l||'';
-  if(tn==='auto'){if(uc.includes('求人'))tn='trust';else if(uc.includes('Instagram'))tn='pop';else if(uc.includes('商品'))tn='cool';}
-  const td=TD[tn]||TD.auto;
-  const pals=td.pals;
-  const names=['クリーン＆モダン','インパクト重視','バランス型'];
-  const lays=['center','left','split'];
-  concepts=[];
-  for(let i=0;i<3;i++){
-    const p=pals[i%pals.length];
-    concepts.push({name:names[i],catch:makeCatch(pr,tn),sub:sb||(tg?`${tg}向け`:''),bg:p.bg,bg2:p.bg2,tx:p.tx,ac:p.ac,sc:p.sc,cols:[p.bg,p.ac,p.tx],cn:p.n,pt:p.pt,lay:lays[i]});
+
+  const btn=document.getElementById('genBtn');
+  btn.disabled=true;
+  document.getElementById('bt').style.display='none';
+  document.getElementById('sp').style.display='block';
+
+  const prompt=`あなたはプロのグラフィックデザイナーです。以下の条件でWebバナーのデザインコンセプトを3パターン提案してください。
+
+条件:
+- 用途: ${uc}
+- サイズ: ${bl}
+- 商品・サービス: ${pr}
+- ターゲット: ${tg||'未指定'}
+- 訴求ポイント: ${mg||'未指定'}
+- 雰囲気: ${tn||'AIが最適判断'}
+
+制約:
+- JSONのみ出力。マークダウン記号や説明文は不要
+- 全フィールドの値にダブルクォートを含めないこと
+
+出力形式:
+{"concepts":[{"name":"コンセプト名8文字以内","catchcopy":"キャッチコピー20文字以内","subtext":"サブテキスト25文字以内","description":"説明40文字以内","bg":"背景色hex","bg2":"グラデ終了色hex","textColor":"テキスト色hex","accentColor":"アクセント色hex","subColor":"補助テキスト色rgba","colors":["#hex1","#hex2","#hex3"],"colorName":"配色名","pattern":"geometric/lines/dots/circles/grid/diagonal/floral/organic/none","layout":"center/left/split"}]}`;
+
+  try{
+    const res=await fetch('/api/generate',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({prompt})
+    });
+    const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    const text=data.text||'';
+    const match=text.match(/\{[\s\S]*\}/);
+    if(!match)throw new Error('JSONが見つかりません');
+    const safe=match[0].replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g,'');
+    const parsed=JSON.parse(safe);
+    concepts=parsed.concepts;
+    si=0;
+    renderConcepts();
+    render(concepts[0]);
+  }catch(err){
+    console.error(err);
+    alert('生成に失敗しました: '+err.message);
+  }finally{
+    btn.disabled=false;
+    document.getElementById('bt').style.display='block';
+    document.getElementById('sp').style.display='none';
   }
-  si=0;renderConcepts(pr);render(concepts[0]);
 }
 
 function render(c){
@@ -332,32 +290,31 @@ function done(area,cv,mw,dh){
 
 function drawDeco(ctx,c,w,h){
   ctx.save();ctx.globalAlpha=.07;
-  const pt=c.pt||'geometric';
+  const pt=c.pattern||'geometric';
   if(pt==='geometric'){
-    ctx.strokeStyle=c.ac;ctx.lineWidth=1.5;
-    const s=Math.round(w/8);
+    ctx.strokeStyle=c.accentColor;ctx.lineWidth=1.5;const s=Math.round(w/8);
     for(let x=-s;x<w+s;x+=s)for(let y=-s;y<h+s;y+=s){ctx.beginPath();ctx.moveTo(x,y+s/2);ctx.lineTo(x+s/2,y);ctx.lineTo(x+s,y+s/2);ctx.lineTo(x+s/2,y+s);ctx.closePath();ctx.stroke();}
   }else if(pt==='lines'){
-    ctx.strokeStyle=c.ac;ctx.lineWidth=1;
+    ctx.strokeStyle=c.accentColor;ctx.lineWidth=1;
     for(let i=0;i<w+h;i+=Math.round(w/12)){ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(0,i);ctx.stroke();}
   }else if(pt==='dots'){
-    ctx.fillStyle=c.ac;const sp=Math.round(w/14);
+    ctx.fillStyle=c.accentColor;const sp=Math.round(w/14);
     for(let x=sp/2;x<w;x+=sp)for(let y=sp/2;y<h;y+=sp){ctx.beginPath();ctx.arc(x,y,sp/8,0,Math.PI*2);ctx.fill();}
   }else if(pt==='circles'){
-    ctx.strokeStyle=c.ac;ctx.lineWidth=2;
+    ctx.strokeStyle=c.accentColor;ctx.lineWidth=2;
     for(let i=0;i<4;i++){ctx.beginPath();ctx.arc(w*.8,h*.2,w*(.08+i*.11),0,Math.PI*2);ctx.stroke();}
   }else if(pt==='grid'){
-    ctx.strokeStyle=c.ac;ctx.lineWidth=.8;const g=Math.round(w/16);
-    for(let x=0;x<w;x+=g){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
-    for(let y=0;y<h;y+=g){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+    ctx.strokeStyle=c.accentColor;ctx.lineWidth=.8;const g2=Math.round(w/16);
+    for(let x=0;x<w;x+=g2){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+    for(let y=0;y<h;y+=g2){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
   }else if(pt==='diagonal'){
-    ctx.strokeStyle=c.ac;ctx.lineWidth=2;const st=Math.round(w/10);
+    ctx.strokeStyle=c.accentColor;ctx.lineWidth=2;const st=Math.round(w/10);
     for(let i=-h;i<w+h;i+=st){ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i+h,h);ctx.stroke();}
   }else if(pt==='floral'){
-    ctx.fillStyle=c.ac;const pe=8,cx=w*.88,cy=h*.12,r=Math.round(w/5);
+    ctx.fillStyle=c.accentColor;const pe=8,cx=w*.88,cy=h*.12,r=Math.round(w/5);
     for(let p=0;p<pe;p++){const a=(p/pe)*Math.PI*2;ctx.beginPath();ctx.ellipse(cx+Math.cos(a)*r*.5,cy+Math.sin(a)*r*.5,r*.22,r*.48,a,0,Math.PI*2);ctx.fill();}
   }else if(pt==='organic'){
-    ctx.strokeStyle=c.ac;ctx.lineWidth=2;
+    ctx.strokeStyle=c.accentColor;ctx.lineWidth=2;
     ctx.beginPath();ctx.arc(w*.88,h*.12,w*.18,0,Math.PI*2);ctx.stroke();
     ctx.beginPath();ctx.arc(w*.1,h*.88,w*.13,0,Math.PI*2);ctx.stroke();
   }
@@ -406,7 +363,7 @@ function drawPhoto(ctx,c,w,h,cb){
   img.src=photo;
 }
 
-function wrap(ctx,text,maxW){
+function wrapTxt(ctx,text,maxW){
   const lines=[];let cur='';
   for(const ch of text){if(ctx.measureText(cur+ch).width>maxW&&cur!==''){lines.push(cur);cur=ch;}else cur+=ch;}
   if(cur)lines.push(cur);return lines;
@@ -422,9 +379,9 @@ function drawTxt(ctx,c,w,h){
   const narrow=h<100;
   const pad=Math.round(w*.08);
   const pr=document.getElementById('product').value.trim();
-  const lay=c.lay||'center';
+  const lay=c.layout||'center';
   if(!narrow){
-    ctx.fillStyle=c.ac;
+    ctx.fillStyle=c.accentColor;
     ctx.fillRect(0,0,w,Math.round(h*.005));
     if(lay!=='center')ctx.fillRect(0,0,Math.round(w*.005),h);
   }
@@ -435,7 +392,6 @@ function drawTxt(ctx,c,w,h){
   const al=lay==='center'?'center':'left';
   ctx.textAlign=al;
 
-  // TAG
   if(!narrow&&h>150){
     const tag=document.getElementById('useCase').value.split('（')[0]||'';
     if(tag){
@@ -444,38 +400,37 @@ function drawTxt(ctx,c,w,h){
       const tw=ctx.measureText(tag).width+tpx*2,th=tf+tpy*2;
       const tx2=lay==='center'?w/2-tw/2:tx;
       const ty2=ty-Math.round(h*.3)-th;
-      ctx.fillStyle=c.ac;rrect(ctx,tx2,ty2,tw,th,Math.round(th*.4));
-      ctx.fillStyle='#fff';
-      ctx.fillText(tag,tx2+tpx,ty2+tpy+tf*.82);
+      ctx.fillStyle=c.accentColor;rrect(ctx,tx2,ty2,tw,th,Math.round(th*.4));
+      ctx.fillStyle='#fff';ctx.fillText(tag,tx2+tpx,ty2+tpy+tf*.82);
     }
   }
 
   const cf=narrow?Math.round(h*.35):Math.round(w*.07);
-  ctx.font=`900 ${cf}px 'Noto Sans JP'`;ctx.fillStyle=c.tx;
+  ctx.font=`900 ${cf}px 'Noto Sans JP'`;ctx.fillStyle=c.textColor;
   const mw=lay==='center'?w*.78:(photo&&(ppos==='left'||ppos==='right'))?w*.42:w-pad*2;
-  const lines=narrow?[c.catch]:wrap(ctx,c.catch,mw);
+  const lines=narrow?[c.catchcopy]:wrapTxt(ctx,c.catchcopy,mw);
   const lh=cf*1.28,th2=lines.length*lh;
   let sy=lay==='center'?h/2-th2/2+cf*.45:ty-th2/2+cf*.45;
   if(lay==='split')sy=Math.round(h*.32);
   if(narrow)sy=h/2+cf*.35;
 
-  ctx.shadowColor=c.ac;ctx.shadowBlur=Math.round(w*.012);
+  ctx.shadowColor=c.accentColor;ctx.shadowBlur=Math.round(w*.012);
   lines.forEach((l,i)=>ctx.fillText(l,tx,sy+i*lh));
   ctx.shadowBlur=0;
 
   if(!narrow){
-    ctx.fillStyle=c.ac;
+    ctx.fillStyle=c.accentColor;
     const ulw=Math.round(w*.07),ulx=lay==='center'?w/2-ulw/2:tx;
     ctx.fillRect(ulx,sy+th2+Math.round(h*.015),ulw,Math.round(h*.006));
   }
-  if(c.sub&&!narrow){
+  if(c.subtext&&!narrow){
     const sf=Math.round(w*.03);
-    ctx.font=`400 ${sf}px 'Noto Sans JP'`;ctx.fillStyle=c.sc||c.tx;
-    ctx.fillText(c.sub,tx,sy+th2+Math.round(h*.06));
+    ctx.font=`400 ${sf}px 'Noto Sans JP'`;ctx.fillStyle=c.subColor||c.textColor;
+    ctx.fillText(c.subtext,tx,sy+th2+Math.round(h*.06));
   }
   if(!narrow){
     ctx.font=`500 ${Math.round(w*.022)}px 'Noto Sans JP'`;
-    ctx.fillStyle=c.sc||c.tx;ctx.textAlign='right';
+    ctx.fillStyle=c.subColor||c.textColor;ctx.textAlign='right';
     ctx.fillText(pr,w-pad,h-Math.round(h*.04));
   }
 }
@@ -489,10 +444,10 @@ function renderConcepts(){
     card.style.animationDelay=`${i*.08}s`;
     card.innerHTML=`
       <div class="cn">CONCEPT ${i+1} — ${c.name}</div>
-      <div class="cname">「${c.catch}」</div>
-      <div class="ccopy">${c.sub||'—'}</div>
-      <div class="cdesc">配色：${c.cn}　装飾：${c.pt}パターン</div>
-      <div class="cdots">${c.cols.map(col=>`<div class="dot" style="background:${col}"></div>`).join('')}<span class="dlabel">${c.cols.join(' · ')}</span></div>
+      <div class="cname">「${c.catchcopy}」</div>
+      <div class="ccopy">${c.subtext||'—'}</div>
+      <div class="cdesc">${c.description||''}<br><span style="color:#404060">配色：${c.colorName||''}　装飾：${c.pattern||''}パターン</span></div>
+      <div class="cdots">${(c.colors||[]).map(col=>`<div class="dot" style="background:${col}"></div>`).join('')}<span class="dlabel">${(c.colors||[]).join(' · ')}</span></div>
     `;
     card.onclick=()=>{
       document.querySelectorAll('.ccard').forEach(x=>x.classList.remove('sel'));
@@ -523,12 +478,12 @@ function saveJPG(){
 
 function copyCols(){
   if(!concepts.length)return;const c=concepts[si];
-  const t=`【${c.cn}】\n背景: ${c.bg}\nテキスト: ${c.tx}\nアクセント: ${c.ac}`;
+  const t=`【${c.colorName}】\n背景: ${c.bg}\nテキスト: ${c.textColor}\nアクセント: ${c.accentColor}`;
   navigator.clipboard.writeText(t).then(()=>alert('配色コードをコピーしました！\n\n'+t));
 }
 function copyAll(){
   if(!concepts.length)return;const c=concepts[si];
-  const t=`【コンセプト${si+1}：${c.name}】\nキャッチコピー：${c.catch}\nサブテキスト：${c.sub}\n配色：${c.cn}\n背景：${c.bg} / テキスト：${c.tx} / アクセント：${c.ac}\n装飾：${c.pt}パターン`;
+  const t=`【コンセプト${si+1}：${c.name}】\nキャッチコピー：${c.catchcopy}\nサブテキスト：${c.subtext}\n配色：${c.colorName}\n背景：${c.bg} / テキスト：${c.textColor} / アクセント：${c.accentColor}\n装飾：${c.pattern}パターン`;
   navigator.clipboard.writeText(t).then(()=>alert('コンセプトをコピーしました！'));
 }
 </script>
