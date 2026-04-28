@@ -10,7 +10,7 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;min-height:100vh;}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 50% at 15% 15%,rgba(124,106,255,.1) 0%,transparent 55%),radial-gradient(ellipse 50% 40% at 85% 80%,rgba(255,106,138,.07) 0%,transparent 55%);pointer-events:none;z-index:0;}
-.wrap{max-width:1160px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
 header{padding:28px 0 16px;display:flex;align-items:center;gap:10px;}
 .logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;background:linear-gradient(130deg,var(--a1),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px;}
 .badge{background:rgba(124,106,255,.15);border:1px solid rgba(124,106,255,.3);color:var(--a1);font-size:9px;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:1px;}
@@ -18,7 +18,7 @@ header{padding:28px 0 16px;display:flex;align-items:center;gap:10px;}
 .hero h1{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,44px);font-weight:800;line-height:1.1;letter-spacing:-2px;margin-bottom:8px;}
 .hero h1 em{font-style:normal;background:linear-gradient(130deg,var(--a1),var(--a2),var(--a3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .hero p{color:var(--mu);font-size:13px;line-height:1.7;}
-.grid{display:grid;grid-template-columns:380px 1fr;gap:18px;align-items:start;}
+.grid{display:grid;grid-template-columns:400px 1fr;gap:20px;align-items:start;}
 @media(max-width:820px){.grid{grid-template-columns:1fr;}}
 .panel{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:22px;}
 .plabel{font-family:'Syne',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--mu);margin-bottom:18px;}
@@ -33,15 +33,25 @@ select option{background:var(--s2);}
 .chip{background:var(--s2);border:1px solid var(--bd);border-radius:6px;color:var(--mu);font-size:10px;font-weight:500;padding:5px 9px;cursor:pointer;transition:all .15s;white-space:nowrap;user-select:none;}
 .chip:hover{border-color:var(--a1);color:var(--a1);}
 .chip.on{background:rgba(124,106,255,.14);border-color:var(--a1);color:var(--a1);}
-.upload-area{background:var(--s2);border:1.5px dashed var(--bd);border-radius:9px;padding:16px;text-align:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+
+/* Photo upload - multiple */
+.upload-area{background:var(--s2);border:1.5px dashed var(--bd);border-radius:9px;padding:16px;text-align:center;cursor:pointer;transition:all .2s;position:relative;}
 .upload-area:hover{border-color:var(--a1);}
 .upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
 .uico{font-size:22px;margin-bottom:4px;opacity:.35;}
 .utxt{font-size:10px;color:var(--mu);line-height:1.5;}
-#uprev{width:100%;height:64px;object-fit:cover;border-radius:6px;margin-top:6px;display:none;}
-.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:6px;}
+.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px;}
+.photo-thumb{position:relative;aspect-ratio:1;border-radius:6px;overflow:hidden;border:2px solid var(--bd);cursor:pointer;transition:all .2s;}
+.photo-thumb img{width:100%;height:100%;object-fit:cover;}
+.photo-thumb.selected{border-color:var(--a1);box-shadow:0 0 0 2px rgba(124,106,255,.3);}
+.photo-thumb .del{position:absolute;top:2px;right:2px;background:rgba(0,0,0,.7);border:none;border-radius:50%;width:18px;height:18px;color:#fff;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.photo-count{font-size:10px;color:var(--a3);margin-top:6px;text-align:center;}
+
+/* Photo position */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:8px;}
 .pbtn{background:var(--s3);border:1px solid var(--bd);border-radius:5px;padding:5px 3px;font-size:9px;color:var(--mu);cursor:pointer;text-align:center;transition:all .15s;}
 .pbtn:hover,.pbtn.on{background:rgba(124,106,255,.15);border-color:var(--a1);color:var(--a1);}
+
 .btn{width:100%;background:linear-gradient(130deg,var(--a1),var(--a2));border:none;border-radius:10px;color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;padding:13px;cursor:pointer;transition:opacity .2s,transform .12s;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;}
 .btn:hover{opacity:.88;transform:translateY(-1px);}
 .btn:active{transform:translateY(0);}
@@ -53,7 +63,7 @@ select option{background:var(--s2);}
 .div{height:1px;background:var(--bd);margin:14px 0;}
 .out{display:flex;flex-direction:column;gap:16px;}
 .pbox{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:18px;}
-.pc{display:flex;justify-content:center;align-items:center;flex-direction:column;gap:8px;}
+.pc{display:flex;justify-content:center;align-items:center;flex-direction:column;gap:10px;}
 .empty{text-align:center;padding:36px 16px;color:var(--mu);}
 .eico{font-size:38px;margin-bottom:10px;opacity:.3;}
 .empty p{font-size:12px;line-height:1.7;}
@@ -77,6 +87,13 @@ select option{background:var(--s2);}
 .abtn.g{background:rgba(74,239,192,.1);border-color:rgba(74,239,192,.3);color:var(--a3);}
 .abtn.g:hover{background:rgba(74,239,192,.2);}
 .slbl{font-size:9px;color:var(--mu);margin-top:6px;}
+
+/* Nav arrows for photo selection */
+.photo-nav{display:flex;gap:6px;margin-top:8px;justify-content:center;align-items:center;}
+.nav-btn{background:var(--s2);border:1px solid var(--bd);border-radius:6px;color:var(--mu);font-size:11px;padding:5px 10px;cursor:pointer;transition:all .15s;}
+.nav-btn:hover{border-color:var(--a1);color:var(--a1);}
+.photo-idx{font-size:10px;color:var(--mu);}
+
 footer{text-align:center;padding:36px 0 20px;color:var(--mu);font-size:9px;}
 @keyframes fu{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 .fu{animation:fu .32s ease forwards;}
@@ -84,10 +101,10 @@ footer{text-align:center;padding:36px 0 20px;color:var(--mu);font-size:9px;}
 </head>
 <body>
 <div class="wrap">
-  <header><div class="logo">BannerAI</div><div class="badge">AI Powered</div></header>
+  <header><div class="logo">BannerAI</div><div class="badge">PRO</div></header>
   <div class="hero">
     <h1>情報を入れるだけで<br><em>プロ品質のバナーが生まれる。</em></h1>
-    <p>AIがキャッチコピー・配色・レイアウトを提案。写真アップロード・JPG保存対応。</p>
+    <p>AIがキャッチコピー・配色・レイアウトを提案。複数写真・JPG保存対応。</p>
   </div>
   <div class="grid">
     <div class="panel">
@@ -112,7 +129,7 @@ footer{text-align:center;padding:36px 0 20px;color:var(--mu);font-size:9px;}
           <div class="chip on" data-w="600" data-h="600" data-l="1080×1080（正方形）">正方形</div>
           <div class="chip" data-w="600" data-h="314" data-l="1200×628（OGP）">OGP横長</div>
           <div class="chip" data-w="270" data-h="480" data-l="1080×1920（ストーリー）">ストーリー縦</div>
-          <div class="chip" data-w="560" data-h="70" data-l="728×90（横長）">横長バナー</div>
+          <div class="chip" data-w="600" data-h="75" data-l="728×90（横長）">横長バナー</div>
           <div class="chip" data-w="360" data-h="300" data-l="300×250（レクタングル）">レクタングル</div>
         </div>
       </div>
@@ -143,17 +160,23 @@ footer{text-align:center;padding:36px 0 20px;color:var(--mu);font-size:9px;}
         </select>
       </div>
       <div class="fg">
-        <label>写真をアップロード（任意）</label>
-        <div class="upload-area">
-          <input type="file" id="photo" accept="image/*" onchange="onPhoto(event)">
+        <label>写真をアップロード（何枚でもOK）</label>
+        <div class="upload-area" id="uploadArea">
+          <input type="file" id="photoInput" accept="image/*" multiple onchange="onPhotos(event)">
           <div class="uico">📷</div>
-          <div class="utxt">クリックまたはドラッグ＆ドロップ</div>
-          <img id="uprev">
+          <div class="utxt">クリックまたはドラッグ＆ドロップ<br>複数選択OK・何枚でも追加できます</div>
+        </div>
+        <div id="photoGrid" class="photo-grid" style="display:none"></div>
+        <div id="photoCount" class="photo-count"></div>
+        <div id="photoNav" class="photo-nav" style="display:none">
+          <button class="nav-btn" onclick="prevPhoto()">◀ 前</button>
+          <span class="photo-idx" id="photoIdx"></span>
+          <button class="nav-btn" onclick="nextPhoto()">次 ▶</button>
         </div>
         <div class="pgrid" id="pg" style="display:none">
-          <div class="pbtn on" data-p="left">左配置</div>
+          <div class="pbtn on" data-p="right">右配置</div>
+          <div class="pbtn" data-p="left">左配置</div>
           <div class="pbtn" data-p="center">中央</div>
-          <div class="pbtn" data-p="right">右配置</div>
           <div class="pbtn" data-p="bg">背景全体</div>
           <div class="pbtn" data-p="top">上部</div>
           <div class="pbtn" data-p="bottom">下部</div>
@@ -177,26 +200,66 @@ footer{text-align:center;padding:36px 0 20px;color:var(--mu);font-size:9px;}
       </div>
     </div>
   </div>
-  <footer>BannerAI — Powered by Gemini AI · South Agency AI Contest 2026</footer>
+  <footer>BannerAI — Powered by Claude AI · South Agency AI Contest 2026</footer>
 </div>
 <script>
-let photo=null,ppos='left',concepts=[],si=0,bw=600,bh=600,bl='1080×1080（正方形）';
+let photos=[],selPhotoIdx=0,ppos='right',concepts=[],si=0,bw=600,bh=600,bl='1080×1080（正方形）';
 
+// Size chips
 document.querySelectorAll('#sc .chip').forEach(c=>c.addEventListener('click',()=>{
   document.querySelectorAll('#sc .chip').forEach(x=>x.classList.remove('on'));
   c.classList.add('on');bw=+c.dataset.w;bh=+c.dataset.h;bl=c.dataset.l;
 }));
+
+// Photo pos
 document.querySelectorAll('.pbtn').forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll('.pbtn').forEach(x=>x.classList.remove('on'));
   b.classList.add('on');ppos=b.dataset.p;
   if(concepts.length)render(concepts[si]);
 }));
-function onPhoto(e){
-  const f=e.target.files[0];if(!f)return;
-  const r=new FileReader();
-  r.onload=ev=>{photo=ev.target.result;const p=document.getElementById('uprev');p.src=photo;p.style.display='block';document.getElementById('pg').style.display='grid';};
-  r.readAsDataURL(f);
+
+function onPhotos(e){
+  const files=Array.from(e.target.files);
+  files.forEach(f=>{
+    const r=new FileReader();
+    r.onload=ev=>{
+      photos.push(ev.target.result);
+      renderPhotoGrid();
+    };
+    r.readAsDataURL(f);
+  });
 }
+
+function renderPhotoGrid(){
+  const grid=document.getElementById('photoGrid');
+  const count=document.getElementById('photoCount');
+  const nav=document.getElementById('photoNav');
+  const idx=document.getElementById('photoIdx');
+  grid.innerHTML='';
+  grid.style.display=photos.length?'grid':'none';
+  document.getElementById('pg').style.display=photos.length?'grid':'none';
+  nav.style.display=photos.length>1?'flex':'none';
+  count.textContent=photos.length?`${photos.length}枚アップロード済み · クリックで使用する写真を選択`:'';
+  idx.textContent=`${selPhotoIdx+1} / ${photos.length}`;
+  photos.forEach((p,i)=>{
+    const div=document.createElement('div');
+    div.className='photo-thumb'+(i===selPhotoIdx?' selected':'');
+    div.innerHTML=`<img src="${p}"><button class="del" onclick="delPhoto(event,${i})">×</button>`;
+    div.onclick=(e)=>{if(e.target.className==='del')return;selPhotoIdx=i;renderPhotoGrid();if(concepts.length)render(concepts[si]);};
+    grid.appendChild(div);
+  });
+}
+
+function delPhoto(e,i){
+  e.stopPropagation();
+  photos.splice(i,1);
+  if(selPhotoIdx>=photos.length)selPhotoIdx=Math.max(0,photos.length-1);
+  renderPhotoGrid();
+  if(concepts.length)render(concepts[si]);
+}
+
+function prevPhoto(){if(photos.length){selPhotoIdx=(selPhotoIdx-1+photos.length)%photos.length;renderPhotoGrid();if(concepts.length)render(concepts[si]);}}
+function nextPhoto(){if(photos.length){selPhotoIdx=(selPhotoIdx+1)%photos.length;renderPhotoGrid();if(concepts.length)render(concepts[si]);}}
 
 async function gen(){
   const uc=document.getElementById('useCase').value;
@@ -227,9 +290,11 @@ async function gen(){
 制約:
 - JSONのみ出力。マークダウン記号や説明文は不要
 - 全フィールドの値にダブルクォートを含めないこと
+- キャッチコピーは商品・ターゲット・訴求を考慮したプロ品質の文言で
+- 配色は実際の広告で使えるプロレベルの配色で
 
 出力形式:
-{"concepts":[{"name":"コンセプト名8文字以内","catchcopy":"キャッチコピー20文字以内","subtext":"サブテキスト25文字以内","description":"説明40文字以内","bg":"背景色hex","bg2":"グラデ終了色hex","textColor":"テキスト色hex","accentColor":"アクセント色hex","subColor":"補助テキスト色rgba","colors":["#hex1","#hex2","#hex3"],"colorName":"配色名","pattern":"geometric/lines/dots/circles/grid/diagonal/floral/organic/none","layout":"center/left/split"}]}`;
+{"concepts":[{"name":"コンセプト名8文字以内","catchcopy":"キャッチコピー16文字以内","subtext":"サブテキスト20文字以内","description":"説明40文字以内","bg":"背景色hex","bg2":"グラデ終了色hex","textColor":"テキスト色hex","accentColor":"アクセント色hex","subColor":"補助テキスト色rgba","colors":["#hex1","#hex2","#hex3"],"colorName":"配色名","pattern":"geometric/lines/dots/circles/grid/diagonal/floral/organic/none","layout":"center/left/split"}]}`;
 
   try{
     const res=await fetch('/api/generate',{
@@ -260,7 +325,7 @@ async function gen(){
 
 function render(c){
   const area=document.getElementById('pa');
-  const maxW=Math.min(bw,480);
+  const maxW=Math.min(bw,500);
   const scale=maxW/bw;
   const dh=Math.round(bh*scale);
   const cv=document.createElement('canvas');
@@ -268,12 +333,14 @@ function render(c){
   cv.style.cssText=`width:${maxW}px;height:${dh}px;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.6);display:block;`;
   cv.id='BC';
   const ctx=cv.getContext('2d');
+  // Background gradient
   const g=ctx.createLinearGradient(0,0,bw,bh);
   g.addColorStop(0,c.bg);g.addColorStop(1,c.bg2||c.bg);
   ctx.fillStyle=g;ctx.fillRect(0,0,bw,bh);
   drawDeco(ctx,c,bw,bh);
   const fin=()=>{drawTxt(ctx,c,bw,bh);done(area,cv,maxW,dh);};
-  if(photo)drawPhoto(ctx,c,bw,bh,fin);else fin();
+  if(photos.length>0)drawPhoto(ctx,c,bw,bh,fin);
+  else fin();
   window._cc=c;
 }
 
@@ -289,7 +356,7 @@ function done(area,cv,mw,dh){
 }
 
 function drawDeco(ctx,c,w,h){
-  ctx.save();ctx.globalAlpha=.07;
+  ctx.save();ctx.globalAlpha=.06;
   const pt=c.pattern||'geometric';
   if(pt==='geometric'){
     ctx.strokeStyle=c.accentColor;ctx.lineWidth=1.5;const s=Math.round(w/8);
@@ -302,7 +369,7 @@ function drawDeco(ctx,c,w,h){
     for(let x=sp/2;x<w;x+=sp)for(let y=sp/2;y<h;y+=sp){ctx.beginPath();ctx.arc(x,y,sp/8,0,Math.PI*2);ctx.fill();}
   }else if(pt==='circles'){
     ctx.strokeStyle=c.accentColor;ctx.lineWidth=2;
-    for(let i=0;i<4;i++){ctx.beginPath();ctx.arc(w*.8,h*.2,w*(.08+i*.11),0,Math.PI*2);ctx.stroke();}
+    for(let i=0;i<5;i++){ctx.beginPath();ctx.arc(w*.8,h*.2,w*(.06+i*.1),0,Math.PI*2);ctx.stroke();}
   }else if(pt==='grid'){
     ctx.strokeStyle=c.accentColor;ctx.lineWidth=.8;const g2=Math.round(w/16);
     for(let x=0;x<w;x+=g2){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
@@ -318,8 +385,8 @@ function drawDeco(ctx,c,w,h){
     ctx.beginPath();ctx.arc(w*.88,h*.12,w*.18,0,Math.PI*2);ctx.stroke();
     ctx.beginPath();ctx.arc(w*.1,h*.88,w*.13,0,Math.PI*2);ctx.stroke();
   }
-  ctx.globalAlpha=.1;
-  const rg=ctx.createRadialGradient(w*.2,h*.2,0,w*.2,h*.2,w*.65);
+  ctx.globalAlpha=.08;
+  const rg=ctx.createRadialGradient(w*.25,h*.25,0,w*.25,h*.25,w*.7);
   rg.addColorStop(0,'rgba(255,255,255,1)');rg.addColorStop(1,'rgba(255,255,255,0)');
   ctx.fillStyle=rg;ctx.fillRect(0,0,w,h);
   ctx.restore();
@@ -329,45 +396,74 @@ function drawPhoto(ctx,c,w,h,cb){
   const img=new Image();
   img.onload=()=>{
     ctx.save();
-    const di=(x,y,iw,ih,a,cl)=>{
-      ctx.globalAlpha=a;const s=Math.max(iw/img.width,ih/img.height);
-      const sw=img.width*s,sh=img.height*s;
-      if(cl){ctx.beginPath();ctx.rect(x,y,iw,ih);ctx.clip();}
-      ctx.drawImage(img,x+(iw-sw)/2,y+(ih-sh)/2,sw,sh);
+    // 写真をアスペクト比を保ちながら指定領域に収める（はみ出さない）
+    const fitImg=(x,y,iw,ih)=>{
+      const scale=Math.min(iw/img.width,ih/img.height);
+      const sw=img.width*scale,sh=img.height*scale;
+      const ox=x+(iw-sw)/2,oy=y+(ih-sh)/2;
+      ctx.drawImage(img,ox,oy,sw,sh);
     };
-    if(ppos==='bg'){di(0,0,w,h,.3,false);}
-    else if(ppos==='left'){
-      di(0,0,Math.round(w*.45),h,1,true);
-      const gr=ctx.createLinearGradient(0,0,Math.round(w*.45),0);
-      gr.addColorStop(.55,'rgba(0,0,0,0)');gr.addColorStop(1,c.bg);
-      ctx.globalAlpha=1;ctx.fillStyle=gr;ctx.fillRect(0,0,Math.round(w*.45),h);
+    // 写真をアスペクト比を保ちながら指定領域をカバー（クリップあり）
+    const coverImg=(x,y,iw,ih)=>{
+      const scale=Math.max(iw/img.width,ih/img.height);
+      const sw=img.width*scale,sh=img.height*scale;
+      ctx.save();ctx.beginPath();ctx.rect(x,y,iw,ih);ctx.clip();
+      ctx.drawImage(img,x+(iw-sw)/2,y+(ih-sh)/2,sw,sh);
+      ctx.restore();
+    };
+
+    if(ppos==='bg'){
+      // 背景全体：透過で全体に収める
+      ctx.globalAlpha=0.4;
+      fitImg(0,0,w,h);
     }else if(ppos==='right'){
-      const px=Math.round(w*.55);di(px,0,Math.round(w*.45),h,1,true);
-      const gr=ctx.createLinearGradient(px,0,px+Math.round(w*.45),0);
-      gr.addColorStop(0,c.bg);gr.addColorStop(.45,'rgba(0,0,0,0)');
-      ctx.globalAlpha=1;ctx.fillStyle=gr;ctx.fillRect(px,0,Math.round(w*.45),h);
-    }else if(ppos==='center'){di(0,0,w,h,.35,false);}
-    else if(ppos==='top'){
-      const ih2=Math.round(h*.45);di(0,0,w,ih2,1,true);
-      const gr=ctx.createLinearGradient(0,0,0,ih2);
-      gr.addColorStop(.5,'rgba(0,0,0,0)');gr.addColorStop(1,c.bg);
-      ctx.globalAlpha=1;ctx.fillStyle=gr;ctx.fillRect(0,0,w,ih2);
-    }else{
-      const iy=Math.round(h*.55),ih2=Math.round(h*.45);di(0,iy,w,ih2,1,true);
-      const gr=ctx.createLinearGradient(0,iy,0,iy+ih2);
-      gr.addColorStop(0,c.bg);gr.addColorStop(.45,'rgba(0,0,0,0)');
-      ctx.globalAlpha=1;ctx.fillStyle=gr;ctx.fillRect(0,iy,w,ih2);
+      // 右半分：写真を右側にカバー配置、左にグラデ
+      const pw=Math.round(w*0.48);
+      const px=w-pw;
+      coverImg(px,0,pw,h);
+      const gr=ctx.createLinearGradient(px,0,px+pw,0);
+      gr.addColorStop(0,c.bg);gr.addColorStop(0.35,'rgba(0,0,0,0)');
+      ctx.globalAlpha=1;ctx.fillStyle=gr;ctx.fillRect(px,0,pw,h);
+    }else if(ppos==='left'){
+      // 左半分
+      coverImg(0,0,Math.round(w*0.48),h);
+      const gr=ctx.createLinearGradient(0,0,Math.round(w*0.48),0);
+      gr.addColorStop(0.65,'rgba(0,0,0,0)');gr.addColorStop(1,c.bg);
+      ctx.globalAlpha=1;ctx.fillStyle=gr;ctx.fillRect(0,0,Math.round(w*0.48),h);
+    }else if(ppos==='center'){
+      // 中央：透過で全体カバー
+      ctx.globalAlpha=0.35;
+      coverImg(0,0,w,h);
+    }else if(ppos==='top'){
+      const ph=Math.round(h*0.45);
+      coverImg(0,0,w,ph);
+      const gr=ctx.createLinearGradient(0,0,0,ph);
+      gr.addColorStop(0.5,'rgba(0,0,0,0)');gr.addColorStop(1,c.bg);
+      ctx.globalAlpha=1;ctx.fillStyle=gr;ctx.fillRect(0,0,w,ph);
+    }else if(ppos==='bottom'){
+      const py=Math.round(h*0.55),ph=Math.round(h*0.45);
+      coverImg(0,py,w,ph);
+      const gr=ctx.createLinearGradient(0,py,0,py+ph);
+      gr.addColorStop(0,c.bg);gr.addColorStop(0.4,'rgba(0,0,0,0)');
+      ctx.globalAlpha=1;ctx.fillStyle=gr;ctx.fillRect(0,py,w,ph);
     }
     ctx.globalAlpha=1;ctx.restore();cb();
   };
-  img.src=photo;
+  img.src=photos[selPhotoIdx];
 }
 
+// テキストを指定幅で折り返す
 function wrapTxt(ctx,text,maxW){
+  if(!text)return[];
   const lines=[];let cur='';
-  for(const ch of text){if(ctx.measureText(cur+ch).width>maxW&&cur!==''){lines.push(cur);cur=ch;}else cur+=ch;}
+  for(const ch of text){
+    if(ctx.measureText(cur+ch).width>maxW&&cur!==''){lines.push(cur);cur=ch;}
+    else cur+=ch;
+  }
   if(cur)lines.push(cur);return lines;
 }
+
+// 角丸矩形
 function rrect(ctx,x,y,w,h,r){
   ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);
   ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
@@ -377,61 +473,93 @@ function rrect(ctx,x,y,w,h,r){
 
 function drawTxt(ctx,c,w,h){
   const narrow=h<100;
-  const pad=Math.round(w*.08);
+  const pad=Math.round(w*0.07);
   const pr=document.getElementById('product').value.trim();
   const lay=c.layout||'center';
-  if(!narrow){
-    ctx.fillStyle=c.accentColor;
-    ctx.fillRect(0,0,w,Math.round(h*.005));
-    if(lay!=='center')ctx.fillRect(0,0,Math.round(w*.005),h);
-  }
-  let tx=pad,ty=Math.round(h*.42);
-  if(lay==='center'){tx=w/2;ty=h/2;}
-  if(lay==='split'&&photo&&ppos==='left')tx=Math.round(w*.53);
-  if(lay==='split'&&photo&&ppos==='right')tx=pad;
-  const al=lay==='center'?'center':'left';
-  ctx.textAlign=al;
 
+  // テキストエリアの幅を決定（写真配置を考慮）
+  let textAreaX=pad,textAreaW=w-pad*2;
+  if(!narrow){
+    if(photos.length>0){
+      if(ppos==='right'){textAreaW=Math.round(w*0.5)-pad;}
+      else if(ppos==='left'){textAreaX=Math.round(w*0.52);textAreaW=Math.round(w*0.48)-pad;}
+    }
+    if(lay==='center'){textAreaX=0;textAreaW=w;}
+  }
+
+  const align=lay==='center'?'center':'left';
+  const centerX=lay==='center'?w/2:textAreaX+(lay==='left'?0:textAreaW/2);
+
+  // アクセントライン
+  ctx.fillStyle=c.accentColor;
+  ctx.fillRect(0,0,w,Math.round(h*.004));
+  if(lay!=='center'&&!narrow)ctx.fillRect(0,0,Math.round(w*.004),h);
+
+  // TAG badge
   if(!narrow&&h>150){
     const tag=document.getElementById('useCase').value.split('（')[0]||'';
     if(tag){
-      const tf=Math.round(w*.022),tpx=Math.round(w*.022),tpy=Math.round(h*.012);
-      ctx.font=`700 ${tf}px 'Noto Sans JP'`;
+      const tf=Math.round(w*.02),tpx=Math.round(w*.018),tpy=Math.round(h*.01);
+      ctx.font=`600 ${tf}px 'Noto Sans JP'`;
       const tw=ctx.measureText(tag).width+tpx*2,th=tf+tpy*2;
-      const tx2=lay==='center'?w/2-tw/2:tx;
-      const ty2=ty-Math.round(h*.3)-th;
-      ctx.fillStyle=c.accentColor;rrect(ctx,tx2,ty2,tw,th,Math.round(th*.4));
-      ctx.fillStyle='#fff';ctx.fillText(tag,tx2+tpx,ty2+tpy+tf*.82);
+      const tx=lay==='center'?w/2-tw/2:textAreaX;
+      const ty=Math.round(h*.14);
+      ctx.fillStyle=c.accentColor;
+      rrect(ctx,tx,ty,tw,th,Math.round(th*.45));
+      ctx.fillStyle='rgba(255,255,255,0.95)';
+      ctx.textAlign='left';
+      ctx.fillText(tag,tx+tpx,ty+tpy+tf*.82);
     }
   }
 
-  const cf=narrow?Math.round(h*.35):Math.round(w*.07);
-  ctx.font=`900 ${cf}px 'Noto Sans JP'`;ctx.fillStyle=c.textColor;
-  const mw=lay==='center'?w*.78:(photo&&(ppos==='left'||ppos==='right'))?w*.42:w-pad*2;
-  const lines=narrow?[c.catchcopy]:wrapTxt(ctx,c.catchcopy,mw);
-  const lh=cf*1.28,th2=lines.length*lh;
-  let sy=lay==='center'?h/2-th2/2+cf*.45:ty-th2/2+cf*.45;
-  if(lay==='split')sy=Math.round(h*.32);
-  if(narrow)sy=h/2+cf*.35;
+  // CATCH COPY（大見出し）
+  const cf=narrow?Math.round(h*.34):Math.round(w*.075);
+  ctx.font=`900 ${cf}px 'Noto Sans JP'`;
+  ctx.fillStyle=c.textColor;
+  ctx.textAlign=align;
 
-  ctx.shadowColor=c.accentColor;ctx.shadowBlur=Math.round(w*.012);
-  lines.forEach((l,i)=>ctx.fillText(l,tx,sy+i*lh));
+  const catchMaxW=lay==='center'?w*.75:textAreaW;
+  const catchLines=narrow?[c.catchcopy]:wrapTxt(ctx,c.catchcopy,catchMaxW);
+  const lh=cf*1.22;
+  const totalCatchH=catchLines.length*lh;
+
+  // 縦位置を計算
+  let startY;
+  if(narrow){startY=h/2+cf*.35;}
+  else if(lay==='center'){startY=h/2-totalCatchH/2+cf*.45;}
+  else{startY=Math.round(h*.35);}
+
+  // テキストのX座標
+  const tx=lay==='center'?w/2:textAreaX;
+
+  // シャドウ
+  ctx.shadowColor=c.bg;ctx.shadowBlur=Math.round(w*.018);ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;
+  catchLines.forEach((line,i)=>ctx.fillText(line,tx,startY+i*lh));
   ctx.shadowBlur=0;
 
+  // アクセントアンダーライン
   if(!narrow){
     ctx.fillStyle=c.accentColor;
-    const ulw=Math.round(w*.07),ulx=lay==='center'?w/2-ulw/2:tx;
-    ctx.fillRect(ulx,sy+th2+Math.round(h*.015),ulw,Math.round(h*.006));
+    const ulW=Math.round(w*.06),ulX=lay==='center'?w/2-ulW/2:textAreaX;
+    ctx.fillRect(ulX,startY+totalCatchH+Math.round(h*.012),ulW,Math.round(h*.005));
   }
+
+  // サブテキスト
   if(c.subtext&&!narrow){
-    const sf=Math.round(w*.03);
-    ctx.font=`400 ${sf}px 'Noto Sans JP'`;ctx.fillStyle=c.subColor||c.textColor;
-    ctx.fillText(c.subtext,tx,sy+th2+Math.round(h*.06));
+    const sf=Math.round(w*.028);
+    ctx.font=`400 ${sf}px 'Noto Sans JP'`;
+    ctx.fillStyle=c.subColor||'rgba(255,255,255,0.75)';
+    ctx.textAlign=align;
+    const subLines=wrapTxt(ctx,c.subtext,catchMaxW);
+    subLines.forEach((line,i)=>ctx.fillText(line,tx,startY+totalCatchH+Math.round(h*.065)+i*sf*1.5));
   }
+
+  // ブランド名（右下）
   if(!narrow){
-    ctx.font=`500 ${Math.round(w*.022)}px 'Noto Sans JP'`;
-    ctx.fillStyle=c.subColor||c.textColor;ctx.textAlign='right';
-    ctx.fillText(pr,w-pad,h-Math.round(h*.04));
+    ctx.font=`500 ${Math.round(w*.02)}px 'Noto Sans JP'`;
+    ctx.fillStyle=c.subColor||'rgba(255,255,255,0.5)';
+    ctx.textAlign='right';
+    ctx.fillText(pr,w-pad,h-Math.round(h*.038));
   }
 }
 
@@ -473,7 +601,7 @@ function saveJPG(){
     a.download=`banner_${pr.slice(0,10)}_${Date.now()}.jpg`;
     a.href=full.toDataURL('image/jpeg',.95);a.click();
   };
-  if(photo)drawPhoto(ctx,c,bw,bh,fin);else fin();
+  if(photos.length>0)drawPhoto(ctx,c,bw,bh,fin);else fin();
 }
 
 function copyCols(){
@@ -483,7 +611,7 @@ function copyCols(){
 }
 function copyAll(){
   if(!concepts.length)return;const c=concepts[si];
-  const t=`【コンセプト${si+1}：${c.name}】\nキャッチコピー：${c.catchcopy}\nサブテキスト：${c.subtext}\n配色：${c.colorName}\n背景：${c.bg} / テキスト：${c.textColor} / アクセント：${c.accentColor}\n装飾：${c.pattern}パターン`;
+  const t=`【コンセプト${si+1}：${c.name}】\nキャッチコピー：${c.catchcopy}\nサブテキスト：${c.subtext}\n配色：${c.colorName}\n背景：${c.bg} / テキスト：${c.textColor} / アクセント：${c.accentColor}`;
   navigator.clipboard.writeText(t).then(()=>alert('コンセプトをコピーしました！'));
 }
 </script>
