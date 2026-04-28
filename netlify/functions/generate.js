@@ -15,30 +15,32 @@ exports.handler = async function(event, context) {
 
   try {
     const { prompt } = JSON.parse(event.body);
-    const GEMINI_KEY = process.env.GEMINI_API_KEY;
+    const CLAUDE_KEY = process.env.CLAUDE_API_KEY;
 
-    if (!GEMINI_KEY) {
+    if (!CLAUDE_KEY) {
       return { statusCode: 500, headers, body: JSON.stringify({ error: 'API key not configured' }) };
     }
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.8, maxOutputTokens: 1200 }
-        })
-      }
-    );
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': CLAUDE_KEY,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 1200,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
 
     const data = await response.json();
     if (data.error) {
       return { statusCode: 500, headers, body: JSON.stringify({ error: data.error.message }) };
     }
 
-    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const text = data.content?.[0]?.text || '';
     return { statusCode: 200, headers, body: JSON.stringify({ text }) };
 
   } catch (err) {
