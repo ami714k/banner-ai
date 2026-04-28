@@ -3,616 +3,764 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BannerAI — プロ品質バナージェネレーター</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<title>BannerAI — 商品まとめバナージェネレーター</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#07070e;--s1:#101018;--s2:#17171f;--s3:#1e1e28;--a1:#7c6aff;--a2:#ff6a8a;--a3:#4aefc0;--tx:#f0f0fa;--mu:#5858a0;--bd:#1a1a30;--r:16px;}
+:root{--bg:#0a0a12;--s1:#12121e;--s2:#1a1a28;--s3:#222232;--a1:#ff6eb4;--a2:#a855f7;--a3:#ffd93d;--a4:#4aefc0;--tx:#f8f0ff;--mu:#7070a8;--bd:#2a2a40;--r:14px;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;min-height:100vh;}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 50% at 15% 15%,rgba(124,106,255,.1) 0%,transparent 55%),radial-gradient(ellipse 50% 40% at 85% 80%,rgba(255,106,138,.07) 0%,transparent 55%);pointer-events:none;z-index:0;}
-.wrap{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
-header{padding:28px 0 16px;display:flex;align-items:center;gap:10px;}
-.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;background:linear-gradient(130deg,var(--a1),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px;}
-.badge{background:rgba(124,106,255,.15);border:1px solid rgba(124,106,255,.3);color:var(--a1);font-size:9px;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:1px;}
-.hero{margin-bottom:28px;}
-.hero h1{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,44px);font-weight:800;line-height:1.1;letter-spacing:-2px;margin-bottom:8px;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 20% 10%,rgba(168,85,247,.08) 0%,transparent 55%),radial-gradient(ellipse 50% 40% at 80% 90%,rgba(255,110,180,.07) 0%,transparent 55%);pointer-events:none;z-index:0;}
+.wrap{max-width:1300px;margin:0 auto;padding:0 20px;position:relative;z-index:1;}
+header{padding:24px 0 14px;display:flex;align-items:center;gap:10px;}
+.logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;background:linear-gradient(130deg,var(--a1),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px;}
+.badge{background:rgba(255,110,180,.15);border:1px solid rgba(255,110,180,.3);color:var(--a1);font-size:9px;font-weight:700;padding:3px 8px;border-radius:20px;}
+.hero{margin-bottom:20px;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(20px,3.5vw,38px);font-weight:800;line-height:1.1;letter-spacing:-1.5px;margin-bottom:6px;}
 .hero h1 em{font-style:normal;background:linear-gradient(130deg,var(--a1),var(--a2),var(--a3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero p{color:var(--mu);font-size:13px;line-height:1.7;}
-.grid{display:grid;grid-template-columns:400px 1fr;gap:20px;align-items:start;}
-@media(max-width:820px){.grid{grid-template-columns:1fr;}}
-.panel{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:22px;}
-.plabel{font-family:'Syne',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--mu);margin-bottom:18px;}
-.fg{margin-bottom:14px;}
-label{display:block;font-size:11px;font-weight:600;color:var(--mu);margin-bottom:5px;}
-label .req{color:var(--a2);}
-input,textarea,select{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);font-family:'Noto Sans JP',sans-serif;font-size:13px;padding:9px 12px;outline:none;transition:border-color .2s,box-shadow .2s;}
-input:focus,textarea:focus,select:focus{border-color:var(--a1);box-shadow:0 0 0 3px rgba(124,106,255,.1);}
-textarea{resize:vertical;min-height:60px;}
+.hero p{color:var(--mu);font-size:12px;line-height:1.7;}
+
+.main-layout{display:grid;grid-template-columns:360px 1fr;gap:18px;align-items:start;}
+@media(max-width:900px){.main-layout{grid-template-columns:1fr;}}
+
+/* LEFT PANEL */
+.lpanel{display:flex;flex-direction:column;gap:12px;}
+.panel{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:18px;}
+.plabel{font-family:'Syne',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--mu);margin-bottom:14px;}
+.fg{margin-bottom:12px;}
+label{display:block;font-size:11px;font-weight:600;color:var(--mu);margin-bottom:4px;}
+label .req{color:var(--a1);}
+input,textarea,select{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:7px;color:var(--tx);font-family:'Noto Sans JP',sans-serif;font-size:12px;padding:8px 11px;outline:none;transition:border-color .2s;}
+input:focus,textarea:focus,select:focus{border-color:var(--a1);}
+textarea{resize:vertical;min-height:52px;}
 select option{background:var(--s2);}
+
 .chips{display:flex;flex-wrap:wrap;gap:5px;}
-.chip{background:var(--s2);border:1px solid var(--bd);border-radius:6px;color:var(--mu);font-size:10px;font-weight:500;padding:5px 9px;cursor:pointer;transition:all .15s;white-space:nowrap;user-select:none;}
+.chip{background:var(--s2);border:1px solid var(--bd);border-radius:6px;color:var(--mu);font-size:10px;font-weight:500;padding:4px 8px;cursor:pointer;transition:all .15s;white-space:nowrap;user-select:none;}
 .chip:hover{border-color:var(--a1);color:var(--a1);}
-.chip.on{background:rgba(124,106,255,.14);border-color:var(--a1);color:var(--a1);}
+.chip.on{background:rgba(255,110,180,.14);border-color:var(--a1);color:var(--a1);}
 
-/* Photo upload - multiple */
-.upload-area{background:var(--s2);border:1.5px dashed var(--bd);border-radius:9px;padding:16px;text-align:center;cursor:pointer;transition:all .2s;position:relative;}
-.upload-area:hover{border-color:var(--a1);}
-.upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.uico{font-size:22px;margin-bottom:4px;opacity:.35;}
-.utxt{font-size:10px;color:var(--mu);line-height:1.5;}
-.photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px;}
-.photo-thumb{position:relative;aspect-ratio:1;border-radius:6px;overflow:hidden;border:2px solid var(--bd);cursor:pointer;transition:all .2s;}
-.photo-thumb img{width:100%;height:100%;object-fit:cover;}
-.photo-thumb.selected{border-color:var(--a1);box-shadow:0 0 0 2px rgba(124,106,255,.3);}
-.photo-thumb .del{position:absolute;top:2px;right:2px;background:rgba(0,0,0,.7);border:none;border-radius:50%;width:18px;height:18px;color:#fff;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-.photo-count{font-size:10px;color:var(--a3);margin-top:6px;text-align:center;}
+/* Theme selector */
+.theme-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.theme-btn{border-radius:8px;padding:8px 4px;cursor:pointer;text-align:center;font-size:9px;font-weight:600;border:2px solid transparent;transition:all .2s;}
+.theme-btn.on{border-color:#fff;transform:scale(1.05);}
+.theme-btn span{display:block;font-size:8px;margin-top:3px;opacity:.8;}
 
-/* Photo position */
-.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:8px;}
-.pbtn{background:var(--s3);border:1px solid var(--bd);border-radius:5px;padding:5px 3px;font-size:9px;color:var(--mu);cursor:pointer;text-align:center;transition:all .15s;}
-.pbtn:hover,.pbtn.on{background:rgba(124,106,255,.15);border-color:var(--a1);color:var(--a1);}
+/* Products section */
+.product-list{display:flex;flex-direction:column;gap:8px;max-height:400px;overflow-y:auto;}
+.product-list::-webkit-scrollbar{width:4px;}
+.product-list::-webkit-scrollbar-track{background:var(--s2);}
+.product-list::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px;}
 
-.btn{width:100%;background:linear-gradient(130deg,var(--a1),var(--a2));border:none;border-radius:10px;color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;padding:13px;cursor:pointer;transition:opacity .2s,transform .12s;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.product-item{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:10px;position:relative;}
+.product-item-header{display:flex;gap:8px;align-items:flex-start;}
+.product-img-preview{width:56px;height:56px;border-radius:7px;object-fit:contain;background:var(--s3);border:1px solid var(--bd);flex-shrink:0;}
+.product-img-placeholder{width:56px;height:56px;border-radius:7px;background:var(--s3);border:1.5px dashed var(--bd);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;flex-shrink:0;position:relative;overflow:hidden;}
+.product-img-placeholder input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.product-fields{flex:1;display:flex;flex-direction:column;gap:4px;}
+.product-fields input{font-size:11px;padding:5px 8px;}
+.del-btn{background:rgba(255,80,80,.15);border:1px solid rgba(255,80,80,.2);border-radius:5px;color:#ff5050;font-size:10px;padding:3px 7px;cursor:pointer;white-space:nowrap;transition:all .15s;}
+.del-btn:hover{background:rgba(255,80,80,.3);}
+
+.add-product-btn{width:100%;background:rgba(255,110,180,.07);border:1.5px dashed rgba(255,110,180,.3);border-radius:9px;color:var(--a1);font-size:12px;padding:10px;cursor:pointer;transition:all .2s;}
+.add-product-btn:hover{background:rgba(255,110,180,.14);}
+
+.btn{width:100%;background:linear-gradient(130deg,var(--a1),var(--a2));border:none;border-radius:10px;color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;padding:13px;cursor:pointer;transition:opacity .2s,transform .12s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .btn:hover{opacity:.88;transform:translateY(-1px);}
-.btn:active{transform:translateY(0);}
 .btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
 .spinner{width:15px;height:15px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.hint{background:rgba(124,106,255,.07);border:1px solid rgba(124,106,255,.15);border-radius:8px;padding:11px 13px;font-size:10px;color:var(--mu);line-height:1.8;margin-top:12px;}
-.hint strong{color:var(--a1);}
-.div{height:1px;background:var(--bd);margin:14px 0;}
-.out{display:flex;flex-direction:column;gap:16px;}
-.pbox{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:18px;}
-.pc{display:flex;justify-content:center;align-items:center;flex-direction:column;gap:10px;}
-.empty{text-align:center;padding:36px 16px;color:var(--mu);}
-.eico{font-size:38px;margin-bottom:10px;opacity:.3;}
+
+/* RIGHT: Preview */
+.rpanel{display:flex;flex-direction:column;gap:14px;}
+.preview-wrap{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:16px;}
+.preview-inner{display:flex;justify-content:center;overflow:auto;}
+.empty{text-align:center;padding:48px 20px;color:var(--mu);}
+.eico{font-size:44px;margin-bottom:12px;opacity:.3;}
 .empty p{font-size:12px;line-height:1.7;}
-.cbox{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:20px;}
-.clist{display:flex;flex-direction:column;gap:10px;}
-.ccard{background:var(--s2);border:1.5px solid var(--bd);border-radius:10px;padding:13px;cursor:pointer;transition:all .18s;position:relative;overflow:hidden;}
-.ccard::before{content:'';position:absolute;inset:0;background:linear-gradient(130deg,rgba(124,106,255,.07),rgba(255,106,138,.04));opacity:0;transition:opacity .2s;}
-.ccard:hover{border-color:var(--a1);}
-.ccard:hover::before,.ccard.sel::before{opacity:1;}
-.ccard.sel{border-color:var(--a1);}
-.cn{font-family:'Syne',sans-serif;font-size:9px;font-weight:700;color:var(--a1);letter-spacing:1.5px;margin-bottom:3px;}
-.cname{font-weight:700;font-size:12px;margin-bottom:3px;}
-.ccopy{font-size:10px;color:var(--a3);font-style:italic;margin-bottom:5px;}
-.cdesc{font-size:9px;color:var(--mu);line-height:1.6;}
-.cdots{display:flex;gap:4px;margin-top:7px;align-items:center;}
-.dot{width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(255,255,255,.08);}
-.dlabel{font-size:9px;color:var(--mu);margin-left:3px;}
-.arow{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;justify-content:center;}
+
+.arow{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;justify-content:center;}
 .abtn{background:var(--s2);border:1px solid var(--bd);border-radius:7px;color:var(--mu);font-size:10px;font-family:'Noto Sans JP',sans-serif;padding:7px 12px;cursor:pointer;transition:all .15s;}
 .abtn:hover{border-color:var(--a1);color:var(--a1);}
-.abtn.g{background:rgba(74,239,192,.1);border-color:rgba(74,239,192,.3);color:var(--a3);}
-.abtn.g:hover{background:rgba(74,239,192,.2);}
-.slbl{font-size:9px;color:var(--mu);margin-top:6px;}
+.abtn.g{background:rgba(74,239,192,.1);border-color:rgba(74,239,192,.3);color:var(--a4);}
 
-/* Nav arrows for photo selection */
-.photo-nav{display:flex;gap:6px;margin-top:8px;justify-content:center;align-items:center;}
-.nav-btn{background:var(--s2);border:1px solid var(--bd);border-radius:6px;color:var(--mu);font-size:11px;padding:5px 10px;cursor:pointer;transition:all .15s;}
-.nav-btn:hover{border-color:var(--a1);color:var(--a1);}
-.photo-idx{font-size:10px;color:var(--mu);}
-
-footer{text-align:center;padding:36px 0 20px;color:var(--mu);font-size:9px;}
+footer{text-align:center;padding:32px 0 16px;color:var(--mu);font-size:9px;}
 @keyframes fu{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-.fu{animation:fu .32s ease forwards;}
+.fu{animation:fu .3s ease forwards;}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header><div class="logo">BannerAI</div><div class="badge">PRO</div></header>
+  <header><div class="logo">BannerAI</div><div class="badge">LIPS LEVEL</div></header>
   <div class="hero">
-    <h1>情報を入れるだけで<br><em>プロ品質のバナーが生まれる。</em></h1>
-    <p>AIがキャッチコピー・配色・レイアウトを提案。複数写真・JPG保存対応。</p>
+    <h1>商品まとめバナーを<br><em>プロ品質で自動生成。</em></h1>
+    <p>商品画像・ブランド名・価格を入力するだけ。LIPSレベルのまとめバナーを一瞬で作成。</p>
   </div>
-  <div class="grid">
-    <div class="panel">
-      <div class="plabel">バナー情報を入力</div>
-      <div class="fg">
-        <label>バナーの用途<span class="req">*</span></label>
-        <select id="useCase">
-          <option value="">選択してください</option>
-          <option value="SNS投稿（Instagram）">SNS投稿（Instagram）</option>
-          <option value="SNS投稿（Twitter/X）">SNS投稿（Twitter/X）</option>
-          <option value="Webサイトのバナー広告">Webサイトのバナー広告</option>
-          <option value="LPヘッダー">LPヘッダー</option>
-          <option value="メールマガジンヘッダー">メールマガジンヘッダー</option>
-          <option value="キャンペーン告知バナー">キャンペーン告知バナー</option>
-          <option value="商品・サービス紹介バナー">商品・サービス紹介バナー</option>
-          <option value="求人・採用バナー">求人・採用バナー</option>
-        </select>
-      </div>
-      <div class="fg">
-        <label>サイズ</label>
-        <div class="chips" id="sc">
-          <div class="chip on" data-w="600" data-h="600" data-l="1080×1080（正方形）">正方形</div>
-          <div class="chip" data-w="600" data-h="314" data-l="1200×628（OGP）">OGP横長</div>
-          <div class="chip" data-w="270" data-h="480" data-l="1080×1920（ストーリー）">ストーリー縦</div>
-          <div class="chip" data-w="600" data-h="75" data-l="728×90（横長）">横長バナー</div>
-          <div class="chip" data-w="360" data-h="300" data-l="300×250（レクタングル）">レクタングル</div>
+
+  <div class="main-layout">
+    <!-- LEFT -->
+    <div class="lpanel">
+      <!-- バナー設定 -->
+      <div class="panel">
+        <div class="plabel">バナー設定</div>
+        <div class="fg">
+          <label>タイトル<span class="req">*</span></label>
+          <input type="text" id="bannerTitle" placeholder="例：垢抜け眉毛メイクおすすめ10選">
+        </div>
+        <div class="fg">
+          <label>サブタイトル</label>
+          <input type="text" id="bannerSub" placeholder="例：ブルベに似合う♡　20代女性向け">
+        </div>
+        <div class="fg">
+          <label>サイズ</label>
+          <div class="chips" id="sc">
+            <div class="chip on" data-w="1080" data-h="1350" data-s="0.5">Instagram縦</div>
+            <div class="chip" data-w="1080" data-h="1080" data-s="0.5">正方形</div>
+            <div class="chip" data-w="1080" data-h="1920" data-s="0.45">ストーリー</div>
+            <div class="chip" data-w="1200" data-h="628" data-s="0.55">OGP横長</div>
+          </div>
+        </div>
+        <div class="fg">
+          <label>テーマ</label>
+          <div class="theme-grid" id="themeGrid">
+            <div class="theme-btn on" data-theme="pink" style="background:linear-gradient(135deg,#ffb7d5,#e879f9);color:#fff">
+              ピンク<span>フェミニン</span>
+            </div>
+            <div class="theme-btn" data-theme="yellow" style="background:linear-gradient(135deg,#fde68a,#fbbf24);color:#78350f">
+              イエロー<span>ナチュラル</span>
+            </div>
+            <div class="theme-btn" data-theme="green" style="background:linear-gradient(135deg,#a7f3d0,#34d399);color:#064e3b">
+              グリーン<span>清楚</span>
+            </div>
+            <div class="theme-btn" data-theme="purple" style="background:linear-gradient(135deg,#c4b5fd,#8b5cf6);color:#fff">
+              パープル<span>上品</span>
+            </div>
+            <div class="theme-btn" data-theme="blue" style="background:linear-gradient(135deg,#bae6fd,#38bdf8);color:#0c4a6e">
+              ブルー<span>クール</span>
+            </div>
+            <div class="theme-btn" data-theme="peach" style="background:linear-gradient(135deg,#fed7aa,#fb923c);color:#7c2d12">
+              ピーチ<span>ポップ</span>
+            </div>
+            <div class="theme-btn" data-theme="choco" style="background:linear-gradient(135deg,#d6b896,#92400e);color:#fff">
+              ショコラ<span>高級感</span>
+            </div>
+            <div class="theme-btn" data-theme="mint" style="background:linear-gradient(135deg,#ccfbf1,#2dd4bf);color:#134e4a">
+              ミント<span>さわやか</span>
+            </div>
+          </div>
+        </div>
+        <div class="fg">
+          <label>レイアウト</label>
+          <div class="chips" id="layoutChips">
+            <div class="chip on" data-layout="grid3">3列グリッド</div>
+            <div class="chip" data-layout="grid2">2列グリッド</div>
+            <div class="chip" data-layout="list">リスト型</div>
+          </div>
         </div>
       </div>
-      <div class="fg">
-        <label>商品・サービス名 / テーマ<span class="req">*</span></label>
-        <input type="text" id="product" placeholder="例：夏の新作コスメ、転職サービス">
+
+      <!-- 商品リスト -->
+      <div class="panel">
+        <div class="plabel">商品を追加</div>
+        <div class="product-list" id="productList"></div>
+        <button class="add-product-btn" onclick="addProduct()" style="margin-top:8px">
+          ＋ 商品を追加する
+        </button>
       </div>
-      <div class="fg">
-        <label>ターゲット層</label>
-        <input type="text" id="target" placeholder="例：20〜30代女性">
-      </div>
-      <div class="fg">
-        <label>伝えたいこと・訴求ポイント</label>
-        <textarea id="msg" placeholder="例：期間限定セール、使いやすさが特徴"></textarea>
-      </div>
-      <div class="fg">
-        <label>雰囲気・トーン</label>
-        <select id="tone">
-          <option value="">おまかせ（AIが判断）</option>
-          <option value="高級感・洗練">高級感・洗練</option>
-          <option value="ポップ・かわいい">ポップ・かわいい</option>
-          <option value="クール・スタイリッシュ">クール・スタイリッシュ</option>
-          <option value="ナチュラル・やわらか">ナチュラル・やわらか</option>
-          <option value="力強い・インパクト重視">力強い・インパクト重視</option>
-          <option value="シンプル・ミニマル">シンプル・ミニマル</option>
-          <option value="信頼感・誠実">信頼感・誠実</option>
-          <option value="エレガント・フェミニン">エレガント・フェミニン</option>
-        </select>
-      </div>
-      <div class="fg">
-        <label>写真をアップロード（何枚でもOK）</label>
-        <div class="upload-area" id="uploadArea">
-          <input type="file" id="photoInput" accept="image/*" multiple onchange="onPhotos(event)">
-          <div class="uico">📷</div>
-          <div class="utxt">クリックまたはドラッグ＆ドロップ<br>複数選択OK・何枚でも追加できます</div>
-        </div>
-        <div id="photoGrid" class="photo-grid" style="display:none"></div>
-        <div id="photoCount" class="photo-count"></div>
-        <div id="photoNav" class="photo-nav" style="display:none">
-          <button class="nav-btn" onclick="prevPhoto()">◀ 前</button>
-          <span class="photo-idx" id="photoIdx"></span>
-          <button class="nav-btn" onclick="nextPhoto()">次 ▶</button>
-        </div>
-        <div class="pgrid" id="pg" style="display:none">
-          <div class="pbtn on" data-p="right">右配置</div>
-          <div class="pbtn" data-p="left">左配置</div>
-          <div class="pbtn" data-p="center">中央</div>
-          <div class="pbtn" data-p="bg">背景全体</div>
-          <div class="pbtn" data-p="top">上部</div>
-          <div class="pbtn" data-p="bottom">下部</div>
-        </div>
-      </div>
+
+      <!-- 生成ボタン -->
       <button class="btn" id="genBtn" onclick="gen()">
-        <span id="bt">✦ AIでバナーを生成する</span>
+        <span id="bt">✦ バナーを生成する</span>
         <div class="spinner" id="sp"></div>
       </button>
-      <div class="div"></div>
-      <div class="hint"><strong>💡 ヒント</strong><br>コンセプトカードをクリックでデザイン切り替え。JPG保存でそのまま使えます。</div>
     </div>
-    <div class="out">
-      <div class="pbox">
-        <div class="plabel">バナープレビュー</div>
-        <div class="pc" id="pa"><div class="empty"><div class="eico">🎨</div><p>左のフォームを入力して<br>「AIでバナーを生成する」を押してください</p></div></div>
-      </div>
-      <div class="cbox">
-        <div class="plabel">AIが考えたデザインコンセプト案</div>
-        <div id="ca"><div class="empty" style="padding:16px"><p>生成するとAIが考えた<br>3パターンのコンセプトが表示されます</p></div></div>
+
+    <!-- RIGHT: Preview -->
+    <div class="rpanel">
+      <div class="preview-wrap">
+        <div class="plabel">プレビュー</div>
+        <div class="preview-inner" id="previewArea">
+          <div class="empty"><div class="eico">🎨</div><p>左のフォームを入力して<br>「バナーを生成する」を押してください</p></div>
+        </div>
+        <div class="arow" id="actionRow" style="display:none">
+          <button class="abtn g" onclick="saveJPG()">⬇ JPGで保存</button>
+          <button class="abtn" onclick="regenerate()">🔄 AIで再生成</button>
+        </div>
       </div>
     </div>
   </div>
   <footer>BannerAI — Powered by Claude AI · South Agency AI Contest 2026</footer>
 </div>
+
 <script>
-let photos=[],selPhotoIdx=0,ppos='right',concepts=[],si=0,bw=600,bh=600,bl='1080×1080（正方形）';
+// ── THEMES ──
+const THEMES = {
+  pink:{
+    bg:'#fff0f6',bg2:'#fce7f3',accent:'#ec4899',accent2:'#a855f7',
+    text:'#831843',subtext:'#9d174d',cardBg:'#ffffff',cardBorder:'#fce7f3',
+    titleGrad:['#ec4899','#a855f7'],decoColor:'#f9a8d4',
+    font:'Zen Maru Gothic',decorations:['♡','✿','★','♪','✦','◎','❋','✸'],
+    wave:'#fce7f3',ribbonColor:'#ec4899'
+  },
+  yellow:{
+    bg:'#fffbeb',bg2:'#fef3c7',accent:'#f59e0b',accent2:'#d97706',
+    text:'#78350f',subtext:'#92400e',cardBg:'#fffdf5',cardBorder:'#fde68a',
+    titleGrad:['#f59e0b','#ef4444'],decoColor:'#fbbf24',
+    font:'Zen Maru Gothic',decorations:['☆','✿','❀','◇','✦','♦','❋','✸'],
+    wave:'#fde68a',ribbonColor:'#f59e0b'
+  },
+  green:{
+    bg:'#f0fdf4',bg2:'#dcfce7',accent:'#16a34a',accent2:'#15803d',
+    text:'#14532d',subtext:'#166534',cardBg:'#f0fff4',cardBorder:'#bbf7d0',
+    titleGrad:['#16a34a','#059669'],decoColor:'#86efac',
+    font:'Zen Maru Gothic',decorations:['✿','❀','♣','◎','✦','♪','✸','❋'],
+    wave:'#bbf7d0',ribbonColor:'#16a34a'
+  },
+  purple:{
+    bg:'#faf5ff',bg2:'#f3e8ff',accent:'#9333ea',accent2:'#7c3aed',
+    text:'#4c1d95',subtext:'#5b21b6',cardBg:'#fdf4ff',cardBorder:'#e9d5ff',
+    titleGrad:['#9333ea','#ec4899'],decoColor:'#c4b5fd',
+    font:'Zen Maru Gothic',decorations:['✦','★','♡','✿','◎','♪','❋','✸'],
+    wave:'#e9d5ff',ribbonColor:'#9333ea'
+  },
+  blue:{
+    bg:'#f0f9ff',bg2:'#e0f2fe',accent:'#0284c7',accent2:'#0369a1',
+    text:'#0c4a6e',subtext:'#075985',cardBg:'#f0f9ff',cardBorder:'#bae6fd',
+    titleGrad:['#0284c7','#6366f1'],decoColor:'#7dd3fc',
+    font:'Zen Maru Gothic',decorations:['✦','◇','★','✿','◎','♪','❋','✸'],
+    wave:'#bae6fd',ribbonColor:'#0284c7'
+  },
+  peach:{
+    bg:'#fff7ed',bg2:'#ffedd5',accent:'#ea580c',accent2:'#dc2626',
+    text:'#7c2d12',subtext:'#9a3412',cardBg:'#fffbf5',cardBorder:'#fed7aa',
+    titleGrad:['#f97316','#ec4899'],decoColor:'#fdba74',
+    font:'Zen Maru Gothic',decorations:['✿','★','♡','◎','✦','♪','❋','✸'],
+    wave:'#fed7aa',ribbonColor:'#f97316'
+  },
+  choco:{
+    bg:'#fdf8f4',bg2:'#f5ebe0',accent:'#92400e',accent2:'#78350f',
+    text:'#3b1a08',subtext:'#4b2510',cardBg:'#fdf6f0',cardBorder:'#e7d5c8',
+    titleGrad:['#92400e','#d97706'],decoColor:'#d6b896',
+    font:'Zen Maru Gothic',decorations:['✦','★','♡','✿','◎','♪','❋','◇'],
+    wave:'#e7d5c8',ribbonColor:'#92400e'
+  },
+  mint:{
+    bg:'#f0fdfa',bg2:'#ccfbf1',accent:'#0d9488',accent2:'#0f766e',
+    text:'#134e4a',subtext:'#115e59',cardBg:'#f0fdfa',cardBorder:'#99f6e4',
+    titleGrad:['#0d9488','#6366f1'],decoColor:'#5eead4',
+    font:'Zen Maru Gothic',decorations:['✿','❀','◎','✦','★','♪','❋','✸'],
+    wave:'#99f6e4',ribbonColor:'#0d9488'
+  },
+};
+
+let products=[];
+let selTheme='pink';
+let selLayout='grid3';
+let bw=1080,bh=1350,bscale=0.5;
+let aiConcept=null;
+
+// ── INIT ──
+addProduct();addProduct();addProduct();
 
 // Size chips
 document.querySelectorAll('#sc .chip').forEach(c=>c.addEventListener('click',()=>{
   document.querySelectorAll('#sc .chip').forEach(x=>x.classList.remove('on'));
-  c.classList.add('on');bw=+c.dataset.w;bh=+c.dataset.h;bl=c.dataset.l;
+  c.classList.add('on');bw=+c.dataset.w;bh=+c.dataset.h;bscale=+c.dataset.s;
 }));
 
-// Photo pos
-document.querySelectorAll('.pbtn').forEach(b=>b.addEventListener('click',()=>{
-  document.querySelectorAll('.pbtn').forEach(x=>x.classList.remove('on'));
-  b.classList.add('on');ppos=b.dataset.p;
-  if(concepts.length)render(concepts[si]);
+// Layout chips
+document.querySelectorAll('#layoutChips .chip').forEach(c=>c.addEventListener('click',()=>{
+  document.querySelectorAll('#layoutChips .chip').forEach(x=>x.classList.remove('on'));
+  c.classList.add('on');selLayout=c.dataset.layout;
 }));
 
-function onPhotos(e){
-  const files=Array.from(e.target.files);
-  files.forEach(f=>{
-    const r=new FileReader();
-    r.onload=ev=>{
-      photos.push(ev.target.result);
-      renderPhotoGrid();
-    };
-    r.readAsDataURL(f);
-  });
+// Theme buttons
+document.querySelectorAll('.theme-btn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.theme-btn').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');selTheme=b.dataset.theme;
+}));
+
+// ── ADD PRODUCT ──
+function addProduct(){
+  const id=Date.now()+'_'+Math.random().toString(36).slice(2);
+  products.push({id,img:null,brand:'',name:'',price:'',desc:''});
+  renderProductList();
 }
 
-function renderPhotoGrid(){
-  const grid=document.getElementById('photoGrid');
-  const count=document.getElementById('photoCount');
-  const nav=document.getElementById('photoNav');
-  const idx=document.getElementById('photoIdx');
-  grid.innerHTML='';
-  grid.style.display=photos.length?'grid':'none';
-  document.getElementById('pg').style.display=photos.length?'grid':'none';
-  nav.style.display=photos.length>1?'flex':'none';
-  count.textContent=photos.length?`${photos.length}枚アップロード済み · クリックで使用する写真を選択`:'';
-  idx.textContent=`${selPhotoIdx+1} / ${photos.length}`;
-  photos.forEach((p,i)=>{
+function delProduct(id){
+  products=products.filter(p=>p.id!==id);
+  renderProductList();
+}
+
+function renderProductList(){
+  const list=document.getElementById('productList');
+  list.innerHTML='';
+  products.forEach((p,i)=>{
     const div=document.createElement('div');
-    div.className='photo-thumb'+(i===selPhotoIdx?' selected':'');
-    div.innerHTML=`<img src="${p}"><button class="del" onclick="delPhoto(event,${i})">×</button>`;
-    div.onclick=(e)=>{if(e.target.className==='del')return;selPhotoIdx=i;renderPhotoGrid();if(concepts.length)render(concepts[si]);};
-    grid.appendChild(div);
+    div.className='product-item fu';
+    div.style.animationDelay=`${i*.03}s`;
+    div.innerHTML=`
+      <div class="product-item-header">
+        <div class="product-img-placeholder" id="ph_${p.id}">
+          ${p.img?`<img src="${p.img}" style="width:100%;height:100%;object-fit:contain;border-radius:7px;">`:`<span>📷</span>`}
+          <input type="file" accept="image/*" onchange="onProductImg(event,'${p.id}')">
+        </div>
+        <div class="product-fields">
+          <input type="text" placeholder="ブランド名（例：CEZANNE）" value="${p.brand}" oninput="updateProduct('${p.id}','brand',this.value)">
+          <input type="text" placeholder="商品名（例：うるふわ仕上げパウダー）" value="${p.name}" oninput="updateProduct('${p.id}','name',this.value)">
+          <input type="text" placeholder="価格（例：858円）" value="${p.price}" oninput="updateProduct('${p.id}','price',this.value)">
+        </div>
+        <button class="del-btn" onclick="delProduct('${p.id}')">削除</button>
+      </div>
+      <input type="text" placeholder="説明（例：28種の美容保湿成分配合）" value="${p.desc}" oninput="updateProduct('${p.id}','desc',this.value)" style="margin-top:6px;font-size:10px;">
+    `;
+    list.appendChild(div);
   });
 }
 
-function delPhoto(e,i){
-  e.stopPropagation();
-  photos.splice(i,1);
-  if(selPhotoIdx>=photos.length)selPhotoIdx=Math.max(0,photos.length-1);
-  renderPhotoGrid();
-  if(concepts.length)render(concepts[si]);
+function updateProduct(id,field,val){
+  const p=products.find(x=>x.id===id);
+  if(p)p[field]=val;
 }
 
-function prevPhoto(){if(photos.length){selPhotoIdx=(selPhotoIdx-1+photos.length)%photos.length;renderPhotoGrid();if(concepts.length)render(concepts[si]);}}
-function nextPhoto(){if(photos.length){selPhotoIdx=(selPhotoIdx+1)%photos.length;renderPhotoGrid();if(concepts.length)render(concepts[si]);}}
+function onProductImg(e,id){
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    const p=products.find(x=>x.id===id);
+    if(p){p.img=ev.target.result;renderProductList();}
+  };
+  r.readAsDataURL(f);
+}
 
+// ── GENERATE ──
 async function gen(){
-  const uc=document.getElementById('useCase').value;
-  const pr=document.getElementById('product').value.trim();
-  const tg=document.getElementById('target').value.trim();
-  const mg=document.getElementById('msg').value.trim();
-  const tn=document.getElementById('tone').value;
-  if(!uc){alert('バナーの用途を選択してください');return;}
-  if(!pr){alert('商品・サービス名を入力してください');return;}
-  const chip=document.querySelector('#sc .chip.on');
-  bw=+(chip?.dataset.w||600);bh=+(chip?.dataset.h||600);bl=chip?.dataset.l||'';
+  const title=document.getElementById('bannerTitle').value.trim();
+  if(!title){alert('タイトルを入力してください');return;}
+  const validProducts=products.filter(p=>p.name||p.brand||p.img);
+  if(validProducts.length===0){alert('商品を少なくとも1つ追加してください');return;}
 
   const btn=document.getElementById('genBtn');
   btn.disabled=true;
   document.getElementById('bt').style.display='none';
   document.getElementById('sp').style.display='block';
 
-  const prompt=`あなたはプロのグラフィックデザイナーです。以下の条件でWebバナーのデザインコンセプトを3パターン提案してください。
+  const prompt=`あなたはプロのグラフィックデザイナーです。以下の商品まとめバナーのデザインコンセプトを提案してください。
 
-条件:
-- 用途: ${uc}
-- サイズ: ${bl}
-- 商品・サービス: ${pr}
-- ターゲット: ${tg||'未指定'}
-- 訴求ポイント: ${mg||'未指定'}
-- 雰囲気: ${tn||'AIが最適判断'}
+バナー情報:
+- タイトル: ${title}
+- サブタイトル: ${document.getElementById('bannerSub').value}
+- テーマ: ${selTheme}
+- 商品数: ${validProducts.length}点
 
-制約:
-- JSONのみ出力。マークダウン記号や説明文は不要
-- 全フィールドの値にダブルクォートを含めないこと
-- キャッチコピーは商品・ターゲット・訴求を考慮したプロ品質の文言で
-- 配色は実際の広告で使えるプロレベルの配色で
-
-出力形式:
-{"concepts":[{"name":"コンセプト名8文字以内","catchcopy":"キャッチコピー16文字以内","subtext":"サブテキスト20文字以内","description":"説明40文字以内","bg":"背景色hex","bg2":"グラデ終了色hex","textColor":"テキスト色hex","accentColor":"アクセント色hex","subColor":"補助テキスト色rgba","colors":["#hex1","#hex2","#hex3"],"colorName":"配色名","pattern":"geometric/lines/dots/circles/grid/diagonal/floral/organic/none","layout":"center/left/split"}]}`;
+以下のJSONのみ出力（説明文不要）:
+{"tagline":"タイトルに合う短いキャッチ文20文字以内","hashtags":["ハッシュタグ1","ハッシュタグ2","ハッシュタグ3"],"appeal":"全体的な訴求ポイント30文字以内","deco_message":"装飾に使う短い煽り文10文字以内"}`;
 
   try{
-    const res=await fetch('/api/generate',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({prompt})
-    });
+    const res=await fetch('/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
     const data=await res.json();
     if(data.error)throw new Error(data.error);
     const text=data.text||'';
     const match=text.match(/\{[\s\S]*\}/);
-    if(!match)throw new Error('JSONが見つかりません');
-    const safe=match[0].replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g,'');
-    const parsed=JSON.parse(safe);
-    concepts=parsed.concepts;
-    si=0;
-    renderConcepts();
-    render(concepts[0]);
-  }catch(err){
-    console.error(err);
-    alert('生成に失敗しました: '+err.message);
-  }finally{
-    btn.disabled=false;
-    document.getElementById('bt').style.display='block';
-    document.getElementById('sp').style.display='none';
+    if(match){
+      const safe=match[0].replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g,'');
+      aiConcept=JSON.parse(safe);
+    }
+  }catch(e){
+    console.warn('AI generation failed, using defaults',e);
+    aiConcept=null;
   }
+
+  drawBanner();
+
+  btn.disabled=false;
+  document.getElementById('bt').style.display='block';
+  document.getElementById('sp').style.display='none';
 }
 
-function render(c){
-  const area=document.getElementById('pa');
-  const maxW=Math.min(bw,500);
-  const scale=maxW/bw;
-  const dh=Math.round(bh*scale);
-  const cv=document.createElement('canvas');
-  cv.width=bw;cv.height=bh;
-  cv.style.cssText=`width:${maxW}px;height:${dh}px;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.6);display:block;`;
-  cv.id='BC';
-  const ctx=cv.getContext('2d');
-  // Background gradient
-  const g=ctx.createLinearGradient(0,0,bw,bh);
-  g.addColorStop(0,c.bg);g.addColorStop(1,c.bg2||c.bg);
-  ctx.fillStyle=g;ctx.fillRect(0,0,bw,bh);
-  drawDeco(ctx,c,bw,bh);
-  const fin=()=>{drawTxt(ctx,c,bw,bh);done(area,cv,maxW,dh);};
-  if(photos.length>0)drawPhoto(ctx,c,bw,bh,fin);
-  else fin();
-  window._cc=c;
-}
+function regenerate(){gen();}
 
-function done(area,cv,mw,dh){
+// ── DRAW BANNER ──
+function drawBanner(){
+  const title=document.getElementById('bannerTitle').value.trim();
+  const sub=document.getElementById('bannerSub').value.trim();
+  const theme=THEMES[selTheme]||THEMES.pink;
+  const validProducts=products.filter(p=>p.name||p.brand||p.img);
+
+  const canvas=document.createElement('canvas');
+  canvas.width=bw;canvas.height=bh;
+  const dispW=Math.round(bw*bscale);
+  const dispH=Math.round(bh*bscale);
+  canvas.style.cssText=`width:${dispW}px;height:${dispH}px;border-radius:10px;box-shadow:0 12px 48px rgba(0,0,0,.3);display:block;`;
+  canvas.id='BC';
+
+  const ctx=canvas.getContext('2d');
+  drawBackground(ctx,theme,bw,bh);
+  drawDecorations(ctx,theme,bw,bh);
+
+  const titleH=drawTitle(ctx,theme,title,sub,bw,bh);
+  drawProducts(ctx,theme,validProducts,bw,bh,titleH);
+  drawFooterDeco(ctx,theme,bw,bh);
+
+  const area=document.getElementById('previewArea');
   area.innerHTML='';
-  const w=document.createElement('div');w.style.textAlign='center';
-  w.appendChild(cv);
-  const l=document.createElement('div');l.className='slbl';l.style.marginTop='6px';
-  l.textContent=bl+' · プレビュー縮小表示';w.appendChild(l);
-  const r=document.createElement('div');r.className='arow';
-  r.innerHTML=`<button class="abtn g" onclick="saveJPG()">⬇ JPGで保存</button><button class="abtn" onclick="copyCols()">配色コピー</button><button class="abtn" onclick="copyAll()">コンセプトコピー</button>`;
-  w.appendChild(r);area.appendChild(w);
+  const wrap=document.createElement('div');wrap.style.textAlign='center';
+  wrap.appendChild(canvas);
+  area.appendChild(wrap);
+  document.getElementById('actionRow').style.display='flex';
+  window._canvas=canvas;
 }
 
-function drawDeco(ctx,c,w,h){
-  ctx.save();ctx.globalAlpha=.06;
-  const pt=c.pattern||'geometric';
-  if(pt==='geometric'){
-    ctx.strokeStyle=c.accentColor;ctx.lineWidth=1.5;const s=Math.round(w/8);
-    for(let x=-s;x<w+s;x+=s)for(let y=-s;y<h+s;y+=s){ctx.beginPath();ctx.moveTo(x,y+s/2);ctx.lineTo(x+s/2,y);ctx.lineTo(x+s,y+s/2);ctx.lineTo(x+s/2,y+s);ctx.closePath();ctx.stroke();}
-  }else if(pt==='lines'){
-    ctx.strokeStyle=c.accentColor;ctx.lineWidth=1;
-    for(let i=0;i<w+h;i+=Math.round(w/12)){ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(0,i);ctx.stroke();}
-  }else if(pt==='dots'){
-    ctx.fillStyle=c.accentColor;const sp=Math.round(w/14);
-    for(let x=sp/2;x<w;x+=sp)for(let y=sp/2;y<h;y+=sp){ctx.beginPath();ctx.arc(x,y,sp/8,0,Math.PI*2);ctx.fill();}
-  }else if(pt==='circles'){
-    ctx.strokeStyle=c.accentColor;ctx.lineWidth=2;
-    for(let i=0;i<5;i++){ctx.beginPath();ctx.arc(w*.8,h*.2,w*(.06+i*.1),0,Math.PI*2);ctx.stroke();}
-  }else if(pt==='grid'){
-    ctx.strokeStyle=c.accentColor;ctx.lineWidth=.8;const g2=Math.round(w/16);
-    for(let x=0;x<w;x+=g2){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
-    for(let y=0;y<h;y+=g2){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
-  }else if(pt==='diagonal'){
-    ctx.strokeStyle=c.accentColor;ctx.lineWidth=2;const st=Math.round(w/10);
-    for(let i=-h;i<w+h;i+=st){ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i+h,h);ctx.stroke();}
-  }else if(pt==='floral'){
-    ctx.fillStyle=c.accentColor;const pe=8,cx=w*.88,cy=h*.12,r=Math.round(w/5);
-    for(let p=0;p<pe;p++){const a=(p/pe)*Math.PI*2;ctx.beginPath();ctx.ellipse(cx+Math.cos(a)*r*.5,cy+Math.sin(a)*r*.5,r*.22,r*.48,a,0,Math.PI*2);ctx.fill();}
-  }else if(pt==='organic'){
-    ctx.strokeStyle=c.accentColor;ctx.lineWidth=2;
-    ctx.beginPath();ctx.arc(w*.88,h*.12,w*.18,0,Math.PI*2);ctx.stroke();
-    ctx.beginPath();ctx.arc(w*.1,h*.88,w*.13,0,Math.PI*2);ctx.stroke();
+function drawBackground(ctx,theme,w,h){
+  // メイン背景グラデーション
+  const grad=ctx.createLinearGradient(0,0,0,h);
+  grad.addColorStop(0,theme.bg);
+  grad.addColorStop(0.5,theme.bg2);
+  grad.addColorStop(1,theme.bg);
+  ctx.fillStyle=grad;
+  ctx.fillRect(0,0,w,h);
+
+  // ドット背景
+  ctx.save();
+  ctx.globalAlpha=0.15;
+  ctx.fillStyle=theme.decoColor;
+  const dotSpacing=Math.round(w/28);
+  for(let x=dotSpacing;x<w;x+=dotSpacing*2){
+    for(let y=dotSpacing;y<h;y+=dotSpacing*2){
+      ctx.beginPath();ctx.arc(x,y,dotSpacing*.18,0,Math.PI*2);ctx.fill();
+    }
   }
-  ctx.globalAlpha=.08;
-  const rg=ctx.createRadialGradient(w*.25,h*.25,0,w*.25,h*.25,w*.7);
-  rg.addColorStop(0,'rgba(255,255,255,1)');rg.addColorStop(1,'rgba(255,255,255,0)');
-  ctx.fillStyle=rg;ctx.fillRect(0,0,w,h);
   ctx.restore();
 }
 
-function drawPhoto(ctx,c,w,h,cb){
-  const img=new Image();
-  img.onload=()=>{
-    ctx.save();
-    // 写真をアスペクト比を保ちながら指定領域に収める（はみ出さない）
-    const fitImg=(x,y,iw,ih)=>{
-      const scale=Math.min(iw/img.width,ih/img.height);
-      const sw=img.width*scale,sh=img.height*scale;
-      const ox=x+(iw-sw)/2,oy=y+(ih-sh)/2;
-      ctx.drawImage(img,ox,oy,sw,sh);
-    };
-    // 写真をアスペクト比を保ちながら指定領域をカバー（クリップあり）
-    const coverImg=(x,y,iw,ih)=>{
-      const scale=Math.max(iw/img.width,ih/img.height);
-      const sw=img.width*scale,sh=img.height*scale;
-      ctx.save();ctx.beginPath();ctx.rect(x,y,iw,ih);ctx.clip();
-      ctx.drawImage(img,x+(iw-sw)/2,y+(ih-sh)/2,sw,sh);
-      ctx.restore();
-    };
+function drawDecorations(ctx,theme,w,h){
+  // 上部ウェーブ装飾
+  ctx.save();
+  ctx.fillStyle=theme.wave;
+  ctx.globalAlpha=0.6;
+  ctx.beginPath();
+  ctx.moveTo(0,0);
+  for(let x=0;x<=w;x+=w/8){
+    ctx.quadraticCurveTo(x+w/16,Math.round(h*.035),x+w/8,Math.round(h*.02));
+  }
+  ctx.lineTo(w,0);ctx.closePath();ctx.fill();
 
-    if(ppos==='bg'){
-      // 背景全体：透過で全体に収める
-      ctx.globalAlpha=0.4;
-      fitImg(0,0,w,h);
-    }else if(ppos==='right'){
-      // 右半分：写真を右側にカバー配置、左にグラデ
-      const pw=Math.round(w*0.48);
-      const px=w-pw;
-      coverImg(px,0,pw,h);
-      const gr=ctx.createLinearGradient(px,0,px+pw,0);
-      gr.addColorStop(0,c.bg);gr.addColorStop(0.35,'rgba(0,0,0,0)');
-      ctx.globalAlpha=1;ctx.fillStyle=gr;ctx.fillRect(px,0,pw,h);
-    }else if(ppos==='left'){
-      // 左半分
-      coverImg(0,0,Math.round(w*0.48),h);
-      const gr=ctx.createLinearGradient(0,0,Math.round(w*0.48),0);
-      gr.addColorStop(0.65,'rgba(0,0,0,0)');gr.addColorStop(1,c.bg);
-      ctx.globalAlpha=1;ctx.fillStyle=gr;ctx.fillRect(0,0,Math.round(w*0.48),h);
-    }else if(ppos==='center'){
-      // 中央：透過で全体カバー
-      ctx.globalAlpha=0.35;
-      coverImg(0,0,w,h);
-    }else if(ppos==='top'){
-      const ph=Math.round(h*0.45);
-      coverImg(0,0,w,ph);
-      const gr=ctx.createLinearGradient(0,0,0,ph);
-      gr.addColorStop(0.5,'rgba(0,0,0,0)');gr.addColorStop(1,c.bg);
-      ctx.globalAlpha=1;ctx.fillStyle=gr;ctx.fillRect(0,0,w,ph);
-    }else if(ppos==='bottom'){
-      const py=Math.round(h*0.55),ph=Math.round(h*0.45);
-      coverImg(0,py,w,ph);
-      const gr=ctx.createLinearGradient(0,py,0,py+ph);
-      gr.addColorStop(0,c.bg);gr.addColorStop(0.4,'rgba(0,0,0,0)');
-      ctx.globalAlpha=1;ctx.fillStyle=gr;ctx.fillRect(0,py,w,ph);
-    }
-    ctx.globalAlpha=1;ctx.restore();cb();
-  };
-  img.src=photos[selPhotoIdx];
+  // 下部ウェーブ装飾
+  ctx.beginPath();
+  ctx.moveTo(0,h);
+  for(let x=0;x<=w;x+=w/8){
+    ctx.quadraticCurveTo(x+w/16,h-Math.round(h*.035),x+w/8,h-Math.round(h*.02));
+  }
+  ctx.lineTo(w,h);ctx.closePath();ctx.fill();
+  ctx.restore();
+
+  // ランダムデコ文字
+  ctx.save();
+  ctx.font=`bold ${Math.round(w*.025)}px serif`;
+  ctx.globalAlpha=0.25;
+  ctx.fillStyle=theme.accent;
+  const decos=theme.decorations;
+  const positions=[
+    [.04,.04],[.92,.06],[.12,.12],[.85,.14],[.96,.35],[.03,.42],
+    [.91,.55],[.05,.65],[.94,.72],[.08,.82],[.88,.88],[.15,.94],
+  ];
+  positions.forEach(([px,py],i)=>{
+    ctx.fillText(decos[i%decos.length],px*w,py*h);
+  });
+  ctx.restore();
+
+  // 左右のボーダーライン
+  ctx.save();
+  ctx.strokeStyle=theme.decoColor;
+  ctx.lineWidth=Math.round(w*.006);
+  ctx.globalAlpha=0.4;
+  ctx.beginPath();ctx.moveTo(Math.round(w*.018),Math.round(h*.015));ctx.lineTo(Math.round(w*.018),Math.round(h*.985));ctx.stroke();
+  ctx.beginPath();ctx.moveTo(Math.round(w*.982),Math.round(h*.015));ctx.lineTo(Math.round(w*.982),Math.round(h*.985));ctx.stroke();
+  ctx.restore();
 }
 
-// テキストを指定幅で折り返す
-function wrapTxt(ctx,text,maxW){
+function drawTitle(ctx,theme,title,sub,w,h){
+  const pad=Math.round(w*.06);
+  let y=Math.round(h*.06);
+
+  // 上部ラベル（サブタイトル）
+  if(sub){
+    ctx.save();
+    const sf=Math.round(w*.028);
+    ctx.font=`700 ${sf}px 'Zen Maru Gothic', 'Noto Sans JP'`;
+    ctx.textAlign='center';
+    // サブタイトル背景リボン
+    const sw=ctx.measureText(sub).width+Math.round(w*.06);
+    const sh=sf+Math.round(h*.018);
+    const sx=w/2-sw/2;
+    ctx.fillStyle=theme.accent;
+    ctx.globalAlpha=0.15;
+    rrect(ctx,sx,y,sw,sh,sh/2);
+    ctx.globalAlpha=1;
+    ctx.strokeStyle=theme.accent;
+    ctx.lineWidth=2;
+    rrect2(ctx,sx,y,sw,sh,sh/2);
+    ctx.fillStyle=theme.text;
+    ctx.fillText(sub,w/2,y+sf*.85+Math.round(h*.009));
+    ctx.restore();
+    y+=sh+Math.round(h*.02);
+  }
+
+  // メインタイトル（グラデーション大文字）
+  ctx.save();
+  const titleLines=splitTitle(title,16);
+  const tf=Math.round(w*(.1/Math.max(1,titleLines.reduce((a,l)=>Math.max(a,l.length),0)/10)));
+  const clampedTf=Math.max(Math.round(w*.07),Math.min(Math.round(w*.12),tf));
+
+  ctx.font=`900 ${clampedTf}px 'Zen Maru Gothic', 'Noto Sans JP'`;
+  ctx.textAlign='center';
+
+  titleLines.forEach((line,i)=>{
+    const lineY=y+i*(clampedTf*1.2)+clampedTf*.9;
+    // 文字シャドウ
+    ctx.save();
+    ctx.shadowColor=theme.decoColor;
+    ctx.shadowBlur=Math.round(w*.015);
+    ctx.shadowOffsetX=Math.round(w*.004);
+    ctx.shadowOffsetY=Math.round(w*.004);
+
+    // グラデーション文字
+    const grad=ctx.createLinearGradient(0,lineY-clampedTf,0,lineY);
+    grad.addColorStop(0,theme.titleGrad[0]);
+    grad.addColorStop(1,theme.titleGrad[1]);
+    ctx.fillStyle=grad;
+    ctx.fillText(line,w/2,lineY);
+    ctx.restore();
+
+    // 文字アウトライン
+    ctx.save();
+    ctx.strokeStyle='rgba(255,255,255,0.6)';
+    ctx.lineWidth=Math.round(w*.004);
+    ctx.strokeText(line,w/2,lineY);
+    ctx.restore();
+  });
+
+  const titleH=y+titleLines.length*clampedTf*1.2+Math.round(h*.03);
+
+  // タイトル下の装飾ライン
+  const lineW=Math.round(w*.4);
+  const lineY=titleH-Math.round(h*.015);
+  ctx.globalAlpha=0.6;
+  const lineGrad=ctx.createLinearGradient(w/2-lineW/2,0,w/2+lineW/2,0);
+  lineGrad.addColorStop(0,'transparent');
+  lineGrad.addColorStop(0.5,theme.accent);
+  lineGrad.addColorStop(1,'transparent');
+  ctx.strokeStyle=lineGrad;
+  ctx.lineWidth=Math.round(w*.004);
+  ctx.beginPath();ctx.moveTo(w/2-lineW/2,lineY);ctx.lineTo(w/2+lineW/2,lineY);ctx.stroke();
+  ctx.restore();
+
+  return titleH;
+}
+
+function splitTitle(title,maxChars){
+  if(title.length<=maxChars)return[title];
+  const lines=[];
+  let cur='';
+  for(const ch of title){
+    cur+=ch;
+    if(cur.length>=maxChars){lines.push(cur);cur='';}
+  }
+  if(cur)lines.push(cur);
+  return lines;
+}
+
+function drawProducts(ctx,theme,prods,w,h,titleH){
+  if(prods.length===0)return;
+  const pad=Math.round(w*.04);
+  const cols=selLayout==='grid2'?2:selLayout==='list'?1:3;
+  const gap=Math.round(w*.025);
+  const cardW=Math.floor((w-pad*2-gap*(cols-1))/cols);
+
+  const remainH=h-titleH-Math.round(h*.06);
+  const rows=Math.ceil(prods.length/cols);
+  const cardH=Math.floor((remainH-gap*(rows-1))/rows);
+
+  const loadAndDraw=(idx)=>{
+    if(idx>=prods.length)return;
+    const p=prods[idx];
+    const col=idx%cols;
+    const row=Math.floor(idx/cols);
+    const cx=pad+col*(cardW+gap);
+    const cy=titleH+row*(cardH+gap);
+
+    drawProductCard(ctx,theme,p,cx,cy,cardW,cardH,()=>loadAndDraw(idx+1));
+  };
+  loadAndDraw(0);
+}
+
+function drawProductCard(ctx,theme,p,x,y,w,h,cb){
+  ctx.save();
+
+  // カード背景
+  ctx.fillStyle=theme.cardBg;
+  ctx.shadowColor='rgba(0,0,0,0.1)';
+  ctx.shadowBlur=Math.round(w*.05);
+  ctx.shadowOffsetY=Math.round(h*.015);
+  rrect(ctx,x,y,w,h,Math.round(w*.06));
+  ctx.shadowBlur=0;ctx.shadowOffsetY=0;
+
+  // カードボーダー
+  ctx.strokeStyle=theme.cardBorder;
+  ctx.lineWidth=Math.round(w*.012);
+  rrect2(ctx,x,y,w,h,Math.round(w*.06));
+
+  ctx.restore();
+
+  // テキスト領域の高さ計算
+  const hasImg=!!p.img;
+  const imgH=hasImg?Math.round(h*.52):0;
+  const textPad=Math.round(w*.06);
+  const textY=y+imgH+Math.round(h*.03);
+  const textW=w-textPad*2;
+
+  if(hasImg){
+    const img=new Image();
+    img.onload=()=>{
+      ctx.save();
+      // 画像クリップ（カード上半分）
+      ctx.beginPath();
+      roundedRectPath(ctx,x+Math.round(w*.015),y+Math.round(h*.015),w-Math.round(w*.03),imgH,Math.round(w*.05));
+      ctx.clip();
+      // 画像をfitで表示（見切れない）
+      const scale=Math.min((w-Math.round(w*.03))/img.width,imgH/img.height);
+      const sw=img.width*scale,sh=img.height*scale;
+      const ix=x+Math.round(w*.015)+(w-Math.round(w*.03)-sw)/2;
+      const iy=y+Math.round(h*.015)+(imgH-sh)/2;
+      ctx.drawImage(img,ix,iy,sw,sh);
+      ctx.restore();
+      drawCardText(ctx,theme,p,textPad,textY,textW,w,h,x);
+      cb();
+    };
+    img.src=p.img;
+  }else{
+    // 画像なしの場合はアイコン
+    ctx.save();
+    ctx.fillStyle=theme.decoColor;
+    ctx.globalAlpha=0.3;
+    rrect(ctx,x+Math.round(w*.05),y+Math.round(h*.04),w-Math.round(w*.1),Math.round(h*.35),Math.round(w*.04));
+    ctx.globalAlpha=1;
+    ctx.font=`${Math.round(w*.15)}px serif`;
+    ctx.textAlign='center';
+    ctx.fillStyle=theme.accent;
+    ctx.fillText('📷',x+w/2,y+Math.round(h*.22));
+    ctx.restore();
+    drawCardText(ctx,theme,p,textPad,y+Math.round(h*.42),textW,w,h,x);
+    cb();
+  }
+}
+
+function drawCardText(ctx,theme,p,textPad,textY,textW,cw,ch,cx){
+  ctx.save();
+  ctx.textAlign='left';
+  let cy=textY;
+
+  // ブランド名
+  if(p.brand){
+    const bf=Math.round(cw*.07);
+    ctx.font=`700 ${bf}px 'Zen Maru Gothic','Noto Sans JP'`;
+    ctx.fillStyle=theme.accent;
+    ctx.fillText(p.brand.slice(0,12),cx+textPad,cy+bf*.9);
+    cy+=Math.round(bf*1.3);
+  }
+
+  // 商品名
+  if(p.name){
+    const nf=Math.round(cw*.065);
+    ctx.font=`500 ${nf}px 'Noto Sans JP'`;
+    ctx.fillStyle=theme.text;
+    const nameLines=wrapText(ctx,p.name,textW,2);
+    nameLines.forEach((line,i)=>{ctx.fillText(line,cx+textPad,cy+nf*.9+i*nf*1.2);});
+    cy+=nameLines.length*nf*1.2+Math.round(nf*.3);
+  }
+
+  // 説明
+  if(p.desc){
+    const df=Math.round(cw*.055);
+    ctx.font=`300 ${df}px 'Noto Sans JP'`;
+    ctx.fillStyle=theme.subtext;
+    const descLines=wrapText(ctx,p.desc,textW,2);
+    descLines.forEach((line,i)=>{ctx.fillText(line,cx+textPad,cy+df*.9+i*df*1.2);});
+    cy+=descLines.length*df*1.2+Math.round(df*.3);
+  }
+
+  // 価格タグ
+  if(p.price){
+    const pf=Math.round(cw*.07);
+    ctx.font=`700 ${pf}px 'Zen Maru Gothic','Noto Sans JP'`;
+    const pw=ctx.measureText(p.price).width+Math.round(cw*.04);
+    const ph=pf+Math.round(cw*.02);
+    ctx.fillStyle=theme.accent;
+    ctx.globalAlpha=1;
+    rrect(ctx,cx+textPad,cy,pw,ph,Math.round(ph*.45));
+    ctx.fillStyle='#fff';
+    ctx.fillText(p.price,cx+textPad+Math.round(cw*.02),cy+pf*.88);
+  }
+  ctx.restore();
+}
+
+function drawFooterDeco(ctx,theme,w,h){
+  ctx.save();
+  // フッター装飾バー
+  const barH=Math.round(h*.025);
+  const grad=ctx.createLinearGradient(0,0,w,0);
+  grad.addColorStop(0,theme.accent);
+  grad.addColorStop(0.5,theme.accent2||theme.accent);
+  grad.addColorStop(1,theme.accent);
+  ctx.fillStyle=grad;
+  ctx.globalAlpha=0.8;
+  ctx.fillRect(0,h-barH,w,barH);
+
+  // AI生成キャッチ
+  if(aiConcept?.tagline){
+    ctx.globalAlpha=0.7;
+    ctx.fillStyle=theme.text;
+    ctx.font=`500 ${Math.round(w*.022)}px 'Noto Sans JP'`;
+    ctx.textAlign='center';
+    ctx.fillText(aiConcept.tagline,w/2,h-barH-Math.round(h*.012));
+  }
+  ctx.restore();
+}
+
+function wrapText(ctx,text,maxW,maxLines=999){
   if(!text)return[];
   const lines=[];let cur='';
   for(const ch of text){
-    if(ctx.measureText(cur+ch).width>maxW&&cur!==''){lines.push(cur);cur=ch;}
-    else cur+=ch;
+    if(ctx.measureText(cur+ch).width>maxW&&cur!==''){
+      lines.push(cur);if(lines.length>=maxLines)return lines;
+      cur=ch;
+    }else cur+=ch;
   }
-  if(cur)lines.push(cur);return lines;
+  if(cur&&lines.length<maxLines)lines.push(cur);
+  return lines;
 }
 
-// 角丸矩形
 function rrect(ctx,x,y,w,h,r){
-  ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.beginPath();roundedRectPath(ctx,x,y,w,h,r);ctx.fill();
+}
+function rrect2(ctx,x,y,w,h,r){
+  ctx.beginPath();roundedRectPath(ctx,x,y,w,h,r);ctx.stroke();
+}
+function roundedRectPath(ctx,x,y,w,h,r){
+  r=Math.min(r,w/2,h/2);
+  ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);
   ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
   ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);
-  ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();ctx.fill();
-}
-
-function drawTxt(ctx,c,w,h){
-  const narrow=h<100;
-  const pad=Math.round(w*0.07);
-  const pr=document.getElementById('product').value.trim();
-  const lay=c.layout||'center';
-
-  // テキストエリアの幅を決定（写真配置を考慮）
-  let textAreaX=pad,textAreaW=w-pad*2;
-  if(!narrow){
-    if(photos.length>0){
-      if(ppos==='right'){textAreaW=Math.round(w*0.5)-pad;}
-      else if(ppos==='left'){textAreaX=Math.round(w*0.52);textAreaW=Math.round(w*0.48)-pad;}
-    }
-    if(lay==='center'){textAreaX=0;textAreaW=w;}
-  }
-
-  const align=lay==='center'?'center':'left';
-  const centerX=lay==='center'?w/2:textAreaX+(lay==='left'?0:textAreaW/2);
-
-  // アクセントライン
-  ctx.fillStyle=c.accentColor;
-  ctx.fillRect(0,0,w,Math.round(h*.004));
-  if(lay!=='center'&&!narrow)ctx.fillRect(0,0,Math.round(w*.004),h);
-
-  // TAG badge
-  if(!narrow&&h>150){
-    const tag=document.getElementById('useCase').value.split('（')[0]||'';
-    if(tag){
-      const tf=Math.round(w*.02),tpx=Math.round(w*.018),tpy=Math.round(h*.01);
-      ctx.font=`600 ${tf}px 'Noto Sans JP'`;
-      const tw=ctx.measureText(tag).width+tpx*2,th=tf+tpy*2;
-      const tx=lay==='center'?w/2-tw/2:textAreaX;
-      const ty=Math.round(h*.14);
-      ctx.fillStyle=c.accentColor;
-      rrect(ctx,tx,ty,tw,th,Math.round(th*.45));
-      ctx.fillStyle='rgba(255,255,255,0.95)';
-      ctx.textAlign='left';
-      ctx.fillText(tag,tx+tpx,ty+tpy+tf*.82);
-    }
-  }
-
-  // CATCH COPY（大見出し）
-  const cf=narrow?Math.round(h*.34):Math.round(w*.075);
-  ctx.font=`900 ${cf}px 'Noto Sans JP'`;
-  ctx.fillStyle=c.textColor;
-  ctx.textAlign=align;
-
-  const catchMaxW=lay==='center'?w*.75:textAreaW;
-  const catchLines=narrow?[c.catchcopy]:wrapTxt(ctx,c.catchcopy,catchMaxW);
-  const lh=cf*1.22;
-  const totalCatchH=catchLines.length*lh;
-
-  // 縦位置を計算
-  let startY;
-  if(narrow){startY=h/2+cf*.35;}
-  else if(lay==='center'){startY=h/2-totalCatchH/2+cf*.45;}
-  else{startY=Math.round(h*.35);}
-
-  // テキストのX座標
-  const tx=lay==='center'?w/2:textAreaX;
-
-  // シャドウ
-  ctx.shadowColor=c.bg;ctx.shadowBlur=Math.round(w*.018);ctx.shadowOffsetX=0;ctx.shadowOffsetY=0;
-  catchLines.forEach((line,i)=>ctx.fillText(line,tx,startY+i*lh));
-  ctx.shadowBlur=0;
-
-  // アクセントアンダーライン
-  if(!narrow){
-    ctx.fillStyle=c.accentColor;
-    const ulW=Math.round(w*.06),ulX=lay==='center'?w/2-ulW/2:textAreaX;
-    ctx.fillRect(ulX,startY+totalCatchH+Math.round(h*.012),ulW,Math.round(h*.005));
-  }
-
-  // サブテキスト
-  if(c.subtext&&!narrow){
-    const sf=Math.round(w*.028);
-    ctx.font=`400 ${sf}px 'Noto Sans JP'`;
-    ctx.fillStyle=c.subColor||'rgba(255,255,255,0.75)';
-    ctx.textAlign=align;
-    const subLines=wrapTxt(ctx,c.subtext,catchMaxW);
-    subLines.forEach((line,i)=>ctx.fillText(line,tx,startY+totalCatchH+Math.round(h*.065)+i*sf*1.5));
-  }
-
-  // ブランド名（右下）
-  if(!narrow){
-    ctx.font=`500 ${Math.round(w*.02)}px 'Noto Sans JP'`;
-    ctx.fillStyle=c.subColor||'rgba(255,255,255,0.5)';
-    ctx.textAlign='right';
-    ctx.fillText(pr,w-pad,h-Math.round(h*.038));
-  }
-}
-
-function renderConcepts(){
-  const area=document.getElementById('ca');area.innerHTML='';
-  const list=document.createElement('div');list.className='clist';
-  concepts.forEach((c,i)=>{
-    const card=document.createElement('div');
-    card.className='ccard fu'+(i===0?' sel':'');
-    card.style.animationDelay=`${i*.08}s`;
-    card.innerHTML=`
-      <div class="cn">CONCEPT ${i+1} — ${c.name}</div>
-      <div class="cname">「${c.catchcopy}」</div>
-      <div class="ccopy">${c.subtext||'—'}</div>
-      <div class="cdesc">${c.description||''}<br><span style="color:#404060">配色：${c.colorName||''}　装飾：${c.pattern||''}パターン</span></div>
-      <div class="cdots">${(c.colors||[]).map(col=>`<div class="dot" style="background:${col}"></div>`).join('')}<span class="dlabel">${(c.colors||[]).join(' · ')}</span></div>
-    `;
-    card.onclick=()=>{
-      document.querySelectorAll('.ccard').forEach(x=>x.classList.remove('sel'));
-      card.classList.add('sel');si=i;render(concepts[i]);
-    };
-    list.appendChild(card);
-  });
-  area.appendChild(list);
+  ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
 }
 
 function saveJPG(){
-  const c=window._cc;if(!c){alert('まずバナーを生成してください');return;}
+  const c=window._canvas;if(!c){alert('まず生成してください');return;}
   const full=document.createElement('canvas');full.width=bw;full.height=bh;
-  const ctx=full.getContext('2d');
-  const g=ctx.createLinearGradient(0,0,bw,bh);
-  g.addColorStop(0,c.bg);g.addColorStop(1,c.bg2||c.bg);
-  ctx.fillStyle=g;ctx.fillRect(0,0,bw,bh);
-  drawDeco(ctx,c,bw,bh);
-  const fin=()=>{
-    drawTxt(ctx,c,bw,bh);
-    const a=document.createElement('a');
-    const pr=document.getElementById('product').value.trim()||'banner';
-    a.download=`banner_${pr.slice(0,10)}_${Date.now()}.jpg`;
-    a.href=full.toDataURL('image/jpeg',.95);a.click();
-  };
-  if(photos.length>0)drawPhoto(ctx,c,bw,bh,fin);else fin();
-}
-
-function copyCols(){
-  if(!concepts.length)return;const c=concepts[si];
-  const t=`【${c.colorName}】\n背景: ${c.bg}\nテキスト: ${c.textColor}\nアクセント: ${c.accentColor}`;
-  navigator.clipboard.writeText(t).then(()=>alert('配色コードをコピーしました！\n\n'+t));
-}
-function copyAll(){
-  if(!concepts.length)return;const c=concepts[si];
-  const t=`【コンセプト${si+1}：${c.name}】\nキャッチコピー：${c.catchcopy}\nサブテキスト：${c.subtext}\n配色：${c.colorName}\n背景：${c.bg} / テキスト：${c.textColor} / アクセント：${c.accentColor}`;
-  navigator.clipboard.writeText(t).then(()=>alert('コンセプトをコピーしました！'));
+  const ctx2=full.getContext('2d');ctx2.drawImage(c,0,0,bw,bh);
+  const a=document.createElement('a');
+  const title=document.getElementById('bannerTitle').value.trim()||'banner';
+  a.download=`banner_${title.slice(0,10)}_${Date.now()}.jpg`;
+  a.href=full.toDataURL('image/jpeg',.95);a.click();
 }
 </script>
 </body>
