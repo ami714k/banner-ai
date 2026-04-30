@@ -3,384 +3,517 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DesignBrief AI — デザイン方向性を瞬時に決める</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<title>DesignBrief AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Zen+Maru+Gothic:wght@700;900&family=DM+Serif+Display&family=Playfair+Display:wght@700&family=M+PLUS+Rounded+1c:wght@700;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#07060f;--s1:#0f0e1e;--s2:#16152a;--s3:#1e1c38;
-  --a1:#7c6aff;--a2:#ff6a8a;--a3:#ffd93d;--a4:#4aefc0;
-  --tx:#f0f0fa;--mu:#7070a0;--bd:#22203a;
-}
+:root{--bg:#07060f;--s1:#0f0e1e;--s2:#16152a;--s3:#1e1c38;--a1:#7c6aff;--a2:#ff6a8a;--a3:#ffd93d;--a4:#4aefc0;--tx:#f0f0fa;--mu:#7070a0;--bd:#22203a;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;min-height:100vh;}
-body::before{content:'';position:fixed;inset:0;
-  background:radial-gradient(ellipse 50% 40% at 20% 20%,rgba(124,106,255,.1) 0%,transparent 60%),
-  radial-gradient(ellipse 40% 30% at 80% 80%,rgba(255,106,138,.07) 0%,transparent 60%);
-  pointer-events:none;z-index:0;}
-
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
-
-header{padding:32px 0 20px;display:flex;align-items:center;justify-content:space-between;}
-.logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;
-  background:linear-gradient(130deg,var(--a1),var(--a2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.logo span{font-size:10px;font-weight:400;color:var(--mu);margin-left:8px;-webkit-text-fill-color:var(--mu);}
-
-.hero{margin-bottom:32px;}
-.hero h1{font-family:'Syne',sans-serif;font-size:clamp(22px,4vw,40px);font-weight:800;
-  line-height:1.1;letter-spacing:-1.5px;margin-bottom:8px;}
-.hero h1 em{font-style:normal;
-  background:linear-gradient(130deg,var(--a1),var(--a2),var(--a3));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero p{color:var(--mu);font-size:13px;line-height:1.7;}
-
-.layout{display:grid;grid-template-columns:360px 1fr;gap:20px;align-items:start;}
-@media(max-width:800px){.layout{grid-template-columns:1fr;}}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 50% 40% at 20% 20%,rgba(124,106,255,.1) 0%,transparent 60%),radial-gradient(ellipse 40% 30% at 80% 80%,rgba(255,106,138,.07) 0%,transparent 60%);pointer-events:none;z-index:0;}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+header{padding:28px 0 16px;}
+.logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;background:linear-gradient(130deg,var(--a1),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.logo-sub{font-size:10px;color:var(--mu);margin-top:2px;}
+.hero{margin-bottom:28px;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(20px,3.5vw,38px);font-weight:800;line-height:1.1;letter-spacing:-1.5px;margin-bottom:6px;}
+.hero h1 em{font-style:normal;background:linear-gradient(130deg,var(--a1),var(--a2),var(--a3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero p{color:var(--mu);font-size:12px;line-height:1.7;}
+.layout{display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start;}
+@media(max-width:860px){.layout{grid-template-columns:1fr;}}
 
 /* FORM */
-.form-panel{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:22px;}
-.sec{margin-bottom:16px;}
-.sl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:var(--mu);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.fpanel{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:20px;}
+.sl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
 .sl::after{content:'';flex:1;height:1px;background:var(--bd);}
-.fg{margin-bottom:10px;}
-label{display:block;font-size:10px;font-weight:600;color:var(--mu);margin-bottom:4px;}
+.sec{margin-bottom:14px;}
+.fg{margin-bottom:8px;}
+label{display:block;font-size:10px;font-weight:600;color:var(--mu);margin-bottom:3px;}
 label .req{color:var(--a2);}
-input[type=text],textarea,select{
-  width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:7px;
-  color:var(--tx);font-family:'Noto Sans JP',sans-serif;font-size:12px;
-  padding:8px 11px;outline:none;transition:border-color .2s;}
+input[type=text],textarea,select{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:7px;color:var(--tx);font-family:'Noto Sans JP',sans-serif;font-size:11px;padding:7px 10px;outline:none;transition:border-color .2s;}
 input[type=text]:focus,textarea:focus,select:focus{border-color:var(--a1);}
-textarea{resize:vertical;min-height:72px;}
+textarea{resize:vertical;min-height:60px;}
 select option{background:var(--s2);}
-
-.chips{display:flex;flex-wrap:wrap;gap:5px;}
-.chip{background:var(--s2);border:1px solid var(--bd);border-radius:6px;
-  color:var(--mu);font-size:10px;font-weight:500;padding:4px 9px;
-  cursor:pointer;transition:all .15s;user-select:none;}
+.chips{display:flex;flex-wrap:wrap;gap:4px;}
+.chip{background:var(--s2);border:1px solid var(--bd);border-radius:5px;color:var(--mu);font-size:9px;font-weight:500;padding:3px 8px;cursor:pointer;transition:all .15s;user-select:none;}
 .chip:hover,.chip.on{background:rgba(124,106,255,.15);border-color:var(--a1);color:var(--a1);}
-
-.gen-btn{width:100%;background:linear-gradient(130deg,var(--a1),var(--a2));
-  border:none;border-radius:10px;color:#fff;font-family:'Syne',sans-serif;
-  font-size:14px;font-weight:700;padding:13px;cursor:pointer;
-  transition:opacity .2s,transform .1s;display:flex;align-items:center;justify-content:center;gap:8px;
-  margin-top:4px;}
-.gen-btn:hover{opacity:.88;transform:translateY(-1px);}
-.gen-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
-.spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.3);
-  border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none;}
+.gbtn{width:100%;background:linear-gradient(130deg,var(--a1),var(--a2));border:none;border-radius:10px;color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;padding:12px;cursor:pointer;transition:opacity .2s,transform .1s;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:4px;}
+.gbtn:hover{opacity:.88;transform:translateY(-1px);}
+.gbtn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.spin{width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
 /* OUTPUT */
 .output{display:flex;flex-direction:column;gap:16px;}
-.empty-state{background:var(--s1);border:1px solid var(--bd);border-radius:16px;
-  padding:48px 24px;text-align:center;color:var(--mu);}
-.empty-state .ico{font-size:44px;margin-bottom:12px;opacity:.3;}
-.empty-state p{font-size:12px;line-height:1.8;}
+.empty{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:48px 24px;text-align:center;color:var(--mu);}
+.empty .ico{font-size:44px;margin-bottom:12px;opacity:.25;}
+.empty p{font-size:12px;line-height:1.8;}
 
-/* BRIEF CARD */
-.brief-header{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:20px;}
-.brief-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;
-  color:var(--a1);letter-spacing:1px;margin-bottom:4px;}
-.brief-project{font-size:18px;font-weight:700;margin-bottom:6px;}
-.brief-meta{font-size:11px;color:var(--mu);line-height:1.6;}
+/* OVERVIEW CARD */
+.overview{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:20px;}
+.ov-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--a1);margin-bottom:6px;}
+.ov-project{font-size:20px;font-weight:700;margin-bottom:4px;}
+.ov-meta{font-size:11px;color:var(--mu);line-height:1.6;}
+.ov-summary{margin-top:10px;font-size:11px;color:var(--a4);line-height:1.7;padding:10px 12px;background:rgba(74,239,192,.06);border-radius:8px;border-left:3px solid var(--a4);}
+.copy-all-btn{margin-top:12px;background:rgba(124,106,255,.1);border:1px solid rgba(124,106,255,.3);border-radius:7px;color:var(--a1);font-size:10px;padding:7px 14px;cursor:pointer;transition:all .15s;}
+.copy-all-btn:hover{background:rgba(124,106,255,.2);}
 
-/* COLOR PALETTES */
-.palettes-wrap{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:20px;}
-.pw-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:var(--mu);margin-bottom:14px;}
-.palettes{display:flex;flex-direction:column;gap:12px;}
-.palette{background:var(--s2);border:1px solid var(--bd);border-radius:10px;
-  padding:14px;cursor:pointer;transition:all .2s;position:relative;}
-.palette:hover{border-color:var(--a1);}
-.palette.selected{border-color:var(--a1);background:rgba(124,106,255,.08);}
-.palette-num{font-size:9px;font-weight:700;color:var(--a1);letter-spacing:1.5px;margin-bottom:6px;}
-.palette-name{font-size:13px;font-weight:700;margin-bottom:4px;}
-.palette-concept{font-size:10px;color:var(--mu);margin-bottom:10px;line-height:1.5;}
-.colors{display:flex;gap:6px;margin-bottom:10px;align-items:center;}
-.color-swatch{width:36px;height:36px;border-radius:8px;border:2px solid rgba(255,255,255,.1);
-  flex-shrink:0;position:relative;}
-.color-swatch:hover::after{content:attr(data-hex);position:absolute;
-  bottom:-22px;left:50%;transform:translateX(-50%);
-  background:var(--s3);color:var(--tx);font-size:9px;padding:2px 6px;
-  border-radius:4px;white-space:nowrap;z-index:10;}
-.color-codes{font-size:9px;color:var(--mu);display:flex;gap:8px;flex-wrap:wrap;}
-.palette-detail{font-size:10px;color:var(--tx);opacity:.8;line-height:1.6;}
-.palette-detail strong{color:var(--a3);}
+/* PALETTE TABS */
+.ptabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
+.ptab{background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:10px;font-weight:600;color:var(--mu);transition:all .15s;}
+.ptab:hover,.ptab.on{background:rgba(124,106,255,.15);border-color:var(--a1);color:var(--a1);}
 
-/* FONT & LAYOUT */
-.design-specs{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.spec-card{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:16px;}
-.spec-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-  color:var(--mu);margin-bottom:10px;}
-.spec-item{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;}
-.spec-icon{font-size:13px;flex-shrink:0;}
-.spec-text{font-size:11px;color:var(--tx);line-height:1.6;opacity:.88;}
-.spec-text strong{color:var(--a4);}
+/* PALETTE CARD */
+.palette-wrap{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:20px;}
+.pw-head{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:14px;}
+.palette-content{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:600px){.palette-content{grid-template-columns:1fr;}}
 
-/* COPY BUTTON */
-.copy-bar{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin-top:8px;}
-.copy-btn{background:var(--s2);border:1px solid var(--bd);border-radius:7px;
-  color:var(--mu);font-size:10px;padding:6px 12px;cursor:pointer;transition:all .15s;}
-.copy-btn:hover{border-color:var(--a1);color:var(--a1);}
-.copy-btn.g{background:rgba(74,239,192,.1);border-color:rgba(74,239,192,.3);color:var(--a4);}
+/* COLOR PREVIEW - actual banner preview */
+.banner-preview{border-radius:12px;overflow:hidden;aspect-ratio:4/5;position:relative;display:flex;flex-direction:column;}
+.bp-bg{flex:1;position:relative;display:flex;align-items:center;justify-content:center;padding:16px;}
+.bp-title-area{text-align:center;z-index:2;padding:12px 16px;border-radius:10px;background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);}
+.bp-title{font-size:18px;font-weight:900;line-height:1.2;margin-bottom:4px;}
+.bp-sub{font-size:10px;opacity:.8;margin-bottom:8px;}
+.bp-badge{display:inline-block;font-size:8px;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.5px;}
+.bp-deco{position:absolute;font-size:20px;opacity:.2;}
+.bp-bar{height:6px;}
+.bp-footer{padding:8px 12px;display:flex;justify-content:space-between;align-items:center;}
+.bp-footer-txt{font-size:8px;opacity:.6;}
+.bp-colors{display:flex;gap:4px;}
+.bp-dot{width:12px;height:12px;border-radius:50%;}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-.fade{animation:fadeUp .35s ease forwards;}
+/* RIGHT SIDE DETAILS */
+.palette-details{}
+.palette-name-big{font-size:16px;font-weight:700;margin-bottom:4px;}
+.palette-concept-txt{font-size:11px;color:var(--mu);line-height:1.6;margin-bottom:12px;}
+
+.color-swatches{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
+.cswatch{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;}
+.cswatch-box{width:44px;height:44px;border-radius:8px;border:2px solid rgba(255,255,255,.1);transition:transform .15s;}
+.cswatch:hover .cswatch-box{transform:scale(1.1);}
+.cswatch-name{font-size:8px;color:var(--mu);text-align:center;max-width:44px;}
+.cswatch-hex{font-size:8px;color:var(--a1);font-family:monospace;}
+
+/* FONT PREVIEW */
+.font-preview{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:12px;margin-bottom:10px;}
+.fp-label{font-size:9px;color:var(--mu);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:1px;}
+.fp-sample{font-size:22px;font-weight:700;line-height:1.3;margin-bottom:3px;}
+.fp-name{font-size:9px;color:var(--a3);}
+
+/* WIREFRAME */
+.wireframe-wrap{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:20px;}
+.wf-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+.wftab{background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:5px 10px;cursor:pointer;font-size:10px;color:var(--mu);transition:all .15s;}
+.wftab:hover,.wftab.on{border-color:var(--a1);color:var(--a1);}
+.wf-content{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:600px){.wf-content{grid-template-columns:1fr;}}
+.wf-frame{background:var(--s2);border-radius:10px;padding:12px;}
+.wf-frame-label{font-size:9px;color:var(--mu);margin-bottom:8px;font-weight:600;}
+.wf-frame svg{width:100%;height:auto;display:block;}
+.wf-desc{font-size:10px;color:var(--tx);line-height:1.7;opacity:.85;}
+.wf-desc h4{font-size:11px;color:var(--a4);margin-bottom:6px;margin-top:10px;}
+.wf-desc h4:first-child{margin-top:0;}
+.wf-desc p{color:var(--mu);margin-bottom:4px;}
+
+/* DO DONT */
+.dodont{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.dd-card{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:14px;}
+.dd-title{font-size:10px;font-weight:700;margin-bottom:8px;}
+.dd-item{display:flex;gap:6px;margin-bottom:6px;font-size:10px;color:var(--tx);opacity:.85;line-height:1.5;align-items:flex-start;}
+.dd-ico{flex-shrink:0;font-size:12px;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+.fade{animation:fadeUp .3s ease forwards;}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <div>
-      <div class="logo">DesignBrief AI <span>powered by Claude</span></div>
+<header>
+  <div class="logo">DesignBrief AI</div>
+  <div class="logo-sub">案件情報 → デザイン方向性を瞬時に決める</div>
+</header>
+<div class="hero">
+  <h1>迷わず作り始める。<br><em>AIがデザインを設計する。</em></h1>
+  <p>配色・フォント・ワイヤーフレームをAIが瞬時に提案。Illustratorで作り始める前の「迷い時間」をゼロに。</p>
+</div>
+<div class="layout">
+  <div class="fpanel">
+    <div class="sec">
+      <div class="sl">案件情報</div>
+      <div class="fg"><label>案件名・制作物<span class="req">*</span></label><input type="text" id="project" placeholder="例：夏の新作コスメ紹介バナー"></div>
+      <div class="fg"><label>ターゲット層</label><input type="text" id="target" placeholder="例：20代女性、ファミリー層"></div>
+      <div class="fg">
+        <label>媒体・サイズ</label>
+        <div class="chips" id="mc">
+          <div class="chip on" data-v="Instagram正方形(1080×1080)">Instagram正方形</div>
+          <div class="chip" data-v="Instagramストーリー(1080×1920)">ストーリー縦</div>
+          <div class="chip" data-v="OGP横長(1200×628)">OGP横長</div>
+          <div class="chip" data-v="Webバナー横長(728×90)">Web横長</div>
+          <div class="chip" data-v="LPヘッダー(1920×600)">LPヘッダー</div>
+        </div>
+      </div>
     </div>
-  </header>
-
-  <div class="hero">
-    <h1>案件情報を入れるだけで<br><em>デザインの方向性が決まる。</em></h1>
-    <p>配色・フォント・レイアウト方針をAIが瞬時に提案。Illustratorで作り始める前の「迷い時間」をゼロにする。</p>
+    <div class="sec">
+      <div class="sl">デザイン要件</div>
+      <div class="fg">
+        <label>雰囲気・トーン</label>
+        <div class="chips" id="tc">
+          <div class="chip on" data-v="かわいい・ポップ">かわいい</div>
+          <div class="chip" data-v="おしゃれ・高級感">高級感</div>
+          <div class="chip" data-v="クール・スタイリッシュ">クール</div>
+          <div class="chip" data-v="ナチュラル・やわらか">ナチュラル</div>
+          <div class="chip" data-v="信頼感・誠実">信頼感</div>
+          <div class="chip" data-v="インパクト重視">インパクト</div>
+          <div class="chip" data-v="シンプル・ミニマル">ミニマル</div>
+        </div>
+      </div>
+      <div class="fg"><label>ブランドカラー（任意）</label><input type="text" id="bc" placeholder="例：ネイビー・ゴールド、#FF6EB4"></div>
+      <div class="fg"><label>その他要望</label><textarea id="notes" placeholder="例：既存バナーと統一感を出したい、文字多め"></textarea></div>
+    </div>
+    <button class="gbtn" id="gbtn">
+      <span id="bt">✦ デザイン方向性を生成する</span>
+      <div class="spin" id="sp"></div>
+    </button>
   </div>
 
-  <div class="layout">
-    <!-- フォーム -->
-    <div class="form-panel">
-      <div class="sec">
-        <div class="sl">案件情報</div>
-        <div class="fg">
-          <label>案件名・制作物<span class="req">*</span></label>
-          <input type="text" id="project" placeholder="例：夏の新作コスメ紹介バナー、イベント告知画像">
-        </div>
-        <div class="fg">
-          <label>ターゲット層</label>
-          <input type="text" id="target" placeholder="例：20代女性、ファミリー層、ビジネスマン">
-        </div>
-        <div class="fg">
-          <label>媒体・サイズ</label>
-          <div class="chips" id="mediaChips">
-            <div class="chip on" data-v="Instagram正方形(1080×1080)">Instagram正方形</div>
-            <div class="chip" data-v="Instagramストーリー(1080×1920)">ストーリー</div>
-            <div class="chip" data-v="TwitterバナーOGP(1200×628)">TwitterOGP</div>
-            <div class="chip" data-v="Webバナー横長(728×90)">Web横長バナー</div>
-            <div class="chip" data-v="LPヘッダー(1920×600)">LPヘッダー</div>
-            <div class="chip" data-v="自由">その他</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="sec">
-        <div class="sl">デザイン要件</div>
-        <div class="fg">
-          <label>雰囲気・トーン</label>
-          <div class="chips" id="toneChips">
-            <div class="chip on" data-v="かわいい・ポップ">かわいい・ポップ</div>
-            <div class="chip" data-v="おしゃれ・高級感">おしゃれ・高級感</div>
-            <div class="chip" data-v="クール・スタイリッシュ">クール</div>
-            <div class="chip" data-v="ナチュラル・やわらか">ナチュラル</div>
-            <div class="chip" data-v="信頼感・誠実">信頼感</div>
-            <div class="chip" data-v="インパクト重視">インパクト</div>
-            <div class="chip" data-v="シンプル・ミニマル">ミニマル</div>
-          </div>
-        </div>
-        <div class="fg">
-          <label>使用カラー（ブランドカラーなど・任意）</label>
-          <input type="text" id="brandColor" placeholder="例：ネイビー・ゴールド、#FF6EB4">
-        </div>
-        <div class="fg">
-          <label>その他要望・制約</label>
-          <textarea id="notes" placeholder="例：既存のバナーと統一感を出したい、文字多め、写真は使わない"></textarea>
-        </div>
-      </div>
-
-      <button class="gen-btn" id="genBtn">
-        <span id="bt">✦ デザイン方向性を生成する</span>
-        <div class="spin" id="sp"></div>
-      </button>
-    </div>
-
-    <!-- 出力 -->
-    <div class="output" id="output">
-      <div class="empty-state">
-        <div class="ico">✏️</div>
-        <p>案件情報を入力して<br>「デザイン方向性を生成する」を押してください<br><br>
-        <span style="color:var(--a4);font-size:11px">✦ 配色3パターン・フォント方針・<br>レイアウト構成案を瞬時に提案</span></p>
-      </div>
+  <div class="output" id="output">
+    <div class="empty">
+      <div class="ico">✏️</div>
+      <p>案件情報を入力して生成してください<br><br>
+      <span style="color:var(--a4);font-size:11px">✦ 配色プレビュー・フォント実物・<br>ワイヤーフレームを同時生成</span></p>
     </div>
   </div>
 </div>
+</div>
 
 <script>
-// チップ選択
-document.querySelectorAll('#mediaChips .chip').forEach(function(c){
-  c.addEventListener('click', function(){
-    document.querySelectorAll('#mediaChips .chip').forEach(function(x){x.classList.remove('on');});
-    c.classList.add('on');
+function prompt_for_key(){
+  if(window.CLAUDE_KEY) return window.CLAUDE_KEY;
+  var k = localStorage.getItem('claude_key');
+  if(k){ window.CLAUDE_KEY=k; return k; }
+  k = window.prompt('Claude APIキーを入力してください（sk-ant-...）');
+  if(k){ window.CLAUDE_KEY=k; localStorage.setItem('claude_key',k); }
+  return k||'';
+}
+
+var selMedia='Instagram正方形(1080×1080)';
+var selTone='かわいい・ポップ';
+var currentData=null;
+var currentPalIdx=0;
+
+document.querySelectorAll('#mc .chip').forEach(function(c){
+  c.addEventListener('click',function(){
+    document.querySelectorAll('#mc .chip').forEach(function(x){x.classList.remove('on');});
+    c.classList.add('on');selMedia=c.dataset.v;
   });
 });
-document.querySelectorAll('#toneChips .chip').forEach(function(c){
-  c.addEventListener('click', function(){
-    document.querySelectorAll('#toneChips .chip').forEach(function(x){x.classList.remove('on');});
-    c.classList.add('on');
+document.querySelectorAll('#tc .chip').forEach(function(c){
+  c.addEventListener('click',function(){
+    document.querySelectorAll('#tc .chip').forEach(function(x){x.classList.remove('on');});
+    c.classList.add('on');selTone=c.dataset.v;
   });
 });
 
-document.getElementById('genBtn').addEventListener('click', generate);
+document.getElementById('gbtn').addEventListener('click',generate);
 
 async function generate(){
-  var project = document.getElementById('project').value.trim();
-  if(!project){alert('案件名・制作物を入力してください');return;}
+  var project=document.getElementById('project').value.trim();
+  if(!project){alert('案件名を入力してください');return;}
+  var target=document.getElementById('target').value.trim();
+  var bc=document.getElementById('bc').value.trim();
+  var notes=document.getElementById('notes').value.trim();
 
-  var target = document.getElementById('target').value.trim();
-  var media = (document.querySelector('#mediaChips .chip.on') || {}).dataset.v || 'Instagram正方形';
-  var tone = (document.querySelector('#toneChips .chip.on') || {}).dataset.v || 'かわいい・ポップ';
-  var brandColor = document.getElementById('brandColor').value.trim();
-  var notes = document.getElementById('notes').value.trim();
+  var btn=document.getElementById('gbtn');
+  btn.disabled=true;
+  document.getElementById('bt').style.display='none';
+  document.getElementById('sp').style.display='block';
 
-  var btn = document.getElementById('genBtn');
-  btn.disabled = true;
-  document.getElementById('bt').style.display = 'none';
-  document.getElementById('sp').style.display = 'block';
-
-  var prompt = 'あなたはプロのグラフィックデザイナーです。以下の案件のデザイン方向性を提案してください。\n\n'
-    + '案件: ' + project + '\n'
-    + 'ターゲット: ' + (target||'未指定') + '\n'
-    + '媒体: ' + media + '\n'
-    + 'トーン: ' + tone + '\n'
-    + (brandColor ? 'ブランドカラー: ' + brandColor + '\n' : '')
-    + (notes ? '要望: ' + notes + '\n' : '')
-    + '\nJSONのみ出力（説明文不要）:\n'
-    + '{"overview":"案件概要と方向性まとめ40文字以内","palettes":[{"name":"配色名10文字","concept":"コンセプト30文字","colors":["#hex1","#hex2","#hex3","#hex4"],"color_names":["色名1","色名2","色名3","色名4"],"font_main":"メインフォント方向性","font_sub":"サブフォント方向性","layout":"レイアウト方針40文字","mood":"この配色で伝わる印象20文字"},{"name":"配色名10文字","concept":"コンセプト30文字","colors":["#hex1","#hex2","#hex3","#hex4"],"color_names":["色名1","色名2","色名3","色名4"],"font_main":"メインフォント方向性","font_sub":"サブフォント方向性","layout":"レイアウト方針40文字","mood":"この配色で伝わる印象20文字"},{"name":"配色名10文字","concept":"コンセプト30文字","colors":["#hex1","#hex2","#hex3","#hex4"],"color_names":["色名1","色名2","色名3","色名4"],"font_main":"メインフォント方向性","font_sub":"サブフォント方向性","layout":"レイアウト方針40文字","mood":"この配色で伝わる印象20文字"}],"dos":["やるべきこと1","やるべきこと2","やるべきこと3"],"donts":["避けるべきこと1","避けるべきこと2"],"reference":"参考にすべきデザインの方向性30文字"}';
+  var prompt='あなたはプロのグラフィックデザイナーです。以下の案件のデザイン方向性を提案してください。\n'
+    +'案件:'+project+'\nターゲット:'+(target||'未指定')+'\n媒体:'+selMedia+'\nトーン:'+selTone+'\n'
+    +(bc?'ブランドカラー:'+bc+'\n':'')+(notes?'要望:'+notes+'\n':'')
+    +'\n以下のJSONのみ出力（前後の説明不要）:\n'
+    +'{"overview":"方向性まとめ40文字以内","palettes":[{"name":"配色名8文字","concept":"コンセプト25文字","colors":["#hex1","#hex2","#hex3","#hex4"],"color_names":["名前1","名前2","名前3","名前4"],"bg_gradient":["#fromColor","#toColor"],"accent":"#accentHex","text_color":"#textHex","font_main":"見出しフォント方向性15文字","font_main_en":"Noto Sans JP","font_sub":"本文フォント方向性15文字","font_sub_en":"Noto Sans JP","layout":"レイアウト方針30文字","mood":"印象15文字"},{"name":"配色名8文字","concept":"コンセプト25文字","colors":["#hex1","#hex2","#hex3","#hex4"],"color_names":["名前1","名前2","名前3","名前4"],"bg_gradient":["#fromColor","#toColor"],"accent":"#accentHex","text_color":"#textHex","font_main":"見出しフォント方向性15文字","font_main_en":"Zen Maru Gothic","font_sub":"本文フォント方向性15文字","font_sub_en":"Noto Sans JP","layout":"レイアウト方針30文字","mood":"印象15文字"},{"name":"配色名8文字","concept":"コンセプト25文字","colors":["#hex1","#hex2","#hex3","#hex4"],"color_names":["名前1","名前2","名前3","名前4"],"bg_gradient":["#fromColor","#toColor"],"accent":"#accentHex","text_color":"#textHex","font_main":"見出しフォント方向性15文字","font_main_en":"Playfair Display","font_sub":"本文フォント方向性15文字","font_sub_en":"Noto Sans JP","layout":"レイアウト方針30文字","mood":"印象15文字"}],"layouts":["中央揃えタイトル+商品グリッド","左寄せタイトル+右画像","上部タイトル帯+下段商品一覧","対角線レイアウト","フルブリード画像+テキストオーバーレイ"],"dos":["やること1","やること2","やること3"],"donts":["避けること1","避けること2"]}';
 
   try{
-    var res = await fetch('/api/generate', {
+    var res=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({prompt:prompt})
+      headers:{
+        'Content-Type':'application/json',
+        'x-api-key': window.CLAUDE_KEY || prompt_for_key(),
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body:JSON.stringify({
+        model:'claude-haiku-4-5-20251001',
+        max_tokens:1500,
+        messages:[{role:'user',content:prompt}]
+      })
     });
-    var d = await res.json();
-    if(d.error) throw new Error(d.error);
-
-    var text = d.text || '';
-    var m = text.match(/\{[\s\S]*\}/);
-    if(!m) throw new Error('JSON not found');
-    var data = JSON.parse(m[0]);
-    renderOutput(project, target, media, tone, data);
+    var d=await res.json();
+    if(d.error)throw new Error(d.error.message||JSON.stringify(d.error));
+    var text=(d.content&&d.content[0]&&d.content[0].text)||'';
+    var m=text.match(/\{[\s\S]*\}/);
+    if(!m)throw new Error('JSON not found');
+    currentData=JSON.parse(m[0]);
+    currentPalIdx=0;
+    renderAll(project,target);
   }catch(e){
     console.error(e);
-    alert('生成に失敗しました: ' + e.message);
+    alert('生成に失敗しました: '+e.message);
   }finally{
-    btn.disabled = false;
-    document.getElementById('bt').style.display = 'block';
-    document.getElementById('sp').style.display = 'none';
+    btn.disabled=false;
+    document.getElementById('bt').style.display='block';
+    document.getElementById('sp').style.display='none';
   }
 }
 
-function renderOutput(project, target, media, tone, data){
-  var out = document.getElementById('output');
-  var html = '';
+function renderAll(project,target){
+  var d=currentData;
+  var out=document.getElementById('output');
+  out.innerHTML='';
 
-  // ヘッダー
-  html += '<div class="brief-header fade">'
-    + '<div class="brief-title">✦ デザインブリーフ</div>'
-    + '<div class="brief-project">' + esc(project) + '</div>'
-    + '<div class="brief-meta">'
-    + (target ? 'ターゲット：' + esc(target) + '　' : '')
-    + '媒体：' + esc(media) + '　トーン：' + esc(tone)
-    + '</div>'
-    + (data.overview ? '<div style="margin-top:8px;font-size:11px;color:var(--a4);line-height:1.6">' + esc(data.overview) + '</div>' : '')
-    + '<div class="copy-bar"><button class="copy-btn g" onclick="copyBrief()">📋 ブリーフ全体をコピー</button></div>'
-    + '</div>';
+  // Overview
+  var ov=document.createElement('div');
+  ov.className='overview fade';
+  ov.innerHTML='<div class="ov-label">✦ デザインブリーフ</div>'
+    +'<div class="ov-project">'+esc(project)+'</div>'
+    +'<div class="ov-meta">'+(target?'ターゲット：'+esc(target)+'　':'')+' 媒体：'+esc(selMedia)+'　トーン：'+esc(selTone)+'</div>'
+    +(d.overview?'<div class="ov-summary">'+esc(d.overview)+'</div>':'')
+    +'<button class="copy-all-btn" onclick="copyAll()">📋 ブリーフ全体をコピー</button>';
+  out.appendChild(ov);
 
-  // 配色パターン
-  html += '<div class="palettes-wrap fade" style="animation-delay:.08s">'
-    + '<div class="pw-title">配色パターン（3案）</div>'
-    + '<div class="palettes" id="paletteList">';
+  // Palette section
+  var pw=document.createElement('div');
+  pw.className='palette-wrap fade';
+  pw.style.animationDelay='.06s';
+  pw.innerHTML='<div class="pw-head">配色パターン + バナープレビュー + フォント</div>'
+    +'<div class="ptabs" id="ptabs">'
+    +(d.palettes||[]).map(function(p,i){return '<div class="ptab'+(i===0?' on':'')+'" onclick="switchPal('+i+')">'+esc(p.name||'パターン'+(i+1))+'</div>';}).join('')
+    +'</div>'
+    +'<div id="palContent"></div>';
+  out.appendChild(pw);
 
-  (data.palettes || []).forEach(function(p, i){
-    html += '<div class="palette' + (i===0?' selected':'') + '" onclick="selectPalette(this)">'
-      + '<div class="palette-num">PATTERN ' + (i+1) + '</div>'
-      + '<div class="palette-name">' + esc(p.name||'') + '</div>'
-      + '<div class="palette-concept">' + esc(p.concept||'') + '</div>'
-      + '<div class="colors">';
-    (p.colors||[]).forEach(function(c, ci){
-      html += '<div class="color-swatch" style="background:' + esc(c) + '" data-hex="' + esc(c) + '" title="' + esc((p.color_names||[])[ci]||c) + '"></div>';
-    });
-    html += '</div>'
-      + '<div class="color-codes">';
-    (p.colors||[]).forEach(function(c, ci){
-      html += '<span onclick="copyText(\'' + esc(c) + '\')" style="cursor:pointer;text-decoration:underline dotted" title="クリックでコピー">' + esc(c) + '</span>';
-    });
-    html += '</div>'
-      + '<div class="palette-detail" style="margin-top:8px">'
-      + '<strong>フォント：</strong>' + esc(p.font_main||'') + ' × ' + esc(p.font_sub||'') + '<br>'
-      + '<strong>レイアウト：</strong>' + esc(p.layout||'') + '<br>'
-      + '<strong>伝わる印象：</strong>' + esc(p.mood||'')
-      + '</div>'
-      + '</div>';
-  });
-
-  html += '</div></div>';
+  // Wireframe section
+  var ww=document.createElement('div');
+  ww.className='wireframe-wrap fade';
+  ww.style.animationDelay='.12s';
+  ww.innerHTML='<div class="pw-head">レイアウト・ワイヤーフレーム</div>'
+    +'<div class="wf-tabs" id="wftabs">'
+    +(d.layouts||[]).slice(0,5).map(function(l,i){return '<div class="wftab'+(i===0?' on':'')+'" onclick="switchWF('+i+','+JSON.stringify(d.layouts||[]).replace(/"/g,'&quot;')+')">'+esc(l)+'</div>';}).join('')
+    +'</div>'
+    +'<div id="wfContent"></div>';
+  out.appendChild(ww);
 
   // DO/DON'T
-  html += '<div class="design-specs fade" style="animation-delay:.16s">'
-    + '<div class="spec-card">'
-    + '<div class="spec-title">✅ やるべきこと</div>';
-  (data.dos||[]).forEach(function(d){
-    html += '<div class="spec-item"><div class="spec-icon">→</div><div class="spec-text">' + esc(d) + '</div></div>';
-  });
-  html += '</div><div class="spec-card">'
-    + '<div class="spec-title">❌ 避けるべきこと</div>';
-  (data.donts||[]).forEach(function(d){
-    html += '<div class="spec-item"><div class="spec-icon">✕</div><div class="spec-text">' + esc(d) + '</div></div>';
-  });
-  if(data.reference){
-    html += '<div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--bd)">'
-      + '<div class="spec-title">🎨 参考デザインの方向性</div>'
-      + '<div class="spec-text">' + esc(data.reference) + '</div>'
-      + '</div>';
-  }
-  html += '</div></div>';
+  var dd=document.createElement('div');
+  dd.className='dodont fade';
+  dd.style.animationDelay='.18s';
+  dd.innerHTML='<div class="dd-card"><div class="dd-title" style="color:var(--a4)">✅ やるべきこと</div>'
+    +(d.dos||[]).map(function(x){return '<div class="dd-item"><div class="dd-ico">→</div><div>'+esc(x)+'</div></div>';}).join('')
+    +'</div>'
+    +'<div class="dd-card"><div class="dd-title" style="color:var(--a2)">❌ 避けること</div>'
+    +(d.donts||[]).map(function(x){return '<div class="dd-item"><div class="dd-ico">✕</div><div>'+esc(x)+'</div></div>';}).join('')
+    +'</div>';
+  out.appendChild(dd);
 
-  out.innerHTML = html;
-  window._briefData = {project, target, media, tone, data};
+  renderPalette(0);
+  renderWF(0,currentData.layouts||[]);
 }
 
-function selectPalette(el){
-  document.querySelectorAll('.palette').forEach(function(p){p.classList.remove('selected');});
-  el.classList.add('selected');
+function switchPal(i){
+  currentPalIdx=i;
+  document.querySelectorAll('.ptab').forEach(function(t,ti){t.classList.toggle('on',ti===i);});
+  renderPalette(i);
 }
 
-function esc(s){
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function renderPalette(i){
+  var p=(currentData.palettes||[])[i];
+  if(!p)return;
+  var el=document.getElementById('palContent');
+
+  var from=(p.bg_gradient||[])[0]||p.colors[0]||'#fff';
+  var to=(p.bg_gradient||[])[1]||p.colors[1]||'#eee';
+  var accent=p.accent||p.colors[0]||'#7c6aff';
+  var textCol=p.text_color||'#ffffff';
+
+  // Banner preview HTML
+  var bannerHTML='<div class="banner-preview">'
+    +'<div class="bp-bar" style="background:'+esc(accent)+'"></div>'
+    +'<div class="bp-bg" style="background:linear-gradient(135deg,'+esc(from)+','+esc(to)+')">'
+    +'<span class="bp-deco" style="top:8%;left:5%">✿</span>'
+    +'<span class="bp-deco" style="top:5%;right:8%">★</span>'
+    +'<span class="bp-deco" style="bottom:20%;left:3%">♡</span>'
+    +'<span class="bp-deco" style="bottom:18%;right:4%">✦</span>'
+    +'<div class="bp-title-area">'
+    +'<div class="bp-title" style="color:'+esc(textCol)+';font-family:\''+esc(p.font_main_en||'Noto Sans JP')+'\',sans-serif">'
+    +esc(document.getElementById('project').value.slice(0,16))
+    +'</div>'
+    +'<div class="bp-sub" style="color:'+esc(textCol)+'">'+(document.getElementById('target').value||'ターゲット層')+'</div>'
+    +'<div class="bp-badge" style="background:'+esc(accent)+';color:#fff">'+esc(p.mood||'')+'</div>'
+    +'</div></div>'
+    +'<div class="bp-footer" style="background:rgba(0,0,0,.15)">'
+    +'<div class="bp-footer-txt" style="color:'+esc(textCol)+'">'+esc(selMedia)+'</div>'
+    +'<div class="bp-colors">'
+    +(p.colors||[]).map(function(c){return '<div class="bp-dot" style="background:'+esc(c)+'" title="'+esc(c)+'"></div>';}).join('')
+    +'</div></div>'
+    +'<div class="bp-bar" style="background:'+esc(p.colors[1]||accent)+'"></div>'
+    +'</div>';
+
+  // Details
+  var detHTML='<div class="palette-details">'
+    +'<div class="palette-name-big">'+esc(p.name||'')+'</div>'
+    +'<div class="palette-concept-txt">'+esc(p.concept||'')+'</div>'
+    // Color swatches
+    +'<div class="color-swatches">'
+    +(p.colors||[]).map(function(c,ci){
+      return '<div class="cswatch" onclick="copyText(\''+esc(c)+'\')" title="クリックでコピー">'
+        +'<div class="cswatch-box" style="background:'+esc(c)+'"></div>'
+        +'<div class="cswatch-name">'+esc((p.color_names||[])[ci]||'')+'</div>'
+        +'<div class="cswatch-hex">'+esc(c)+'</div>'
+        +'</div>';
+    }).join('')
+    +'</div>'
+    // Font preview main
+    +'<div class="font-preview">'
+    +'<div class="fp-label">見出しフォント</div>'
+    +'<div class="fp-sample" style="font-family:\''+esc(p.font_main_en||'Noto Sans JP')+'\',sans-serif;color:'+esc(accent)+'">'+esc(document.getElementById('project').value.slice(0,10)||'タイトルサンプル')+'</div>'
+    +'<div class="fp-name">'+esc(p.font_main||'')+'</div>'
+    +'</div>'
+    // Font preview sub
+    +'<div class="font-preview">'
+    +'<div class="fp-label">本文フォント</div>'
+    +'<div class="fp-sample" style="font-family:\''+esc(p.font_sub_en||'Noto Sans JP')+'\',sans-serif;font-size:14px;font-weight:400;color:var(--mu)">本文テキストのサンプルです。読みやすさを重視。</div>'
+    +'<div class="fp-name">'+esc(p.font_sub||'')+'</div>'
+    +'</div>'
+    +'<div style="font-size:10px;color:var(--mu);padding:8px 10px;background:var(--s2);border-radius:7px;line-height:1.7"><strong style="color:var(--a3)">レイアウト方針：</strong>'+esc(p.layout||'')+'</div>'
+    +'</div>';
+
+  el.innerHTML='<div class="palette-content">'+bannerHTML+detHTML+'</div>';
 }
 
-function copyText(text){
-  navigator.clipboard.writeText(text).then(function(){
-    // 一瞬フラッシュ
+function switchWF(i,layouts){
+  document.querySelectorAll('.wftab').forEach(function(t,ti){t.classList.toggle('on',ti===i);});
+  renderWF(i,layouts);
+}
+
+function renderWF(i,layouts){
+  var el=document.getElementById('wfContent');
+  var layoutName=(layouts||[])[i]||'';
+  var media=selMedia;
+
+  // SVGワイヤーフレームを生成
+  var svgs=generateWFSVGs(layoutName,i,media);
+  var descriptions=getLayoutDesc(layoutName,i);
+
+  el.innerHTML='<div class="wf-content">'
+    +'<div class="wf-frame"><div class="wf-frame-label">'+esc(layoutName)+'</div>'+svgs+'</div>'
+    +'<div class="wf-desc">'+descriptions+'</div>'
+    +'</div>';
+}
+
+function generateWFSVGs(name,idx,media){
+  // アスペクト比
+  var isVertical=media.indexOf('ストーリー')>=0||media.indexOf('正方形')>=0;
+  var isWide=media.indexOf('横長')>=0||media.indexOf('OGP')>=0||media.indexOf('LPヘッダー')>=0;
+  var vb=isWide?'0 0 300 160':isVertical?'0 0 200 250':'0 0 200 200';
+  var W=isWide?300:200;
+  var H=isWide?160:isVertical?250:200;
+
+  var patterns=[
+    // 0: 中央揃えタイトル+商品グリッド
+    function(){
+      return '<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#1a1930" rx="4"/>'
+        +'<rect x="0" y="0" width="'+W+'" height="4" fill="#7c6aff"/>'
+        +'<rect x="'+(W*.3)+'" y="10" width="'+(W*.4)+'" height="14" fill="#7c6aff" opacity=".6" rx="7"/>'
+        +'<rect x="'+(W*.15)+'" y="30" width="'+(W*.7)+'" height="20" fill="#fff" opacity=".15" rx="4"/>'
+        +'<text x="'+W/2+'" y="44" text-anchor="middle" fill="#fff" font-size="8" opacity=".4">TITLE</text>'
+        +'<line x1="'+W*.3+'" y1="56" x2="'+W*.7+'" y2="56" stroke="#7c6aff" stroke-width="1.5" opacity=".5"/>'
+        +[0,1,2].map(function(j){var x=W*.08+j*(W*.3);return '<rect x="'+x+'" y="64" width="'+(W*.25)+'" height="'+(H*.38)+'" fill="#fff" opacity=".06" rx="4"/><rect x="'+x+'" y="'+(64+H*.38+4)+'" width="'+(W*.25)+'" height="6" fill="#fff" opacity=".1" rx="3"/>';}).join('')
+        +'<rect x="'+W*.35+'" y="'+(H*.9)+'" width="'+(W*.3)+'" height="8" fill="#7c6aff" opacity=".4" rx="4"/>';
+    },
+    // 1: 左寄せタイトル+右画像
+    function(){
+      return '<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#1a1930" rx="4"/>'
+        +'<rect x="0" y="0" width="'+W+'" height="4" fill="#ff6a8a"/>'
+        +'<rect x="10" y="14" width="'+(W*.35)+'" height="8" fill="#ff6a8a" opacity=".5" rx="4"/>'
+        +'<rect x="10" y="26" width="'+(W*.42)+'" height="16" fill="#fff" opacity=".12" rx="3"/>'
+        +'<text x="'+(10+W*.21)+'" y="37" text-anchor="middle" fill="#fff" font-size="7" opacity=".35">TITLE</text>'
+        +'<rect x="10" y="46" width="'+(W*.35)+'" height="5" fill="#fff" opacity=".08" rx="2"/>'
+        +'<rect x="10" y="54" width="'+(W*.28)+'" height="5" fill="#fff" opacity=".08" rx="2"/>'
+        +'<rect x="10" y="66" width="'+(W*.2)+'" height="10" fill="#ff6a8a" opacity=".5" rx="5"/>'
+        +'<rect x="'+(W*.52)+'" y="10" width="'+(W*.44)+'" height="'+(H*.82)+'" fill="#fff" opacity=".08" rx="6"/>'
+        +'<text x="'+(W*.74)+'" y="'+(H*.5)+'" text-anchor="middle" fill="#fff" font-size="7" opacity=".25">IMAGE</text>'
+        +'<rect x="0" y="'+(H*.92)+'" width="'+W+'" height="'+(H*.08)+'" fill="#ff6a8a" opacity=".15"/>';
+    },
+    // 2: 上部タイトル帯+下段商品一覧
+    function(){
+      return '<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#1a1930" rx="4"/>'
+        +'<rect x="0" y="0" width="'+W+'" height="'+(H*.32)+'" fill="#7c6aff" opacity=".2"/>'
+        +'<rect x="'+W*.25+'" y="8" width="'+W*.5+'" height="10" fill="#7c6aff" opacity=".5" rx="5"/>'
+        +'<rect x="'+W*.15+'" y="22" width="'+W*.7+'" height="18" fill="#fff" opacity=".12" rx="4"/>'
+        +'<text x="'+W/2+'" y="34" text-anchor="middle" fill="#fff" font-size="8" opacity=".35">タイトル大見出し</text>'
+        +'<line x1="0" y1="'+(H*.34)+'" x2="'+W+'" y2="'+(H*.34)+'" stroke="#7c6aff" stroke-width="2" opacity=".4"/>'
+        +[0,1,2,3].map(function(j){var x=W*.04+j*(W*.24);return '<rect x="'+x+'" y="'+(H*.38)+'" width="'+(W*.2)+'" height="'+(H*.38)+'" fill="#fff" opacity=".06" rx="4"/><rect x="'+x+'" y="'+(H*.38+H*.38+4)+'" width="'+(W*.2)+'" height="5" fill="#fff" opacity=".08" rx="2"/>';}).join('')
+        +'<rect x="'+W*.3+'" y="'+(H*.92)+'" width="'+W*.4+'" height="6" fill="#7c6aff" opacity=".3" rx="3"/>';
+    },
+    // 3: 対角線レイアウト
+    function(){
+      return '<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#1a1930" rx="4"/>'
+        +'<polygon points="0,0 '+(W*.6)+',0 0,'+(H*.55)+'" fill="#7c6aff" opacity=".15"/>'
+        +'<polygon points="'+W+','+(H*.45)+' '+W+','+H+' '+(W*.4)+','+H+'" fill="#ff6a8a" opacity=".12"/>'
+        +'<rect x="10" y="16" width="'+(W*.45)+'" height="20" fill="#fff" opacity=".1" rx="4"/>'
+        +'<text x="'+(10+W*.225)+'" y="29" text-anchor="middle" fill="#fff" font-size="8" opacity=".35">TITLE</text>'
+        +'<rect x="10" y="40" width="'+(W*.38)+'" height="5" fill="#fff" opacity=".08" rx="2"/>'
+        +'<rect x="10" y="48" width="'+(W*.3)+'" height="5" fill="#fff" opacity=".08" rx="2"/>'
+        +'<rect x="10" y="60" width="'+(W*.2)+'" height="12" fill="#7c6aff" opacity=".5" rx="6"/>'
+        +'<rect x="'+(W*.5)+'" y="'+(H*.15)+'" width="'+(W*.45)+'" height="'+(H*.6)+'" fill="#fff" opacity=".06" rx="8"/>'
+        +'<text x="'+(W*.725)+'" y="'+(H*.47)+'" text-anchor="middle" fill="#fff" font-size="7" opacity=".25">IMAGE</text>';
+    },
+    // 4: フルブリード+テキストオーバーレイ
+    function(){
+      return '<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#1a1930" rx="4"/>'
+        +'<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#fff" opacity=".04" rx="4"/>'
+        +'<text x="'+W/2+'" y="'+H/2+'" text-anchor="middle" fill="#fff" font-size="9" opacity=".15">FULL IMAGE</text>'
+        +'<rect x="0" y="'+(H*.55)+'" width="'+W+'" height="'+(H*.45)+'" fill="url(#grad1)" opacity=".85"/>'
+        +'<defs><linearGradient id="grad1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a1930" stop-opacity="0"/><stop offset="100%" stop-color="#1a1930" stop-opacity="1"/></linearGradient></defs>'
+        +'<rect x="'+W*.1+'" y="'+(H*.62)+'" width="'+W*.8+'" height="18" fill="#fff" opacity=".1" rx="4"/>'
+        +'<text x="'+W/2+'" y="'+(H*.62+12)+'" text-anchor="middle" fill="#fff" font-size="8" opacity=".35">TITLE</text>'
+        +'<rect x="'+W*.15+'" y="'+(H*.84)+'" width="'+W*.7+'" height="5" fill="#fff" opacity=".08" rx="2"/>'
+        +'<rect x="'+W*.3+'" y="'+(H*.92)+'" width="'+W*.4+'" height="8" fill="#7c6aff" opacity=".5" rx="4"/>';
+    },
+  ];
+
+  var fn=patterns[idx%patterns.length]||patterns[0];
+  return '<svg viewBox="'+vb+'" xmlns="http://www.w3.org/2000/svg" style="border-radius:8px">'+fn()+'</svg>';
+}
+
+function getLayoutDesc(name,idx){
+  var descs=[
+    '<h4>中央揃えタイトル + 商品グリッド</h4><p>タイトルを画面中央に配置し、下部に商品をグリッド状に並べる最もオーソドックスな構成。</p><h4>向いている案件</h4><p>商品まとめ・比較バナー・LIPSタイプの投稿画像</p><h4>注意点</h4><p>商品数が多いと窮屈になるため、3〜6個程度が最適。余白を意識して。</p>',
+    '<h4>左寄せタイトル + 右画像</h4><p>左にテキスト情報、右に商品画像を配置。視線が左から右へ自然に流れる読みやすい構成。</p><h4>向いている案件</h4><p>単品商品PRバナー・イベント告知・横長バナー</p><h4>注意点</h4><p>画像の被写体が右向きだと視線が外に逃げるため、内側向きの画像が効果的。</p>',
+    '<h4>上部タイトル帯 + 下段商品一覧</h4><p>上部に目立つタイトルエリアを設け、下段に商品を横並びで展開。情報の優先度が明確。</p><h4>向いている案件</h4><p>セール告知・複数商品一覧・ランキング系バナー</p><h4>注意点</h4><p>上部の帯が強すぎると商品が見えにくくなるため、コントラストを調整。</p>',
+    '<h4>対角線レイアウト</h4><p>画面を斜めに分割し、動きと緊張感を生む上級レイアウト。視線誘導が強くインパクト大。</p><h4>向いている案件</h4><p>クール系・スポーツ・テック・キャンペーン告知</p><h4>注意点</h4><p>テキストが斜めのラインに沿って読みにくくなりやすいため、文字量は最小限に。</p>',
+    '<h4>フルブリード画像 + テキストオーバーレイ</h4><p>全面に画像を敷き、下部にグラデーションをかけてテキストを重ねる映画ポスター的な手法。</p><h4>向いている案件</h4><p>高級感・ファッション・ブランドバナー・LPヘッダー</p><h4>注意点</h4><p>画像の選定が命。写真がショボいと全て台無しになる。人物・風景の高品質素材必須。</p>',
+  ];
+  return descs[idx%descs.length]||descs[0];
+}
+
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function copyText(t){navigator.clipboard.writeText(t);}
+
+function copyAll(){
+  if(!currentData)return;
+  var d=currentData;
+  var txt='【デザインブリーフ】\n案件：'+document.getElementById('project').value+'\n媒体：'+selMedia+'\nトーン：'+selTone+'\n\n方向性：'+(d.overview||'')+'\n\n';
+  (d.palettes||[]).forEach(function(p,i){
+    txt+='【配色案'+(i+1)+'：'+p.name+'】\n';
+    txt+='コンセプト：'+p.concept+'\n';
+    txt+='カラー：'+(p.colors||[]).join(' / ')+'\n';
+    txt+='見出しフォント：'+p.font_main+'\n本文フォント：'+p.font_sub+'\n';
+    txt+='レイアウト：'+p.layout+'\n\n';
   });
-}
-
-function copyBrief(){
-  var d = window._briefData;
-  if(!d) return;
-  var txt = '【デザインブリーフ】\n';
-  txt += '案件：' + d.project + '\n';
-  if(d.target) txt += 'ターゲット：' + d.target + '\n';
-  txt += '媒体：' + d.media + '\n';
-  txt += 'トーン：' + d.tone + '\n\n';
-  if(d.data.overview) txt += '方向性：' + d.data.overview + '\n\n';
-  (d.data.palettes||[]).forEach(function(p,i){
-    txt += '【配色案' + (i+1) + '：' + p.name + '】\n';
-    txt += 'コンセプト：' + p.concept + '\n';
-    txt += 'カラー：' + (p.colors||[]).join(' / ') + '\n';
-    txt += 'フォント：' + p.font_main + ' × ' + p.font_sub + '\n';
-    txt += 'レイアウト：' + p.layout + '\n';
-    txt += '印象：' + p.mood + '\n\n';
-  });
-  if(d.data.dos) txt += 'やるべきこと：\n' + d.data.dos.map(function(x){return '・'+x;}).join('\n') + '\n\n';
-  if(d.data.donts) txt += '避けるべきこと：\n' + d.data.donts.map(function(x){return '・'+x;}).join('\n') + '\n\n';
-  if(d.data.reference) txt += '参考方向性：' + d.data.reference + '\n';
-  navigator.clipboard.writeText(txt).then(function(){alert('ブリーフをコピーしました！');});
+  txt+='DO：'+(d.dos||[]).join('、')+'\nDON\'T：'+(d.donts||[]).join('、');
+  navigator.clipboard.writeText(txt).then(function(){alert('コピーしました！');});
 }
 </script>
 </body>
