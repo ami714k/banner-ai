@@ -3,411 +3,222 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BRIEF</title>
+<title>BRIEF — デザインの方向性を、秒で決める。</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#FDFCF7;
-  --yellow:#FFE135;
-  --yellow-light:#FFF9C4;
-  --yellow-pale:#FFFEF0;
-  --black:#111108;
-  --gray1:#3D3C30;
-  --gray2:#8A8870;
-  --gray3:#E8E6D9;
-  --gray4:#F2F0E6;
-  --white:#FFFFFF;
-  --red:#FF3B3B;
-  --blue:#1A56FF;
-  --green:#00A878;
+  --bg:#07060f;--s1:#0f0e1e;--s2:#16152a;--s3:#1e1c38;
+  --a1:#7c6aff;--a2:#ff6a8a;--a3:#ffd93d;--a4:#4aefc0;
+  --tx:#f0f0fa;--mu:#6060a0;--bd:#22203a;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--black);font-family:'Noto Sans JP',sans-serif;min-height:100vh;}
+body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse 60% 40% at 15% 15%,rgba(124,106,255,.12) 0%,transparent 55%),
+  radial-gradient(ellipse 50% 40% at 85% 85%,rgba(255,106,138,.08) 0%,transparent 55%);
+  pointer-events:none;z-index:0;}
 
-/* ── HEADER ── */
-.header{
-  position:sticky;top:0;z-index:100;
-  background:var(--black);
-  padding:0 40px;
-  height:52px;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.logo{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--white);letter-spacing:-0.3px;}
-.logo em{font-style:normal;color:var(--yellow);}
-.header-right{display:flex;align-items:center;gap:16px;}
-.header-tag{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:1.5px;text-transform:uppercase;}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
 
-/* ── HERO ── */
-.hero{
-  background:var(--black);
-  padding:64px 40px 56px;
-  position:relative;overflow:hidden;
-}
-.hero::after{
-  content:'';position:absolute;
-  right:-80px;top:-80px;
-  width:400px;height:400px;
-  background:var(--yellow);
-  border-radius:50%;
-  opacity:.08;
-}
-.hero-eyebrow{
-  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
-  color:var(--yellow);margin-bottom:20px;
-}
-.hero-title{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(32px,5vw,60px);
-  font-weight:800;
-  line-height:1.0;
-  letter-spacing:-2px;
-  color:var(--white);
-  margin-bottom:8px;
-}
-.hero-title .hl{
-  display:inline-block;
-  background:var(--yellow);
-  color:var(--black);
-  padding:0 8px;
-  line-height:1.1;
-}
-.hero-sub{
-  font-size:14px;color:rgba(255,255,255,.45);
-  margin-top:16px;line-height:1.8;
-  max-width:560px;
-}
+.header{padding:24px 0 12px;display:flex;align-items:flex-end;justify-content:space-between;}
+.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;
+  background:linear-gradient(130deg,var(--a1),var(--a2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px;}
+.logo-sub{font-size:10px;color:var(--mu);margin-top:2px;}
+.header-badge{background:rgba(124,106,255,.15);border:1px solid rgba(124,106,255,.3);
+  color:var(--a1);font-size:9px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:1px;}
 
-/* ── FORM ── */
-.form-section{
-  background:var(--white);
-  border-bottom:2px solid var(--black);
-  padding:28px 40px;
-}
-.form-grid{
-  display:grid;
-  grid-template-columns:2fr 1fr 1fr 1fr auto;
-  gap:12px;align-items:end;
-}
-@media(max-width:900px){.form-grid{grid-template-columns:1fr 1fr;}}
-@media(max-width:540px){.form-grid{grid-template-columns:1fr;}}
-.fg{display:flex;flex-direction:column;gap:5px;}
-.fg-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray2);}
-.fg-label .req{color:var(--red);}
-.fg input,.fg select{
-  background:var(--gray4);
-  border:1.5px solid var(--gray3);
-  border-radius:6px;
-  color:var(--black);
-  font-family:'Noto Sans JP',sans-serif;
-  font-size:12px;
-  padding:9px 12px;
-  outline:none;
-  transition:all .18s;
-  width:100%;
-}
-.fg input:focus,.fg select:focus{border-color:var(--black);background:var(--white);}
-.fg input::placeholder{color:var(--gray2);}
-.fg select option{background:var(--white);}
+.hero{padding:20px 0 28px;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,52px);font-weight:800;
+  line-height:1.08;letter-spacing:-2px;margin-bottom:10px;}
+.hero h1 em{font-style:normal;
+  background:linear-gradient(130deg,var(--a1),var(--a2),var(--a3));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero p{color:var(--mu);font-size:12px;line-height:1.8;max-width:560px;}
 
-.gbtn{
-  background:var(--yellow);
-  border:none;border-radius:6px;
-  color:var(--black);
-  font-family:'Syne',sans-serif;font-size:13px;font-weight:800;
-  padding:0 22px;height:40px;
-  cursor:pointer;white-space:nowrap;
-  display:flex;align-items:center;gap:6px;
-  transition:all .15s;
-  border:2px solid var(--black);
-}
-.gbtn:hover{background:var(--black);color:var(--yellow);}
-.gbtn:disabled{opacity:.4;cursor:not-allowed;}
-.spin{width:12px;height:12px;border:2px solid rgba(0,0,0,.2);border-top-color:var(--black);border-radius:50%;animation:spin .7s linear infinite;display:none;}
+.fcard{background:var(--s1);border:1px solid var(--bd);border-radius:18px;padding:24px;margin-bottom:24px;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+@media(max-width:620px){.fgrid{grid-template-columns:1fr;}}
+.fg{margin-bottom:0;}
+.fg label{display:block;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu);margin-bottom:4px;}
+.fg label .req{color:var(--a2);}
+input[type=text],select,textarea{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:8px;
+  color:var(--tx);font-family:'Noto Sans JP',sans-serif;font-size:12px;padding:9px 12px;outline:none;transition:border-color .2s;}
+input[type=text]:focus,select:focus,textarea:focus{border-color:var(--a1);}
+textarea{resize:none;height:58px;}
+select option{background:var(--s2);}
+.fg-full{grid-column:1/-1;}
+.gbtn{width:100%;background:linear-gradient(130deg,var(--a1),var(--a2));border:none;border-radius:11px;
+  color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;padding:14px;cursor:pointer;
+  margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:opacity .2s,transform .1s;}
+.gbtn:hover{opacity:.88;transform:translateY(-1px);}
+.gbtn:disabled{opacity:.45;cursor:not-allowed;transform:none;}
+.spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;
+  border-radius:50%;animation:spin .7s linear infinite;display:none;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-/* ── OUTPUT ── */
-.output{padding:40px;}
+.out{display:flex;flex-direction:column;gap:20px;}
+.empty{background:var(--s1);border:1px solid var(--bd);border-radius:18px;
+  padding:60px 24px;text-align:center;color:var(--mu);}
+.empty-ico{font-size:52px;margin-bottom:14px;opacity:.2;}
+.empty-txt{font-size:13px;line-height:1.9;}
+.empty-hint{margin-top:10px;font-size:11px;color:var(--a4);}
 
-.empty{
-  display:flex;flex-direction:column;align-items:center;
-  justify-content:center;min-height:55vh;
-  gap:14px;text-align:center;
-}
-.empty-ico{font-size:52px;opacity:.2;}
-.empty-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--gray2);}
-.empty-sub{font-size:12px;color:var(--gray2);line-height:1.9;}
-.empty-hint{
-  font-size:11px;font-weight:700;
-  background:var(--yellow);
-  color:var(--black);
-  padding:6px 16px;border-radius:4px;
-}
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:var(--s1);border:1px solid var(--bd);border-radius:18px;padding:60px;gap:16px;}
+.loading-bar{width:240px;height:3px;background:var(--bd);border-radius:2px;overflow:hidden;}
+.loading-bar-inner{height:100%;background:linear-gradient(90deg,var(--a1),var(--a2));
+  border-radius:2px;animation:lb 1.8s ease-in-out infinite;}
+@keyframes lb{0%{width:0%;margin-left:0;}50%{width:60%;margin-left:20%;}100%{width:0%;margin-left:100%;};}
+.loading-txt{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;}
+.loading-sub{font-size:11px;color:var(--mu);}
 
-/* ── LOADING ── */
-.loading{
-  display:flex;flex-direction:column;align-items:center;
-  justify-content:center;min-height:55vh;gap:20px;
-}
-.loading-bar{
-  width:280px;height:4px;
-  background:var(--gray3);border-radius:2px;overflow:hidden;
-}
-.loading-bar-inner{
-  height:100%;background:var(--yellow);border-radius:2px;
-  animation:loadbar 2s ease-in-out infinite;
-}
-@keyframes loadbar{0%{width:0%;margin-left:0;}50%{width:60%;margin-left:20%;}100%{width:0%;margin-left:100%;};}
-.loading-txt{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--gray1);}
-.loading-sub{font-size:11px;color:var(--gray2);}
+.result-header{display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--bd);}
+.result-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;}
+.result-meta{font-size:10px;color:var(--mu);margin-top:2px;}
+.copy-all-btn{background:rgba(124,106,255,.12);border:1px solid rgba(124,106,255,.25);
+  border-radius:7px;color:var(--a1);font-size:10px;font-weight:700;padding:8px 14px;
+  cursor:pointer;font-family:'Noto Sans JP',sans-serif;transition:all .15s;}
+.copy-all-btn:hover{background:rgba(124,106,255,.22);}
 
-/* ── IDEAS ── */
-.result-header{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:24px;padding-bottom:16px;
-  border-bottom:2px solid var(--black);
-}
-.result-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;}
-.result-meta{font-size:11px;color:var(--gray2);}
-.copy-all-btn{
-  background:var(--black);border:none;border-radius:5px;
-  color:var(--white);font-size:10px;font-weight:700;
-  padding:7px 14px;cursor:pointer;
-  font-family:'Noto Sans JP',sans-serif;
-  transition:opacity .15s;
-}
-.copy-all-btn:hover{opacity:.75;}
+.ideas{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+@media(max-width:1100px){.ideas{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.ideas{grid-template-columns:1fr;}}
 
-.ideas-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:20px;
-}
-@media(max-width:1100px){.ideas-grid{grid-template-columns:1fr 1fr;}}
-@media(max-width:600px){.ideas-grid{grid-template-columns:1fr;}}
-
-/* ── IDEA CARD ── */
-.icard{
-  background:var(--white);
-  border:2px solid var(--black);
-  border-radius:12px;
-  overflow:hidden;
-  display:flex;flex-direction:column;
-  transition:transform .2s,box-shadow .2s;
-  animation:cardIn .4s ease forwards;
-  opacity:0;
-}
-.icard:hover{transform:translateY(-4px);box-shadow:6px 6px 0 var(--black);}
+.icard{background:var(--s1);border:1.5px solid var(--bd);border-radius:16px;overflow:hidden;
+  display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s,border-color .2s;
+  animation:cardIn .4s ease forwards;opacity:0;}
+.icard:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.5);border-color:rgba(124,106,255,.3);}
 @keyframes cardIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 
-/* Color preview */
-.card-colors{display:flex;height:6px;}
+.card-colorbar{display:flex;height:5px;}
 .card-color{flex:1;}
 
-/* Idea banner mock */
-.card-mock{
-  height:180px;
-  position:relative;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  padding:20px;overflow:hidden;
-}
-.mock-eyebrow{
-  font-size:9px;font-weight:700;
-  padding:3px 10px;border-radius:999px;
-  margin-bottom:8px;letter-spacing:.8px;
-  display:inline-block;
-}
-.mock-title{
-  font-family:'Syne',sans-serif;
-  font-size:18px;font-weight:800;
-  text-align:center;line-height:1.2;
-  margin-bottom:5px;
-  text-shadow:0 2px 8px rgba(0,0,0,.12);
-}
-.mock-sub{font-size:10px;text-align:center;opacity:.6;margin-bottom:10px;}
-.mock-dots{display:flex;gap:5px;justify-content:center;}
-.mock-dot{width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,.25);}
-.mock-deco{position:absolute;font-size:16px;opacity:.15;user-select:none;}
+/* Realistic layout preview */
+.card-preview{position:relative;overflow:hidden;}
+.card-preview svg{width:100%;height:auto;display:block;}
 
-/* Card body */
-.card-body{padding:18px;flex:1;display:flex;flex-direction:column;gap:10px;}
+.card-body{padding:16px;flex:1;display:flex;flex-direction:column;gap:10px;}
+.card-num{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:-2px;}
+.card-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;line-height:1.3;color:var(--tx);}
+.card-desc{font-size:10px;color:var(--mu);line-height:1.8;
+  border-left:2px solid var(--a1);padding-left:9px;padding:8px 10px;
+  background:rgba(124,106,255,.06);border-radius:0 6px 6px 0;}
 
-.card-num{
-  font-size:9px;font-weight:700;letter-spacing:2px;
-  text-transform:uppercase;margin-bottom:-2px;
-}
-.card-title{
-  font-family:'Syne',sans-serif;
-  font-size:16px;font-weight:800;
-  line-height:1.3;color:var(--black);
-}
-.card-desc{
-  font-size:11px;color:var(--gray1);
-  line-height:1.85;
-  border-left:3px solid var(--yellow);
-  padding-left:10px;
-  background:var(--yellow-pale);
-  padding:8px 10px;
-  border-radius:0 6px 6px 0;
-}
-
-/* Swatches */
-.swatches{display:flex;gap:0;border-radius:6px;overflow:hidden;height:38px;}
-.sw{
-  flex:1;display:flex;align-items:flex-end;
-  justify-content:center;padding-bottom:3px;
-  cursor:pointer;transition:flex .18s;
-  position:relative;
-}
+.swatches{display:flex;gap:0;border-radius:6px;overflow:hidden;height:34px;}
+.sw{flex:1;display:flex;align-items:flex-end;justify-content:center;padding-bottom:3px;
+  cursor:pointer;transition:flex .18s;position:relative;}
 .sw:hover{flex:2.5;}
-.sw-hex{
-  font-size:8px;font-family:monospace;
-  color:rgba(255,255,255,.9);
-  text-shadow:0 1px 4px rgba(0,0,0,.6);font-weight:700;
-  white-space:nowrap;
-}
+.sw-hex{font-size:7px;font-family:monospace;color:rgba(255,255,255,.9);
+  text-shadow:0 1px 4px rgba(0,0,0,.6);font-weight:700;white-space:nowrap;}
 
-/* Tags */
-.tags{display:flex;flex-wrap:wrap;gap:5px;}
-.tag{font-size:9px;font-weight:700;padding:4px 9px;border-radius:4px;}
-.tag-font{background:var(--yellow-light);color:var(--black);border:1px solid var(--yellow);}
-.tag-layout{background:#EEF2FF;color:#3730A3;border:1px solid #C7D2FE;}
-.tag-mood{background:#F0FDF4;color:#166534;border:1px solid #BBF7D0;}
+.tags{display:flex;flex-wrap:wrap;gap:4px;}
+.tag{font-size:9px;font-weight:600;padding:3px 8px;border-radius:4px;}
+.tag-font{background:rgba(124,106,255,.15);color:var(--a1);}
+.tag-layout{background:rgba(255,211,61,.1);color:var(--a3);}
+.tag-mood{background:rgba(74,239,192,.1);color:var(--a4);}
 
-/* Illustrator steps */
-.ai-steps{
-  background:var(--gray4);
-  border-radius:8px;padding:14px;
-  border:1px solid var(--gray3);
-}
-.ai-steps-label{
-  font-size:9px;font-weight:700;letter-spacing:1.5px;
-  text-transform:uppercase;color:var(--gray2);
-  margin-bottom:8px;
-  display:flex;align-items:center;gap:5px;
-}
-.ai-badge{
-  font-size:9px;font-weight:900;
-  background:linear-gradient(135deg,#FF9500,#FF3B00);
-  color:white;padding:1px 5px;border-radius:3px;
-}
+.ai-steps{background:var(--s2);border-radius:8px;padding:12px;border:1px solid var(--bd);}
+.ai-steps-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--mu);margin-bottom:8px;display:flex;align-items:center;gap:5px;}
+.ai-badge{font-size:9px;font-weight:900;background:linear-gradient(135deg,#FF9500,#FF3B00);
+  color:white;padding:1px 5px;border-radius:3px;}
 .step-list{display:flex;flex-direction:column;gap:8px;}
 .step-item{display:flex;gap:8px;align-items:flex-start;}
-.step-n{
-  width:22px;height:22px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;color:var(--white);
-  flex-shrink:0;margin-top:2px;
-}
-.step-txt{font-size:12px;color:var(--gray1);line-height:1.7;font-weight:500;}
+.step-n{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#fff;flex-shrink:0;margin-top:2px;}
+.step-txt{font-size:12px;color:var(--tx);line-height:1.7;font-weight:500;opacity:.88;}
 
-/* Refs */
-.refs{border-top:1px solid var(--gray3);padding-top:10px;margin-top:auto;}
-.refs-label{
-  font-size:9px;font-weight:700;letter-spacing:1.5px;
-  text-transform:uppercase;color:var(--gray2);margin-bottom:7px;
-}
+.refs{border-top:1px solid var(--bd);padding-top:10px;margin-top:auto;}
+.refs-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu);margin-bottom:7px;}
 .ref-list{display:flex;flex-direction:column;gap:4px;}
-.ref-a{
-  display:flex;align-items:center;gap:9px;
-  padding:7px 9px;
-  background:var(--gray4);
-  border:1px solid var(--gray3);
-  border-radius:6px;
-  text-decoration:none;
-  transition:all .15s;
-}
-.ref-a:hover{border-color:var(--black);background:var(--yellow-light);}
+.ref-a{display:flex;align-items:center;gap:9px;padding:7px 9px;background:var(--s2);
+  border:1px solid var(--bd);border-radius:6px;text-decoration:none;transition:all .15s;}
+.ref-a:hover{border-color:var(--a1);background:rgba(124,106,255,.08);}
 .ref-ico{font-size:13px;flex-shrink:0;}
 .ref-info{flex:1;min-width:0;}
-.ref-site{font-size:10px;font-weight:700;color:var(--black);}
-.ref-kw{font-size:9px;color:var(--gray2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.ref-arr{font-size:11px;color:var(--gray2);}
+.ref-site{font-size:10px;font-weight:700;color:var(--tx);}
+.ref-kw{font-size:9px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ref-arr{font-size:11px;color:var(--mu);}
 
-/* Toast */
-.toast{
-  position:fixed;bottom:24px;right:24px;
-  background:var(--black);color:var(--white);
-  font-size:11px;font-weight:700;
-  padding:10px 18px;border-radius:6px;
-  border-left:3px solid var(--yellow);
-  opacity:0;pointer-events:none;
-  transition:all .25s;z-index:999;
-  transform:translateY(8px);
-}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--a1);color:#fff;
+  font-size:11px;font-weight:700;padding:10px 18px;border-radius:6px;
+  opacity:0;pointer-events:none;transition:all .25s;z-index:999;transform:translateY(8px);}
 .toast.show{opacity:1;transform:translateY(0);}
 </style>
 </head>
 <body>
 <div class="toast" id="toast"></div>
-
-<div class="header">
-  <div class="logo">BRIEF</div>
-  <div class="header-right">
-    <div class="header-tag">Powered by Claude · South Agency</div>
-  </div>
-</div>
-
-<div class="hero">
-  <div class="hero-eyebrow">✦ AI-powered Design Direction Tool</div>
-  <div class="hero-title">
-    デザインの方向性を、<br>
-    <span class="hl">秒で決める。</span>
-  </div>
-  <div class="hero-sub">
-    案件情報を入れるだけで、AIが具体的なデザインアイデア・配色・レイアウト・参考リンクを瞬時に生成。
-  </div>
-</div>
-
-<div class="form-section">
-  <div class="form-grid">
-    <div class="fg">
-      <div class="fg-label">案件名・制作物 <span class="req">*</span></div>
-      <input type="text" id="project" placeholder="例：夏の新作コスメ紹介バナー、マリノスのイベント告知">
+<div class="wrap">
+  <div class="header">
+    <div>
+      <div class="logo">BRIEF</div>
+      <div class="logo-sub">デザインの方向性を、秒で決める。</div>
     </div>
-    <div class="fg">
-      <div class="fg-label">ターゲット層</div>
-      <input type="text" id="target" placeholder="例：20代女性">
-    </div>
-    <div class="fg">
-      <div class="fg-label">媒体</div>
-      <select id="media">
-        <option value="Instagram正方形 1080×1080px">Instagram正方形</option>
-        <option value="Instagramストーリー 1080×1920px">ストーリー縦</option>
-        <option value="OGP横長 1200×628px">OGP横長</option>
-        <option value="Webバナー 728×90px">Web横長バナー</option>
-        <option value="LPヘッダー 1920×600px">LPヘッダー</option>
-      </select>
-    </div>
-    <div class="fg">
-      <div class="fg-label">トーン</div>
-      <select id="tone">
-        <option>かわいい・ポップ</option>
-        <option>おしゃれ・高級感</option>
-        <option>クール・スタイリッシュ</option>
-        <option>ナチュラル・やわらか</option>
-        <option>信頼感・誠実</option>
-        <option>インパクト重視</option>
-        <option>シンプル・ミニマル</option>
-      </select>
+    <div class="header-badge">powered by Claude</div>
+  </div>
+
+  <div class="hero">
+    <h1>デザインの方向性を、<br><em>秒で決める。</em></h1>
+    <p>案件情報を入れるだけで、AIが具体的なデザインアイデア・配色・レイアウト・参考リンクを瞬時に生成。「何から始めよう」と悩む時間をゼロにする。</p>
+  </div>
+
+  <div class="fcard">
+    <div class="fgrid">
+      <div class="fg fg-full">
+        <label>案件名・制作物 <span class="req">*</span></label>
+        <input type="text" id="project" placeholder="例：夏の新作コスメ紹介バナー、マリノスのイベント告知">
+      </div>
+      <div class="fg">
+        <label>ターゲット層</label>
+        <input type="text" id="target" placeholder="例：20〜30代女性">
+      </div>
+      <div class="fg">
+        <label>媒体・サイズ</label>
+        <select id="media">
+          <option value="Instagram正方形 1080×1080px">Instagram正方形</option>
+          <option value="Instagramストーリー 1080×1920px">ストーリー縦</option>
+          <option value="OGP横長 1200×628px">OGP横長</option>
+          <option value="Webバナー 728×90px">Web横長バナー</option>
+          <option value="LPヘッダー 1920×600px">LPヘッダー</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>雰囲気・トーン</label>
+        <select id="tone">
+          <option>かわいい・ポップ</option>
+          <option>おしゃれ・高級感</option>
+          <option>クール・スタイリッシュ</option>
+          <option>ナチュラル・やわらか</option>
+          <option>信頼感・誠実</option>
+          <option>インパクト重視</option>
+          <option>シンプル・ミニマル</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>ブランドカラー（任意）</label>
+        <input type="text" id="bc" placeholder="例：ネイビー×ゴールド、#FF6EB4">
+      </div>
+      <div class="fg">
+        <label>その他メモ（任意）</label>
+        <input type="text" id="notes" placeholder="例：既存バナーと統一感を出したい">
+      </div>
     </div>
     <button class="gbtn" id="gbtn">
-      <span id="bt">生成 →</span>
+      <span id="bt">✦ デザインアイデアを生成する</span>
       <div class="spin" id="sp"></div>
     </button>
   </div>
-</div>
 
-<div class="output" id="output">
-  <div class="empty">
-    <div class="empty-ico">✏️</div>
-    <div class="empty-title">案件情報を入力してください</div>
-    <div class="empty-sub">
-      上のフォームに案件情報を入力して「生成」を押すと<br>
-      デザインアイデア3案が瞬時に生成されます
+  <div class="out" id="out">
+    <div class="empty">
+      <div class="empty-ico">✏️</div>
+      <div class="empty-txt">案件情報を入力して「デザインアイデアを生成する」を押してください</div>
+      <div class="empty-hint">✦ アイデア4案 ＋ 配色 ＋ レイアウトプレビュー ＋ Illustrator手順 ＋ 参考リンクを同時生成</div>
     </div>
-    <div class="empty-hint">✦ アイデア + 配色 + ワイヤーフレーム + 参考リンクを同時生成</div>
   </div>
 </div>
 
@@ -431,12 +242,14 @@ async function generate(){
   var target = document.getElementById('target').value.trim();
   var media = document.getElementById('media').value;
   var tone = document.getElementById('tone').value;
+  var bc = document.getElementById('bc').value.trim();
+  var notes = document.getElementById('notes').value.trim();
 
   document.getElementById('gbtn').disabled = true;
   document.getElementById('bt').style.display = 'none';
   document.getElementById('sp').style.display = 'block';
 
-  document.getElementById('output').innerHTML =
+  document.getElementById('out').innerHTML =
     '<div class="loading">'
     + '<div class="loading-txt">AIがデザインを考えています</div>'
     + '<div class="loading-bar"><div class="loading-bar-inner"></div></div>'
@@ -445,24 +258,27 @@ async function generate(){
 
   var prompt =
     'あなたはLIPS・資生堂・電通の第一線でバナーを数千枚制作してきたトップクリエイティブディレクターです。'
-    + '以下の案件のデザインアイデアを3案提案してください。'
+    + '以下の案件のデザインアイデアを4案提案してください。'
     + '案件：' + project + ' ターゲット：' + (target||'未指定') + ' 媒体：' + media + ' トーン：' + tone + ' '
+    + (bc ? 'ブランドカラー：' + bc + ' ' : '')
+    + (notes ? 'メモ：' + notes + ' ' : '')
     + '各アイデアで必ず含めること：'
     + '(1)そのターゲットが思わず保存したくなる心理的根拠とトレンド名 '
     + '(2)競合との差別化ポイント '
     + '(3)Illustratorの具体的操作手順（ツール名・数値・色コード・フォント名まで） '
-    + '禁止：当たり前の提案・抽象的表現。3案は方向性・配色・レイアウトが全て異なること。'
-    + 'JSONのみ出力（説明文・マークダウン不要）。文字列内にダブルクォートを使わないこと。'
+    + '禁止：当たり前の提案・抽象的表現。4案は方向性・配色・レイアウトが全て異なること。'
+    + 'JSONのみ出力。文字列内にダブルクォートを使わないこと。改行コードを含めないこと。'
     + '{"ideas":['
     + '{"concept":"コンセプト名10文字","title":"方向性20文字",'
     + '"why":"なぜこのターゲットに刺さるか。競合との違い。心理的根拠。ブランド名やトレンドを含めて100文字",'
     + '"colors":["#hex1","#hex2","#hex3","#hex4"],"cnames":["色名1","色名2","色名3","色名4"],'
     + '"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex",'
     + '"font":"フォント名と使い方20文字","layout_name":"レイアウト名10文字","layout_type":"center_title_grid","mood":"8文字",'
-    + '"ai_steps":["背景：#hexで塗り、グラデ適用","テキスト：フォント名・サイズ・配置","仕上げ：装飾・不透明度・書き出し"],'
+    + '"ai_steps":["手順1：具体的に","手順2：具体的に","手順3：具体的に"],'
     + '"pinterest_kw":"日本語6文字","behance_kw":"英語3単語","google_kw":"日本語8文字"},'
-    + '{"concept":"...","title":"...","why":"100文字","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout_name":"...","layout_type":"left_text_right_image","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."},'
-    + '{"concept":"...","title":"...","why":"100文字","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout_name":"...","layout_type":"diagonal","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."},{"concept":"...","title":"...","why":"100文字","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout_name":"...","layout_type":"fullbleed","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."}]}';
+    + '{"concept":"...","title":"...","why":"...","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout_name":"...","layout_type":"left_text_right_image","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."},'
+    + '{"concept":"...","title":"...","why":"...","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout_name":"...","layout_type":"top_band","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."},'
+    + '{"concept":"...","title":"...","why":"...","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout_name":"...","layout_type":"diagonal","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."}]}';
 
   try{
     var res = await fetch('https://api.anthropic.com/v1/messages', {
@@ -475,7 +291,7 @@ async function generate(){
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 2500,
+        max_tokens: 3000,
         messages: [{ role: 'user', content: prompt }]
       })
     });
@@ -484,7 +300,6 @@ async function generate(){
     var text = (d.content && d.content[0] && d.content[0].text) || '';
     var m = text.match(/\{[\s\S]*\}/);
     if(!m) throw new Error('JSONが見つかりません');
-    // JSONを安全にパース
     var jsonStr = m[0]
       .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '')
       .replace(/\r\n/g, ' ').replace(/\r/g, ' ').replace(/\n/g, ' ')
@@ -492,20 +307,18 @@ async function generate(){
       .replace(/,\s*}/g, '}').replace(/,\s*]/g, ']');
     try {
       D = JSON.parse(jsonStr);
-    } catch(parseErr) {
-      // 文字列値内の改行・制御文字を修正して再試行
-      jsonStr = jsonStr.replace(/"([^"]*?)"/g, function(match, p1) {
-        return '"' + p1.replace(/[\x00-\x1F]/g, ' ').replace(/"/g, '\\"') + '"';
+    } catch(e2) {
+      jsonStr = jsonStr.replace(/"([^"]*)"/g, function(match, p1){
+        return '"' + p1.replace(/[\x00-\x1F]/g, ' ') + '"';
       });
       D = JSON.parse(jsonStr);
     }
     render(project, target, media, tone);
-  } catch(e) {
+  } catch(e){
     console.error(e);
-    document.getElementById('output').innerHTML =
+    document.getElementById('out').innerHTML =
       '<div class="empty"><div class="empty-ico">⚠️</div>'
-      + '<div class="empty-title">エラーが発生しました</div>'
-      + '<div class="empty-sub">' + esc(e.message) + '</div></div>';
+      + '<div class="empty-txt">エラー: ' + esc(e.message) + '</div></div>';
   } finally {
     document.getElementById('gbtn').disabled = false;
     document.getElementById('bt').style.display = 'block';
@@ -514,7 +327,7 @@ async function generate(){
 }
 
 function render(project, target, media, tone){
-  var out = document.getElementById('output');
+  var out = document.getElementById('out');
   out.innerHTML = '';
 
   var rh = document.createElement('div');
@@ -528,276 +341,133 @@ function render(project, target, media, tone){
   out.appendChild(rh);
 
   var grid = document.createElement('div');
-  grid.className = 'ideas-grid';
+  grid.className = 'ideas';
 
   (D.ideas || []).forEach(function(idea, i){
-    var acc = idea.accent || '#FFE135';
-    var txc = idea.text_color || '#111108';
-    var bgF = idea.bg_from || '#FFFEF0';
-    var bgT = idea.bg_to || '#FFF9C4';
-    var cols = idea.colors || ['#FFE135','#111108','#FF3B3B','#00A878'];
+    var acc = idea.accent || '#7c6aff';
+    var txc = idea.text_color || '#f0f0fa';
+    var bgF = idea.bg_from || '#0f0e1e';
+    var bgT = idea.bg_to || '#16152a';
+    var cols = idea.colors || ['#7c6aff','#ff6a8a','#ffd93d','#4aefc0'];
     var pq = encodeURIComponent(idea.pinterest_kw || project);
     var bq = encodeURIComponent(idea.behance_kw || 'banner design');
     var gq = encodeURIComponent(idea.google_kw || project);
 
     var card = document.createElement('div');
     card.className = 'icard';
-    card.style.animationDelay = (i * 0.12) + 's';
+    card.style.animationDelay = (i * 0.1) + 's';
 
     card.innerHTML =
-      // 上部カラーバー
-      '<div class="card-colors">'
+      '<div class="card-colorbar">'
       + cols.map(function(c){ return '<div class="card-color" style="background:' + esc(c) + '"></div>'; }).join('')
       + '</div>'
-
-      // バナーモック
-      + '<div class="card-mock" style="background:linear-gradient(135deg,' + esc(bgF) + ',' + esc(bgT) + ')">'
-      + '<span class="mock-deco" style="top:8%;left:5%">✿</span>'
-      + '<span class="mock-deco" style="top:5%;right:7%">★</span>'
-      + '<span class="mock-deco" style="bottom:15%;left:4%">♡</span>'
-      + '<span class="mock-deco" style="bottom:12%;right:5%">✦</span>'
-      + '<div class="mock-eyebrow" style="background:' + esc(acc) + ';color:' + esc(txc) + '">' + esc(idea.concept || '') + '</div>'
-      + '<div class="mock-title" style="color:' + esc(txc) + '">' + esc((project).slice(0, 14)) + '</div>'
-      + '<div class="mock-sub" style="color:' + esc(txc) + '">' + esc(target || idea.mood || '') + '</div>'
-      + '<div class="mock-dots">' + cols.map(function(c){ return '<div class="mock-dot" style="background:' + esc(c) + '"></div>'; }).join('') + '</div>'
-      + '</div>'
-
-      // ボディ
+      + '<div class="card-preview">' + makeWF(idea.layout_type || 'center_title_grid', idea, project, target) + '</div>'
       + '<div class="card-body">'
-      + '<div class="card-num" style="color:' + esc(acc === '#FFE135' ? '#B8960C' : acc) + '">IDEA ' + (i+1) + '</div>'
-      + '<div class="card-title">' + esc(idea.title || '') + '</div>'
-      + '<div class="card-desc">' + esc(idea.why || '') + '</div>'
-
-      // スウォッチ
-      + '<div>'
+      + '<div class="card-num" style="color:' + esc(acc) + '">IDEA ' + (i+1) + ' — ' + esc(idea.concept||'') + '</div>'
+      + '<div class="card-title">' + esc(idea.title||'') + '</div>'
+      + '<div class="card-desc" style="border-color:' + esc(acc) + '">' + esc(idea.why||'') + '</div>'
       + '<div class="swatches">'
       + cols.map(function(c, ci){
-          return '<div class="sw" style="background:' + esc(c) + '" onclick="copyTxt(\'' + esc(c) + '\')" title="' + esc((idea.cnames || [])[ci] || '') + ' — クリックでコピー">'
+          return '<div class="sw" style="background:' + esc(c) + '" onclick="copyTxt(\'' + esc(c) + '\')" title="' + esc((idea.cnames||[])[ci]||'') + ' — クリックでコピー">'
             + '<span class="sw-hex">' + esc(c) + '</span></div>';
         }).join('')
       + '</div>'
-      + '</div>'
-
-      // タグ
       + '<div class="tags">'
-      + '<span class="tag tag-font">🔤 ' + esc(idea.font || '') + '</span>'
-      + '<span class="tag tag-layout">📐 ' + esc(idea.layout_name || '') + '</span>'
-      + '<span class="tag tag-mood">✨ ' + esc(idea.mood || '') + '</span>'
+      + '<span class="tag tag-font">🔤 ' + esc(idea.font||'') + '</span>'
+      + '<span class="tag tag-layout">📐 ' + esc(idea.layout_name||'') + '</span>'
+      + '<span class="tag tag-mood">✨ ' + esc(idea.mood||'') + '</span>'
       + '</div>'
-
-      // Illustrator手順
       + '<div class="ai-steps">'
       + '<div class="ai-steps-label"><span class="ai-badge">Ai</span> Illustratorでの作り方</div>'
       + '<div class="step-list">'
-      + (idea.ai_steps || []).map(function(s, si){
+      + (idea.ai_steps||[]).map(function(s, si){
           return '<div class="step-item">'
-            + '<div class="step-n" style="background:' + esc(acc === '#FFE135' ? '#B8960C' : acc) + '">' + (si+1) + '</div>'
+            + '<div class="step-n" style="background:' + esc(acc) + '">' + (si+1) + '</div>'
             + '<div class="step-txt">' + esc(s) + '</div>'
             + '</div>';
         }).join('')
       + '</div></div>'
-
-      // 参考リンク
-      + '<div class="refs">'
-      + '<div class="refs-label">参考画像を探す</div>'
+      + '<div class="refs"><div class="refs-label">参考画像を探す</div>'
       + '<div class="ref-list">'
       + '<a class="ref-a" href="https://jp.pinterest.com/search/pins/?q=' + pq + '" target="_blank" rel="noopener">'
-      + '<span class="ref-ico">📌</span><div class="ref-info"><div class="ref-site">Pinterest</div><div class="ref-kw">' + esc(idea.pinterest_kw || '') + '</div></div><span class="ref-arr">↗</span></a>'
+      + '<span class="ref-ico">📌</span><div class="ref-info"><div class="ref-site">Pinterest</div><div class="ref-kw">' + esc(idea.pinterest_kw||'') + '</div></div><span class="ref-arr">↗</span></a>'
       + '<a class="ref-a" href="https://www.behance.net/search/projects/?search=' + bq + '" target="_blank" rel="noopener">'
-      + '<span class="ref-ico">🎨</span><div class="ref-info"><div class="ref-site">Behance</div><div class="ref-kw">' + esc(idea.behance_kw || '') + '</div></div><span class="ref-arr">↗</span></a>'
+      + '<span class="ref-ico">🎨</span><div class="ref-info"><div class="ref-site">Behance</div><div class="ref-kw">' + esc(idea.behance_kw||'') + '</div></div><span class="ref-arr">↗</span></a>'
       + '<a class="ref-a" href="https://www.google.com/search?q=' + gq + '&tbm=isch" target="_blank" rel="noopener">'
-      + '<span class="ref-ico">🔍</span><div class="ref-info"><div class="ref-site">Google画像</div><div class="ref-kw">' + esc(idea.google_kw || '') + '</div></div><span class="ref-arr">↗</span></a>'
-      + '</div></div>'
-      + '</div>';
+      + '<span class="ref-ico">🔍</span><div class="ref-info"><div class="ref-site">Google画像</div><div class="ref-kw">' + esc(idea.google_kw||'') + '</div></div><span class="ref-arr">↗</span></a>'
+      + '</div></div></div>';
 
     grid.appendChild(card);
   });
-
   out.appendChild(grid);
 }
 
-function showToast(msg){
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(function(){ t.classList.remove('show'); }, 2000);
-}
+function makeWF(type, idea, project, target){
+  var W = 260, H = 300;
+  var bf = idea.bg_from || '#0f0e1e';
+  var bt = idea.bg_to || '#16152a';
+  var acc = idea.accent || '#7c6aff';
+  var txc = idea.text_color || '#f0f0fa';
+  var cols = idea.colors || [acc];
+  var title = (project||'タイトル').slice(0,10);
+  var sub = (target||'ターゲット').slice(0,8);
 
-function copyTxt(t){
-  navigator.clipboard.writeText(t).then(function(){ showToast(t + ' をコピー！'); });
-}
-
-function copyAll(){
-  if(!D) return;
-  var project = document.getElementById('project').value;
-  var txt = '【BRIEF — デザインブリーフ】\n';
-  txt += '案件：' + project + '\n';
-  txt += '媒体：' + document.getElementById('media').value + '\n';
-  txt += 'トーン：' + document.getElementById('tone').value + '\n\n';
-  (D.ideas || []).forEach(function(idea, i){
-    txt += '━━━━━━━━━━━━━━━━\n';
-    txt += '【IDEA ' + (i+1) + '：' + idea.concept + '】\n';
-    txt += idea.title + '\n\n';
-    txt += '▶ なぜこのデザインか\n' + idea.why + '\n\n';
-    txt += '▶ 配色\n' + (idea.colors || []).join(' / ') + '\n';
-    txt += '▶ フォント：' + idea.font + '\n';
-    txt += '▶ レイアウト：' + idea.layout_name + '\n\n';
-    txt += '▶ Illustratorでの作り方\n';
-    (idea.ai_steps || []).forEach(function(s){ txt += s + '\n'; });
-    txt += '\n▶ 参考：Pinterest「' + idea.pinterest_kw + '」\n\n';
-  });
-  navigator.clipboard.writeText(txt).then(function(){ showToast('ブリーフをコピーしました！'); });
-}
-
-function esc(s){
-  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-</script>
-</body>
-</html>function makeWF(type, idea, project, target){
-  var W = 260, H = 320;
-  var bf = idea.bg_from || '#FFFEF0';
-  var bt = idea.bg_to || '#FFF9C4';
-  var acc = idea.accent || '#FFE135';
-  var txc = idea.text_color || '#111108';
-  var cols = idea.colors || [acc, '#111108'];
-  var title = (project || 'タイトル').slice(0, 10);
-  var sub = target || 'サブテキスト';
-
-  // より実際のバナーに近いプレビューを生成
-  var layouts = {
-    'center_title_grid': function(){
-      return ''
-        // 背景
-        + '<rect width="'+W+'" height="'+H+'" fill="url(#bg'+type+')"/>'
-        // 上部デコライン
-        + '<rect x="0" y="0" width="'+W+'" height="4" fill="'+esc(acc)+'"/>'
-        // サブバッジ
-        + '<rect x="'+(W/2-40)+'" y="14" width="80" height="18" fill="'+esc(acc)+'" opacity=".9" rx="9"/>'
-        + '<text x="'+(W/2)+'" y="26" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="bold" fill="'+esc(txc)+'">'+esc(sub.slice(0,8))+'</text>'
-        // メインタイトル（大きく中央）
-        + '<text x="'+(W/2)+'" y="62" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(0,6))+'</text>'
-        + '<text x="'+(W/2)+'" y="84" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(6,12)||title.slice(0,6))+'</text>'
-        // アクセントライン
-        + '<rect x="'+(W/2-30)+'" y="94" width="60" height="3" fill="'+esc(acc)+'" rx="1.5"/>'
-        // 商品グリッド（3列）
-        + [0,1,2].map(function(j){
-            var x = 14 + j*82;
-            return '<rect x="'+x+'" y="106" width="74" height="90" fill="'+esc(txc)+'" opacity=".07" rx="6"/>'
-              + '<rect x="'+(x+8)+'" y="202" width="58" height="7" fill="'+esc(txc)+'" opacity=".12" rx="3"/>'
-              + '<rect x="'+(x+16)+'" y="213" width="42" height="6" fill="'+esc(acc)+'" opacity=".5" rx="3"/>';
-          }).join('')
-        // ボトムバー
-        + '<rect x="0" y="'+(H-6)+'" width="'+W+'" height="6" fill="'+esc(acc)+'"/>'
-        // ハッシュタグ
-        + '<text x="'+(W/2)+'" y="'+(H-10)+'" text-anchor="middle" font-family="sans-serif" font-size="7" fill="'+esc(acc)+'" opacity=".7">#コスメ  #メイク  #おすすめ</text>';
-    },
-    'left_text_right_image': function(){
-      return ''
-        + '<rect width="'+W+'" height="'+H+'" fill="url(#bg'+type+')"/>'
-        + '<rect x="0" y="0" width="4" height="'+H+'" fill="'+esc(acc)+'"/>'
-        // 左：テキストゾーン
-        + '<rect x="14" y="20" width="70" height="14" fill="'+esc(acc)+'" opacity=".8" rx="7"/>'
-        + '<text x="49" y="30" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="bold" fill="'+esc(txc)+'">'+esc(sub.slice(0,7))+'</text>'
-        // タイトル（左寄せ・大きく）
-        + '<text x="14" y="60" font-family="sans-serif" font-size="18" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(0,5))+'</text>'
-        + '<text x="14" y="80" font-family="sans-serif" font-size="18" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(5,10)||title)+'</text>'
-        // 説明テキスト
-        + '<rect x="14" y="92" width="95" height="6" fill="'+esc(txc)+'" opacity=".12" rx="3"/>'
-        + '<rect x="14" y="102" width="80" height="6" fill="'+esc(txc)+'" opacity=".12" rx="3"/>'
-        + '<rect x="14" y="112" width="88" height="6" fill="'+esc(txc)+'" opacity=".12" rx="3"/>'
-        // CTAボタン
-        + '<rect x="14" y="130" width="80" height="22" fill="'+esc(acc)+'" rx="11"/>'
-        + '<text x="54" y="145" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="bold" fill="'+esc(txc)+'">詳しく見る →</text>'
-        // 右：画像ゾーン（グラデオーバーレイ付き）
-        + '<rect x="'+(W*.52)+'" y="10" width="'+(W*.44)+'" height="'+(H-20)+'" fill="'+esc(txc)+'" opacity=".08" rx="8"/>'
-        + '<text x="'+(W*.74)+'" y="'+(H*.45)+'" text-anchor="middle" font-family="sans-serif" font-size="8" fill="'+esc(txc)+'" opacity=".3">IMAGE</text>'
-        // グラデーションフェード
-        + '<rect x="'+(W*.52)+'" y="10" width="20" height="'+(H-20)+'" fill="url(#fade'+type+')" rx="0"/>'
-        + '<rect x="0" y="'+(H-6)+'" width="'+W+'" height="6" fill="'+esc(acc)+'"/>';
-    },
-    'top_band': function(){
-      return ''
-        + '<rect width="'+W+'" height="'+H+'" fill="url(#bg'+type+')"/>'
-        // 上部帯
-        + '<rect x="0" y="0" width="'+W+'" height="'+(H*.38)+'" fill="'+esc(acc)+'" opacity=".15"/>'
-        + '<rect x="0" y="0" width="'+W+'" height="4" fill="'+esc(acc)+'"/>'
-        // 帯内タイトル
-        + '<rect x="'+(W/2-50)+'" y="14" width="100" height="12" fill="'+esc(acc)+'" opacity=".7" rx="6"/>'
-        + '<text x="'+(W/2)+'" y="23.5" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="bold" fill="'+esc(txc)+'">'+esc(sub.slice(0,10))+'</text>'
-        + '<text x="'+(W/2)+'" y="52" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(0,6))+'</text>'
-        + '<text x="'+(W/2)+'" y="74" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(6,12)||title.slice(0,6))+'</text>'
-        // セパレーター
-        + '<rect x="20" y="'+(H*.38+2)+'" width="'+(W-40)+'" height="2" fill="'+esc(acc)+'" opacity=".4"/>'
-        // 下段：商品4列
-        + [0,1,2,3].map(function(j){
-            var x = 10 + j*61;
-            return '<rect x="'+x+'" y="'+(H*.42)+'" width="54" height="70" fill="'+esc(txc)+'" opacity=".07" rx="5"/>'
-              + '<rect x="'+(x+6)+'" y="'+(H*.42+74)+'" width="42" height="5" fill="'+esc(txc)+'" opacity=".1" rx="2"/>'
-              + '<rect x="'+(x+10)+'" y="'+(H*.42+81)+'" width="34" height="5" fill="'+esc(acc)+'" opacity=".4" rx="2"/>';
-          }).join('')
-        + '<rect x="0" y="'+(H-6)+'" width="'+W+'" height="6" fill="'+esc(acc)+'"/>';
-    },
-    'diagonal': function(){
-      return ''
-        + '<rect width="'+W+'" height="'+H+'" fill="url(#bg'+type+')"/>'
-        // 対角線の色分割
-        + '<polygon points="0,0 '+(W*.65)+',0 0,'+(H*.6)+'" fill="'+esc(acc)+'" opacity=".18"/>'
-        + '<polygon points="'+W+','+(H*.4)+' '+W+','+H+' '+(W*.35)+','+H+'" fill="'+esc(cols[1]||acc)+'" opacity=".12"/>'
-        // 対角ライン
-        + '<line x1="'+(W*.65)+'" y1="0" x2="'+(W*.35)+'" y2="'+H+'" stroke="'+esc(acc)+'" stroke-width="2" opacity=".4"/>'
-        + '<rect x="0" y="0" width="'+W+'" height="4" fill="'+esc(acc)+'"/>'
-        // 左上テキスト
-        + '<text x="16" y="36" font-family="sans-serif" font-size="20" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(0,5))+'</text>'
-        + '<text x="16" y="58" font-family="sans-serif" font-size="20" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(5,10)||title)+'</text>'
-        + '<rect x="16" y="66" width="'+(W*.3)+'" height="3" fill="'+esc(acc)+'" rx="1.5"/>'
-        + '<rect x="16" y="76" width="'+(W*.32)+'" height="5" fill="'+esc(txc)+'" opacity=".1" rx="2"/>'
-        + '<rect x="16" y="84" width="'+(W*.25)+'" height="5" fill="'+esc(txc)+'" opacity=".1" rx="2"/>'
-        + '<rect x="16" y="98" width="65" height="20" fill="'+esc(acc)+'" rx="10"/>'
-        + '<text x="48" y="112" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="bold" fill="'+esc(txc)+'">詳しく見る</text>'
-        // 右：画像
-        + '<rect x="'+(W*.55)+'" y="20" width="'+(W*.4)+'" height="'+(H*.55)+'" fill="'+esc(txc)+'" opacity=".08" rx="8"/>'
-        + '<text x="'+(W*.75)+'" y="'+(H*.32)+'" text-anchor="middle" font-family="sans-serif" font-size="8" fill="'+esc(txc)+'" opacity=".3">IMAGE</text>'
-        + '<rect x="0" y="'+(H-6)+'" width="'+W+'" height="6" fill="'+esc(acc)+'"/>';
-    },
-    'fullbleed': function(){
-      return ''
-        + '<rect width="'+W+'" height="'+H+'" fill="url(#bg'+type+')"/>'
-        // フル画像っぽい背景
-        + '<rect width="'+W+'" height="'+H+'" fill="'+esc(txc)+'" opacity=".04"/>'
-        // グラデーションオーバーレイ（下から）
-        + '<rect x="0" y="'+(H*.45)+'" width="'+W+'" height="'+(H*.55)+'" fill="url(#overlay'+type+')" />'
-        + '<text x="'+(W/2)+'" y="'+(H*.35)+'" text-anchor="middle" font-family="sans-serif" font-size="9" fill="'+esc(txc)+'" opacity=".2">FULL IMAGE</text>'
-        // 中下部テキスト
-        + '<rect x="'+(W*.1)+'" y="'+(H*.52)+'" width="'+(W*.8)+'" height="12" fill="'+esc(acc)+'" opacity=".7" rx="6"/>'
-        + '<text x="'+(W/2)+'" y="'+(H*.52+9)+'" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="bold" fill="'+esc(txc)+'">'+esc(sub.slice(0,10))+'</text>'
-        + '<text x="'+(W/2)+'" y="'+(H*.67)+'" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="900" fill="#fff">'+esc(title.slice(0,6))+'</text>'
-        + '<text x="'+(W/2)+'" y="'+(H*.78)+'" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="900" fill="#fff">'+esc(title.slice(6,12)||title.slice(0,6))+'</text>'
-        + '<rect x="'+(W/2-40)+'" y="'+(H*.84)+'" width="80" height="20" fill="'+esc(acc)+'" rx="10"/>'
-        + '<text x="'+(W/2)+'" y="'+(H*.84+13)+'" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="bold" fill="'+esc(txc)+'">詳しく見る →</text>'
-        + '<rect x="0" y="'+(H-6)+'" width="'+W+'" height="6" fill="'+esc(acc)+'"/>';
-    }
-  };
-
-  var drawFn = layouts[type] || layouts['center_title_grid'];
+  var content = '';
+  if(type === 'center_title_grid'){
+    content = '<rect x="'+(W*.3)+'" y="14" width="'+(W*.4)+'" height="16" fill="'+esc(acc)+'" opacity=".8" rx="8"/>'
+      +'<text x="'+(W/2)+'" y="25" text-anchor="middle" font-size="9" font-weight="bold" fill="'+esc(txc)+'">'+esc(sub)+'</text>'
+      +'<text x="'+(W/2)+'" y="58" text-anchor="middle" font-size="20" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(0,6))+'</text>'
+      +'<text x="'+(W/2)+'" y="80" text-anchor="middle" font-size="20" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(6)||title.slice(0,4))+'</text>'
+      +'<rect x="'+(W/2-25)+'" y="90" width="50" height="3" fill="'+esc(acc)+'" rx="1.5"/>'
+      +[0,1,2].map(function(j){var x=14+j*80;return '<rect x="'+x+'" y="102" width="72" height="88" fill="'+esc(txc)+'" opacity=".07" rx="6"/><rect x="'+(x+8)+'" y="196" width="56" height="6" fill="'+esc(txc)+'" opacity=".1" rx="3"/><rect x="'+(x+16)+'" y="206" width="40" height="5" fill="'+esc(acc)+'" opacity=".5" rx="2"/>';}).join('')
+      +'<rect x="'+(W*.35)+'" y="'+(H-16)+'" width="'+(W*.3)+'" height="8" fill="'+esc(acc)+'" opacity=".5" rx="4"/>';
+  } else if(type === 'left_text_right_image'){
+    content = '<rect x="0" y="0" width="4" height="'+H+'" fill="'+esc(acc)+'"/>'
+      +'<rect x="14" y="18" width="68" height="13" fill="'+esc(acc)+'" opacity=".7" rx="6"/>'
+      +'<text x="48" y="27.5" text-anchor="middle" font-size="8" font-weight="bold" fill="'+esc(txc)+'">'+esc(sub)+'</text>'
+      +'<text x="14" y="58" font-size="18" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(0,5))+'</text>'
+      +'<text x="14" y="78" font-size="18" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(5,10)||title)+'</text>'
+      +'<rect x="14" y="90" width="90" height="5" fill="'+esc(txc)+'" opacity=".1" rx="2"/>'
+      +'<rect x="14" y="99" width="75" height="5" fill="'+esc(txc)+'" opacity=".1" rx="2"/>'
+      +'<rect x="14" y="116" width="72" height="20" fill="'+esc(acc)+'" rx="10"/>'
+      +'<text x="50" y="129" text-anchor="middle" font-size="8" font-weight="bold" fill="'+esc(txc)+'">詳しく見る →</text>'
+      +'<rect x="'+(W*.52)+'" y="12" width="'+(W*.44)+'" height="'+(H-24)+'" fill="'+esc(txc)+'" opacity=".08" rx="8"/>'
+      +'<text x="'+(W*.74)+'" y="'+(H*.48)+'" text-anchor="middle" font-size="8" fill="'+esc(txc)+'" opacity=".25">IMAGE</text>';
+  } else if(type === 'top_band'){
+    content = '<rect x="0" y="0" width="'+W+'" height="'+(H*.35)+'" fill="'+esc(acc)+'" opacity=".15"/>'
+      +'<rect x="0" y="0" width="'+W+'" height="4" fill="'+esc(acc)+'"/>'
+      +'<rect x="'+(W/2-45)+'" y="12" width="90" height="13" fill="'+esc(acc)+'" opacity=".6" rx="6"/>'
+      +'<text x="'+(W/2)+'" y="22" text-anchor="middle" font-size="8" font-weight="bold" fill="'+esc(txc)+'">'+esc(sub)+'</text>'
+      +'<text x="'+(W/2)+'" y="52" text-anchor="middle" font-size="20" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(0,6))+'</text>'
+      +'<text x="'+(W/2)+'" y="72" text-anchor="middle" font-size="20" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(6)||title.slice(0,4))+'</text>'
+      +'<rect x="20" y="'+(H*.36)+'" width="'+(W-40)+'" height="2" fill="'+esc(acc)+'" opacity=".3"/>'
+      +[0,1,2,3].map(function(j){var x=8+j*62;return '<rect x="'+x+'" y="'+(H*.4)+'" width="55" height="68" fill="'+esc(txc)+'" opacity=".07" rx="5"/><rect x="'+(x+6)+'" y="'+(H*.4+72)+'" width="43" height="5" fill="'+esc(txc)+'" opacity=".1" rx="2"/>';}).join('')
+      +'<rect x="'+(W*.3)+'" y="'+(H-14)+'" width="'+(W*.4)+'" height="7" fill="'+esc(acc)+'" opacity=".4" rx="3"/>';
+  } else {
+    content = '<polygon points="0,0 '+(W*.65)+',0 0,'+(H*.58)+'" fill="'+esc(acc)+'" opacity=".15"/>'
+      +'<polygon points="'+W+','+(H*.42)+' '+W+','+H+' '+(W*.35)+','+H+'" fill="'+esc(cols[1]||acc)+'" opacity=".1"/>'
+      +'<line x1="'+(W*.65)+'" y1="0" x2="'+(W*.35)+'" y2="'+H+'" stroke="'+esc(acc)+'" stroke-width="1.5" opacity=".35"/>'
+      +'<rect x="0" y="0" width="'+W+'" height="4" fill="'+esc(acc)+'"/>'
+      +'<text x="14" y="38" font-size="19" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(0,5))+'</text>'
+      +'<text x="14" y="58" font-size="19" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(5,10)||title)+'</text>'
+      +'<rect x="14" y="68" width="'+(W*.28)+'" height="3" fill="'+esc(acc)+'" rx="1.5"/>'
+      +'<rect x="14" y="76" width="'+(W*.3)+'" height="5" fill="'+esc(txc)+'" opacity=".1" rx="2"/>'
+      +'<rect x="14" y="84" width="'+(W*.24)+'" height="5" fill="'+esc(txc)+'" opacity=".1" rx="2"/>'
+      +'<rect x="14" y="98" width="62" height="19" fill="'+esc(acc)+'" rx="9.5"/>'
+      +'<text x="45" y="111" text-anchor="middle" font-size="8" font-weight="bold" fill="'+esc(txc)+'">詳しく見る</text>'
+      +'<rect x="'+(W*.54)+'" y="18" width="'+(W*.42)+'" height="'+(H*.55)+'" fill="'+esc(txc)+'" opacity=".07" rx="8"/>'
+      +'<text x="'+(W*.75)+'" y="'+(H*.32)+'" text-anchor="middle" font-size="8" fill="'+esc(txc)+'" opacity=".25">IMAGE</text>';
+  }
 
   return '<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">'
-    + '<defs>'
-    + '<linearGradient id="bg'+type+'" x1="0" y1="0" x2="1" y2="1">'
-    + '<stop offset="0%" stop-color="'+esc(bf)+'"/>'
-    + '<stop offset="100%" stop-color="'+esc(bt)+'"/>'
-    + '</linearGradient>'
-    + '<linearGradient id="fade'+type+'" x1="0" y1="0" x2="1" y2="0">'
-    + '<stop offset="0%" stop-color="'+esc(bf)+'" stop-opacity="1"/>'
-    + '<stop offset="100%" stop-color="'+esc(bf)+'" stop-opacity="0"/>'
-    + '</linearGradient>'
-    + '<linearGradient id="overlay'+type+'" x1="0" y1="0" x2="0" y2="1">'
-    + '<stop offset="0%" stop-color="'+esc(bf)+'" stop-opacity="0"/>'
-    + '<stop offset="100%" stop-color="'+esc(bf)+'" stop-opacity="0.92"/>'
-    + '</linearGradient>'
-    + '</defs>'
-    + drawFn()
-    + '</svg>';
+    +'<defs><linearGradient id="bg'+i+'" x1="0" y1="0" x2="1" y2="1">'
+    +'<stop offset="0%" stop-color="'+esc(bf)+'"/><stop offset="100%" stop-color="'+esc(bt)+'"/>'
+    +'</linearGradient></defs>'
+    +'<rect width="'+W+'" height="'+H+'" fill="url(#bg'+i+')"/>'
+    + content
+    +'</svg>';
+
+  var i = 0;
 }
 
 function showToast(msg){
@@ -806,36 +476,23 @@ function showToast(msg){
   t.classList.add('show');
   setTimeout(function(){ t.classList.remove('show'); }, 2000);
 }
-
-function copyTxt(t){
-  navigator.clipboard.writeText(t).then(function(){ showToast(t + ' をコピー！'); });
-}
-
+function copyTxt(t){ navigator.clipboard.writeText(t).then(function(){ showToast(t + ' をコピー！'); }); }
 function copyAll(){
   if(!D) return;
   var project = document.getElementById('project').value;
-  var txt = '【BRIEF — デザインブリーフ】\n';
-  txt += '案件：' + project + '\n';
-  txt += '媒体：' + document.getElementById('media').value + '\n';
-  txt += 'トーン：' + document.getElementById('tone').value + '\n\n';
-  (D.ideas || []).forEach(function(idea, i){
-    txt += '━━━━━━━━━━━━━━━━\n';
-    txt += '【IDEA ' + (i+1) + '：' + idea.concept + '】\n';
-    txt += idea.title + '\n\n';
+  var txt = '【BRIEF — デザインブリーフ】\n案件：' + project + '\n媒体：' + document.getElementById('media').value + '\n\n';
+  (D.ideas||[]).forEach(function(idea, i){
+    txt += '━━━━━━━━━━━━━━━━\n【IDEA'+(i+1)+'：'+idea.concept+'】\n'+idea.title+'\n\n';
     txt += '▶ なぜこのデザインか\n' + idea.why + '\n\n';
-    txt += '▶ 配色\n' + (idea.colors || []).join(' / ') + '\n';
-    txt += '▶ フォント：' + idea.font + '\n';
-    txt += '▶ レイアウト：' + idea.layout_name + '\n\n';
+    txt += '▶ 配色\n' + (idea.colors||[]).join(' / ') + '\n';
+    txt += '▶ フォント：' + idea.font + '\n▶ レイアウト：' + idea.layout_name + '\n\n';
     txt += '▶ Illustratorでの作り方\n';
-    (idea.ai_steps || []).forEach(function(s){ txt += s + '\n'; });
+    (idea.ai_steps||[]).forEach(function(s){ txt += s + '\n'; });
     txt += '\n▶ 参考：Pinterest「' + idea.pinterest_kw + '」\n\n';
   });
   navigator.clipboard.writeText(txt).then(function(){ showToast('ブリーフをコピーしました！'); });
 }
-
-function esc(s){
-  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 </script>
 </body>
 </html>
