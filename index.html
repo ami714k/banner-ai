@@ -4,215 +4,203 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DesignBrief AI</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&family=Zen+Maru+Gothic:wght@700;900&family=DM+Serif+Display&family=Playfair+Display:wght@700&family=M+PLUS+Rounded+1c:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#07060f;--s1:#0f0e1e;--s2:#16152a;--s3:#1e1c38;--a1:#7c6aff;--a2:#ff6a8a;--a3:#ffd93d;--a4:#4aefc0;--tx:#f0f0fa;--mu:#7070a0;--bd:#22203a;}
+:root{--bg:#07060f;--s1:#0f0e1e;--s2:#16152a;--s3:#1e1c38;--a1:#7c6aff;--a2:#ff6a8a;--a3:#ffd93d;--a4:#4aefc0;--tx:#f0f0fa;--mu:#6060a0;--bd:#22203a;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;min-height:100vh;}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 50% 40% at 20% 20%,rgba(124,106,255,.1) 0%,transparent 60%),radial-gradient(ellipse 40% 30% at 80% 80%,rgba(255,106,138,.07) 0%,transparent 60%);pointer-events:none;z-index:0;}
-.wrap{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
-header{padding:28px 0 16px;}
-.logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;background:linear-gradient(130deg,var(--a1),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 15% 15%,rgba(124,106,255,.12) 0%,transparent 55%),radial-gradient(ellipse 50% 40% at 85% 85%,rgba(255,106,138,.08) 0%,transparent 55%);pointer-events:none;z-index:0;}
+
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+
+/* HEADER */
+header{padding:28px 0 12px;display:flex;align-items:flex-end;justify-content:space-between;}
+.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;background:linear-gradient(130deg,var(--a1),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px;}
 .logo-sub{font-size:10px;color:var(--mu);margin-top:2px;}
-.hero{margin-bottom:28px;}
-.hero h1{font-family:'Syne',sans-serif;font-size:clamp(20px,3.5vw,38px);font-weight:800;line-height:1.1;letter-spacing:-1.5px;margin-bottom:6px;}
+.header-badge{background:rgba(124,106,255,.15);border:1px solid rgba(124,106,255,.3);color:var(--a1);font-size:9px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:1px;}
+
+/* HERO */
+.hero{padding:20px 0 24px;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,42px);font-weight:800;line-height:1.08;letter-spacing:-2px;margin-bottom:10px;}
 .hero h1 em{font-style:normal;background:linear-gradient(130deg,var(--a1),var(--a2),var(--a3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero p{color:var(--mu);font-size:12px;line-height:1.7;}
-.layout{display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start;}
-@media(max-width:860px){.layout{grid-template-columns:1fr;}}
+.hero p{color:var(--mu);font-size:12px;line-height:1.8;max-width:560px;}
 
 /* FORM */
-.fpanel{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:20px;}
-.sl{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
-.sl::after{content:'';flex:1;height:1px;background:var(--bd);}
-.sec{margin-bottom:14px;}
-.fg{margin-bottom:8px;}
-label{display:block;font-size:10px;font-weight:600;color:var(--mu);margin-bottom:3px;}
-label .req{color:var(--a2);}
-input[type=text],textarea,select{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:7px;color:var(--tx);font-family:'Noto Sans JP',sans-serif;font-size:11px;padding:7px 10px;outline:none;transition:border-color .2s;}
-input[type=text]:focus,textarea:focus,select:focus{border-color:var(--a1);}
-textarea{resize:vertical;min-height:60px;}
+.fcard{background:var(--s1);border:1px solid var(--bd);border-radius:18px;padding:24px;margin-bottom:24px;}
+.fg{margin-bottom:10px;}
+.fg label{display:block;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu);margin-bottom:4px;}
+.fg label .req{color:var(--a2);}
+input[type=text],select,textarea{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);font-family:'Noto Sans JP',sans-serif;font-size:12px;padding:9px 12px;outline:none;transition:border-color .2s;}
+input[type=text]:focus,select:focus,textarea:focus{border-color:var(--a1);}
+textarea{resize:none;height:58px;}
 select option{background:var(--s2);}
-.chips{display:flex;flex-wrap:wrap;gap:4px;}
-.chip{background:var(--s2);border:1px solid var(--bd);border-radius:5px;color:var(--mu);font-size:9px;font-weight:500;padding:3px 8px;cursor:pointer;transition:all .15s;user-select:none;}
-.chip:hover,.chip.on{background:rgba(124,106,255,.15);border-color:var(--a1);color:var(--a1);}
-.gbtn{width:100%;background:linear-gradient(130deg,var(--a1),var(--a2));border:none;border-radius:10px;color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;padding:12px;cursor:pointer;transition:opacity .2s,transform .1s;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:4px;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:620px){.fgrid{grid-template-columns:1fr;}}
+.gbtn{width:100%;background:linear-gradient(130deg,var(--a1),var(--a2));border:none;border-radius:11px;color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;padding:14px;cursor:pointer;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .2s,transform .1s;}
 .gbtn:hover{opacity:.88;transform:translateY(-1px);}
-.gbtn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
-.spin{width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none;}
+.gbtn:disabled{opacity:.45;cursor:not-allowed;transform:none;}
+.spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
 /* OUTPUT */
-.output{display:flex;flex-direction:column;gap:16px;}
-.empty{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:48px 24px;text-align:center;color:var(--mu);}
-.empty .ico{font-size:44px;margin-bottom:12px;opacity:.25;}
-.empty p{font-size:12px;line-height:1.8;}
+.out{display:flex;flex-direction:column;gap:20px;}
+.empty{background:var(--s1);border:1px solid var(--bd);border-radius:18px;padding:60px 24px;text-align:center;color:var(--mu);}
+.empty-ico{font-size:52px;margin-bottom:14px;opacity:.2;}
+.empty-txt{font-size:13px;line-height:1.9;}
+.empty-hint{margin-top:10px;font-size:11px;color:var(--a4);}
 
-/* OVERVIEW CARD */
-.overview{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:20px;}
-.ov-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--a1);margin-bottom:6px;}
-.ov-project{font-size:20px;font-weight:700;margin-bottom:4px;}
-.ov-meta{font-size:11px;color:var(--mu);line-height:1.6;}
-.ov-summary{margin-top:10px;font-size:11px;color:var(--a4);line-height:1.7;padding:10px 12px;background:rgba(74,239,192,.06);border-radius:8px;border-left:3px solid var(--a4);}
-.copy-all-btn{margin-top:12px;background:rgba(124,106,255,.1);border:1px solid rgba(124,106,255,.3);border-radius:7px;color:var(--a1);font-size:10px;padding:7px 14px;cursor:pointer;transition:all .15s;}
-.copy-all-btn:hover{background:rgba(124,106,255,.2);}
+/* IDEA CARDS */
+.ideas{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media(max-width:860px){.ideas{grid-template-columns:1fr;}}
 
-/* PALETTE TABS */
-.ptabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
-.ptab{background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:10px;font-weight:600;color:var(--mu);transition:all .15s;}
-.ptab:hover,.ptab.on{background:rgba(124,106,255,.15);border-color:var(--a1);color:var(--a1);}
+.icard{background:var(--s1);border:1.5px solid var(--bd);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s,border-color .2s;}
+.icard:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.5);border-color:rgba(124,106,255,.3);}
 
-/* PALETTE CARD */
-.palette-wrap{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:20px;}
-.pw-head{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:14px;}
-.palette-content{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-@media(max-width:600px){.palette-content{grid-template-columns:1fr;}}
+/* Mock banner */
+.mock{height:200px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;overflow:hidden;}
+.mock-deco{position:absolute;font-size:18px;opacity:.18;pointer-events:none;user-select:none;}
+.mock-eyebrow{font-size:9px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:9px;letter-spacing:.8px;display:inline-block;}
+.mock-title{font-size:20px;font-weight:900;text-align:center;line-height:1.2;margin-bottom:5px;text-shadow:0 2px 10px rgba(0,0,0,.2);}
+.mock-sub{font-size:10px;text-align:center;opacity:.65;margin-bottom:12px;}
+.mock-colors{display:flex;gap:6px;justify-content:center;}
+.mock-dot{width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,.2);}
+.mock-stripe{height:5px;width:100%;position:absolute;bottom:0;}
 
-/* COLOR PREVIEW - actual banner preview */
-.banner-preview{border-radius:12px;overflow:hidden;aspect-ratio:4/5;position:relative;display:flex;flex-direction:column;}
-.bp-bg{flex:1;position:relative;display:flex;align-items:center;justify-content:center;padding:16px;}
-.bp-title-area{text-align:center;z-index:2;padding:12px 16px;border-radius:10px;background:rgba(255,255,255,0.15);backdrop-filter:blur(4px);}
-.bp-title{font-size:18px;font-weight:900;line-height:1.2;margin-bottom:4px;}
-.bp-sub{font-size:10px;opacity:.8;margin-bottom:8px;}
-.bp-badge{display:inline-block;font-size:8px;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.5px;}
-.bp-deco{position:absolute;font-size:20px;opacity:.2;}
-.bp-bar{height:6px;}
-.bp-footer{padding:8px 12px;display:flex;justify-content:space-between;align-items:center;}
-.bp-footer-txt{font-size:8px;opacity:.6;}
-.bp-colors{display:flex;gap:4px;}
-.bp-dot{width:12px;height:12px;border-radius:50%;}
+/* Card body */
+.ibody{padding:18px;flex:1;display:flex;flex-direction:column;gap:0;}
+.inum{font-size:9px;font-weight:700;letter-spacing:2px;color:var(--a1);margin-bottom:4px;}
+.ititle{font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.35;}
+.idesc{font-size:11px;color:var(--mu);line-height:1.75;margin-bottom:14px;}
 
-/* RIGHT SIDE DETAILS */
-.palette-details{}
-.palette-name-big{font-size:16px;font-weight:700;margin-bottom:4px;}
-.palette-concept-txt{font-size:11px;color:var(--mu);line-height:1.6;margin-bottom:12px;}
+/* Color swatches */
+.swatches{display:flex;gap:0;border-radius:8px;overflow:hidden;height:36px;margin-bottom:10px;cursor:pointer;}
+.sw{flex:1;display:flex;align-items:flex-end;justify-content:center;padding-bottom:3px;transition:flex .18s;position:relative;}
+.sw:hover{flex:2.2;}
+.sw-hex{font-size:8px;font-family:monospace;color:rgba(255,255,255,.8);text-shadow:0 1px 4px rgba(0,0,0,.6);white-space:nowrap;}
 
-.color-swatches{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
-.cswatch{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;}
-.cswatch-box{width:44px;height:44px;border-radius:8px;border:2px solid rgba(255,255,255,.1);transition:transform .15s;}
-.cswatch:hover .cswatch-box{transform:scale(1.1);}
-.cswatch-name{font-size:8px;color:var(--mu);text-align:center;max-width:44px;}
-.cswatch-hex{font-size:8px;color:var(--a1);font-family:monospace;}
+/* Tags row */
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;}
+.tag{font-size:9px;font-weight:600;padding:4px 9px;border-radius:5px;}
+.tf{background:rgba(124,106,255,.15);color:var(--a1);}
+.tl{background:rgba(255,211,61,.12);color:var(--a3);}
+.tm{background:rgba(74,239,192,.12);color:var(--a4);}
 
-/* FONT PREVIEW */
-.font-preview{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:12px;margin-bottom:10px;}
-.fp-label{font-size:9px;color:var(--mu);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:1px;}
-.fp-sample{font-size:22px;font-weight:700;line-height:1.3;margin-bottom:3px;}
-.fp-name{font-size:9px;color:var(--a3);}
+/* Illustrator section */
+.ai-sec{background:var(--s2);border-radius:10px;padding:12px;margin-bottom:14px;}
+.ai-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu);margin-bottom:8px;display:flex;align-items:center;gap:5px;}
+.ai-label::before{content:'';width:8px;height:8px;border-radius:2px;background:linear-gradient(135deg,#FF9A00,#FF6600);flex-shrink:0;}
+.ai-steps{display:flex;flex-direction:column;gap:5px;}
+.ai-step{font-size:10px;color:var(--tx);line-height:1.5;display:flex;gap:6px;align-items:flex-start;}
+.ai-step-num{font-size:9px;font-weight:700;color:var(--a1);flex-shrink:0;margin-top:1px;}
 
-/* WIREFRAME */
-.wireframe-wrap{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:20px;}
-.wf-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
-.wftab{background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:5px 10px;cursor:pointer;font-size:10px;color:var(--mu);transition:all .15s;}
-.wftab:hover,.wftab.on{border-color:var(--a1);color:var(--a1);}
-.wf-content{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-@media(max-width:600px){.wf-content{grid-template-columns:1fr;}}
-.wf-frame{background:var(--s2);border-radius:10px;padding:12px;}
-.wf-frame-label{font-size:9px;color:var(--mu);margin-bottom:8px;font-weight:600;}
-.wf-frame svg{width:100%;height:auto;display:block;}
-.wf-desc{font-size:10px;color:var(--tx);line-height:1.7;opacity:.85;}
-.wf-desc h4{font-size:11px;color:var(--a4);margin-bottom:6px;margin-top:10px;}
-.wf-desc h4:first-child{margin-top:0;}
-.wf-desc p{color:var(--mu);margin-bottom:4px;}
+/* Reference links */
+.refs{border-top:1px solid var(--bd);padding-top:14px;margin-top:auto;}
+.refs-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu);margin-bottom:8px;}
+.ref-list{display:flex;flex-direction:column;gap:5px;}
+.ref-a{display:flex;align-items:center;gap:9px;padding:8px 10px;background:var(--s3);border:1px solid var(--bd);border-radius:8px;text-decoration:none;transition:all .15s;}
+.ref-a:hover{border-color:var(--a1);background:rgba(124,106,255,.1);}
+.ref-ico{font-size:15px;flex-shrink:0;}
+.ref-info{flex:1;min-width:0;}
+.ref-site{font-size:10px;font-weight:700;color:var(--tx);}
+.ref-kw{font-size:9px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ref-arr{font-size:11px;color:var(--mu);flex-shrink:0;}
 
-/* DO DONT */
-.dodont{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.dd-card{background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:14px;}
-.dd-title{font-size:10px;font-weight:700;margin-bottom:8px;}
-.dd-item{display:flex;gap:6px;margin-bottom:6px;font-size:10px;color:var(--tx);opacity:.85;line-height:1.5;align-items:flex-start;}
-.dd-ico{flex-shrink:0;font-size:12px;}
+/* Copy all */
+.copy-wrap{display:flex;justify-content:flex-end;}
+.copy-btn{background:rgba(124,106,255,.12);border:1px solid rgba(124,106,255,.3);border-radius:9px;color:var(--a1);font-size:11px;padding:9px 18px;cursor:pointer;transition:all .15s;font-family:'Noto Sans JP',sans-serif;}
+.copy-btn:hover{background:rgba(124,106,255,.22);}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-.fade{animation:fadeUp .3s ease forwards;}
+/* Toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--a1);color:#fff;font-size:11px;font-weight:700;padding:8px 20px;border-radius:999px;opacity:0;pointer-events:none;transition:all .25s;z-index:999;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+@keyframes fu{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.fu{animation:fu .32s ease forwards;}
 </style>
 </head>
 <body>
+<div class="toast" id="toast">コピーしました！</div>
 <div class="wrap">
-<header>
-  <div class="logo">DesignBrief AI</div>
-  <div class="logo-sub">案件情報 → デザイン方向性を瞬時に決める</div>
-</header>
-<div class="hero">
-  <h1>迷わず作り始める。<br><em>AIがデザインを設計する。</em></h1>
-  <p>配色・フォント・ワイヤーフレームをAIが瞬時に提案。Illustratorで作り始める前の「迷い時間」をゼロに。</p>
-</div>
-<div class="layout">
-  <div class="fpanel">
-    <div class="sec">
-      <div class="sl">案件情報</div>
-      <div class="fg"><label>案件名・制作物<span class="req">*</span></label><input type="text" id="project" placeholder="例：夏の新作コスメ紹介バナー"></div>
-      <div class="fg"><label>ターゲット層</label><input type="text" id="target" placeholder="例：20代女性、ファミリー層"></div>
+  <header>
+    <div>
+      <div class="logo">DesignBrief AI</div>
+      <div class="logo-sub">デザインの方向性を、Illustratorを開く前に決める</div>
+    </div>
+    <div class="header-badge">powered by Claude</div>
+  </header>
+
+  <div class="hero">
+    <h1>アイデアに詰まったら<br><em>ここから始めよう。</em></h1>
+    <p>案件情報を入れるだけで、AIが具体的なデザインアイデア3案・配色・Illustratorでの作り方・参考画像リンクをまとめて提案。<br>迷う時間をゼロにして、すぐ作り始められる。</p>
+  </div>
+
+  <div class="fcard">
+    <div class="fg">
+      <label>案件名・制作物 <span class="req">*</span></label>
+      <input type="text" id="project" placeholder="例：夏の新作コスメ紹介バナー、マリノスのイベント告知画像">
+    </div>
+    <div class="fgrid">
+      <div class="fg">
+        <label>ターゲット層</label>
+        <input type="text" id="target" placeholder="例：20代女性、ファミリー層">
+      </div>
       <div class="fg">
         <label>媒体・サイズ</label>
-        <div class="chips" id="mc">
-          <div class="chip on" data-v="Instagram正方形(1080×1080)">Instagram正方形</div>
-          <div class="chip" data-v="Instagramストーリー(1080×1920)">ストーリー縦</div>
-          <div class="chip" data-v="OGP横長(1200×628)">OGP横長</div>
-          <div class="chip" data-v="Webバナー横長(728×90)">Web横長</div>
-          <div class="chip" data-v="LPヘッダー(1920×600)">LPヘッダー</div>
-        </div>
+        <select id="media">
+          <option>Instagram正方形 1080×1080px</option>
+          <option>Instagramストーリー 1080×1920px</option>
+          <option>OGP横長 1200×628px</option>
+          <option>Webバナー横長 728×90px</option>
+          <option>LPヘッダー 1920×600px</option>
+        </select>
       </div>
-    </div>
-    <div class="sec">
-      <div class="sl">デザイン要件</div>
       <div class="fg">
         <label>雰囲気・トーン</label>
-        <div class="chips" id="tc">
-          <div class="chip on" data-v="かわいい・ポップ">かわいい</div>
-          <div class="chip" data-v="おしゃれ・高級感">高級感</div>
-          <div class="chip" data-v="クール・スタイリッシュ">クール</div>
-          <div class="chip" data-v="ナチュラル・やわらか">ナチュラル</div>
-          <div class="chip" data-v="信頼感・誠実">信頼感</div>
-          <div class="chip" data-v="インパクト重視">インパクト</div>
-          <div class="chip" data-v="シンプル・ミニマル">ミニマル</div>
-        </div>
+        <select id="tone">
+          <option>かわいい・ポップ</option>
+          <option>おしゃれ・高級感</option>
+          <option>クール・スタイリッシュ</option>
+          <option>ナチュラル・やわらか</option>
+          <option>信頼感・誠実</option>
+          <option>インパクト重視</option>
+          <option>シンプル・ミニマル</option>
+        </select>
       </div>
-      <div class="fg"><label>ブランドカラー（任意）</label><input type="text" id="bc" placeholder="例：ネイビー・ゴールド、#FF6EB4"></div>
-      <div class="fg"><label>その他要望</label><textarea id="notes" placeholder="例：既存バナーと統一感を出したい、文字多め"></textarea></div>
+      <div class="fg">
+        <label>ブランドカラー（任意）</label>
+        <input type="text" id="bc" placeholder="例：ネイビー×ゴールド、#FF6EB4">
+      </div>
+    </div>
+    <div class="fg">
+      <label>その他メモ（任意）</label>
+      <textarea id="notes" placeholder="例：既存のバナーと統一感を出したい、文字多め、写真は使わない"></textarea>
     </div>
     <button class="gbtn" id="gbtn">
-      <span id="bt">✦ デザイン方向性を生成する</span>
+      <span id="bt">✦ デザインアイデアを生成する</span>
       <div class="spin" id="sp"></div>
     </button>
   </div>
 
-  <div class="output" id="output">
+  <div class="out" id="out">
     <div class="empty">
-      <div class="ico">✏️</div>
-      <p>案件情報を入力して生成してください<br><br>
-      <span style="color:var(--a4);font-size:11px">✦ 配色プレビュー・フォント実物・<br>ワイヤーフレームを同時生成</span></p>
+      <div class="empty-ico">💡</div>
+      <div class="empty-txt">案件情報を入力して「デザインアイデアを生成する」を押してください</div>
+      <div class="empty-hint">✦ アイデア3案 ＋ 配色 ＋ Illustratorの作り方 ＋ 参考リンクを同時生成</div>
     </div>
   </div>
 </div>
-</div>
 
 <script>
-function prompt_for_key(){
-  if(window.CLAUDE_KEY) return window.CLAUDE_KEY;
-  var k = localStorage.getItem('claude_key');
-  if(k){ window.CLAUDE_KEY=k; return k; }
-  k = window.prompt('Claude APIキーを入力してください（sk-ant-...）');
-  if(k){ window.CLAUDE_KEY=k; localStorage.setItem('claude_key',k); }
+var D=null;
+
+function getKey(){
+  if(window.CK)return window.CK;
+  var k=localStorage.getItem('ck');
+  if(k){window.CK=k;return k;}
+  k=window.prompt('Claude APIキー（sk-ant-...）を入力してください\n※一度入力すれば次回から不要です');
+  if(k){window.CK=k;localStorage.setItem('ck',k);}
   return k||'';
 }
-
-var selMedia='Instagram正方形(1080×1080)';
-var selTone='かわいい・ポップ';
-var currentData=null;
-var currentPalIdx=0;
-
-document.querySelectorAll('#mc .chip').forEach(function(c){
-  c.addEventListener('click',function(){
-    document.querySelectorAll('#mc .chip').forEach(function(x){x.classList.remove('on');});
-    c.classList.add('on');selMedia=c.dataset.v;
-  });
-});
-document.querySelectorAll('#tc .chip').forEach(function(c){
-  c.addEventListener('click',function(){
-    document.querySelectorAll('#tc .chip').forEach(function(x){x.classList.remove('on');});
-    c.classList.add('on');selTone=c.dataset.v;
-  });
-});
 
 document.getElementById('gbtn').addEventListener('click',generate);
 
@@ -220,6 +208,8 @@ async function generate(){
   var project=document.getElementById('project').value.trim();
   if(!project){alert('案件名を入力してください');return;}
   var target=document.getElementById('target').value.trim();
+  var media=document.getElementById('media').value;
+  var tone=document.getElementById('tone').value;
   var bc=document.getElementById('bc').value.trim();
   var notes=document.getElementById('notes').value.trim();
 
@@ -227,25 +217,47 @@ async function generate(){
   btn.disabled=true;
   document.getElementById('bt').style.display='none';
   document.getElementById('sp').style.display='block';
+  document.getElementById('out').innerHTML='<div class="empty"><div class="empty-ico" style="opacity:.4">⏳</div><div class="empty-txt">AIがデザインを考えています...<br><span style="font-size:11px;color:var(--a4)">配色・レイアウト・参考リンクを生成中</span></div></div>';
 
-  var prompt='あなたはプロのグラフィックデザイナーです。以下の案件のデザイン方向性を提案してください。\n'
-    +'案件:'+project+'\nターゲット:'+(target||'未指定')+'\n媒体:'+selMedia+'\nトーン:'+selTone+'\n'
-    +(bc?'ブランドカラー:'+bc+'\n':'')+(notes?'要望:'+notes+'\n':'')
-    +'\n以下のJSONのみ出力（前後の説明不要）:\n'
-    +'{"overview":"方向性まとめ40文字以内","palettes":[{"name":"配色名8文字","concept":"コンセプト25文字","colors":["#hex1","#hex2","#hex3","#hex4"],"color_names":["名前1","名前2","名前3","名前4"],"bg_gradient":["#fromColor","#toColor"],"accent":"#accentHex","text_color":"#textHex","font_main":"見出しフォント方向性15文字","font_main_en":"Noto Sans JP","font_sub":"本文フォント方向性15文字","font_sub_en":"Noto Sans JP","layout":"レイアウト方針30文字","mood":"印象15文字"},{"name":"配色名8文字","concept":"コンセプト25文字","colors":["#hex1","#hex2","#hex3","#hex4"],"color_names":["名前1","名前2","名前3","名前4"],"bg_gradient":["#fromColor","#toColor"],"accent":"#accentHex","text_color":"#textHex","font_main":"見出しフォント方向性15文字","font_main_en":"Zen Maru Gothic","font_sub":"本文フォント方向性15文字","font_sub_en":"Noto Sans JP","layout":"レイアウト方針30文字","mood":"印象15文字"},{"name":"配色名8文字","concept":"コンセプト25文字","colors":["#hex1","#hex2","#hex3","#hex4"],"color_names":["名前1","名前2","名前3","名前4"],"bg_gradient":["#fromColor","#toColor"],"accent":"#accentHex","text_color":"#textHex","font_main":"見出しフォント方向性15文字","font_main_en":"Playfair Display","font_sub":"本文フォント方向性15文字","font_sub_en":"Noto Sans JP","layout":"レイアウト方針30文字","mood":"印象15文字"}],"layouts":["中央揃えタイトル+商品グリッド","左寄せタイトル+右画像","上部タイトル帯+下段商品一覧","対角線レイアウト","フルブリード画像+テキストオーバーレイ"],"dos":["やること1","やること2","やること3"],"donts":["避けること1","避けること2"]}';
+  var prompt='あなたはLIPSやブランドのバナー制作に精通したプロのグラフィックデザイナーです。\n'
+    +'以下の案件について、Illustratorですぐ制作に取り掛かれるレベルの具体的なデザインアイデアを3案提案してください。\n\n'
+    +'案件：'+project+'\n'
+    +'ターゲット：'+(target||'未指定')+'\n'
+    +'媒体：'+media+'\n'
+    +'トーン：'+tone+'\n'
+    +(bc?'ブランドカラー：'+bc+'\n':'')
+    +(notes?'その他：'+notes+'\n':'')
+    +'\n以下のJSON形式のみ出力（説明文・マークダウン不要）:\n'
+    +'{"ideas":['
+    +'{"concept":"コンセプト名12文字以内",'
+    +'"title":"デザイン方向性タイトル20文字以内",'
+    +'"description":"このデザインにした理由と狙い・ターゲットへの訴求方法・全体の印象を60文字以内で具体的に",'
+    +'"colors":["#hex1","#hex2","#hex3","#hex4"],'
+    +'"cnames":["色名1","色名2","色名3","色名4"],'
+    +'"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex",'
+    +'"font":"フォント方向性と理由15文字",'
+    +'"layout":"レイアウト構成の説明15文字",'
+    +'"mood":"キーワード一言8文字",'
+    +'"ai_steps":["Illustratorでの具体的な手順1（例：新規ドキュメントを1080×1080pxで作成し背景をグラデーションで塗る）","手順2（例：テキストをNoto Sans JP Blackで配置しアウトライン化してグラデーション塗りを適用）","手順3（例：装飾要素として楕円ツールで丸を複数配置し不透明度20%に設定）"],'
+    +'"pinterest_kw":"Pinterest検索英語キーワード4〜6単語",'
+    +'"behance_kw":"Behance検索英語キーワード3〜4単語",'
+    +'"google_kw":"Google画像検索日本語キーワード5〜8文字"}'
+    +',{"concept":"...","title":"...","description":"...","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout":"...","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."}'
+    +',{"concept":"...","title":"...","description":"...","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout":"...","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."}'
+    +']}';
 
   try{
     var res=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
       headers:{
         'Content-Type':'application/json',
-        'x-api-key': window.CLAUDE_KEY || prompt_for_key(),
+        'x-api-key':getKey(),
         'anthropic-version':'2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
+        'anthropic-dangerous-direct-browser-access':'true'
       },
       body:JSON.stringify({
-        model:'claude-haiku-4-5-20251001',
-        max_tokens:1500,
+        model:'claude-sonnet-4-20250514',
+        max_tokens:2000,
         messages:[{role:'user',content:prompt}]
       })
     });
@@ -253,13 +265,12 @@ async function generate(){
     if(d.error)throw new Error(d.error.message||JSON.stringify(d.error));
     var text=(d.content&&d.content[0]&&d.content[0].text)||'';
     var m=text.match(/\{[\s\S]*\}/);
-    if(!m)throw new Error('JSON not found');
-    currentData=JSON.parse(m[0]);
-    currentPalIdx=0;
-    renderAll(project,target);
+    if(!m)throw new Error('JSONが見つかりません');
+    D=JSON.parse(m[0]);
+    render(project,target);
   }catch(e){
     console.error(e);
-    alert('生成に失敗しました: '+e.message);
+    document.getElementById('out').innerHTML='<div class="empty"><div class="empty-ico">⚠️</div><div class="empty-txt">エラー: '+esc(e.message)+'</div></div>';
   }finally{
     btn.disabled=false;
     document.getElementById('bt').style.display='block';
@@ -267,253 +278,138 @@ async function generate(){
   }
 }
 
-function renderAll(project,target){
-  var d=currentData;
-  var out=document.getElementById('output');
+function render(project,target){
+  var out=document.getElementById('out');
   out.innerHTML='';
 
-  // Overview
-  var ov=document.createElement('div');
-  ov.className='overview fade';
-  ov.innerHTML='<div class="ov-label">✦ デザインブリーフ</div>'
-    +'<div class="ov-project">'+esc(project)+'</div>'
-    +'<div class="ov-meta">'+(target?'ターゲット：'+esc(target)+'　':'')+' 媒体：'+esc(selMedia)+'　トーン：'+esc(selTone)+'</div>'
-    +(d.overview?'<div class="ov-summary">'+esc(d.overview)+'</div>':'')
-    +'<button class="copy-all-btn" onclick="copyAll()">📋 ブリーフ全体をコピー</button>';
-  out.appendChild(ov);
+  var grid=document.createElement('div');
+  grid.className='ideas';
 
-  // Palette section
-  var pw=document.createElement('div');
-  pw.className='palette-wrap fade';
-  pw.style.animationDelay='.06s';
-  pw.innerHTML='<div class="pw-head">配色パターン + バナープレビュー + フォント</div>'
-    +'<div class="ptabs" id="ptabs">'
-    +(d.palettes||[]).map(function(p,i){return '<div class="ptab'+(i===0?' on':'')+'" onclick="switchPal('+i+')">'+esc(p.name||'パターン'+(i+1))+'</div>';}).join('')
-    +'</div>'
-    +'<div id="palContent"></div>';
-  out.appendChild(pw);
+  (D.ideas||[]).forEach(function(idea,i){
+    var pq=encodeURIComponent(idea.pinterest_kw||'banner design');
+    var bq=encodeURIComponent(idea.behance_kw||'banner design');
+    var gq=encodeURIComponent(idea.google_kw||project);
 
-  // Wireframe section
-  var ww=document.createElement('div');
-  ww.className='wireframe-wrap fade';
-  ww.style.animationDelay='.12s';
-  ww.innerHTML='<div class="pw-head">レイアウト・ワイヤーフレーム</div>'
-    +'<div class="wf-tabs" id="wftabs">'
-    +(d.layouts||[]).slice(0,5).map(function(l,i){return '<div class="wftab'+(i===0?' on':'')+'" onclick="switchWF('+i+','+JSON.stringify(d.layouts||[]).replace(/"/g,'&quot;')+')">'+esc(l)+'</div>';}).join('')
-    +'</div>'
-    +'<div id="wfContent"></div>';
-  out.appendChild(ww);
+    var card=document.createElement('div');
+    card.className='icard fu';
+    card.style.animationDelay=(i*.1)+'s';
 
-  // DO/DON'T
-  var dd=document.createElement('div');
-  dd.className='dodont fade';
-  dd.style.animationDelay='.18s';
-  dd.innerHTML='<div class="dd-card"><div class="dd-title" style="color:var(--a4)">✅ やるべきこと</div>'
-    +(d.dos||[]).map(function(x){return '<div class="dd-item"><div class="dd-ico">→</div><div>'+esc(x)+'</div></div>';}).join('')
-    +'</div>'
-    +'<div class="dd-card"><div class="dd-title" style="color:var(--a2)">❌ 避けること</div>'
-    +(d.donts||[]).map(function(x){return '<div class="dd-item"><div class="dd-ico">✕</div><div>'+esc(x)+'</div></div>';}).join('')
-    +'</div>';
-  out.appendChild(dd);
+    // 安全なカラー
+    var bgF=idea.bg_from||'#1a1930';
+    var bgT=idea.bg_to||'#0f0e1e';
+    var acc=idea.accent||'#7c6aff';
+    var txc=idea.text_color||'#ffffff';
+    var cols=idea.colors||['#7c6aff','#ff6a8a','#ffd93d','#4aefc0'];
 
-  renderPalette(0);
-  renderWF(0,currentData.layouts||[]);
+    card.innerHTML=
+      // Mock banner
+      '<div class="mock" style="background:linear-gradient(135deg,'+esc(bgF)+','+esc(bgT)+')">'
+      +'<span class="mock-deco" style="top:8%;left:5%">✿</span>'
+      +'<span class="mock-deco" style="top:5%;right:7%">★</span>'
+      +'<span class="mock-deco" style="bottom:18%;left:4%">♡</span>'
+      +'<span class="mock-deco" style="bottom:16%;right:5%">✦</span>'
+      +'<span class="mock-deco" style="top:45%;left:2%">◎</span>'
+      +'<div class="mock-eyebrow" style="background:'+esc(acc)+';color:#fff">'+esc(idea.concept||'')+'</div>'
+      +'<div class="mock-title" style="color:'+esc(txc)+'">'+(project.slice(0,14)||'タイトル')+'</div>'
+      +'<div class="mock-sub" style="color:'+esc(txc)+'">'+(target||idea.mood||'ターゲット')+'</div>'
+      +'<div class="mock-colors">'+cols.map(function(c){return '<div class="mock-dot" style="background:'+esc(c)+'"></div>';}).join('')+'</div>'
+      +'<div class="mock-stripe" style="background:linear-gradient(90deg,'+cols.join(',')+')"></div>'
+      +'</div>'
+
+      // Body
+      +'<div class="ibody">'
+      +'<div class="inum">IDEA '+(i+1)+'</div>'
+      +'<div class="ititle">'+esc(idea.title||'')+'</div>'
+      +'<div class="idesc">'+esc(idea.description||'')+'</div>'
+
+      // Swatches
+      +'<div class="swatches">'+cols.map(function(c,ci){
+        return '<div class="sw" style="background:'+esc(c)+'" onclick="copyTxt(\''+esc(c)+'\')" title="'+(idea.cnames||[])[ci]+' — クリックでコピー"><span class="sw-hex">'+esc(c)+'</span></div>';
+      }).join('')+'</div>'
+
+      // Tags
+      +'<div class="tags">'
+      +'<span class="tag tf">🔤 '+esc(idea.font||'')+'</span>'
+      +'<span class="tag tl">📐 '+esc(idea.layout||'')+'</span>'
+      +'<span class="tag tm">✨ '+esc(idea.mood||'')+'</span>'
+      +'</div>'
+
+      // Illustrator steps
+      +'<div class="ai-sec">'
+      +'<div class="ai-label">Illustratorでの作り方</div>'
+      +'<div class="ai-steps">'
+      +(idea.ai_steps||[]).map(function(s,si){
+        return '<div class="ai-step"><span class="ai-step-num">'+(si+1)+'.</span><span>'+esc(s)+'</span></div>';
+      }).join('')
+      +'</div></div>'
+
+      // Reference links
+      +'<div class="refs">'
+      +'<div class="refs-label">参考画像を探す</div>'
+      +'<div class="ref-list">'
+      +'<a class="ref-a" href="https://www.pinterest.jp/search/pins/?q='+pq+'" target="_blank" rel="noopener">'
+      +'<span class="ref-ico">📌</span>'
+      +'<div class="ref-info"><div class="ref-site">Pinterest</div><div class="ref-kw">'+esc(idea.pinterest_kw||'')+'</div></div>'
+      +'<span class="ref-arr">↗</span></a>'
+
+      +'<a class="ref-a" href="https://www.behance.net/search/projects/?search='+bq+'" target="_blank" rel="noopener">'
+      +'<span class="ref-ico">🎨</span>'
+      +'<div class="ref-info"><div class="ref-site">Behance</div><div class="ref-kw">'+esc(idea.behance_kw||'')+'</div></div>'
+      +'<span class="ref-arr">↗</span></a>'
+
+      +'<a class="ref-a" href="https://www.google.com/search?q='+gq+'&tbm=isch" target="_blank" rel="noopener">'
+      +'<span class="ref-ico">🔍</span>'
+      +'<div class="ref-info"><div class="ref-site">Google画像</div><div class="ref-kw">'+esc(idea.google_kw||'')+'</div></div>'
+      +'<span class="ref-arr">↗</span></a>'
+      +'</div></div>'
+      +'</div>';
+
+    grid.appendChild(card);
+  });
+
+  out.appendChild(grid);
+
+  var cw=document.createElement('div');
+  cw.className='copy-wrap fu';cw.style.animationDelay='.35s';
+  cw.innerHTML='<button class="copy-btn" onclick="copyAll()">📋 ブリーフ全体をコピー（Slack・Notion用）</button>';
+  out.appendChild(cw);
 }
 
-function switchPal(i){
-  currentPalIdx=i;
-  document.querySelectorAll('.ptab').forEach(function(t,ti){t.classList.toggle('on',ti===i);});
-  renderPalette(i);
+function showToast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg||'コピーしました！';
+  t.classList.add('show');
+  setTimeout(function(){t.classList.remove('show');},1800);
 }
 
-function renderPalette(i){
-  var p=(currentData.palettes||[])[i];
-  if(!p)return;
-  var el=document.getElementById('palContent');
-
-  var from=(p.bg_gradient||[])[0]||p.colors[0]||'#fff';
-  var to=(p.bg_gradient||[])[1]||p.colors[1]||'#eee';
-  var accent=p.accent||p.colors[0]||'#7c6aff';
-  var textCol=p.text_color||'#ffffff';
-
-  // Banner preview HTML
-  var bannerHTML='<div class="banner-preview">'
-    +'<div class="bp-bar" style="background:'+esc(accent)+'"></div>'
-    +'<div class="bp-bg" style="background:linear-gradient(135deg,'+esc(from)+','+esc(to)+')">'
-    +'<span class="bp-deco" style="top:8%;left:5%">✿</span>'
-    +'<span class="bp-deco" style="top:5%;right:8%">★</span>'
-    +'<span class="bp-deco" style="bottom:20%;left:3%">♡</span>'
-    +'<span class="bp-deco" style="bottom:18%;right:4%">✦</span>'
-    +'<div class="bp-title-area">'
-    +'<div class="bp-title" style="color:'+esc(textCol)+';font-family:\''+esc(p.font_main_en||'Noto Sans JP')+'\',sans-serif">'
-    +esc(document.getElementById('project').value.slice(0,16))
-    +'</div>'
-    +'<div class="bp-sub" style="color:'+esc(textCol)+'">'+(document.getElementById('target').value||'ターゲット層')+'</div>'
-    +'<div class="bp-badge" style="background:'+esc(accent)+';color:#fff">'+esc(p.mood||'')+'</div>'
-    +'</div></div>'
-    +'<div class="bp-footer" style="background:rgba(0,0,0,.15)">'
-    +'<div class="bp-footer-txt" style="color:'+esc(textCol)+'">'+esc(selMedia)+'</div>'
-    +'<div class="bp-colors">'
-    +(p.colors||[]).map(function(c){return '<div class="bp-dot" style="background:'+esc(c)+'" title="'+esc(c)+'"></div>';}).join('')
-    +'</div></div>'
-    +'<div class="bp-bar" style="background:'+esc(p.colors[1]||accent)+'"></div>'
-    +'</div>';
-
-  // Details
-  var detHTML='<div class="palette-details">'
-    +'<div class="palette-name-big">'+esc(p.name||'')+'</div>'
-    +'<div class="palette-concept-txt">'+esc(p.concept||'')+'</div>'
-    // Color swatches
-    +'<div class="color-swatches">'
-    +(p.colors||[]).map(function(c,ci){
-      return '<div class="cswatch" onclick="copyText(\''+esc(c)+'\')" title="クリックでコピー">'
-        +'<div class="cswatch-box" style="background:'+esc(c)+'"></div>'
-        +'<div class="cswatch-name">'+esc((p.color_names||[])[ci]||'')+'</div>'
-        +'<div class="cswatch-hex">'+esc(c)+'</div>'
-        +'</div>';
-    }).join('')
-    +'</div>'
-    // Font preview main
-    +'<div class="font-preview">'
-    +'<div class="fp-label">見出しフォント</div>'
-    +'<div class="fp-sample" style="font-family:\''+esc(p.font_main_en||'Noto Sans JP')+'\',sans-serif;color:'+esc(accent)+'">'+esc(document.getElementById('project').value.slice(0,10)||'タイトルサンプル')+'</div>'
-    +'<div class="fp-name">'+esc(p.font_main||'')+'</div>'
-    +'</div>'
-    // Font preview sub
-    +'<div class="font-preview">'
-    +'<div class="fp-label">本文フォント</div>'
-    +'<div class="fp-sample" style="font-family:\''+esc(p.font_sub_en||'Noto Sans JP')+'\',sans-serif;font-size:14px;font-weight:400;color:var(--mu)">本文テキストのサンプルです。読みやすさを重視。</div>'
-    +'<div class="fp-name">'+esc(p.font_sub||'')+'</div>'
-    +'</div>'
-    +'<div style="font-size:10px;color:var(--mu);padding:8px 10px;background:var(--s2);border-radius:7px;line-height:1.7"><strong style="color:var(--a3)">レイアウト方針：</strong>'+esc(p.layout||'')+'</div>'
-    +'</div>';
-
-  el.innerHTML='<div class="palette-content">'+bannerHTML+detHTML+'</div>';
+function copyTxt(t){
+  navigator.clipboard.writeText(t).then(function(){showToast(t+' をコピー！');});
 }
-
-function switchWF(i,layouts){
-  document.querySelectorAll('.wftab').forEach(function(t,ti){t.classList.toggle('on',ti===i);});
-  renderWF(i,layouts);
-}
-
-function renderWF(i,layouts){
-  var el=document.getElementById('wfContent');
-  var layoutName=(layouts||[])[i]||'';
-  var media=selMedia;
-
-  // SVGワイヤーフレームを生成
-  var svgs=generateWFSVGs(layoutName,i,media);
-  var descriptions=getLayoutDesc(layoutName,i);
-
-  el.innerHTML='<div class="wf-content">'
-    +'<div class="wf-frame"><div class="wf-frame-label">'+esc(layoutName)+'</div>'+svgs+'</div>'
-    +'<div class="wf-desc">'+descriptions+'</div>'
-    +'</div>';
-}
-
-function generateWFSVGs(name,idx,media){
-  // アスペクト比
-  var isVertical=media.indexOf('ストーリー')>=0||media.indexOf('正方形')>=0;
-  var isWide=media.indexOf('横長')>=0||media.indexOf('OGP')>=0||media.indexOf('LPヘッダー')>=0;
-  var vb=isWide?'0 0 300 160':isVertical?'0 0 200 250':'0 0 200 200';
-  var W=isWide?300:200;
-  var H=isWide?160:isVertical?250:200;
-
-  var patterns=[
-    // 0: 中央揃えタイトル+商品グリッド
-    function(){
-      return '<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#1a1930" rx="4"/>'
-        +'<rect x="0" y="0" width="'+W+'" height="4" fill="#7c6aff"/>'
-        +'<rect x="'+(W*.3)+'" y="10" width="'+(W*.4)+'" height="14" fill="#7c6aff" opacity=".6" rx="7"/>'
-        +'<rect x="'+(W*.15)+'" y="30" width="'+(W*.7)+'" height="20" fill="#fff" opacity=".15" rx="4"/>'
-        +'<text x="'+W/2+'" y="44" text-anchor="middle" fill="#fff" font-size="8" opacity=".4">TITLE</text>'
-        +'<line x1="'+W*.3+'" y1="56" x2="'+W*.7+'" y2="56" stroke="#7c6aff" stroke-width="1.5" opacity=".5"/>'
-        +[0,1,2].map(function(j){var x=W*.08+j*(W*.3);return '<rect x="'+x+'" y="64" width="'+(W*.25)+'" height="'+(H*.38)+'" fill="#fff" opacity=".06" rx="4"/><rect x="'+x+'" y="'+(64+H*.38+4)+'" width="'+(W*.25)+'" height="6" fill="#fff" opacity=".1" rx="3"/>';}).join('')
-        +'<rect x="'+W*.35+'" y="'+(H*.9)+'" width="'+(W*.3)+'" height="8" fill="#7c6aff" opacity=".4" rx="4"/>';
-    },
-    // 1: 左寄せタイトル+右画像
-    function(){
-      return '<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#1a1930" rx="4"/>'
-        +'<rect x="0" y="0" width="'+W+'" height="4" fill="#ff6a8a"/>'
-        +'<rect x="10" y="14" width="'+(W*.35)+'" height="8" fill="#ff6a8a" opacity=".5" rx="4"/>'
-        +'<rect x="10" y="26" width="'+(W*.42)+'" height="16" fill="#fff" opacity=".12" rx="3"/>'
-        +'<text x="'+(10+W*.21)+'" y="37" text-anchor="middle" fill="#fff" font-size="7" opacity=".35">TITLE</text>'
-        +'<rect x="10" y="46" width="'+(W*.35)+'" height="5" fill="#fff" opacity=".08" rx="2"/>'
-        +'<rect x="10" y="54" width="'+(W*.28)+'" height="5" fill="#fff" opacity=".08" rx="2"/>'
-        +'<rect x="10" y="66" width="'+(W*.2)+'" height="10" fill="#ff6a8a" opacity=".5" rx="5"/>'
-        +'<rect x="'+(W*.52)+'" y="10" width="'+(W*.44)+'" height="'+(H*.82)+'" fill="#fff" opacity=".08" rx="6"/>'
-        +'<text x="'+(W*.74)+'" y="'+(H*.5)+'" text-anchor="middle" fill="#fff" font-size="7" opacity=".25">IMAGE</text>'
-        +'<rect x="0" y="'+(H*.92)+'" width="'+W+'" height="'+(H*.08)+'" fill="#ff6a8a" opacity=".15"/>';
-    },
-    // 2: 上部タイトル帯+下段商品一覧
-    function(){
-      return '<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#1a1930" rx="4"/>'
-        +'<rect x="0" y="0" width="'+W+'" height="'+(H*.32)+'" fill="#7c6aff" opacity=".2"/>'
-        +'<rect x="'+W*.25+'" y="8" width="'+W*.5+'" height="10" fill="#7c6aff" opacity=".5" rx="5"/>'
-        +'<rect x="'+W*.15+'" y="22" width="'+W*.7+'" height="18" fill="#fff" opacity=".12" rx="4"/>'
-        +'<text x="'+W/2+'" y="34" text-anchor="middle" fill="#fff" font-size="8" opacity=".35">タイトル大見出し</text>'
-        +'<line x1="0" y1="'+(H*.34)+'" x2="'+W+'" y2="'+(H*.34)+'" stroke="#7c6aff" stroke-width="2" opacity=".4"/>'
-        +[0,1,2,3].map(function(j){var x=W*.04+j*(W*.24);return '<rect x="'+x+'" y="'+(H*.38)+'" width="'+(W*.2)+'" height="'+(H*.38)+'" fill="#fff" opacity=".06" rx="4"/><rect x="'+x+'" y="'+(H*.38+H*.38+4)+'" width="'+(W*.2)+'" height="5" fill="#fff" opacity=".08" rx="2"/>';}).join('')
-        +'<rect x="'+W*.3+'" y="'+(H*.92)+'" width="'+W*.4+'" height="6" fill="#7c6aff" opacity=".3" rx="3"/>';
-    },
-    // 3: 対角線レイアウト
-    function(){
-      return '<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#1a1930" rx="4"/>'
-        +'<polygon points="0,0 '+(W*.6)+',0 0,'+(H*.55)+'" fill="#7c6aff" opacity=".15"/>'
-        +'<polygon points="'+W+','+(H*.45)+' '+W+','+H+' '+(W*.4)+','+H+'" fill="#ff6a8a" opacity=".12"/>'
-        +'<rect x="10" y="16" width="'+(W*.45)+'" height="20" fill="#fff" opacity=".1" rx="4"/>'
-        +'<text x="'+(10+W*.225)+'" y="29" text-anchor="middle" fill="#fff" font-size="8" opacity=".35">TITLE</text>'
-        +'<rect x="10" y="40" width="'+(W*.38)+'" height="5" fill="#fff" opacity=".08" rx="2"/>'
-        +'<rect x="10" y="48" width="'+(W*.3)+'" height="5" fill="#fff" opacity=".08" rx="2"/>'
-        +'<rect x="10" y="60" width="'+(W*.2)+'" height="12" fill="#7c6aff" opacity=".5" rx="6"/>'
-        +'<rect x="'+(W*.5)+'" y="'+(H*.15)+'" width="'+(W*.45)+'" height="'+(H*.6)+'" fill="#fff" opacity=".06" rx="8"/>'
-        +'<text x="'+(W*.725)+'" y="'+(H*.47)+'" text-anchor="middle" fill="#fff" font-size="7" opacity=".25">IMAGE</text>';
-    },
-    // 4: フルブリード+テキストオーバーレイ
-    function(){
-      return '<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#1a1930" rx="4"/>'
-        +'<rect x="0" y="0" width="'+W+'" height="'+H+'" fill="#fff" opacity=".04" rx="4"/>'
-        +'<text x="'+W/2+'" y="'+H/2+'" text-anchor="middle" fill="#fff" font-size="9" opacity=".15">FULL IMAGE</text>'
-        +'<rect x="0" y="'+(H*.55)+'" width="'+W+'" height="'+(H*.45)+'" fill="url(#grad1)" opacity=".85"/>'
-        +'<defs><linearGradient id="grad1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1a1930" stop-opacity="0"/><stop offset="100%" stop-color="#1a1930" stop-opacity="1"/></linearGradient></defs>'
-        +'<rect x="'+W*.1+'" y="'+(H*.62)+'" width="'+W*.8+'" height="18" fill="#fff" opacity=".1" rx="4"/>'
-        +'<text x="'+W/2+'" y="'+(H*.62+12)+'" text-anchor="middle" fill="#fff" font-size="8" opacity=".35">TITLE</text>'
-        +'<rect x="'+W*.15+'" y="'+(H*.84)+'" width="'+W*.7+'" height="5" fill="#fff" opacity=".08" rx="2"/>'
-        +'<rect x="'+W*.3+'" y="'+(H*.92)+'" width="'+W*.4+'" height="8" fill="#7c6aff" opacity=".5" rx="4"/>';
-    },
-  ];
-
-  var fn=patterns[idx%patterns.length]||patterns[0];
-  return '<svg viewBox="'+vb+'" xmlns="http://www.w3.org/2000/svg" style="border-radius:8px">'+fn()+'</svg>';
-}
-
-function getLayoutDesc(name,idx){
-  var descs=[
-    '<h4>中央揃えタイトル + 商品グリッド</h4><p>タイトルを画面中央に配置し、下部に商品をグリッド状に並べる最もオーソドックスな構成。</p><h4>向いている案件</h4><p>商品まとめ・比較バナー・LIPSタイプの投稿画像</p><h4>注意点</h4><p>商品数が多いと窮屈になるため、3〜6個程度が最適。余白を意識して。</p>',
-    '<h4>左寄せタイトル + 右画像</h4><p>左にテキスト情報、右に商品画像を配置。視線が左から右へ自然に流れる読みやすい構成。</p><h4>向いている案件</h4><p>単品商品PRバナー・イベント告知・横長バナー</p><h4>注意点</h4><p>画像の被写体が右向きだと視線が外に逃げるため、内側向きの画像が効果的。</p>',
-    '<h4>上部タイトル帯 + 下段商品一覧</h4><p>上部に目立つタイトルエリアを設け、下段に商品を横並びで展開。情報の優先度が明確。</p><h4>向いている案件</h4><p>セール告知・複数商品一覧・ランキング系バナー</p><h4>注意点</h4><p>上部の帯が強すぎると商品が見えにくくなるため、コントラストを調整。</p>',
-    '<h4>対角線レイアウト</h4><p>画面を斜めに分割し、動きと緊張感を生む上級レイアウト。視線誘導が強くインパクト大。</p><h4>向いている案件</h4><p>クール系・スポーツ・テック・キャンペーン告知</p><h4>注意点</h4><p>テキストが斜めのラインに沿って読みにくくなりやすいため、文字量は最小限に。</p>',
-    '<h4>フルブリード画像 + テキストオーバーレイ</h4><p>全面に画像を敷き、下部にグラデーションをかけてテキストを重ねる映画ポスター的な手法。</p><h4>向いている案件</h4><p>高級感・ファッション・ブランドバナー・LPヘッダー</p><h4>注意点</h4><p>画像の選定が命。写真がショボいと全て台無しになる。人物・風景の高品質素材必須。</p>',
-  ];
-  return descs[idx%descs.length]||descs[0];
-}
-
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-function copyText(t){navigator.clipboard.writeText(t);}
 
 function copyAll(){
-  if(!currentData)return;
-  var d=currentData;
-  var txt='【デザインブリーフ】\n案件：'+document.getElementById('project').value+'\n媒体：'+selMedia+'\nトーン：'+selTone+'\n\n方向性：'+(d.overview||'')+'\n\n';
-  (d.palettes||[]).forEach(function(p,i){
-    txt+='【配色案'+(i+1)+'：'+p.name+'】\n';
-    txt+='コンセプト：'+p.concept+'\n';
-    txt+='カラー：'+(p.colors||[]).join(' / ')+'\n';
-    txt+='見出しフォント：'+p.font_main+'\n本文フォント：'+p.font_sub+'\n';
-    txt+='レイアウト：'+p.layout+'\n\n';
+  if(!D)return;
+  var project=document.getElementById('project').value;
+  var txt='【デザインブリーフ】\n';
+  txt+='案件：'+project+'\n';
+  txt+='媒体：'+document.getElementById('media').value+'\n';
+  txt+='トーン：'+document.getElementById('tone').value+'\n\n';
+  (D.ideas||[]).forEach(function(idea,i){
+    txt+='━━━━━━━━━━━━\n';
+    txt+='【アイデア'+(i+1)+'：'+idea.concept+'】\n';
+    txt+=idea.title+'\n\n';
+    txt+=idea.description+'\n\n';
+    txt+='配色：'+(idea.colors||[]).join(' / ')+'\n';
+    txt+='フォント：'+idea.font+'\n';
+    txt+='レイアウト：'+idea.layout+'\n\n';
+    txt+='Illustratorでの作り方：\n';
+    (idea.ai_steps||[]).forEach(function(s,si){txt+=(si+1)+'. '+s+'\n';});
+    txt+='\n参考：Pinterest「'+idea.pinterest_kw+'」\n\n';
   });
-  txt+='DO：'+(d.dos||[]).join('、')+'\nDON\'T：'+(d.donts||[]).join('、');
-  navigator.clipboard.writeText(txt).then(function(){alert('コピーしました！');});
+  navigator.clipboard.writeText(txt).then(function(){showToast('ブリーフをコピーしました！');});
+}
+
+function esc(s){
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 </script>
 </body>
