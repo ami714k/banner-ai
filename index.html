@@ -6,147 +6,124 @@
 <title>BRIEF — デザインの方向性を、秒で決める。</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#07060f;--s1:#0f0e1e;--s2:#16152a;--s3:#1e1c38;
-  --a1:#7c6aff;--a2:#ff6a8a;--a3:#ffd93d;--a4:#4aefc0;
-  --tx:#f0f0fa;--mu:#6060a0;--bd:#22203a;
-}
+:root{--bg:#07060f;--s1:#0f0e1e;--s2:#16152a;--a1:#7c6aff;--a2:#ff6a8a;--a3:#ffd93d;--a4:#4aefc0;--tx:#f0f0fa;--mu:#6060a0;--bd:#22203a;}
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;min-height:100vh;}
-body::before{content:'';position:fixed;inset:0;
-  background:radial-gradient(ellipse 60% 40% at 15% 15%,rgba(124,106,255,.12) 0%,transparent 55%),
-  radial-gradient(ellipse 50% 40% at 85% 85%,rgba(255,106,138,.08) 0%,transparent 55%);
-  pointer-events:none;z-index:0;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 15% 15%,rgba(124,106,255,.12) 0%,transparent 55%),radial-gradient(ellipse 50% 40% at 85% 85%,rgba(255,106,138,.08) 0%,transparent 55%);pointer-events:none;z-index:0;}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
 
-.wrap{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
-
+/* HEADER */
 .header{padding:24px 0 12px;display:flex;align-items:flex-end;justify-content:space-between;}
-.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;
-  background:linear-gradient(130deg,var(--a1),var(--a2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px;}
+.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;background:linear-gradient(130deg,var(--a1),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px;}
 .logo-sub{font-size:10px;color:var(--mu);margin-top:2px;}
-.header-badge{background:rgba(124,106,255,.15);border:1px solid rgba(124,106,255,.3);
-  color:var(--a1);font-size:9px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:1px;}
+.header-badge{background:rgba(124,106,255,.15);border:1px solid rgba(124,106,255,.3);color:var(--a1);font-size:9px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:1px;}
 
+/* HERO */
 .hero{padding:20px 0 28px;}
-.hero h1{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,52px);font-weight:800;
-  line-height:1.08;letter-spacing:-2px;margin-bottom:10px;}
-.hero h1 em{font-style:normal;
-  background:linear-gradient(130deg,var(--a1),var(--a2),var(--a3));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,52px);font-weight:800;line-height:1.08;letter-spacing:-2px;margin-bottom:10px;}
+.hero h1 em{font-style:normal;background:linear-gradient(130deg,var(--a1),var(--a2),var(--a3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .hero p{color:var(--mu);font-size:12px;line-height:1.8;max-width:560px;}
 
+/* FORM */
 .fcard{background:var(--s1);border:1px solid var(--bd);border-radius:18px;padding:24px;margin-bottom:24px;}
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
 @media(max-width:620px){.fgrid{grid-template-columns:1fr;}}
 .fg{margin-bottom:0;}
 .fg label{display:block;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu);margin-bottom:4px;}
 .fg label .req{color:var(--a2);}
-input[type=text],select,textarea{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:8px;
-  color:var(--tx);font-family:'Noto Sans JP',sans-serif;font-size:12px;padding:9px 12px;outline:none;transition:border-color .2s;}
-input[type=text]:focus,select:focus,textarea:focus{border-color:var(--a1);}
-textarea{resize:none;height:58px;}
+input[type=text],select{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);font-family:'Noto Sans JP',sans-serif;font-size:12px;padding:9px 12px;outline:none;transition:border-color .2s;}
+input[type=text]:focus,select:focus{border-color:var(--a1);}
 select option{background:var(--s2);}
 .fg-full{grid-column:1/-1;}
-.gbtn{width:100%;background:linear-gradient(130deg,var(--a1),var(--a2));border:none;border-radius:11px;
-  color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;padding:14px;cursor:pointer;
-  margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px;
-  transition:opacity .2s,transform .1s;}
+.gbtn{width:100%;background:linear-gradient(130deg,var(--a1),var(--a2));border:none;border-radius:11px;color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;padding:14px;cursor:pointer;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .2s,transform .1s;}
 .gbtn:hover{opacity:.88;transform:translateY(-1px);}
 .gbtn:disabled{opacity:.45;cursor:not-allowed;transform:none;}
-.spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;
-  border-radius:50%;animation:spin .7s linear infinite;display:none;}
+.spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
+/* OUTPUT */
 .out{display:flex;flex-direction:column;gap:20px;}
-.empty{background:var(--s1);border:1px solid var(--bd);border-radius:18px;
-  padding:60px 24px;text-align:center;color:var(--mu);}
+.empty{background:var(--s1);border:1px solid var(--bd);border-radius:18px;padding:60px 24px;text-align:center;color:var(--mu);}
 .empty-ico{font-size:52px;margin-bottom:14px;opacity:.2;}
 .empty-txt{font-size:13px;line-height:1.9;}
 .empty-hint{margin-top:10px;font-size:11px;color:var(--a4);}
-
-.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:var(--s1);border:1px solid var(--bd);border-radius:18px;padding:60px;gap:16px;}
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--s1);border:1px solid var(--bd);border-radius:18px;padding:60px;gap:16px;}
 .loading-bar{width:240px;height:3px;background:var(--bd);border-radius:2px;overflow:hidden;}
-.loading-bar-inner{height:100%;background:linear-gradient(90deg,var(--a1),var(--a2));
-  border-radius:2px;animation:lb 1.8s ease-in-out infinite;}
+.loading-bar-inner{height:100%;background:linear-gradient(90deg,var(--a1),var(--a2));border-radius:2px;animation:lb 1.8s ease-in-out infinite;}
 @keyframes lb{0%{width:0%;margin-left:0;}50%{width:60%;margin-left:20%;}100%{width:0%;margin-left:100%;};}
 .loading-txt{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;}
 .loading-sub{font-size:11px;color:var(--mu);}
 
-.result-header{display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--bd);}
+/* RESULT HEADER */
+.result-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--bd);}
 .result-title{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;}
 .result-meta{font-size:10px;color:var(--mu);margin-top:2px;}
-.copy-all-btn{background:rgba(124,106,255,.12);border:1px solid rgba(124,106,255,.25);
-  border-radius:7px;color:var(--a1);font-size:10px;font-weight:700;padding:8px 14px;
-  cursor:pointer;font-family:'Noto Sans JP',sans-serif;transition:all .15s;}
+.copy-all-btn{background:rgba(124,106,255,.12);border:1px solid rgba(124,106,255,.25);border-radius:7px;color:var(--a1);font-size:10px;font-weight:700;padding:8px 14px;cursor:pointer;font-family:'Noto Sans JP',sans-serif;transition:all .15s;}
 .copy-all-btn:hover{background:rgba(124,106,255,.22);}
 
-.ideas{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
-@media(max-width:1100px){.ideas{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:600px){.ideas{grid-template-columns:1fr;}}
+/* COLOR CUSTOMIZER */
+.color-panel{background:var(--s1);border:1px solid var(--bd);border-radius:14px;padding:18px;margin-bottom:20px;}
+.cp-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.cp-title{font-size:11px;font-weight:700;color:var(--tx);}
+.cp-sub{font-size:10px;color:var(--mu);}
+.cp-body{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:700px){.cp-body{grid-template-columns:1fr;}}
 
-.icard{background:var(--s1);border:1.5px solid var(--bd);border-radius:16px;overflow:hidden;
-  display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s,border-color .2s;
-  animation:cardIn .4s ease forwards;opacity:0;}
-.icard:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.5);border-color:rgba(124,106,255,.3);}
+/* Color presets */
+.presets{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.preset-btn{display:flex;gap:3px;align-items:center;padding:5px 10px;border-radius:6px;cursor:pointer;border:1.5px solid var(--bd);background:var(--s2);transition:all .15s;}
+.preset-btn:hover,.preset-btn.active{border-color:var(--a1);}
+.preset-dot{width:12px;height:12px;border-radius:50%;}
+.preset-name{font-size:9px;color:var(--mu);font-weight:600;}
+
+/* Color inputs */
+.color-inputs{display:flex;flex-direction:column;gap:8px;}
+.ci{display:flex;align-items:center;gap:10px;}
+.ci label{font-size:10px;color:var(--mu);width:80px;flex-shrink:0;}
+.ci input[type=color]{width:36px;height:28px;border:none;border-radius:6px;cursor:pointer;padding:2px;background:var(--s2);}
+.ci input[type=text]{flex:1;font-size:11px;padding:5px 9px;}
+
+/* IDEA CARDS - 2x2 grid */
+.ideas{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:700px){.ideas{grid-template-columns:1fr;}}
+
+.icard{background:var(--s1);border:1.5px solid var(--bd);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s,border-color .2s;animation:cardIn .4s ease forwards;opacity:0;}
+.icard:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.5);border-color:rgba(124,106,255,.3);}
 @keyframes cardIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 
-.card-colorbar{display:flex;height:5px;}
-.card-color{flex:1;}
+.card-inner{display:grid;grid-template-columns:1fr 1fr;gap:0;}
 
-/* Realistic layout preview */
-.card-preview{position:relative;overflow:hidden;}
-.card-preview svg{width:100%;height:auto;display:block;}
+/* LEFT: Layout preview */
+.card-preview{position:relative;background:var(--s2);}
+.card-preview svg{width:100%;height:100%;display:block;min-height:220px;}
 
-.card-body{padding:16px;flex:1;display:flex;flex-direction:column;gap:10px;}
-.card-num{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:-2px;}
-.card-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:800;line-height:1.3;color:var(--tx);}
-.card-desc{font-size:10px;color:var(--mu);line-height:1.8;
-  border-left:2px solid var(--a1);padding-left:9px;padding:8px 10px;
-  background:rgba(124,106,255,.06);border-radius:0 6px 6px 0;}
+/* RIGHT: Info */
+.card-info{padding:18px;display:flex;flex-direction:column;gap:10px;}
+.card-num{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;}
+.card-layout-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;line-height:1.3;color:var(--tx);}
+.card-why{font-size:11px;color:var(--tx);line-height:1.85;opacity:.85;flex:1;}
+.card-why-label{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--a1);margin-bottom:4px;}
 
-.swatches{display:flex;gap:0;border-radius:6px;overflow:hidden;height:34px;}
-.sw{flex:1;display:flex;align-items:flex-end;justify-content:center;padding-bottom:3px;
-  cursor:pointer;transition:flex .18s;position:relative;}
-.sw:hover{flex:2.5;}
-.sw-hex{font-size:7px;font-family:monospace;color:rgba(255,255,255,.9);
-  text-shadow:0 1px 4px rgba(0,0,0,.6);font-weight:700;white-space:nowrap;}
-
+/* Tags */
 .tags{display:flex;flex-wrap:wrap;gap:4px;}
 .tag{font-size:9px;font-weight:600;padding:3px 8px;border-radius:4px;}
-.tag-font{background:rgba(124,106,255,.15);color:var(--a1);}
-.tag-layout{background:rgba(255,211,61,.1);color:var(--a3);}
 .tag-mood{background:rgba(74,239,192,.1);color:var(--a4);}
+.tag-font{background:rgba(124,106,255,.15);color:var(--a1);}
 
-.ai-steps{background:var(--s2);border-radius:8px;padding:12px;border:1px solid var(--bd);}
-.ai-steps-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--mu);margin-bottom:8px;display:flex;align-items:center;gap:5px;}
-.ai-badge{font-size:9px;font-weight:900;background:linear-gradient(135deg,#FF9500,#FF3B00);
-  color:white;padding:1px 5px;border-radius:3px;}
-.step-list{display:flex;flex-direction:column;gap:8px;}
-.step-item{display:flex;gap:8px;align-items:flex-start;}
-.step-n{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;color:#fff;flex-shrink:0;margin-top:2px;}
-.step-txt{font-size:12px;color:var(--tx);line-height:1.7;font-weight:500;opacity:.88;}
-
-.refs{border-top:1px solid var(--bd);padding-top:10px;margin-top:auto;}
-.refs-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu);margin-bottom:7px;}
-.ref-list{display:flex;flex-direction:column;gap:4px;}
-.ref-a{display:flex;align-items:center;gap:9px;padding:7px 9px;background:var(--s2);
-  border:1px solid var(--bd);border-radius:6px;text-decoration:none;transition:all .15s;}
+/* Refs */
+.refs{border-top:1px solid var(--bd);padding-top:10px;}
+.refs-label{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--mu);margin-bottom:6px;}
+.ref-list{display:flex;flex-direction:column;gap:3px;}
+.ref-a{display:flex;align-items:center;gap:8px;padding:6px 8px;background:var(--s2);border:1px solid var(--bd);border-radius:6px;text-decoration:none;transition:all .15s;font-size:10px;}
 .ref-a:hover{border-color:var(--a1);background:rgba(124,106,255,.08);}
-.ref-ico{font-size:13px;flex-shrink:0;}
+.ref-ico{font-size:12px;flex-shrink:0;}
 .ref-info{flex:1;min-width:0;}
 .ref-site{font-size:10px;font-weight:700;color:var(--tx);}
 .ref-kw{font-size:9px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.ref-arr{font-size:11px;color:var(--mu);}
+.ref-arr{font-size:10px;color:var(--mu);}
 
-.toast{position:fixed;bottom:24px;right:24px;background:var(--a1);color:#fff;
-  font-size:11px;font-weight:700;padding:10px 18px;border-radius:6px;
-  opacity:0;pointer-events:none;transition:all .25s;z-index:999;transform:translateY(8px);}
+/* Toast */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--a1);color:#fff;font-size:11px;font-weight:700;padding:10px 18px;border-radius:6px;opacity:0;pointer-events:none;transition:all .25s;z-index:999;transform:translateY(8px);}
 .toast.show{opacity:1;transform:translateY(0);}
 </style>
 </head>
@@ -154,30 +131,20 @@ select option{background:var(--s2);}
 <div class="toast" id="toast"></div>
 <div class="wrap">
   <div class="header">
-    <div>
-      <div class="logo">BRIEF</div>
-      <div class="logo-sub">デザインの方向性を、秒で決める。</div>
-    </div>
+    <div><div class="logo">BRIEF</div><div class="logo-sub">デザインの方向性を、秒で決める。</div></div>
     <div class="header-badge">powered by Claude</div>
   </div>
 
   <div class="hero">
     <h1>デザインの方向性を、<br><em>秒で決める。</em></h1>
-    <p>案件情報を入れるだけで、AIが具体的なデザインアイデア・配色・レイアウト・参考リンクを瞬時に生成。「何から始めよう」と悩む時間をゼロにする。</p>
+    <p>案件情報を入れるだけで、AIが4つの異なるレイアウト案を提案。色は自分でカスタマイズできます。</p>
   </div>
 
   <div class="fcard">
     <div class="fgrid">
-      <div class="fg fg-full">
-        <label>案件名・制作物 <span class="req">*</span></label>
-        <input type="text" id="project" placeholder="例：夏の新作コスメ紹介バナー、マリノスのイベント告知">
-      </div>
-      <div class="fg">
-        <label>ターゲット層</label>
-        <input type="text" id="target" placeholder="例：20〜30代女性">
-      </div>
-      <div class="fg">
-        <label>媒体・サイズ</label>
+      <div class="fg fg-full"><label>案件名・制作物 <span class="req">*</span></label><input type="text" id="project" placeholder="例：夏の新作コスメ紹介バナー、マリノスのイベント告知"></div>
+      <div class="fg"><label>ターゲット層</label><input type="text" id="target" placeholder="例：20〜30代女性"></div>
+      <div class="fg"><label>媒体・サイズ</label>
         <select id="media">
           <option value="Instagram正方形 1080×1080px">Instagram正方形</option>
           <option value="Instagramストーリー 1080×1920px">ストーリー縦</option>
@@ -186,29 +153,17 @@ select option{background:var(--s2);}
           <option value="LPヘッダー 1920×600px">LPヘッダー</option>
         </select>
       </div>
-      <div class="fg">
-        <label>雰囲気・トーン</label>
+      <div class="fg"><label>雰囲気・トーン</label>
         <select id="tone">
-          <option>かわいい・ポップ</option>
-          <option>おしゃれ・高級感</option>
-          <option>クール・スタイリッシュ</option>
-          <option>ナチュラル・やわらか</option>
-          <option>信頼感・誠実</option>
-          <option>インパクト重視</option>
-          <option>シンプル・ミニマル</option>
+          <option>かわいい・ポップ</option><option>おしゃれ・高級感</option>
+          <option>クール・スタイリッシュ</option><option>ナチュラル・やわらか</option>
+          <option>信頼感・誠実</option><option>インパクト重視</option><option>シンプル・ミニマル</option>
         </select>
       </div>
-      <div class="fg">
-        <label>ブランドカラー（任意）</label>
-        <input type="text" id="bc" placeholder="例：ネイビー×ゴールド、#FF6EB4">
-      </div>
-      <div class="fg">
-        <label>その他メモ（任意）</label>
-        <input type="text" id="notes" placeholder="例：既存バナーと統一感を出したい">
-      </div>
+      <div class="fg fg-full"><label>その他メモ（任意）</label><input type="text" id="notes" placeholder="例：既存バナーと統一感を出したい、文字多め"></div>
     </div>
     <button class="gbtn" id="gbtn">
-      <span id="bt">✦ デザインアイデアを生成する</span>
+      <span id="bt">✦ レイアウト案を生成する</span>
       <div class="spin" id="sp"></div>
     </button>
   </div>
@@ -216,14 +171,24 @@ select option{background:var(--s2);}
   <div class="out" id="out">
     <div class="empty">
       <div class="empty-ico">✏️</div>
-      <div class="empty-txt">案件情報を入力して「デザインアイデアを生成する」を押してください</div>
-      <div class="empty-hint">✦ アイデア4案 ＋ 配色 ＋ レイアウトプレビュー ＋ Illustrator手順 ＋ 参考リンクを同時生成</div>
+      <div class="empty-txt">案件情報を入力して「レイアウト案を生成する」を押してください</div>
+      <div class="empty-hint">✦ 4つの異なるレイアウト案 ＋ なぜそのデザインか ＋ 参考リンク</div>
     </div>
   </div>
 </div>
 
 <script>
 var D = null;
+var userColors = { bg: '#1a1a2e', accent: '#7c6aff', text: '#ffffff', sub: '#cccccc' };
+
+var COLOR_PRESETS = [
+  { name: 'ナイト', colors: { bg: '#1a1a2e', accent: '#7c6aff', text: '#ffffff', sub: '#cccccc' } },
+  { name: 'ピンク', colors: { bg: '#fff0f7', accent: '#ff6eb4', text: '#831843', sub: '#9d174d' } },
+  { name: 'イエロー', colors: { bg: '#fffbeb', accent: '#f59e0b', text: '#78350f', sub: '#92400e' } },
+  { name: 'グリーン', colors: { bg: '#f0fdf4', accent: '#16a34a', text: '#14532d', sub: '#166534' } },
+  { name: 'ベリー', colors: { bg: '#fff1f2', accent: '#e11d48', text: '#881337', sub: '#9f1239' } },
+  { name: 'ショコラ', colors: { bg: '#fdf8f4', accent: '#92400e', text: '#3b1a08', sub: '#4b2510' } },
+];
 
 function getKey(){
   if(window.CK) return window.CK;
@@ -242,83 +207,46 @@ async function generate(){
   var target = document.getElementById('target').value.trim();
   var media = document.getElementById('media').value;
   var tone = document.getElementById('tone').value;
-  var bc = document.getElementById('bc').value.trim();
   var notes = document.getElementById('notes').value.trim();
 
   document.getElementById('gbtn').disabled = true;
   document.getElementById('bt').style.display = 'none';
   document.getElementById('sp').style.display = 'block';
-
-  document.getElementById('out').innerHTML =
-    '<div class="loading">'
-    + '<div class="loading-txt">AIがデザインを考えています</div>'
-    + '<div class="loading-bar"><div class="loading-bar-inner"></div></div>'
-    + '<div class="loading-sub">配色・レイアウト・参考キーワードを生成中...</div>'
-    + '</div>';
+  document.getElementById('out').innerHTML = '<div class="loading"><div class="loading-txt">AIがレイアウトを考えています</div><div class="loading-bar"><div class="loading-bar-inner"></div></div><div class="loading-sub">4つの異なる構成を生成中...</div></div>';
 
   var prompt =
-    'あなたはLIPS・資生堂・電通の第一線でバナーを数千枚制作してきたトップクリエイティブディレクターです。'
-    + '以下の案件のデザインアイデアを4案提案してください。'
-    + '案件：' + project + ' ターゲット：' + (target||'未指定') + ' 媒体：' + media + ' トーン：' + tone + ' '
-    + (bc ? 'ブランドカラー：' + bc + ' ' : '')
-    + (notes ? 'メモ：' + notes + ' ' : '')
-    + '各アイデアで必ず含めること：'
-    + '(1)そのターゲットが思わず保存したくなる心理的根拠とトレンド名 '
-    + '(2)競合との差別化ポイント '
-    + '(3)Illustratorの具体的操作手順（ツール名・数値・色コード・フォント名まで） '
-    + '禁止：当たり前の提案・抽象的表現。4案は方向性・配色・レイアウトが全て異なること。'
-    + 'JSONのみ出力。文字列内にダブルクォートを使わないこと。改行コードを含めないこと。'
+    'あなたはプロのグラフィックデザイナーです。以下の案件のバナーレイアウト案を4つ提案してください。'
+    + '案件：' + project + ' ターゲット：' + (target||'未指定') + ' 媒体：' + media + ' トーン：' + tone + ' ' + (notes?'メモ：'+notes:'')
+    + ' 重要：4案はレイアウト構成が全て異なること（中央集中・左右分割・上下分割・斜め対角）。'
+    + ' 各案の「なぜこのレイアウトか」の理由を具体的に（ターゲット心理・視線誘導・媒体特性を踏まえて）。'
+    + ' JSONのみ出力（説明文不要）:'
     + '{"ideas":['
-    + '{"concept":"コンセプト名10文字","title":"方向性20文字",'
-    + '"why":"なぜこのターゲットに刺さるか。競合との違い。心理的根拠。ブランド名やトレンドを含めて100文字",'
-    + '"colors":["#hex1","#hex2","#hex3","#hex4"],"cnames":["色名1","色名2","色名3","色名4"],'
-    + '"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex",'
-    + '"font":"フォント名と使い方20文字","layout_name":"レイアウト名10文字","layout_type":"center_title_grid","mood":"8文字",'
-    + '"ai_steps":["手順1：具体的に","手順2：具体的に","手順3：具体的に"],'
-    + '"pinterest_kw":"日本語6文字","behance_kw":"英語3単語","google_kw":"日本語8文字"},'
-    + '{"concept":"...","title":"...","why":"...","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout_name":"...","layout_type":"left_text_right_image","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."},'
-    + '{"concept":"...","title":"...","why":"...","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout_name":"...","layout_type":"top_band","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."},'
-    + '{"concept":"...","title":"...","why":"...","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout_name":"...","layout_type":"diagonal","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."}]}';
+    + '{"layout_name":"レイアウト名10文字","layout_type":"center","why":"なぜこのレイアウトがこの案件・ターゲットに効果的か。視線誘導・心理的効果・媒体との相性を具体的に80文字","mood":"キーワード8文字","font":"推奨フォント方向性15文字","pinterest_kw":"日本語6文字","behance_kw":"英語3単語","google_kw":"日本語8文字"},'
+    + '{"layout_name":"...","layout_type":"leftright","why":"80文字","mood":"...","font":"...","pinterest_kw":"...","behance_kw":"...","google_kw":"..."},'
+    + '{"layout_name":"...","layout_type":"topbottom","why":"80文字","mood":"...","font":"...","pinterest_kw":"...","behance_kw":"...","google_kw":"..."},'
+    + '{"layout_name":"...","layout_type":"diagonal","why":"80文字","mood":"...","font":"...","pinterest_kw":"...","behance_kw":"...","google_kw":"..."}]}';
 
   try{
     var res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': getKey(),
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 3000,
-        messages: [{ role: 'user', content: prompt }]
-      })
+      headers: { 'Content-Type': 'application/json', 'x-api-key': getKey(), 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 2000, messages: [{ role: 'user', content: prompt }] })
     });
     var d = await res.json();
     if(d.error) throw new Error(d.error.message || JSON.stringify(d.error));
     var text = (d.content && d.content[0] && d.content[0].text) || '';
     var m = text.match(/\{[\s\S]*\}/);
     if(!m) throw new Error('JSONが見つかりません');
-    var jsonStr = m[0]
-      .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '')
-      .replace(/\r\n/g, ' ').replace(/\r/g, ' ').replace(/\n/g, ' ')
-      .replace(/\t/g, ' ')
-      .replace(/,\s*}/g, '}').replace(/,\s*]/g, ']');
-    try {
-      D = JSON.parse(jsonStr);
-    } catch(e2) {
-      jsonStr = jsonStr.replace(/"([^"]*)"/g, function(match, p1){
-        return '"' + p1.replace(/[\x00-\x1F]/g, ' ') + '"';
-      });
+    var jsonStr = m[0].replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g,'').replace(/\r\n|\r|\n/g,' ').replace(/\t/g,' ').replace(/,\s*}/g,'}').replace(/,\s*]/g,']');
+    try{ D = JSON.parse(jsonStr); }
+    catch(e2){
+      jsonStr = jsonStr.replace(/"([^"]*)"/g, function(match,p1){ return '"'+p1.replace(/[\x00-\x1F]/g,' ')+'"'; });
       D = JSON.parse(jsonStr);
     }
     render(project, target, media, tone);
   } catch(e){
     console.error(e);
-    document.getElementById('out').innerHTML =
-      '<div class="empty"><div class="empty-ico">⚠️</div>'
-      + '<div class="empty-txt">エラー: ' + esc(e.message) + '</div></div>';
+    document.getElementById('out').innerHTML = '<div class="empty"><div class="empty-ico">⚠️</div><div class="empty-txt">エラー: '+esc(e.message)+'</div></div>';
   } finally {
     document.getElementById('gbtn').disabled = false;
     document.getElementById('bt').style.display = 'block';
@@ -330,167 +258,232 @@ function render(project, target, media, tone){
   var out = document.getElementById('out');
   out.innerHTML = '';
 
+  // Result header
   var rh = document.createElement('div');
   rh.className = 'result-header';
-  rh.innerHTML =
-    '<div>'
-    + '<div class="result-title">デザインアイデア 4案 — ' + esc(project) + '</div>'
-    + '<div class="result-meta">' + esc(media) + ' · ' + esc(tone) + (target ? ' · ' + esc(target) : '') + '</div>'
-    + '</div>'
-    + '<button class="copy-all-btn" onclick="copyAll()">📋 ブリーフ全コピー</button>';
+  rh.innerHTML = '<div><div class="result-title">レイアウト案 4パターン — '+esc(project)+'</div><div class="result-meta">'+esc(media)+' · '+esc(tone)+(target?' · '+esc(target):'')+'</div></div>'
+    + '<button class="copy-all-btn" onclick="copyAll()">📋 全案をコピー</button>';
   out.appendChild(rh);
 
+  // Color customizer
+  var cp = document.createElement('div');
+  cp.className = 'color-panel';
+  cp.innerHTML = '<div class="cp-header"><div><div class="cp-title">🎨 カラーカスタマイズ</div><div class="cp-sub">先方の指定カラーに合わせて自由に変更できます</div></div></div>'
+    + '<div class="presets" id="presets">'
+    + COLOR_PRESETS.map(function(p,i){
+        return '<div class="preset-btn'+(i===0?' active':'')+'" onclick="applyPreset('+i+')">'
+          +'<div class="preset-dot" style="background:'+p.colors.accent+'"></div>'
+          +'<div class="preset-dot" style="background:'+p.colors.bg+'"></div>'
+          +'<span class="preset-name">'+p.name+'</span></div>';
+      }).join('')
+    + '</div>'
+    + '<div class="color-inputs">'
+    + '<div class="ci"><label>背景色</label><input type="color" id="col-bg" value="'+userColors.bg+'" oninput="onColorChange()"><input type="text" id="txt-bg" value="'+userColors.bg+'" oninput="onColorText(\'bg\',this.value)"></div>'
+    + '<div class="ci"><label>アクセント</label><input type="color" id="col-accent" value="'+userColors.accent+'" oninput="onColorChange()"><input type="text" id="txt-accent" value="'+userColors.accent+'" oninput="onColorText(\'accent\',this.value)"></div>'
+    + '<div class="ci"><label>テキスト</label><input type="color" id="col-text" value="'+userColors.text+'" oninput="onColorChange()"><input type="text" id="txt-text" value="'+userColors.text+'" oninput="onColorText(\'text\',this.value)"></div>'
+    + '</div>';
+  out.appendChild(cp);
+
+  // Cards
   var grid = document.createElement('div');
   grid.className = 'ideas';
+  grid.id = 'ideaGrid';
+  out.appendChild(grid);
 
-  (D.ideas || []).forEach(function(idea, i){
-    var acc = idea.accent || '#7c6aff';
-    var txc = idea.text_color || '#f0f0fa';
-    var bgF = idea.bg_from || '#0f0e1e';
-    var bgT = idea.bg_to || '#16152a';
-    var cols = idea.colors || ['#7c6aff','#ff6a8a','#ffd93d','#4aefc0'];
-    var pq = encodeURIComponent(idea.pinterest_kw || project);
-    var bq = encodeURIComponent(idea.behance_kw || 'banner design');
-    var gq = encodeURIComponent(idea.google_kw || project);
+  renderCards();
+}
+
+function applyPreset(i){
+  var p = COLOR_PRESETS[i];
+  userColors = Object.assign({}, p.colors);
+  document.getElementById('col-bg').value = userColors.bg;
+  document.getElementById('txt-bg').value = userColors.bg;
+  document.getElementById('col-accent').value = userColors.accent;
+  document.getElementById('txt-accent').value = userColors.accent;
+  document.getElementById('col-text').value = userColors.text;
+  document.getElementById('txt-text').value = userColors.text;
+  document.querySelectorAll('.preset-btn').forEach(function(b,bi){ b.classList.toggle('active', bi===i); });
+  renderCards();
+}
+
+function onColorChange(){
+  userColors.bg = document.getElementById('col-bg').value;
+  userColors.accent = document.getElementById('col-accent').value;
+  userColors.text = document.getElementById('col-text').value;
+  document.getElementById('txt-bg').value = userColors.bg;
+  document.getElementById('txt-accent').value = userColors.accent;
+  document.getElementById('txt-text').value = userColors.text;
+  renderCards();
+}
+
+function onColorText(key, val){
+  if(/^#[0-9a-fA-F]{6}$/.test(val)){
+    userColors[key] = val;
+    document.getElementById('col-'+key).value = val;
+    renderCards();
+  }
+}
+
+function renderCards(){
+  if(!D) return;
+  var grid = document.getElementById('ideaGrid');
+  if(!grid) return;
+  grid.innerHTML = '';
+
+  (D.ideas||[]).forEach(function(idea, i){
+    var pq = encodeURIComponent(idea.pinterest_kw||'');
+    var bq = encodeURIComponent(idea.behance_kw||'');
+    var gq = encodeURIComponent(idea.google_kw||'');
+    var acc = userColors.accent;
+    var accColors = ['#7c6aff','#ff6a8a','#ffd93d','#4aefc0'];
 
     var card = document.createElement('div');
     card.className = 'icard';
-    card.style.animationDelay = (i * 0.1) + 's';
+    card.style.animationDelay = (i*0.1)+'s';
 
     card.innerHTML =
-      '<div class="card-colorbar">'
-      + cols.map(function(c){ return '<div class="card-color" style="background:' + esc(c) + '"></div>'; }).join('')
-      + '</div>'
-      + '<div class="card-preview">' + makeWF(idea.layout_type || 'center_title_grid', idea, project, target) + '</div>'
-      + '<div class="card-body">'
-      + '<div class="card-num" style="color:' + esc(acc) + '">IDEA ' + (i+1) + ' — ' + esc(idea.concept||'') + '</div>'
-      + '<div class="card-title">' + esc(idea.title||'') + '</div>'
-      + '<div class="card-desc" style="border-color:' + esc(acc) + '">' + esc(idea.why||'') + '</div>'
-      + '<div class="swatches">'
-      + cols.map(function(c, ci){
-          return '<div class="sw" style="background:' + esc(c) + '" onclick="copyTxt(\'' + esc(c) + '\')" title="' + esc((idea.cnames||[])[ci]||'') + ' — クリックでコピー">'
-            + '<span class="sw-hex">' + esc(c) + '</span></div>';
-        }).join('')
+      '<div class="card-inner">'
+      // LEFT: Layout preview
+      + '<div class="card-preview">' + makeLayout(idea.layout_type, i) + '</div>'
+      // RIGHT: Info
+      + '<div class="card-info">'
+      + '<div class="card-num" style="color:'+esc(accColors[i%4])+'">LAYOUT 0'+(i+1)+'</div>'
+      + '<div class="card-layout-name">'+esc(idea.layout_name||'')+'</div>'
+      + '<div>'
+      + '<div class="card-why-label">なぜこのレイアウトか</div>'
+      + '<div class="card-why">'+esc(idea.why||'')+'</div>'
       + '</div>'
       + '<div class="tags">'
-      + '<span class="tag tag-font">🔤 ' + esc(idea.font||'') + '</span>'
-      + '<span class="tag tag-layout">📐 ' + esc(idea.layout_name||'') + '</span>'
-      + '<span class="tag tag-mood">✨ ' + esc(idea.mood||'') + '</span>'
+      + '<span class="tag tag-mood">'+esc(idea.mood||'')+'</span>'
+      + '<span class="tag tag-font">🔤 '+esc(idea.font||'')+'</span>'
       + '</div>'
-      + '<div class="ai-steps">'
-      + '<div class="ai-steps-label"><span class="ai-badge">Ai</span> Illustratorでの作り方</div>'
-      + '<div class="step-list">'
-      + (idea.ai_steps||[]).map(function(s, si){
-          return '<div class="step-item">'
-            + '<div class="step-n" style="background:' + esc(acc) + '">' + (si+1) + '</div>'
-            + '<div class="step-txt">' + esc(s) + '</div>'
-            + '</div>';
-        }).join('')
-      + '</div></div>'
-      + '<div class="refs"><div class="refs-label">参考画像を探す</div>'
+      + '<div class="refs"><div class="refs-label">参考画像</div>'
       + '<div class="ref-list">'
-      + '<a class="ref-a" href="https://jp.pinterest.com/search/pins/?q=' + pq + '" target="_blank" rel="noopener">'
-      + '<span class="ref-ico">📌</span><div class="ref-info"><div class="ref-site">Pinterest</div><div class="ref-kw">' + esc(idea.pinterest_kw||'') + '</div></div><span class="ref-arr">↗</span></a>'
-      + '<a class="ref-a" href="https://www.behance.net/search/projects/?search=' + bq + '" target="_blank" rel="noopener">'
-      + '<span class="ref-ico">🎨</span><div class="ref-info"><div class="ref-site">Behance</div><div class="ref-kw">' + esc(idea.behance_kw||'') + '</div></div><span class="ref-arr">↗</span></a>'
-      + '<a class="ref-a" href="https://www.google.com/search?q=' + gq + '&tbm=isch" target="_blank" rel="noopener">'
-      + '<span class="ref-ico">🔍</span><div class="ref-info"><div class="ref-site">Google画像</div><div class="ref-kw">' + esc(idea.google_kw||'') + '</div></div><span class="ref-arr">↗</span></a>'
-      + '</div></div></div>';
+      + '<a class="ref-a" href="https://jp.pinterest.com/search/pins/?q='+pq+'" target="_blank" rel="noopener"><span class="ref-ico">📌</span><div class="ref-info"><div class="ref-site">Pinterest</div><div class="ref-kw">'+esc(idea.pinterest_kw||'')+'</div></div><span class="ref-arr">↗</span></a>'
+      + '<a class="ref-a" href="https://www.behance.net/search/projects/?search='+bq+'" target="_blank" rel="noopener"><span class="ref-ico">🎨</span><div class="ref-info"><div class="ref-site">Behance</div><div class="ref-kw">'+esc(idea.behance_kw||'')+'</div></div><span class="ref-arr">↗</span></a>'
+      + '<a class="ref-a" href="https://www.google.com/search?q='+gq+'&tbm=isch" target="_blank" rel="noopener"><span class="ref-ico">🔍</span><div class="ref-info"><div class="ref-site">Google画像</div><div class="ref-kw">'+esc(idea.google_kw||'')+'</div></div><span class="ref-arr">↗</span></a>'
+      + '</div></div>'
+      + '</div>'
+      + '</div>';
 
     grid.appendChild(card);
   });
-  out.appendChild(grid);
 }
 
-function makeWF(type, idea, project, target){
-  var W = 260, H = 300;
-  var bf = idea.bg_from || '#0f0e1e';
-  var bt = idea.bg_to || '#16152a';
-  var acc = idea.accent || '#7c6aff';
-  var txc = idea.text_color || '#f0f0fa';
-  var cols = idea.colors || [acc];
-  var title = (project||'タイトル').slice(0,10);
-  var sub = (target||'ターゲット').slice(0,8);
+function makeLayout(type, idx){
+  var W = 240, H = 300;
+  var bg = userColors.bg || '#1a1a2e';
+  var acc = userColors.accent || '#7c6aff';
+  var tx = userColors.text || '#ffffff';
+
+  // 少し暗め/明るめのバリエーション
+  var accVars = [acc, acc, acc, acc];
 
   var content = '';
-  if(type === 'center_title_grid'){
-    content = '<rect x="'+(W*.3)+'" y="14" width="'+(W*.4)+'" height="16" fill="'+esc(acc)+'" opacity=".8" rx="8"/>'
-      +'<text x="'+(W/2)+'" y="25" text-anchor="middle" font-size="9" font-weight="bold" fill="'+esc(txc)+'">'+esc(sub)+'</text>'
-      +'<text x="'+(W/2)+'" y="58" text-anchor="middle" font-size="20" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(0,6))+'</text>'
-      +'<text x="'+(W/2)+'" y="80" text-anchor="middle" font-size="20" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(6)||title.slice(0,4))+'</text>'
-      +'<rect x="'+(W/2-25)+'" y="90" width="50" height="3" fill="'+esc(acc)+'" rx="1.5"/>'
-      +[0,1,2].map(function(j){var x=14+j*80;return '<rect x="'+x+'" y="102" width="72" height="88" fill="'+esc(txc)+'" opacity=".07" rx="6"/><rect x="'+(x+8)+'" y="196" width="56" height="6" fill="'+esc(txc)+'" opacity=".1" rx="3"/><rect x="'+(x+16)+'" y="206" width="40" height="5" fill="'+esc(acc)+'" opacity=".5" rx="2"/>';}).join('')
-      +'<rect x="'+(W*.35)+'" y="'+(H-16)+'" width="'+(W*.3)+'" height="8" fill="'+esc(acc)+'" opacity=".5" rx="4"/>';
-  } else if(type === 'left_text_right_image'){
-    content = '<rect x="0" y="0" width="4" height="'+H+'" fill="'+esc(acc)+'"/>'
-      +'<rect x="14" y="18" width="68" height="13" fill="'+esc(acc)+'" opacity=".7" rx="6"/>'
-      +'<text x="48" y="27.5" text-anchor="middle" font-size="8" font-weight="bold" fill="'+esc(txc)+'">'+esc(sub)+'</text>'
-      +'<text x="14" y="58" font-size="18" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(0,5))+'</text>'
-      +'<text x="14" y="78" font-size="18" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(5,10)||title)+'</text>'
-      +'<rect x="14" y="90" width="90" height="5" fill="'+esc(txc)+'" opacity=".1" rx="2"/>'
-      +'<rect x="14" y="99" width="75" height="5" fill="'+esc(txc)+'" opacity=".1" rx="2"/>'
-      +'<rect x="14" y="116" width="72" height="20" fill="'+esc(acc)+'" rx="10"/>'
-      +'<text x="50" y="129" text-anchor="middle" font-size="8" font-weight="bold" fill="'+esc(txc)+'">詳しく見る →</text>'
-      +'<rect x="'+(W*.52)+'" y="12" width="'+(W*.44)+'" height="'+(H-24)+'" fill="'+esc(txc)+'" opacity=".08" rx="8"/>'
-      +'<text x="'+(W*.74)+'" y="'+(H*.48)+'" text-anchor="middle" font-size="8" fill="'+esc(txc)+'" opacity=".25">IMAGE</text>';
-  } else if(type === 'top_band'){
-    content = '<rect x="0" y="0" width="'+W+'" height="'+(H*.35)+'" fill="'+esc(acc)+'" opacity=".15"/>'
-      +'<rect x="0" y="0" width="'+W+'" height="4" fill="'+esc(acc)+'"/>'
-      +'<rect x="'+(W/2-45)+'" y="12" width="90" height="13" fill="'+esc(acc)+'" opacity=".6" rx="6"/>'
-      +'<text x="'+(W/2)+'" y="22" text-anchor="middle" font-size="8" font-weight="bold" fill="'+esc(txc)+'">'+esc(sub)+'</text>'
-      +'<text x="'+(W/2)+'" y="52" text-anchor="middle" font-size="20" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(0,6))+'</text>'
-      +'<text x="'+(W/2)+'" y="72" text-anchor="middle" font-size="20" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(6)||title.slice(0,4))+'</text>'
-      +'<rect x="20" y="'+(H*.36)+'" width="'+(W-40)+'" height="2" fill="'+esc(acc)+'" opacity=".3"/>'
-      +[0,1,2,3].map(function(j){var x=8+j*62;return '<rect x="'+x+'" y="'+(H*.4)+'" width="55" height="68" fill="'+esc(txc)+'" opacity=".07" rx="5"/><rect x="'+(x+6)+'" y="'+(H*.4+72)+'" width="43" height="5" fill="'+esc(txc)+'" opacity=".1" rx="2"/>';}).join('')
-      +'<rect x="'+(W*.3)+'" y="'+(H-14)+'" width="'+(W*.4)+'" height="7" fill="'+esc(acc)+'" opacity=".4" rx="3"/>';
+
+  if(type === 'center' || idx === 0){
+    // 中央集中レイアウト
+    content =
+      // 上下グラデライン
+      '<rect x="0" y="0" width="'+W+'" height="5" fill="'+esc(acc)+'"/>'
+      // 中央ゾーン背景
+      + '<rect x="'+(W*.1)+'" y="'+(H*.25)+'" width="'+(W*.8)+'" height="'+(H*.42)+'" fill="'+esc(acc)+'" opacity=".12" rx="8"/>'
+      // バッジ
+      + '<rect x="'+(W/2-35)+'" y="'+(H*.27)+'" width="70" height="16" fill="'+esc(acc)+'" rx="8"/>'
+      + '<rect x="'+(W/2-40)+'" y="'+(H*.36)+'" width="80" height="22" fill="'+esc(tx)+'" opacity=".12" rx="4"/>'
+      + '<rect x="'+(W/2-30)+'" y="'+(H*.4)+'" width="60" height="10" fill="'+esc(tx)+'" opacity=".15" rx="3"/>'
+      // メインタイトル（中央・大）
+      + '<rect x="'+(W*.15)+'" y="'+(H*.44)+'" width="'+(W*.7)+'" height="28" fill="'+esc(tx)+'" opacity=".9" rx="3"/>'
+      + '<rect x="'+(W*.2)+'" y="'+(H*.5)+'" width="'+(W*.6)+'" height="20" fill="'+esc(tx)+'" opacity=".6" rx="3"/>'
+      // サブテキスト
+      + '<rect x="'+(W*.25)+'" y="'+(H*.58)+'" width="'+(W*.5)+'" height="8" fill="'+esc(tx)+'" opacity=".25" rx="2"/>'
+      // 四隅の装飾要素（商品など）
+      + '<rect x="14" y="14" width="52" height="64" fill="'+esc(tx)+'" opacity=".06" rx="5"/>'
+      + '<rect x="'+( W-66)+'" y="14" width="52" height="64" fill="'+esc(tx)+'" opacity=".06" rx="5"/>'
+      + '<rect x="14" y="'+(H-78)+'" width="52" height="64" fill="'+esc(tx)+'" opacity=".06" rx="5"/>'
+      + '<rect x="'+(W-66)+'" y="'+(H-78)+'" width="52" height="64" fill="'+esc(tx)+'" opacity=".06" rx="5"/>'
+      // CTAボタン
+      + '<rect x="'+(W/2-36)+'" y="'+(H*.67)+'" width="72" height="20" fill="'+esc(acc)+'" rx="10"/>'
+      + '<rect x="0" y="'+(H-5)+'" width="'+W+'" height="5" fill="'+esc(acc)+'"/>';
+
+  } else if(type === 'leftright' || idx === 1){
+    // 左右分割レイアウト
+    content =
+      '<rect x="0" y="0" width="'+(W/2)+'" height="'+H+'" fill="'+esc(acc)+'" opacity=".15"/>'
+      + '<rect x="'+(W/2)+'" y="0" width="1.5" height="'+H+'" fill="'+esc(acc)+'" opacity=".3"/>'
+      // 左：テキストゾーン
+      + '<rect x="12" y="20" width="52" height="12" fill="'+esc(acc)+'" opacity=".7" rx="6"/>'
+      + '<rect x="12" y="40" width="'+(W*.38)+'" height="22" fill="'+esc(tx)+'" opacity=".9" rx="3"/>'
+      + '<rect x="12" y="65" width="'+(W*.34)+'" height="14" fill="'+esc(tx)+'" opacity=".6" rx="3"/>'
+      + '<rect x="12" y="88" width="'+(W*.3)+'" height="7" fill="'+esc(tx)+'" opacity=".2" rx="2"/>'
+      + '<rect x="12" y="98" width="'+(W*.25)+'" height="7" fill="'+esc(tx)+'" opacity=".2" rx="2"/>'
+      + '<rect x="12" y="108" width="'+(W*.2)+'" height="7" fill="'+esc(tx)+'" opacity=".2" rx="2"/>'
+      + '<rect x="12" y="126" width="64" height="20" fill="'+esc(acc)+'" rx="10"/>'
+      // 右：画像ゾーン
+      + '<rect x="'+(W/2+10)+'" y="10" width="'+(W/2-18)+'" height="'+(H-20)+'" fill="'+esc(tx)+'" opacity=".07" rx="6"/>'
+      + '<rect x="'+(W/2+14)+'" y="14" width="'+(W/2-26)+'" height="'+(H*.45)+'" fill="'+esc(tx)+'" opacity=".05" rx="4"/>'
+      + '<rect x="'+(W/2+14)+'" y="'+(H*.47)+'" width="'+(W/2-26)+'" height="'+(H*.42)+'" fill="'+esc(tx)+'" opacity=".05" rx="4"/>'
+      // 縦ライン装飾
+      + '<rect x="'+(W*.48)+'" y="'+(H*.1)+'" width="3" height="'+(H*.8)+'" fill="'+esc(acc)+'" opacity=".4" rx="1.5"/>';
+
+  } else if(type === 'topbottom' || idx === 2){
+    // 上下分割レイアウト
+    content =
+      // 上部：大きなタイトルゾーン
+      '<rect x="0" y="0" width="'+W+'" height="'+(H*.45)+'" fill="'+esc(acc)+'" opacity=".18"/>'
+      + '<rect x="0" y="0" width="'+W+'" height="5" fill="'+esc(acc)+'"/>'
+      + '<rect x="'+(W/2-50)+'" y="16" width="100" height="14" fill="'+esc(acc)+'" opacity=".6" rx="7"/>'
+      + '<rect x="'+(W*.1)+'" y="38" width="'+(W*.8)+'" height="28" fill="'+esc(tx)+'" opacity=".9" rx="3"/>'
+      + '<rect x="'+(W*.15)+'" y="70" width="'+(W*.7)+'" height="18" fill="'+esc(tx)+'" opacity=".6" rx="3"/>'
+      + '<rect x="'+(W*.25)+'" y="96" width="'+(W*.5)+'" height="20" fill="'+esc(acc)+'" rx="10"/>'
+      // 区切りライン
+      + '<rect x="20" y="'+(H*.46)+'" width="'+(W-40)+'" height="2" fill="'+esc(acc)+'" opacity=".4"/>'
+      // 下部：商品グリッド（4列）
+      + [0,1,2,3].map(function(j){
+          var x = 10 + j*(W/4-2);
+          return '<rect x="'+x+'" y="'+(H*.5)+'" width="'+(W/4-8)+'" height="'+(H*.33)+'" fill="'+esc(tx)+'" opacity=".07" rx="5"/>'
+            + '<rect x="'+(x+4)+'" y="'+(H*.5+H*.33+4)+'" width="'+(W/4-16)+'" height="5" fill="'+esc(acc)+'" opacity=".4" rx="2"/>';
+        }).join('')
+      + '<rect x="0" y="'+(H-5)+'" width="'+W+'" height="5" fill="'+esc(acc)+'"/>';
+
   } else {
-    content = '<polygon points="0,0 '+(W*.65)+',0 0,'+(H*.58)+'" fill="'+esc(acc)+'" opacity=".15"/>'
-      +'<polygon points="'+W+','+(H*.42)+' '+W+','+H+' '+(W*.35)+','+H+'" fill="'+esc(cols[1]||acc)+'" opacity=".1"/>'
-      +'<line x1="'+(W*.65)+'" y1="0" x2="'+(W*.35)+'" y2="'+H+'" stroke="'+esc(acc)+'" stroke-width="1.5" opacity=".35"/>'
-      +'<rect x="0" y="0" width="'+W+'" height="4" fill="'+esc(acc)+'"/>'
-      +'<text x="14" y="38" font-size="19" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(0,5))+'</text>'
-      +'<text x="14" y="58" font-size="19" font-weight="900" fill="'+esc(txc)+'">'+esc(title.slice(5,10)||title)+'</text>'
-      +'<rect x="14" y="68" width="'+(W*.28)+'" height="3" fill="'+esc(acc)+'" rx="1.5"/>'
-      +'<rect x="14" y="76" width="'+(W*.3)+'" height="5" fill="'+esc(txc)+'" opacity=".1" rx="2"/>'
-      +'<rect x="14" y="84" width="'+(W*.24)+'" height="5" fill="'+esc(txc)+'" opacity=".1" rx="2"/>'
-      +'<rect x="14" y="98" width="62" height="19" fill="'+esc(acc)+'" rx="9.5"/>'
-      +'<text x="45" y="111" text-anchor="middle" font-size="8" font-weight="bold" fill="'+esc(txc)+'">詳しく見る</text>'
-      +'<rect x="'+(W*.54)+'" y="18" width="'+(W*.42)+'" height="'+(H*.55)+'" fill="'+esc(txc)+'" opacity=".07" rx="8"/>'
-      +'<text x="'+(W*.75)+'" y="'+(H*.32)+'" text-anchor="middle" font-size="8" fill="'+esc(txc)+'" opacity=".25">IMAGE</text>';
+    // 対角線レイアウト
+    content =
+      '<polygon points="0,0 '+(W*.7)+',0 0,'+(H*.62)+'" fill="'+esc(acc)+'" opacity=".2"/>'
+      + '<polygon points="'+W+','+(H*.38)+' '+W+','+H+' '+(W*.3)+','+H+'" fill="'+esc(acc)+'" opacity=".1"/>'
+      + '<line x1="'+(W*.7)+'" y1="0" x2="'+(W*.3)+'" y2="'+H+'" stroke="'+esc(acc)+'" stroke-width="2" opacity=".5"/>'
+      + '<rect x="0" y="0" width="'+W+'" height="5" fill="'+esc(acc)+'"/>'
+      // 左上テキスト
+      + '<rect x="12" y="18" width="60" height="13" fill="'+esc(acc)+'" opacity=".7" rx="6"/>'
+      + '<rect x="12" y="40" width="'+(W*.5)+'" height="24" fill="'+esc(tx)+'" opacity=".9" rx="3"/>'
+      + '<rect x="12" y="68" width="'+(W*.42)+'" height="16" fill="'+esc(tx)+'" opacity=".6" rx="3"/>'
+      + '<rect x="12" y="92" width="'+(W*.3)+'" height="7" fill="'+esc(tx)+'" opacity=".2" rx="2"/>'
+      + '<rect x="12" y="102" width="'+(W*.24)+'" height="7" fill="'+esc(tx)+'" opacity=".2" rx="2"/>'
+      + '<rect x="12" y="118" width="64" height="20" fill="'+esc(acc)+'" rx="10"/>'
+      // 右下画像
+      + '<rect x="'+(W*.48)+'" y="'+(H*.22)+'" width="'+(W*.46)+'" height="'+(H*.55)+'" fill="'+esc(tx)+'" opacity=".07" rx="8"/>'
+      + '<rect x="0" y="'+(H-5)+'" width="'+W+'" height="5" fill="'+esc(acc)+'"/>';
   }
 
-  return '<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">'
-    +'<defs><linearGradient id="bg'+i+'" x1="0" y1="0" x2="1" y2="1">'
-    +'<stop offset="0%" stop-color="'+esc(bf)+'"/><stop offset="100%" stop-color="'+esc(bt)+'"/>'
-    +'</linearGradient></defs>'
-    +'<rect width="'+W+'" height="'+H+'" fill="url(#bg'+i+')"/>'
+  return '<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="min-height:220px">'
+    + '<rect width="'+W+'" height="'+H+'" fill="'+esc(bg)+'"/>'
     + content
-    +'</svg>';
-
-  var i = 0;
+    + '</svg>';
 }
 
-function showToast(msg){
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(function(){ t.classList.remove('show'); }, 2000);
-}
-function copyTxt(t){ navigator.clipboard.writeText(t).then(function(){ showToast(t + ' をコピー！'); }); }
+function showToast(msg){ var t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(function(){t.classList.remove('show');},2000); }
 function copyAll(){
   if(!D) return;
   var project = document.getElementById('project').value;
-  var txt = '【BRIEF — デザインブリーフ】\n案件：' + project + '\n媒体：' + document.getElementById('media').value + '\n\n';
-  (D.ideas||[]).forEach(function(idea, i){
-    txt += '━━━━━━━━━━━━━━━━\n【IDEA'+(i+1)+'：'+idea.concept+'】\n'+idea.title+'\n\n';
-    txt += '▶ なぜこのデザインか\n' + idea.why + '\n\n';
-    txt += '▶ 配色\n' + (idea.colors||[]).join(' / ') + '\n';
-    txt += '▶ フォント：' + idea.font + '\n▶ レイアウト：' + idea.layout_name + '\n\n';
-    txt += '▶ Illustratorでの作り方\n';
-    (idea.ai_steps||[]).forEach(function(s){ txt += s + '\n'; });
-    txt += '\n▶ 参考：Pinterest「' + idea.pinterest_kw + '」\n\n';
+  var txt = '【BRIEF — レイアウト案】\n案件：'+project+'\n媒体：'+document.getElementById('media').value+'\n\n';
+  (D.ideas||[]).forEach(function(idea,i){
+    txt += '━━━━━━━━━━\n【LAYOUT 0'+(i+1)+'：'+idea.layout_name+'】\n';
+    txt += '▶ なぜこのレイアウトか\n'+idea.why+'\n';
+    txt += '▶ キーワード：'+idea.mood+'\n';
+    txt += '▶ フォント：'+idea.font+'\n';
+    txt += '▶ 参考：Pinterest「'+idea.pinterest_kw+'」\n\n';
   });
-  navigator.clipboard.writeText(txt).then(function(){ showToast('ブリーフをコピーしました！'); });
+  navigator.clipboard.writeText(txt).then(function(){ showToast('コピーしました！'); });
 }
 function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 </script>
