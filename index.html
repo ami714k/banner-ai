@@ -4,412 +4,646 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DesignBrief AI</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#07060f;--s1:#0f0e1e;--s2:#16152a;--s3:#1e1c38;--a1:#7c6aff;--a2:#ff6a8a;--a3:#ffd93d;--a4:#4aefc0;--tx:#f0f0fa;--mu:#6060a0;--bd:#22203a;}
+:root{
+  --bg:#FDFCF7;
+  --yellow:#FFE135;
+  --yellow-light:#FFF9C4;
+  --yellow-pale:#FFFEF0;
+  --black:#111108;
+  --gray1:#3D3C30;
+  --gray2:#8A8870;
+  --gray3:#E8E6D9;
+  --gray4:#F2F0E6;
+  --white:#FFFFFF;
+  --red:#FF3B3B;
+  --blue:#1A56FF;
+  --green:#00A878;
+}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--tx);font-family:'Noto Sans JP',sans-serif;min-height:100vh;}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 15% 15%,rgba(124,106,255,.12) 0%,transparent 55%),radial-gradient(ellipse 50% 40% at 85% 85%,rgba(255,106,138,.08) 0%,transparent 55%);pointer-events:none;z-index:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--black);font-family:'Noto Sans JP',sans-serif;min-height:100vh;}
 
-.wrap{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+/* ── HEADER ── */
+.header{
+  position:sticky;top:0;z-index:100;
+  background:var(--black);
+  padding:0 40px;
+  height:52px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--white);letter-spacing:-0.3px;}
+.logo em{font-style:normal;color:var(--yellow);}
+.header-right{display:flex;align-items:center;gap:16px;}
+.header-tag{font-size:10px;color:rgba(255,255,255,.35);letter-spacing:1.5px;text-transform:uppercase;}
 
-/* HEADER */
-header{padding:28px 0 12px;display:flex;align-items:flex-end;justify-content:space-between;}
-.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;background:linear-gradient(130deg,var(--a1),var(--a2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px;}
-.logo-sub{font-size:10px;color:var(--mu);margin-top:2px;}
-.header-badge{background:rgba(124,106,255,.15);border:1px solid rgba(124,106,255,.3);color:var(--a1);font-size:9px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:1px;}
+/* ── HERO ── */
+.hero{
+  background:var(--black);
+  padding:64px 40px 56px;
+  position:relative;overflow:hidden;
+}
+.hero::after{
+  content:'';position:absolute;
+  right:-80px;top:-80px;
+  width:400px;height:400px;
+  background:var(--yellow);
+  border-radius:50%;
+  opacity:.08;
+}
+.hero-eyebrow{
+  font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--yellow);margin-bottom:20px;
+}
+.hero-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(32px,5vw,60px);
+  font-weight:800;
+  line-height:1.0;
+  letter-spacing:-2px;
+  color:var(--white);
+  margin-bottom:8px;
+}
+.hero-title .hl{
+  display:inline-block;
+  background:var(--yellow);
+  color:var(--black);
+  padding:0 8px;
+  line-height:1.1;
+}
+.hero-sub{
+  font-size:14px;color:rgba(255,255,255,.45);
+  margin-top:16px;line-height:1.8;
+  max-width:560px;
+}
 
-/* HERO */
-.hero{padding:20px 0 24px;}
-.hero h1{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,42px);font-weight:800;line-height:1.08;letter-spacing:-2px;margin-bottom:10px;}
-.hero h1 em{font-style:normal;background:linear-gradient(130deg,var(--a1),var(--a2),var(--a3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero p{color:var(--mu);font-size:12px;line-height:1.8;max-width:560px;}
+/* ── FORM ── */
+.form-section{
+  background:var(--white);
+  border-bottom:2px solid var(--black);
+  padding:28px 40px;
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr auto;
+  gap:12px;align-items:end;
+}
+@media(max-width:900px){.form-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:540px){.form-grid{grid-template-columns:1fr;}}
+.fg{display:flex;flex-direction:column;gap:5px;}
+.fg-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray2);}
+.fg-label .req{color:var(--red);}
+.fg input,.fg select{
+  background:var(--gray4);
+  border:1.5px solid var(--gray3);
+  border-radius:6px;
+  color:var(--black);
+  font-family:'Noto Sans JP',sans-serif;
+  font-size:12px;
+  padding:9px 12px;
+  outline:none;
+  transition:all .18s;
+  width:100%;
+}
+.fg input:focus,.fg select:focus{border-color:var(--black);background:var(--white);}
+.fg input::placeholder{color:var(--gray2);}
+.fg select option{background:var(--white);}
 
-/* FORM */
-.fcard{background:var(--s1);border:1px solid var(--bd);border-radius:18px;padding:24px;margin-bottom:24px;}
-.fg{margin-bottom:10px;}
-.fg label{display:block;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu);margin-bottom:4px;}
-.fg label .req{color:var(--a2);}
-input[type=text],select,textarea{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:8px;color:var(--tx);font-family:'Noto Sans JP',sans-serif;font-size:12px;padding:9px 12px;outline:none;transition:border-color .2s;}
-input[type=text]:focus,select:focus,textarea:focus{border-color:var(--a1);}
-textarea{resize:none;height:58px;}
-select option{background:var(--s2);}
-.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-@media(max-width:620px){.fgrid{grid-template-columns:1fr;}}
-.gbtn{width:100%;background:linear-gradient(130deg,var(--a1),var(--a2));border:none;border-radius:11px;color:#fff;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;padding:14px;cursor:pointer;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .2s,transform .1s;}
-.gbtn:hover{opacity:.88;transform:translateY(-1px);}
-.gbtn:disabled{opacity:.45;cursor:not-allowed;transform:none;}
-.spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none;}
+.gbtn{
+  background:var(--yellow);
+  border:none;border-radius:6px;
+  color:var(--black);
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:800;
+  padding:0 22px;height:40px;
+  cursor:pointer;white-space:nowrap;
+  display:flex;align-items:center;gap:6px;
+  transition:all .15s;
+  border:2px solid var(--black);
+}
+.gbtn:hover{background:var(--black);color:var(--yellow);}
+.gbtn:disabled{opacity:.4;cursor:not-allowed;}
+.spin{width:12px;height:12px;border:2px solid rgba(0,0,0,.2);border-top-color:var(--black);border-radius:50%;animation:spin .7s linear infinite;display:none;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
-/* OUTPUT */
-.out{display:flex;flex-direction:column;gap:20px;}
-.empty{background:var(--s1);border:1px solid var(--bd);border-radius:18px;padding:60px 24px;text-align:center;color:var(--mu);}
-.empty-ico{font-size:52px;margin-bottom:14px;opacity:.2;}
-.empty-txt{font-size:13px;line-height:1.9;}
-.empty-hint{margin-top:10px;font-size:11px;color:var(--a4);}
+/* ── OUTPUT ── */
+.output{padding:40px;}
 
-/* IDEA CARDS */
-.ideas{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
-@media(max-width:860px){.ideas{grid-template-columns:1fr;}}
+.empty{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;min-height:55vh;
+  gap:14px;text-align:center;
+}
+.empty-ico{font-size:52px;opacity:.2;}
+.empty-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--gray2);}
+.empty-sub{font-size:12px;color:var(--gray2);line-height:1.9;}
+.empty-hint{
+  font-size:11px;font-weight:700;
+  background:var(--yellow);
+  color:var(--black);
+  padding:6px 16px;border-radius:4px;
+}
 
-.icard{background:var(--s1);border:1.5px solid var(--bd);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s,border-color .2s;}
-.icard:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.5);border-color:rgba(124,106,255,.3);}
+/* ── LOADING ── */
+.loading{
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;min-height:55vh;gap:20px;
+}
+.loading-bar{
+  width:280px;height:4px;
+  background:var(--gray3);border-radius:2px;overflow:hidden;
+}
+.loading-bar-inner{
+  height:100%;background:var(--yellow);border-radius:2px;
+  animation:loadbar 2s ease-in-out infinite;
+}
+@keyframes loadbar{0%{width:0%;margin-left:0;}50%{width:60%;margin-left:20%;}100%{width:0%;margin-left:100%;};}
+.loading-txt{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--gray1);}
+.loading-sub{font-size:11px;color:var(--gray2);}
 
-/* Mock banner */
-.mock{height:200px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;overflow:hidden;}
-.mock-deco{position:absolute;font-size:18px;opacity:.18;pointer-events:none;user-select:none;}
-.mock-eyebrow{font-size:9px;font-weight:700;padding:3px 12px;border-radius:999px;margin-bottom:9px;letter-spacing:.8px;display:inline-block;}
-.mock-title{font-size:20px;font-weight:900;text-align:center;line-height:1.2;margin-bottom:5px;text-shadow:0 2px 10px rgba(0,0,0,.2);}
-.mock-sub{font-size:10px;text-align:center;opacity:.65;margin-bottom:12px;}
-.mock-colors{display:flex;gap:6px;justify-content:center;}
-.mock-dot{width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,.2);}
-.mock-stripe{height:5px;width:100%;position:absolute;bottom:0;}
+/* ── IDEAS ── */
+.result-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:24px;padding-bottom:16px;
+  border-bottom:2px solid var(--black);
+}
+.result-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;}
+.result-meta{font-size:11px;color:var(--gray2);}
+.copy-all-btn{
+  background:var(--black);border:none;border-radius:5px;
+  color:var(--white);font-size:10px;font-weight:700;
+  padding:7px 14px;cursor:pointer;
+  font-family:'Noto Sans JP',sans-serif;
+  transition:opacity .15s;
+}
+.copy-all-btn:hover{opacity:.75;}
+
+.ideas-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+@media(max-width:960px){.ideas-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.ideas-grid{grid-template-columns:1fr;}}
+
+/* ── IDEA CARD ── */
+.icard{
+  background:var(--white);
+  border:2px solid var(--black);
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:transform .2s,box-shadow .2s;
+  animation:cardIn .4s ease forwards;
+  opacity:0;
+}
+.icard:hover{transform:translateY(-4px);box-shadow:6px 6px 0 var(--black);}
+@keyframes cardIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* Color preview */
+.card-colors{display:flex;height:6px;}
+.card-color{flex:1;}
+
+/* Idea banner mock */
+.card-mock{
+  height:180px;
+  position:relative;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:20px;overflow:hidden;
+}
+.mock-eyebrow{
+  font-size:9px;font-weight:700;
+  padding:3px 10px;border-radius:999px;
+  margin-bottom:8px;letter-spacing:.8px;
+  display:inline-block;
+}
+.mock-title{
+  font-family:'Syne',sans-serif;
+  font-size:18px;font-weight:800;
+  text-align:center;line-height:1.2;
+  margin-bottom:5px;
+  text-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+.mock-sub{font-size:10px;text-align:center;opacity:.6;margin-bottom:10px;}
+.mock-dots{display:flex;gap:5px;justify-content:center;}
+.mock-dot{width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,.25);}
+.mock-deco{position:absolute;font-size:16px;opacity:.15;user-select:none;}
 
 /* Card body */
-.ibody{padding:18px;flex:1;display:flex;flex-direction:column;gap:0;}
-.inum{font-size:9px;font-weight:700;letter-spacing:2px;color:var(--a1);margin-bottom:4px;}
-.ititle{font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.35;}
-.idesc{font-size:11px;color:var(--mu);line-height:1.75;margin-bottom:14px;}
+.card-body{padding:18px;flex:1;display:flex;flex-direction:column;gap:10px;}
 
-/* Color swatches */
-.swatches{display:flex;gap:0;border-radius:8px;overflow:hidden;height:36px;margin-bottom:10px;cursor:pointer;}
-.sw{flex:1;display:flex;align-items:flex-end;justify-content:center;padding-bottom:3px;transition:flex .18s;position:relative;}
-.sw:hover{flex:2.2;}
-.sw-hex{font-size:8px;font-family:monospace;color:rgba(255,255,255,.8);text-shadow:0 1px 4px rgba(0,0,0,.6);white-space:nowrap;}
+.card-num{
+  font-size:9px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:-2px;
+}
+.card-title{
+  font-family:'Syne',sans-serif;
+  font-size:16px;font-weight:800;
+  line-height:1.3;color:var(--black);
+}
+.card-desc{
+  font-size:11px;color:var(--gray1);
+  line-height:1.85;
+  border-left:3px solid var(--yellow);
+  padding-left:10px;
+  background:var(--yellow-pale);
+  padding:8px 10px;
+  border-radius:0 6px 6px 0;
+}
 
-/* Tags row */
-.tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;}
-.tag{font-size:9px;font-weight:600;padding:4px 9px;border-radius:5px;}
-.tf{background:rgba(124,106,255,.15);color:var(--a1);}
-.tl{background:rgba(255,211,61,.12);color:var(--a3);}
-.tm{background:rgba(74,239,192,.12);color:var(--a4);}
+/* Swatches */
+.swatches{display:flex;gap:0;border-radius:6px;overflow:hidden;height:38px;}
+.sw{
+  flex:1;display:flex;align-items:flex-end;
+  justify-content:center;padding-bottom:3px;
+  cursor:pointer;transition:flex .18s;
+  position:relative;
+}
+.sw:hover{flex:2.5;}
+.sw-hex{
+  font-size:8px;font-family:monospace;
+  color:rgba(255,255,255,.9);
+  text-shadow:0 1px 4px rgba(0,0,0,.6);font-weight:700;
+  white-space:nowrap;
+}
 
-/* Illustrator section */
-.ai-sec{background:var(--s2);border-radius:10px;padding:12px;margin-bottom:14px;}
-.ai-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu);margin-bottom:8px;display:flex;align-items:center;gap:5px;}
-.ai-label::before{content:'';width:8px;height:8px;border-radius:2px;background:linear-gradient(135deg,#FF9A00,#FF6600);flex-shrink:0;}
-.ai-steps{display:flex;flex-direction:column;gap:5px;}
-.ai-step{font-size:10px;color:var(--tx);line-height:1.5;display:flex;gap:6px;align-items:flex-start;}
-.ai-step-num{font-size:9px;font-weight:700;color:var(--a1);flex-shrink:0;margin-top:1px;}
+/* Tags */
+.tags{display:flex;flex-wrap:wrap;gap:5px;}
+.tag{font-size:9px;font-weight:700;padding:4px 9px;border-radius:4px;}
+.tag-font{background:var(--yellow-light);color:var(--black);border:1px solid var(--yellow);}
+.tag-layout{background:#EEF2FF;color:#3730A3;border:1px solid #C7D2FE;}
+.tag-mood{background:#F0FDF4;color:#166534;border:1px solid #BBF7D0;}
 
-/* Reference links */
-.refs{border-top:1px solid var(--bd);padding-top:14px;margin-top:auto;}
-.refs-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mu);margin-bottom:8px;}
-.ref-list{display:flex;flex-direction:column;gap:5px;}
-.ref-a{display:flex;align-items:center;gap:9px;padding:8px 10px;background:var(--s3);border:1px solid var(--bd);border-radius:8px;text-decoration:none;transition:all .15s;}
-.ref-a:hover{border-color:var(--a1);background:rgba(124,106,255,.1);}
-.ref-ico{font-size:15px;flex-shrink:0;}
+/* Illustrator steps */
+.ai-steps{
+  background:var(--gray4);
+  border-radius:8px;padding:12px;
+  border:1px solid var(--gray3);
+}
+.ai-steps-label{
+  font-size:9px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--gray2);
+  margin-bottom:8px;
+  display:flex;align-items:center;gap:5px;
+}
+.ai-badge{
+  font-size:9px;font-weight:900;
+  background:linear-gradient(135deg,#FF9500,#FF3B00);
+  color:white;padding:1px 5px;border-radius:3px;
+}
+.step-list{display:flex;flex-direction:column;gap:5px;}
+.step-item{display:flex;gap:8px;align-items:flex-start;}
+.step-n{
+  width:18px;height:18px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:700;color:var(--white);
+  flex-shrink:0;margin-top:2px;
+}
+.step-txt{font-size:10px;color:var(--gray1);line-height:1.65;}
+
+/* Refs */
+.refs{border-top:1px solid var(--gray3);padding-top:10px;margin-top:auto;}
+.refs-label{
+  font-size:9px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--gray2);margin-bottom:7px;
+}
+.ref-list{display:flex;flex-direction:column;gap:4px;}
+.ref-a{
+  display:flex;align-items:center;gap:9px;
+  padding:7px 9px;
+  background:var(--gray4);
+  border:1px solid var(--gray3);
+  border-radius:6px;
+  text-decoration:none;
+  transition:all .15s;
+}
+.ref-a:hover{border-color:var(--black);background:var(--yellow-light);}
+.ref-ico{font-size:13px;flex-shrink:0;}
 .ref-info{flex:1;min-width:0;}
-.ref-site{font-size:10px;font-weight:700;color:var(--tx);}
-.ref-kw{font-size:9px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.ref-arr{font-size:11px;color:var(--mu);flex-shrink:0;}
-
-/* Copy all */
-.copy-wrap{display:flex;justify-content:flex-end;}
-.copy-btn{background:rgba(124,106,255,.12);border:1px solid rgba(124,106,255,.3);border-radius:9px;color:var(--a1);font-size:11px;padding:9px 18px;cursor:pointer;transition:all .15s;font-family:'Noto Sans JP',sans-serif;}
-.copy-btn:hover{background:rgba(124,106,255,.22);}
+.ref-site{font-size:10px;font-weight:700;color:var(--black);}
+.ref-kw{font-size:9px;color:var(--gray2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ref-arr{font-size:11px;color:var(--gray2);}
 
 /* Toast */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--a1);color:#fff;font-size:11px;font-weight:700;padding:8px 20px;border-radius:999px;opacity:0;pointer-events:none;transition:all .25s;z-index:999;}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-
-@keyframes fu{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
-.fu{animation:fu .32s ease forwards;}
+.toast{
+  position:fixed;bottom:24px;right:24px;
+  background:var(--black);color:var(--white);
+  font-size:11px;font-weight:700;
+  padding:10px 18px;border-radius:6px;
+  border-left:3px solid var(--yellow);
+  opacity:0;pointer-events:none;
+  transition:all .25s;z-index:999;
+  transform:translateY(8px);
+}
+.toast.show{opacity:1;transform:translateY(0);}
 </style>
 </head>
 <body>
-<div class="toast" id="toast">コピーしました！</div>
-<div class="wrap">
-  <header>
-    <div>
-      <div class="logo">DesignBrief AI</div>
-      <div class="logo-sub">デザインの方向性を、Illustratorを開く前に決める</div>
-    </div>
-    <div class="header-badge">powered by Claude</div>
-  </header>
+<div class="toast" id="toast"></div>
 
-  <div class="hero">
-    <h1>アイデアに詰まったら<br><em>ここから始めよう。</em></h1>
-    <p>案件情報を入れるだけで、AIが具体的なデザインアイデア3案・配色・Illustratorでの作り方・参考画像リンクをまとめて提案。<br>迷う時間をゼロにして、すぐ作り始められる。</p>
+<div class="header">
+  <div class="logo">Design<em>Brief</em> AI</div>
+  <div class="header-right">
+    <div class="header-tag">South Agency · 2026</div>
   </div>
+</div>
 
-  <div class="fcard">
+<div class="hero">
+  <div class="hero-eyebrow">✦ AI-powered Design Direction Tool</div>
+  <div class="hero-title">
+    アイデアに詰まったら、<br>
+    <span class="hl">ここから始める。</span>
+  </div>
+  <div class="hero-sub">
+    案件情報を入れるだけで、AIが具体的なデザインアイデア・配色・ワイヤーフレーム・参考リンクを瞬時に生成。<br>
+    「最初の一歩」に悩む時間をゼロにする。
+  </div>
+</div>
+
+<div class="form-section">
+  <div class="form-grid">
     <div class="fg">
-      <label>案件名・制作物 <span class="req">*</span></label>
-      <input type="text" id="project" placeholder="例：夏の新作コスメ紹介バナー、マリノスのイベント告知画像">
-    </div>
-    <div class="fgrid">
-      <div class="fg">
-        <label>ターゲット層</label>
-        <input type="text" id="target" placeholder="例：20代女性、ファミリー層">
-      </div>
-      <div class="fg">
-        <label>媒体・サイズ</label>
-        <select id="media">
-          <option>Instagram正方形 1080×1080px</option>
-          <option>Instagramストーリー 1080×1920px</option>
-          <option>OGP横長 1200×628px</option>
-          <option>Webバナー横長 728×90px</option>
-          <option>LPヘッダー 1920×600px</option>
-        </select>
-      </div>
-      <div class="fg">
-        <label>雰囲気・トーン</label>
-        <select id="tone">
-          <option>かわいい・ポップ</option>
-          <option>おしゃれ・高級感</option>
-          <option>クール・スタイリッシュ</option>
-          <option>ナチュラル・やわらか</option>
-          <option>信頼感・誠実</option>
-          <option>インパクト重視</option>
-          <option>シンプル・ミニマル</option>
-        </select>
-      </div>
-      <div class="fg">
-        <label>ブランドカラー（任意）</label>
-        <input type="text" id="bc" placeholder="例：ネイビー×ゴールド、#FF6EB4">
-      </div>
+      <div class="fg-label">案件名・制作物 <span class="req">*</span></div>
+      <input type="text" id="project" placeholder="例：夏の新作コスメ紹介バナー、マリノスのイベント告知">
     </div>
     <div class="fg">
-      <label>その他メモ（任意）</label>
-      <textarea id="notes" placeholder="例：既存のバナーと統一感を出したい、文字多め、写真は使わない"></textarea>
+      <div class="fg-label">ターゲット層</div>
+      <input type="text" id="target" placeholder="例：20代女性">
+    </div>
+    <div class="fg">
+      <div class="fg-label">媒体</div>
+      <select id="media">
+        <option value="Instagram正方形 1080×1080px">Instagram正方形</option>
+        <option value="Instagramストーリー 1080×1920px">ストーリー縦</option>
+        <option value="OGP横長 1200×628px">OGP横長</option>
+        <option value="Webバナー 728×90px">Web横長バナー</option>
+        <option value="LPヘッダー 1920×600px">LPヘッダー</option>
+      </select>
+    </div>
+    <div class="fg">
+      <div class="fg-label">トーン</div>
+      <select id="tone">
+        <option>かわいい・ポップ</option>
+        <option>おしゃれ・高級感</option>
+        <option>クール・スタイリッシュ</option>
+        <option>ナチュラル・やわらか</option>
+        <option>信頼感・誠実</option>
+        <option>インパクト重視</option>
+        <option>シンプル・ミニマル</option>
+      </select>
     </div>
     <button class="gbtn" id="gbtn">
-      <span id="bt">✦ デザインアイデアを生成する</span>
+      <span id="bt">生成 →</span>
       <div class="spin" id="sp"></div>
     </button>
   </div>
+</div>
 
-  <div class="out" id="out">
-    <div class="empty">
-      <div class="empty-ico">💡</div>
-      <div class="empty-txt">案件情報を入力して「デザインアイデアを生成する」を押してください</div>
-      <div class="empty-hint">✦ アイデア3案 ＋ 配色 ＋ Illustratorの作り方 ＋ 参考リンクを同時生成</div>
+<div class="output" id="output">
+  <div class="empty">
+    <div class="empty-ico">✏️</div>
+    <div class="empty-title">案件情報を入力してください</div>
+    <div class="empty-sub">
+      上のフォームに案件情報を入力して「生成」を押すと<br>
+      デザインアイデア3案が瞬時に生成されます
     </div>
+    <div class="empty-hint">✦ アイデア + 配色 + ワイヤーフレーム + 参考リンクを同時生成</div>
   </div>
 </div>
 
 <script>
-var D=null;
+var D = null;
 
 function getKey(){
-  if(window.CK)return window.CK;
-  var k=localStorage.getItem('ck');
-  if(k){window.CK=k;return k;}
-  k=window.prompt('Claude APIキー（sk-ant-...）を入力してください\n※一度入力すれば次回から不要です');
-  if(k){window.CK=k;localStorage.setItem('ck',k);}
-  return k||'';
+  if(window.CK) return window.CK;
+  var k = localStorage.getItem('ck');
+  if(k){ window.CK = k; return k; }
+  k = window.prompt('Claude APIキー（sk-ant-...）を入力\n※次回から不要です');
+  if(k){ window.CK = k; localStorage.setItem('ck', k); }
+  return k || '';
 }
 
-document.getElementById('gbtn').addEventListener('click',generate);
+document.getElementById('gbtn').addEventListener('click', generate);
 
 async function generate(){
-  var project=document.getElementById('project').value.trim();
-  if(!project){alert('案件名を入力してください');return;}
-  var target=document.getElementById('target').value.trim();
-  var media=document.getElementById('media').value;
-  var tone=document.getElementById('tone').value;
-  var bc=document.getElementById('bc').value.trim();
-  var notes=document.getElementById('notes').value.trim();
+  var project = document.getElementById('project').value.trim();
+  if(!project){ alert('案件名を入力してください'); return; }
+  var target = document.getElementById('target').value.trim();
+  var media = document.getElementById('media').value;
+  var tone = document.getElementById('tone').value;
 
-  var btn=document.getElementById('gbtn');
-  btn.disabled=true;
-  document.getElementById('bt').style.display='none';
-  document.getElementById('sp').style.display='block';
-  document.getElementById('out').innerHTML='<div class="empty"><div class="empty-ico" style="opacity:.4">⏳</div><div class="empty-txt">AIがデザインを考えています...<br><span style="font-size:11px;color:var(--a4)">配色・レイアウト・参考リンクを生成中</span></div></div>';
+  document.getElementById('gbtn').disabled = true;
+  document.getElementById('bt').style.display = 'none';
+  document.getElementById('sp').style.display = 'block';
 
-  var prompt='あなたはLIPSやブランドのバナー制作に精通したプロのグラフィックデザイナーです。\n'
-    +'以下の案件について、Illustratorですぐ制作に取り掛かれるレベルの具体的なデザインアイデアを3案提案してください。\n\n'
-    +'案件：'+project+'\n'
-    +'ターゲット：'+(target||'未指定')+'\n'
-    +'媒体：'+media+'\n'
-    +'トーン：'+tone+'\n'
-    +(bc?'ブランドカラー：'+bc+'\n':'')
-    +(notes?'その他：'+notes+'\n':'')
-    +'\n以下のJSON形式のみ出力（説明文・マークダウン不要）:\n'
-    +'{"ideas":['
-    +'{"concept":"コンセプト名12文字以内",'
-    +'"title":"デザイン方向性タイトル20文字以内",'
-    +'"description":"このデザインにした理由と狙い・ターゲットへの訴求方法・全体の印象を60文字以内で具体的に",'
-    +'"colors":["#hex1","#hex2","#hex3","#hex4"],'
-    +'"cnames":["色名1","色名2","色名3","色名4"],'
-    +'"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex",'
-    +'"font":"フォント方向性と理由15文字",'
-    +'"layout":"レイアウト構成の説明15文字",'
-    +'"mood":"キーワード一言8文字",'
-    +'"ai_steps":["Illustratorでの具体的な手順1（例：新規ドキュメントを1080×1080pxで作成し背景をグラデーションで塗る）","手順2（例：テキストをNoto Sans JP Blackで配置しアウトライン化してグラデーション塗りを適用）","手順3（例：装飾要素として楕円ツールで丸を複数配置し不透明度20%に設定）"],'
-    +'"pinterest_kw":"Pinterest検索英語キーワード4〜6単語",'
-    +'"behance_kw":"Behance検索英語キーワード3〜4単語",'
-    +'"google_kw":"Google画像検索日本語キーワード5〜8文字"}'
-    +',{"concept":"...","title":"...","description":"...","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout":"...","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."}'
-    +',{"concept":"...","title":"...","description":"...","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout":"...","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."}'
-    +']}';
+  document.getElementById('output').innerHTML =
+    '<div class="loading">'
+    + '<div class="loading-txt">AIがデザインを考えています</div>'
+    + '<div class="loading-bar"><div class="loading-bar-inner"></div></div>'
+    + '<div class="loading-sub">配色・レイアウト・参考キーワードを生成中...</div>'
+    + '</div>';
+
+  var prompt =
+    'あなたはLIPS・資生堂・電通の第一線でバナーを数千枚制作してきたトップクリエイティブディレクターです。'
+    + '以下の案件のデザインアイデアを3案提案してください。'
+    + '案件：' + project + ' ターゲット：' + (target||'未指定') + ' 媒体：' + media + ' トーン：' + tone + ' '
+    + '各アイデアで必ず含めること：'
+    + '(1)そのターゲットが思わず保存したくなる心理的根拠とトレンド名 '
+    + '(2)競合との差別化ポイント '
+    + '(3)Illustratorの具体的操作手順（ツール名・数値・色コード・フォント名まで） '
+    + '禁止：当たり前の提案・抽象的表現。3案は方向性・配色・レイアウトが全て異なること。'
+    + 'JSONのみ出力（説明文・マークダウン不要）。文字列内にダブルクォートを使わないこと。'
+    + '{"ideas":['
+    + '{"concept":"コンセプト名10文字","title":"方向性20文字",'
+    + '"why":"なぜこのターゲットに刺さるか。競合との違い。心理的根拠。ブランド名やトレンドを含めて100文字",'
+    + '"colors":["#hex1","#hex2","#hex3","#hex4"],"cnames":["色名1","色名2","色名3","色名4"],'
+    + '"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex",'
+    + '"font":"フォント名と使い方20文字","layout_name":"レイアウト名10文字","layout_type":"center_title_grid","mood":"8文字",'
+    + '"ai_steps":["手順1：具体的に","手順2：具体的に","手順3：具体的に"],'
+    + '"pinterest_kw":"日本語6文字","behance_kw":"英語3単語","google_kw":"日本語8文字"},'
+    + '{"concept":"...","title":"...","why":"100文字","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout_name":"...","layout_type":"left_text_right_image","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."},'
+    + '{"concept":"...","title":"...","why":"100文字","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout_name":"...","layout_type":"diagonal","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."}]}';
 
   try{
-    var res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'x-api-key':getKey(),
-        'anthropic-version':'2023-06-01',
-        'anthropic-dangerous-direct-browser-access':'true'
+    var res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': getKey(),
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
       },
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:2000,
-        messages:[{role:'user',content:prompt}]
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 2500,
+        messages: [{ role: 'user', content: prompt }]
       })
     });
-    var d=await res.json();
-    if(d.error)throw new Error(d.error.message||JSON.stringify(d.error));
-    var text=(d.content&&d.content[0]&&d.content[0].text)||'';
-    var m=text.match(/\{[\s\S]*\}/);
-    if(!m)throw new Error('JSONが見つかりません');
-    D=JSON.parse(m[0]);
-    render(project,target);
-  }catch(e){
+    var d = await res.json();
+    if(d.error) throw new Error(d.error.message || JSON.stringify(d.error));
+    var text = (d.content && d.content[0] && d.content[0].text) || '';
+    var m = text.match(/\{[\s\S]*\}/);
+    if(!m) throw new Error('JSONが見つかりません');
+    // JSONを安全にパース（制御文字・改行を除去）
+    var jsonStr = m[0]
+      .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '')
+      .replace(/\n/g, ' ')
+      .replace(/\r/g, '')
+      .replace(/\t/g, ' ');
+    D = JSON.parse(jsonStr);
+    render(project, target, media, tone);
+  } catch(e) {
     console.error(e);
-    document.getElementById('out').innerHTML='<div class="empty"><div class="empty-ico">⚠️</div><div class="empty-txt">エラー: '+esc(e.message)+'</div></div>';
-  }finally{
-    btn.disabled=false;
-    document.getElementById('bt').style.display='block';
-    document.getElementById('sp').style.display='none';
+    document.getElementById('output').innerHTML =
+      '<div class="empty"><div class="empty-ico">⚠️</div>'
+      + '<div class="empty-title">エラーが発生しました</div>'
+      + '<div class="empty-sub">' + esc(e.message) + '</div></div>';
+  } finally {
+    document.getElementById('gbtn').disabled = false;
+    document.getElementById('bt').style.display = 'block';
+    document.getElementById('sp').style.display = 'none';
   }
 }
 
-function render(project,target){
-  var out=document.getElementById('out');
-  out.innerHTML='';
+function render(project, target, media, tone){
+  var out = document.getElementById('output');
+  out.innerHTML = '';
 
-  var grid=document.createElement('div');
-  grid.className='ideas';
+  var rh = document.createElement('div');
+  rh.className = 'result-header';
+  rh.innerHTML =
+    '<div>'
+    + '<div class="result-title">デザインアイデア 3案 — ' + esc(project) + '</div>'
+    + '<div class="result-meta">' + esc(media) + ' · ' + esc(tone) + (target ? ' · ' + esc(target) : '') + '</div>'
+    + '</div>'
+    + '<button class="copy-all-btn" onclick="copyAll()">📋 ブリーフ全コピー</button>';
+  out.appendChild(rh);
 
-  (D.ideas||[]).forEach(function(idea,i){
-    var pq=encodeURIComponent(idea.pinterest_kw||'banner design');
-    var bq=encodeURIComponent(idea.behance_kw||'banner design');
-    var gq=encodeURIComponent(idea.google_kw||project);
+  var grid = document.createElement('div');
+  grid.className = 'ideas-grid';
 
-    var card=document.createElement('div');
-    card.className='icard fu';
-    card.style.animationDelay=(i*.1)+'s';
+  (D.ideas || []).forEach(function(idea, i){
+    var acc = idea.accent || '#FFE135';
+    var txc = idea.text_color || '#111108';
+    var bgF = idea.bg_from || '#FFFEF0';
+    var bgT = idea.bg_to || '#FFF9C4';
+    var cols = idea.colors || ['#FFE135','#111108','#FF3B3B','#00A878'];
+    var pq = encodeURIComponent(idea.pinterest_kw || project);
+    var bq = encodeURIComponent(idea.behance_kw || 'banner design');
+    var gq = encodeURIComponent(idea.google_kw || project);
 
-    // 安全なカラー
-    var bgF=idea.bg_from||'#1a1930';
-    var bgT=idea.bg_to||'#0f0e1e';
-    var acc=idea.accent||'#7c6aff';
-    var txc=idea.text_color||'#ffffff';
-    var cols=idea.colors||['#7c6aff','#ff6a8a','#ffd93d','#4aefc0'];
+    var card = document.createElement('div');
+    card.className = 'icard';
+    card.style.animationDelay = (i * 0.12) + 's';
 
-    card.innerHTML=
-      // Mock banner
-      '<div class="mock" style="background:linear-gradient(135deg,'+esc(bgF)+','+esc(bgT)+')">'
-      +'<span class="mock-deco" style="top:8%;left:5%">✿</span>'
-      +'<span class="mock-deco" style="top:5%;right:7%">★</span>'
-      +'<span class="mock-deco" style="bottom:18%;left:4%">♡</span>'
-      +'<span class="mock-deco" style="bottom:16%;right:5%">✦</span>'
-      +'<span class="mock-deco" style="top:45%;left:2%">◎</span>'
-      +'<div class="mock-eyebrow" style="background:'+esc(acc)+';color:#fff">'+esc(idea.concept||'')+'</div>'
-      +'<div class="mock-title" style="color:'+esc(txc)+'">'+(project.slice(0,14)||'タイトル')+'</div>'
-      +'<div class="mock-sub" style="color:'+esc(txc)+'">'+(target||idea.mood||'ターゲット')+'</div>'
-      +'<div class="mock-colors">'+cols.map(function(c){return '<div class="mock-dot" style="background:'+esc(c)+'"></div>';}).join('')+'</div>'
-      +'<div class="mock-stripe" style="background:linear-gradient(90deg,'+cols.join(',')+')"></div>'
-      +'</div>'
+    card.innerHTML =
+      // 上部カラーバー
+      '<div class="card-colors">'
+      + cols.map(function(c){ return '<div class="card-color" style="background:' + esc(c) + '"></div>'; }).join('')
+      + '</div>'
 
-      // Body
-      +'<div class="ibody">'
-      +'<div class="inum">IDEA '+(i+1)+'</div>'
-      +'<div class="ititle">'+esc(idea.title||'')+'</div>'
-      +'<div class="idesc">'+esc(idea.description||'')+'</div>'
+      // バナーモック
+      + '<div class="card-mock" style="background:linear-gradient(135deg,' + esc(bgF) + ',' + esc(bgT) + ')">'
+      + '<span class="mock-deco" style="top:8%;left:5%">✿</span>'
+      + '<span class="mock-deco" style="top:5%;right:7%">★</span>'
+      + '<span class="mock-deco" style="bottom:15%;left:4%">♡</span>'
+      + '<span class="mock-deco" style="bottom:12%;right:5%">✦</span>'
+      + '<div class="mock-eyebrow" style="background:' + esc(acc) + ';color:' + esc(txc) + '">' + esc(idea.concept || '') + '</div>'
+      + '<div class="mock-title" style="color:' + esc(txc) + '">' + esc((project).slice(0, 14)) + '</div>'
+      + '<div class="mock-sub" style="color:' + esc(txc) + '">' + esc(target || idea.mood || '') + '</div>'
+      + '<div class="mock-dots">' + cols.map(function(c){ return '<div class="mock-dot" style="background:' + esc(c) + '"></div>'; }).join('') + '</div>'
+      + '</div>'
 
-      // Swatches
-      +'<div class="swatches">'+cols.map(function(c,ci){
-        return '<div class="sw" style="background:'+esc(c)+'" onclick="copyTxt(\''+esc(c)+'\')" title="'+(idea.cnames||[])[ci]+' — クリックでコピー"><span class="sw-hex">'+esc(c)+'</span></div>';
-      }).join('')+'</div>'
+      // ボディ
+      + '<div class="card-body">'
+      + '<div class="card-num" style="color:' + esc(acc === '#FFE135' ? '#B8960C' : acc) + '">IDEA ' + (i+1) + '</div>'
+      + '<div class="card-title">' + esc(idea.title || '') + '</div>'
+      + '<div class="card-desc">' + esc(idea.why || '') + '</div>'
 
-      // Tags
-      +'<div class="tags">'
-      +'<span class="tag tf">🔤 '+esc(idea.font||'')+'</span>'
-      +'<span class="tag tl">📐 '+esc(idea.layout||'')+'</span>'
-      +'<span class="tag tm">✨ '+esc(idea.mood||'')+'</span>'
-      +'</div>'
+      // スウォッチ
+      + '<div>'
+      + '<div class="swatches">'
+      + cols.map(function(c, ci){
+          return '<div class="sw" style="background:' + esc(c) + '" onclick="copyTxt(\'' + esc(c) + '\')" title="' + esc((idea.cnames || [])[ci] || '') + ' — クリックでコピー">'
+            + '<span class="sw-hex">' + esc(c) + '</span></div>';
+        }).join('')
+      + '</div>'
+      + '</div>'
 
-      // Illustrator steps
-      +'<div class="ai-sec">'
-      +'<div class="ai-label">Illustratorでの作り方</div>'
-      +'<div class="ai-steps">'
-      +(idea.ai_steps||[]).map(function(s,si){
-        return '<div class="ai-step"><span class="ai-step-num">'+(si+1)+'.</span><span>'+esc(s)+'</span></div>';
-      }).join('')
-      +'</div></div>'
+      // タグ
+      + '<div class="tags">'
+      + '<span class="tag tag-font">🔤 ' + esc(idea.font || '') + '</span>'
+      + '<span class="tag tag-layout">📐 ' + esc(idea.layout_name || '') + '</span>'
+      + '<span class="tag tag-mood">✨ ' + esc(idea.mood || '') + '</span>'
+      + '</div>'
 
-      // Reference links
-      +'<div class="refs">'
-      +'<div class="refs-label">参考画像を探す</div>'
-      +'<div class="ref-list">'
-      +'<a class="ref-a" href="https://www.pinterest.jp/search/pins/?q='+pq+'" target="_blank" rel="noopener">'
-      +'<span class="ref-ico">📌</span>'
-      +'<div class="ref-info"><div class="ref-site">Pinterest</div><div class="ref-kw">'+esc(idea.pinterest_kw||'')+'</div></div>'
-      +'<span class="ref-arr">↗</span></a>'
+      // Illustrator手順
+      + '<div class="ai-steps">'
+      + '<div class="ai-steps-label"><span class="ai-badge">Ai</span> Illustratorでの作り方</div>'
+      + '<div class="step-list">'
+      + (idea.ai_steps || []).map(function(s, si){
+          return '<div class="step-item">'
+            + '<div class="step-n" style="background:' + esc(acc === '#FFE135' ? '#B8960C' : acc) + '">' + (si+1) + '</div>'
+            + '<div class="step-txt">' + esc(s) + '</div>'
+            + '</div>';
+        }).join('')
+      + '</div></div>'
 
-      +'<a class="ref-a" href="https://www.behance.net/search/projects/?search='+bq+'" target="_blank" rel="noopener">'
-      +'<span class="ref-ico">🎨</span>'
-      +'<div class="ref-info"><div class="ref-site">Behance</div><div class="ref-kw">'+esc(idea.behance_kw||'')+'</div></div>'
-      +'<span class="ref-arr">↗</span></a>'
-
-      +'<a class="ref-a" href="https://www.google.com/search?q='+gq+'&tbm=isch" target="_blank" rel="noopener">'
-      +'<span class="ref-ico">🔍</span>'
-      +'<div class="ref-info"><div class="ref-site">Google画像</div><div class="ref-kw">'+esc(idea.google_kw||'')+'</div></div>'
-      +'<span class="ref-arr">↗</span></a>'
-      +'</div></div>'
-      +'</div>';
+      // 参考リンク
+      + '<div class="refs">'
+      + '<div class="refs-label">参考画像を探す</div>'
+      + '<div class="ref-list">'
+      + '<a class="ref-a" href="https://jp.pinterest.com/search/pins/?q=' + pq + '" target="_blank" rel="noopener">'
+      + '<span class="ref-ico">📌</span><div class="ref-info"><div class="ref-site">Pinterest</div><div class="ref-kw">' + esc(idea.pinterest_kw || '') + '</div></div><span class="ref-arr">↗</span></a>'
+      + '<a class="ref-a" href="https://www.behance.net/search/projects/?search=' + bq + '" target="_blank" rel="noopener">'
+      + '<span class="ref-ico">🎨</span><div class="ref-info"><div class="ref-site">Behance</div><div class="ref-kw">' + esc(idea.behance_kw || '') + '</div></div><span class="ref-arr">↗</span></a>'
+      + '<a class="ref-a" href="https://www.google.com/search?q=' + gq + '&tbm=isch" target="_blank" rel="noopener">'
+      + '<span class="ref-ico">🔍</span><div class="ref-info"><div class="ref-site">Google画像</div><div class="ref-kw">' + esc(idea.google_kw || '') + '</div></div><span class="ref-arr">↗</span></a>'
+      + '</div></div>'
+      + '</div>';
 
     grid.appendChild(card);
   });
 
   out.appendChild(grid);
-
-  var cw=document.createElement('div');
-  cw.className='copy-wrap fu';cw.style.animationDelay='.35s';
-  cw.innerHTML='<button class="copy-btn" onclick="copyAll()">📋 ブリーフ全体をコピー（Slack・Notion用）</button>';
-  out.appendChild(cw);
 }
 
 function showToast(msg){
-  var t=document.getElementById('toast');
-  t.textContent=msg||'コピーしました！';
+  var t = document.getElementById('toast');
+  t.textContent = msg;
   t.classList.add('show');
-  setTimeout(function(){t.classList.remove('show');},1800);
+  setTimeout(function(){ t.classList.remove('show'); }, 2000);
 }
 
 function copyTxt(t){
-  navigator.clipboard.writeText(t).then(function(){showToast(t+' をコピー！');});
+  navigator.clipboard.writeText(t).then(function(){ showToast(t + ' をコピー！'); });
 }
 
 function copyAll(){
-  if(!D)return;
-  var project=document.getElementById('project').value;
-  var txt='【デザインブリーフ】\n';
-  txt+='案件：'+project+'\n';
-  txt+='媒体：'+document.getElementById('media').value+'\n';
-  txt+='トーン：'+document.getElementById('tone').value+'\n\n';
-  (D.ideas||[]).forEach(function(idea,i){
-    txt+='━━━━━━━━━━━━\n';
-    txt+='【アイデア'+(i+1)+'：'+idea.concept+'】\n';
-    txt+=idea.title+'\n\n';
-    txt+=idea.description+'\n\n';
-    txt+='配色：'+(idea.colors||[]).join(' / ')+'\n';
-    txt+='フォント：'+idea.font+'\n';
-    txt+='レイアウト：'+idea.layout+'\n\n';
-    txt+='Illustratorでの作り方：\n';
-    (idea.ai_steps||[]).forEach(function(s,si){txt+=(si+1)+'. '+s+'\n';});
-    txt+='\n参考：Pinterest「'+idea.pinterest_kw+'」\n\n';
+  if(!D) return;
+  var project = document.getElementById('project').value;
+  var txt = '【DesignBrief AI — デザインブリーフ】\n';
+  txt += '案件：' + project + '\n';
+  txt += '媒体：' + document.getElementById('media').value + '\n';
+  txt += 'トーン：' + document.getElementById('tone').value + '\n\n';
+  (D.ideas || []).forEach(function(idea, i){
+    txt += '━━━━━━━━━━━━━━━━\n';
+    txt += '【IDEA ' + (i+1) + '：' + idea.concept + '】\n';
+    txt += idea.title + '\n\n';
+    txt += '▶ なぜこのデザインか\n' + idea.why + '\n\n';
+    txt += '▶ 配色\n' + (idea.colors || []).join(' / ') + '\n';
+    txt += '▶ フォント：' + idea.font + '\n';
+    txt += '▶ レイアウト：' + idea.layout_name + '\n\n';
+    txt += '▶ Illustratorでの作り方\n';
+    (idea.ai_steps || []).forEach(function(s){ txt += s + '\n'; });
+    txt += '\n▶ 参考：Pinterest「' + idea.pinterest_kw + '」\n\n';
   });
-  navigator.clipboard.writeText(txt).then(function(){showToast('ブリーフをコピーしました！');});
+  navigator.clipboard.writeText(txt).then(function(){ showToast('ブリーフをコピーしました！'); });
 }
 
 function esc(s){
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 </script>
 </body>
