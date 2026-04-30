@@ -180,10 +180,10 @@ body{background:var(--bg);color:var(--black);font-family:'Noto Sans JP',sans-ser
 
 .ideas-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(4,1fr);
   gap:20px;
 }
-@media(max-width:960px){.ideas-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:1100px){.ideas-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:600px){.ideas-grid{grid-template-columns:1fr;}}
 
 /* ── IDEA CARD ── */
@@ -278,7 +278,7 @@ body{background:var(--bg);color:var(--black);font-family:'Noto Sans JP',sans-ser
 /* Illustrator steps */
 .ai-steps{
   background:var(--gray4);
-  border-radius:8px;padding:12px;
+  border-radius:8px;padding:14px;
   border:1px solid var(--gray3);
 }
 .ai-steps-label{
@@ -292,15 +292,15 @@ body{background:var(--bg);color:var(--black);font-family:'Noto Sans JP',sans-ser
   background:linear-gradient(135deg,#FF9500,#FF3B00);
   color:white;padding:1px 5px;border-radius:3px;
 }
-.step-list{display:flex;flex-direction:column;gap:5px;}
+.step-list{display:flex;flex-direction:column;gap:8px;}
 .step-item{display:flex;gap:8px;align-items:flex-start;}
 .step-n{
-  width:18px;height:18px;border-radius:50%;
+  width:22px;height:22px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  font-size:9px;font-weight:700;color:var(--white);
+  font-size:11px;font-weight:700;color:var(--white);
   flex-shrink:0;margin-top:2px;
 }
-.step-txt{font-size:10px;color:var(--gray1);line-height:1.65;}
+.step-txt{font-size:12px;color:var(--gray1);line-height:1.7;font-weight:500;}
 
 /* Refs */
 .refs{border-top:1px solid var(--gray3);padding-top:10px;margin-top:auto;}
@@ -460,10 +460,10 @@ async function generate(){
     + '"colors":["#hex1","#hex2","#hex3","#hex4"],"cnames":["色名1","色名2","色名3","色名4"],'
     + '"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex",'
     + '"font":"フォント名と使い方20文字","layout_name":"レイアウト名10文字","layout_type":"center_title_grid","mood":"8文字",'
-    + '"ai_steps":["手順1：具体的に","手順2：具体的に","手順3：具体的に"],'
+    + '"ai_steps":["背景：#hexで塗り、グラデ適用","テキスト：フォント名・サイズ・配置","仕上げ：装飾・不透明度・書き出し"],'
     + '"pinterest_kw":"日本語6文字","behance_kw":"英語3単語","google_kw":"日本語8文字"},'
     + '{"concept":"...","title":"...","why":"100文字","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout_name":"...","layout_type":"left_text_right_image","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."},'
-    + '{"concept":"...","title":"...","why":"100文字","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout_name":"...","layout_type":"diagonal","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."}]}';
+    + '{"concept":"...","title":"...","why":"100文字","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout_name":"...","layout_type":"diagonal","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."},{"concept":"...","title":"...","why":"100文字","colors":["#h1","#h2","#h3","#h4"],"cnames":["n1","n2","n3","n4"],"bg_from":"#hex","bg_to":"#hex","accent":"#hex","text_color":"#hex","font":"...","layout_name":"...","layout_type":"fullbleed","mood":"...","ai_steps":["手順1","手順2","手順3"],"pinterest_kw":"...","behance_kw":"...","google_kw":"..."}]}';
 
   try{
     var res = await fetch('https://api.anthropic.com/v1/messages', {
@@ -485,13 +485,21 @@ async function generate(){
     var text = (d.content && d.content[0] && d.content[0].text) || '';
     var m = text.match(/\{[\s\S]*\}/);
     if(!m) throw new Error('JSONが見つかりません');
-    // JSONを安全にパース（制御文字・改行を除去）
+    // JSONを安全にパース
     var jsonStr = m[0]
       .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '')
-      .replace(/\n/g, ' ')
-      .replace(/\r/g, '')
-      .replace(/\t/g, ' ');
-    D = JSON.parse(jsonStr);
+      .replace(/\r\n/g, ' ').replace(/\r/g, ' ').replace(/\n/g, ' ')
+      .replace(/\t/g, ' ')
+      .replace(/,\s*}/g, '}').replace(/,\s*]/g, ']');
+    try {
+      D = JSON.parse(jsonStr);
+    } catch(parseErr) {
+      // 文字列値内の改行・制御文字を修正して再試行
+      jsonStr = jsonStr.replace(/"([^"]*?)"/g, function(match, p1) {
+        return '"' + p1.replace(/[\x00-\x1F]/g, ' ').replace(/"/g, '\\"') + '"';
+      });
+      D = JSON.parse(jsonStr);
+    }
     render(project, target, media, tone);
   } catch(e) {
     console.error(e);
@@ -514,7 +522,7 @@ function render(project, target, media, tone){
   rh.className = 'result-header';
   rh.innerHTML =
     '<div>'
-    + '<div class="result-title">デザインアイデア 3案 — ' + esc(project) + '</div>'
+    + '<div class="result-title">デザインアイデア 4案 — ' + esc(project) + '</div>'
     + '<div class="result-meta">' + esc(media) + ' · ' + esc(tone) + (target ? ' · ' + esc(target) : '') + '</div>'
     + '</div>'
     + '<button class="copy-all-btn" onclick="copyAll()">📋 ブリーフ全コピー</button>';
